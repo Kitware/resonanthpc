@@ -5,6 +5,9 @@
       <ItemDefinitions>
         <Double Name="start time">
           <DefaultValue>0.0</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">0.0</Min>
+          </RangeInfo>
         </Double>
         <String Name="start time units">
           <DiscreteInfo DefaultIndex="0">
@@ -15,7 +18,11 @@
         </String>
         <String Name="end-spec" Label="end">
           <ChildrenDefinitions>
-            <Double Name="end time"></Double>
+            <Double Name="end time">
+              <RangeInfo>
+                <Min Inclusive="true">0.0</Min>
+              </RangeInfo>
+            </Double>
             <String Name="end time units">
               <DiscreteInfo DefaultIndex="0">
                 <Value Enum="second">s</Value>
@@ -42,7 +49,11 @@
           </DiscreteInfo>
         </String>
         <File Name="restart from checkpoint file" Optional="true" IsEnabledByDefault="false" ShouldExist="true"></File>
-        <Double Name="wallclock duration [hrs]" Optional="true" IsEnabledByDefault="false"></Double>
+        <Double Name="wallclock duration [hrs]" Optional="true" IsEnabledByDefault="false">
+          <RangeInfo>
+            <Min Inclusive="false">0.0</Min>
+          </RangeInfo>
+        </Double>
         <!-- Todo "required times"-->
         <Component Name="PK tree">
           <Accepts>

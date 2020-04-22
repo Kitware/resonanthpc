@@ -13,6 +13,9 @@
             </Double>
             <Int Name="number of cells" NumberOfRequiredValues="3">
               <DefaultValue>1</DefaultValue>
+              <RangeInfo>
+                <Min Inclusive="true">1</Min>
+              </RangeInfo>
             </Int>
           </ChildrenDefinitions>
           <DiscreteInfo DefaultIndex="0">
