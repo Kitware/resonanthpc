@@ -6,6 +6,7 @@ SMTK_AttributeResource(Version="3")
   Includes
     File domain.sbt
     File coordinator.sbt
+    File process-kernel.sbt
 
   Views
     View(Type="Group" Title="ATS" TopLevel="true" TabPosition="North"
@@ -13,6 +14,7 @@ SMTK_AttributeResource(Version="3")
       Views
         View(Title="Domain")/
         View(Title="Coordinator")/
+        View(Title="Process Kernel")/
 
     View(Type="Group" Title="Domain" Style="Tiled")
       Views
@@ -30,6 +32,10 @@ SMTK_AttributeResource(Version="3")
     View(Type="Instanced" Title="Coordinator")
       InstancedAttributes
         Att(Type="cycle driver" Name="cycle driver")/
+
+    View(Type="Attribute" Title="Process Kernel")
+      AttributeTypes
+        Att(Type="pk-base")/
 
 //- Adds newline to end of file
 = "\n"

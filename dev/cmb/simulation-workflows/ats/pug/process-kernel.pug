@@ -1,0 +1,12 @@
+doctype xml
+//- SMTK root templates for process kernels
+//- From the parent directory:
+    > pug ./pug/process-kernel.pug --pretty --extension sbt -o .
+SMTK_AttributeResource(Version="3")
+  //- Must load pk-base first it provides base types for all PKs
+  Includes
+    File pk-base.sbt
+    File pk-richards.sbt
+
+//- Adds newline to end of file
+= "\n"

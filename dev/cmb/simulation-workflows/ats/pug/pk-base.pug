@@ -1,0 +1,38 @@
+mixin bdf-items
+  // Todo initial time step
+  // Todo assemble preconditioner
+  // Todo time integrator
+  // Todo preconditioner
+
+
+doctype xml
+//- Base definitions for process kernels
+//- From the parent directory:
+    > pug ./pug/pk-base.pug --pretty --extension sbt -o .
+SMTK_AttributeResource(Version="3")
+
+  Definitions
+    AttDef(Type="pk-base" BaseType="" Abstract="true" Version="0")
+      ItemDefinitions
+        // Todo verbose object
+
+    AttDef(Type="pk-physical" BaseType="pk-base" Abstract="true" Version="0")
+      ItemDefinitions
+        // Todo domain (name)
+        String(Name="primary variable key")
+          BriefDescription Can we get a list from each PK?
+        // Todo initial condition
+        // Todo max valid change
+        // Todo debugger spec
+
+    AttDef(Type="pk-bdf" BaseType="pk-base" Abstract="true" Version="0")
+      ItemDefinitions
+        +bdf-items
+
+    // Inherit from pk-physical and copy bdf items
+    AttDef(Type="pk-physical-bdf" BaseType="pk-physical" Abstract="true" Version="0")
+      ItemDefinitions
+        +bdf-items
+
+//- Adds newline to end of file
+= "\n"

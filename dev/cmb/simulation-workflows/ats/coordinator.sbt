@@ -44,7 +44,11 @@
         <File Name="restart from checkpoint file" Optional="true" IsEnabledByDefault="false" ShouldExist="true"></File>
         <Double Name="wallclock duration [hrs]" Optional="true" IsEnabledByDefault="false"></Double>
         <!-- Todo "required times"-->
-        <!-- Todo "PK tree"-->
+        <Component Name="PK tree">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base']"></Resource>
+          </Accepts>
+        </Component>
       </ItemDefinitions>
     </AttDef>
   </Definitions>

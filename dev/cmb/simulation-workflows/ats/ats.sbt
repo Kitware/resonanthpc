@@ -3,12 +3,14 @@
   <Includes>
     <File>domain.sbt</File>
     <File>coordinator.sbt</File>
+    <File>process-kernel.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
       <Views>
         <View Title="Domain"/>
-        <View Title="Coordinator"></View>
+        <View Title="Coordinator"/>
+        <View Title="Process Kernel"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -31,6 +33,11 @@
       <InstancedAttributes>
         <Att Type="cycle driver" Name="cycle driver"/>
       </InstancedAttributes>
+    </View>
+    <View Type="Attribute" Title="Process Kernel">
+      <AttributeTypes>
+        <Att Type="pk-base"/>
+      </AttributeTypes>
     </View>
   </Views>
 </SMTK_AttributeResource>
