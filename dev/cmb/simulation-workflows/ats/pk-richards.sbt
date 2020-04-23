@@ -8,9 +8,9 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']"></Resource>
           </Accepts>
         </Component>
-        <!-- Todo boundary conditions-->
+        <!-- Todo - priority - boundary conditions-->
         <!-- Todo permeability type-->
-        <!-- Todo water retention evaluator-->
+        <!-- Todo - priority - water retention evaluator-->
         <Group Name="source term" Optional="true" IsEnabledByDefault="false">
           <ItemDefinitions>
             <String Name="source key" Units="mol s^-1">
@@ -20,12 +20,19 @@
             <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
           </ItemDefinitions>
         </Group>
-        <!-- Todo diffusion-->
+        <!-- Todo - priority - diffusion-->
         <!-- Todo diffusion preconditioner-->
-        <!-- Todo preconditioner-->
+        <!-- Todo - priority - preconditioner-->
         <!-- Todo linear solver-->
-        <!-- Todo surface rel perm strategy-->
-        <!-- Todo relative permeability method-->
+        <String Name="surface rel perm strategy">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>upwind with Darcy flux</Value>
+            <Value>upwind with gravity</Value>
+            <Value>cell centered</Value>
+            <Value>arithmetic mean</Value>
+          </DiscreteInfo>
+        </String>
+        <!-- Todo - priority - relative permeability method-->
         <!-- Todo modify predictor with consistent faces-->
         <!-- Todo modify predictor for flux BCs-->
         <!-- Todo modify predictor via water content-->
@@ -33,6 +40,12 @@
         <!-- Todo max valid change in ice saturation in a time step [-]-->
         <!-- Todo limit correction to pressure change [Pa]-->
         <!-- Todo limit correction to pressure change when crossing atmospheric [Pa]-->
+        <Double Name="permeability rescaling">
+          <DefaultValue>1e7</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="false">0.0</Min>
+          </RangeInfo>
+        </Double>
       </ItemDefinitions>
     </AttDef>
   </Definitions>

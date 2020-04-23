@@ -3,7 +3,15 @@
   <Definitions>
     <AttDef Type="pk-base" BaseType="" Abstract="true" Version="0">
       <ItemDefinitions>
-        <!-- Todo verbose object-->
+        <String Name="verbosity level">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>low</Value>
+            <Value>medium</Value>
+            <Value>high</Value>
+            <Value>extreme</Value>
+          </DiscreteInfo>
+        </String>
+        <!-- Todo - priority - time integrators-->
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="pk-physical" BaseType="pk-base" Abstract="true" Version="0">
@@ -12,9 +20,14 @@
         <String Name="primary variable key">
           <BriefDescription>Can we get a list from each PK?</BriefDescription>
         </String>
-        <!-- Todo initial condition-->
+        <!-- Todo -priority - initial condition-->
         <!-- Todo max valid change-->
-        <!-- Todo debugger spec-->
+        <Group Name="debugger">
+          <ItemDefinitions>
+            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+          </ItemDefinitions>
+        </Group>
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="pk-bdf" BaseType="pk-base" Abstract="true" Version="0">
