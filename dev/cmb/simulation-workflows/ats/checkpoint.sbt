@@ -12,7 +12,7 @@
           </RangeInfo>
         </Int>
         <!-- TODO: add IOEvent spec -->
-    </ItemDefinitions>
+      </ItemDefinitions>
     </AttDef>
   </Definitions>
 </SMTK_AttributeResource>
