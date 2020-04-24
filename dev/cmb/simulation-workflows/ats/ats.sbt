@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
+  <!-- ATS's top level -->
   <Includes>
+    <!-- Mesh and Regions -->
     <File>domain.sbt</File>
+    <!-- cycle driver -->
     <File>coordinator.sbt</File>
+    <!-- PKs -->
     <File>process-kernel.sbt</File>
+    <!-- TODO: add state -->
+    <!-- TODO: add checkpoint -->
+    <!-- TODO: add observations -->
+    <File>visualization.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -11,6 +19,7 @@
         <View Title="Domain"/>
         <View Title="Coordinator"/>
         <View Title="Process Kernel"/>
+        <View Title="Visualization"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -38,6 +47,11 @@
       <AttributeTypes>
         <Att Type="pk-base"/>
       </AttributeTypes>
+    </View>
+    <View Type="Instanced" Title="Visualization">
+      <InstancedAttributes>
+        <Att Type="visualization driver" Name="visualization driver"/>
+      </InstancedAttributes>
     </View>
   </Views>
 </SMTK_AttributeResource>
