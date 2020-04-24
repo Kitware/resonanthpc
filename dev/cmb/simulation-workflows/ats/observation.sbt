@@ -14,9 +14,11 @@
 
         <String Name="delimiter" DefauleValue=" "/>
 
-        <String Name="region">
-          <!-- TODO  should this be a drop down menu of available regions? -->
-        </String>
+        <Component Name="Region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
 
         <String Name="location name">
           <DiscreteInfo DefaultIndex="0">
