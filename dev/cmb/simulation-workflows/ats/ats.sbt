@@ -9,7 +9,7 @@
     <!-- PKs -->
     <File>process-kernel.sbt</File>
     <!-- TODO: add state -->
-    <!-- TODO: add checkpoint -->
+    <File>checkpoint.sbt</File>
     <!-- TODO: add observations -->
     <File>visualization.sbt</File>
   </Includes>
@@ -20,6 +20,7 @@
         <View Title="Coordinator"/>
         <View Title="Process Kernel"/>
         <View Title="Visualization"/>
+        <View Title="Checkpoint"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -51,6 +52,11 @@
     <View Type="Instanced" Title="Visualization">
       <InstancedAttributes>
         <Att Type="visualization driver" Name="visualization driver"/>
+      </InstancedAttributes>
+    </View>
+    <View Type="Instanced" Title="Checkpoint">
+      <InstancedAttributes>
+        <Att Type="checkpoint driver" Name="checkpoint driver"/>
       </InstancedAttributes>
     </View>
   </Views>
