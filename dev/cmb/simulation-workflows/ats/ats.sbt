@@ -10,7 +10,7 @@
     <File>process-kernel.sbt</File>
     <!-- TODO: add state -->
     <File>checkpoint.sbt</File>
-    <!-- TODO: add observations -->
+    <File>observation.sbt</File>
     <File>visualization.sbt</File>
   </Includes>
   <Views>
@@ -21,6 +21,7 @@
         <View Title="Process Kernel"/>
         <View Title="Visualization"/>
         <View Title="Checkpoint"/>
+        <View Title="Observation"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -58,6 +59,11 @@
       <InstancedAttributes>
         <Att Type="checkpoint driver" Name="checkpoint driver"/>
       </InstancedAttributes>
+    </View>
+    <View Type="Attribute" Title="Observation">
+      <AttributeTypes>
+        <Att Type="observation-base" Name="observations"/>
+      </AttributeTypes>
     </View>
   </Views>
 </SMTK_AttributeResource>
