@@ -3,6 +3,7 @@
   <Definitions>
     <AttDef Type="cycle driver" BaseType="" Version="0">
       <ItemDefinitions>
+        <!-- domain timing -->
         <Double Name="start time">
           <DefaultValue>0.0</DefaultValue>
           <RangeInfo>
@@ -16,6 +17,8 @@
             <Value Enum="year">yr</Value>
           </DiscreteInfo>
         </String>
+        <!-- end timing choices -->
+        <!-- TODO: should we use an end cycle?: "commonly used to ensure that, in the case of a time step crash, we do not continue on forever spewing output." -->
         <String Name="end-spec" Label="end">
           <ChildrenDefinitions>
             <Double Name="end time">
@@ -48,13 +51,17 @@
             </Structure>
           </DiscreteInfo>
         </String>
+        <!-- end of end timing section-->
         <File Name="restart from checkpoint file" Optional="true" IsEnabledByDefault="false" ShouldExist="true"></File>
         <Double Name="wallclock duration [hrs]" Optional="true" IsEnabledByDefault="false">
           <RangeInfo>
             <Min Inclusive="false">0.0</Min>
           </RangeInfo>
         </Double>
-        <!-- Todo "required times"-->
+
+        <!-- TODO: "required times" optional -->
+
+        <!-- PK tree (list of length one??) -->
         <Component Name="PK tree">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base']"></Resource>
