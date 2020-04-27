@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<SMTK_AttributeResource Version="3">
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Definitions>
     <AttDef Type="cycle driver" BaseType="" Version="0">
       <ItemDefinitions>
@@ -59,7 +59,9 @@
           </RangeInfo>
         </Double>
 
-        <!-- TODO: "required times" optional -->
+        <Group Name="required times" Optional="true" IsEnabledByDefault="false">
+          <xi:include href="source/io-event.xml" />
+        </Group>
 
         <!-- PK tree (list of length one??) -->
         <Component Name="PK tree">
