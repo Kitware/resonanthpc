@@ -11,7 +11,9 @@
             <Min Inclusive="true">0</Min>
           </RangeInfo>
         </Int>
-        <!-- TODO: add IOEvent spec -->
+        <Group Name="checkpoint times">
+          <xi:include href="source/io-event.xml" />
+        </Group>
       </ItemDefinitions>
     </AttDef>
   </Definitions>
