@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<SMTK_AttributeResource Version="3">
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Definitions>
     <AttDef Type="visualization driver" BaseType="" Version="0">
       <ItemDefinitions>
@@ -19,9 +19,14 @@
           </DiscreteInfo>
         </String>
 
-        <!-- TODO: IOEvent spec for timing -->
 
       </ItemDefinitions>
+
+      <!-- TODO: IOEvent spec for timing -->
+      <Group Name="visualization times">
+        <xi:include href="source/io-event.xml" />
+      </Group>
+
     </AttDef>
   </Definitions>
 </SMTK_AttributeResource>
