@@ -21,6 +21,9 @@ def resolve_xinclude(source_folder, source_ext, output_folder):
         out_filepath = os.path.join(output_folder, out_filename)
         with open(out_filepath, 'wb') as f:
             s = ET.tostring(root)
+            # TODO: would be good to clean up trailing whitespace
+            #       however, we'd have to do some str-bytes conversion
+            # s = "\n".join([ln.strip() for ln in s.splitlines()])
             f.write(s)
             print('Wrote', out_filepath)
     return
