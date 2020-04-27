@@ -20,12 +20,12 @@
         </String>
 
 
-      </ItemDefinitions>
+        <!-- TODO: IOEvent spec for timing -->
+        <Group Name="visualization times">
+          <xi:include href="source/io-event.xml" />
+        </Group>
 
-      <!-- TODO: IOEvent spec for timing -->
-      <Group Name="visualization times">
-        <xi:include href="source/io-event.xml" />
-      </Group>
+      </ItemDefinitions>
 
     </AttDef>
   </Definitions>
