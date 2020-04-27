@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<SMTK_AttributeResource Version="3">
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Definitions>
     <AttDef Type="observation-base" BaseType="" Version="0">
       <ItemDefinitions>
@@ -45,7 +45,9 @@
         </Void>
         <!-- TODO: if that bool is true, add array of flux directions? -->
 
-        <!-- TODO: add IOEvent -->
+        <Group Name="observation times">
+          <xi:include href="source/io-event.xml" />
+        </Group>
 
 
       </ItemDefinitions>
