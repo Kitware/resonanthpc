@@ -6,10 +6,11 @@
         <!-- TODO: file name "checkpoint" -->
         <!-- TODO: how to set a default value? -->
         <File Name="file name base" ShouldExist="false"></File>
-        <Int Name="file name digits" DefaultValue="5">
+        <Int Name="file name digits">
           <RangeInfo>
             <Min Inclusive="true">0</Min>
           </RangeInfo>
+          <DefaultValue>5</DefaultValue>
         </Int>
         <Group Name="checkpoint times">
           <xi:include href="source/io-event.xml" />
