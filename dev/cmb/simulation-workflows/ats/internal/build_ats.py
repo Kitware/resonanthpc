@@ -6,7 +6,6 @@ import xml.etree.ElementTree as ET
 
 def resolve_xinclude(source_folder, source_ext, output_folder):
     """"""
-    print(source_folder)
     # Process all files in the source folder with the give extension
     pattern = '{}/*{}'.format(source_folder, source_ext)
     matches= glob.glob(pattern)

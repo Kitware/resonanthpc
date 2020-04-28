@@ -3,15 +3,15 @@
   <!-- ATS's top level -->
   <Includes>
     <!-- Mesh and Regions -->
-    <File>domain.sbt</File>
+    <File>templates/domain.sbt</File>
     <!-- cycle driver -->
-    <File>coordinator.sbt</File>
+    <File>templates/coordinator.sbt</File>
     <!-- PKs -->
-    <File>process-kernel.sbt</File>
+    <File>templates/process-kernel.sbt</File>
     <!-- TODO: add state -->
-    <File>checkpoint.sbt</File>
-    <File>observation.sbt</File>
-    <File>visualization.sbt</File>
+    <File>templates/checkpoint.sbt</File>
+    <File>templates/observation.sbt</File>
+    <File>templates/visualization.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
