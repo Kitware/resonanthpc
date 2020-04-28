@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
+  <!-- ATS's top level -->
   <Includes>
-    <File>domain.sbt</File>
-    <File>coordinator.sbt</File>
-    <File>process-kernel.sbt</File>
+    <!-- Mesh and Regions -->
+    <File>internal/templates/domain.sbt</File>
+    <!-- cycle driver -->
+    <File>internal/templates/coordinator.sbt</File>
+    <!-- PKs -->
+    <File>internal/templates/process-kernel.sbt</File>
+    <!-- TODO: add state -->
+    <File>internal/templates/checkpoint.sbt</File>
+    <File>internal/templates/observation.sbt</File>
+    <File>internal/templates/visualization.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -11,6 +19,9 @@
         <View Title="Domain"/>
         <View Title="Coordinator"/>
         <View Title="Process Kernel"/>
+        <View Title="Visualization"/>
+        <View Title="Checkpoint"/>
+        <View Title="Observation"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -37,6 +48,21 @@
     <View Type="Attribute" Title="Process Kernel">
       <AttributeTypes>
         <Att Type="pk-base"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Instanced" Title="Visualization">
+      <InstancedAttributes>
+        <Att Type="visualization driver" Name="visualization driver"/>
+      </InstancedAttributes>
+    </View>
+    <View Type="Instanced" Title="Checkpoint">
+      <InstancedAttributes>
+        <Att Type="checkpoint driver" Name="checkpoint driver"/>
+      </InstancedAttributes>
+    </View>
+    <View Type="Attribute" Title="Observation">
+      <AttributeTypes>
+        <Att Type="observation-base" Name="observations"/>
       </AttributeTypes>
     </View>
   </Views>

@@ -8,9 +8,9 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']"></Resource>
           </Accepts>
         </Component>
-        <!-- Todo - priority - boundary conditions-->
-        <!-- Todo permeability type-->
-        <!-- Todo - priority - water retention evaluator-->
+        <!-- TODO: - priority - boundary conditions-->
+        <!-- TODO: permeability type-->
+        <!-- TODO: - priority - water retention evaluator-->
         <Group Name="source term" Optional="true" IsEnabledByDefault="false">
           <ItemDefinitions>
             <String Name="source key" Units="mol s^-1">
@@ -20,10 +20,10 @@
             <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
           </ItemDefinitions>
         </Group>
-        <!-- Todo - priority - diffusion-->
-        <!-- Todo diffusion preconditioner-->
-        <!-- Todo - priority - preconditioner-->
-        <!-- Todo linear solver-->
+        <!-- TODO: - priority - diffusion-->
+        <!-- TODO: diffusion preconditioner-->
+        <!-- TODO: - priority - preconditioner-->
+        <!-- TODO: linear solver-->
         <String Name="surface rel perm strategy">
           <DiscreteInfo DefaultIndex="0">
             <Value>upwind with Darcy flux</Value>
@@ -32,14 +32,14 @@
             <Value>arithmetic mean</Value>
           </DiscreteInfo>
         </String>
-        <!-- Todo - priority - relative permeability method-->
-        <!-- Todo modify predictor with consistent faces-->
-        <!-- Todo modify predictor for flux BCs-->
-        <!-- Todo modify predictor via water content-->
-        <!-- Todo max valid change in saturation in a time step [-]-->
-        <!-- Todo max valid change in ice saturation in a time step [-]-->
-        <!-- Todo limit correction to pressure change [Pa]-->
-        <!-- Todo limit correction to pressure change when crossing atmospheric [Pa]-->
+        <!-- TODO: - priority - relative permeability method-->
+        <!-- TODO: modify predictor with consistent faces-->
+        <!-- TODO: modify predictor for flux BCs-->
+        <!-- TODO: modify predictor via water content-->
+        <!-- TODO: max valid change in saturation in a time step [-]-->
+        <!-- TODO: max valid change in ice saturation in a time step [-]-->
+        <!-- TODO: limit correction to pressure change [Pa]-->
+        <!-- TODO: limit correction to pressure change when crossing atmospheric [Pa]-->
         <Double Name="permeability rescaling">
           <DefaultValue>1e7</DefaultValue>
           <RangeInfo>
