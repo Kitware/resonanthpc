@@ -58,7 +58,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate ATS input file from attribute resource')
     parser.add_argument('attribute_filepath', help='Input attribute filename/path (.smtk)')
     parser.add_argument('--output_filepath', '-o', default='ats_input.xml', help='output filename/path (ats_input.xml)')
-    parser.add_argument('--export_operation', '-e', default='ats/ATS.py', help='export operation path (./ats/ATS.py)')
+    parser.add_argument('--export_operation', '-e', default='ats/ats.py', help='export operation path (./ats/ats.py)')
 
     args = parser.parse_args()
     # print(args)

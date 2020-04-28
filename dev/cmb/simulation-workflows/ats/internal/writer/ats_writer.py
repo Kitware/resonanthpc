@@ -12,10 +12,17 @@
 
 import os
 print('loading', os.path.basename(__file__))
-import xml.etree.ElementTree as ET
+from xml.dom import minidom
 
 import smtk
 import smtk.attribute
+
+TypeStringMap = {
+    smtk.attribute.Item.DoubleType: 'double',
+    smtk.attribute.Item.IntType: 'int',
+    smtk.attribute.Item.StringType: 'string',
+    smtk.attribute.Item.VoidType: 'bool'
+}
 
 
 class ATSWriter:
@@ -24,11 +31,11 @@ class ATSWriter:
     def __init__(self, export_params):
         """"""
         self.checked_attributes = set()  # attributes that have been validated
-        self.elem_root = None
-        self.elem_tree = None
         self.model_resource = None
         self.sim_atts = None
         self.warning_messages = list()
+        self.xml_doc = None
+        self.xml_root = None
 
         self.sim_atts = smtk.attribute.Resource.CastTo(export_params.find('attributes').value())
         # print('sim_atts', self.sim_atts)
@@ -38,37 +45,80 @@ class ATSWriter:
             raise RuntimeError(msg)
 
     def write(self, output_filepath):
-        """"""
-        self.elem_root = ET.Element('ParameterList', attrib=dict(name='Main', type='ParameterList'))
-        self.elem_tree = ET.ElementTree(element=self.elem_root)
+        """Generate the xml output file"""
+        self.xml_doc = minidom.Document()
+        self.xml_root = self.xml_doc.createElement('ParameterList')
+        self.xml_root.setAttribute('name', 'Main')
+        self.xml_root.setAttribute('type', 'ParameterList')
+        self.xml_doc.appendChild(self.xml_root)
 
         # Render mesh element
-        mesh_elem = self._new_list(self.elem_root, 'mesh')
-        att = self.sim_atts.findAttribute('domain')
-        domain_elem = self._new_list(mesh_elem, att.name())
-        type_item = att.findString('mesh type')
+        mesh_elem = self._new_list(self.xml_root, 'mesh')
+        mesh_att = self.sim_atts.findAttribute('mesh')
+        domain_elem = self._new_list(mesh_elem, mesh_att.name())
+        type_item = mesh_att.findString('mesh type')
         type_elem = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
+        #  Winging it here to generate the parameters list
+        gen_params_list_name = '{} parameters'.format(type_item.value())
+        gen_params_list = self._new_list(domain_elem, gen_params_list_name)
+        gen_param_names = ['number of cells', 'domain low coordinate', 'domain high coordinate']
+        self._render_items(gen_params_list, mesh_att, gen_param_names)
+
+        param_names = ['verify mesh', 'deformable mesh', 'partitioner']
+        self._render_items(domain_elem, mesh_att, param_names)
+
+        # Render region elements
+        regions_elem = self._new_list(self.xml_root, 'regions')
+        region_atts = self.sim_atts.findAttributes('region')
+        for region_att in region_atts:
+            list_elem = self._new_list(regions_elem, region_att.name())
+            type_list = self._new_list(list_elem, region_att.type())
+            self._render_items(type_list, region_att, ['point', 'normal'])
 
         # Write output file
         wrote_file = False
-        with open(output_filepath, 'wb') as fp:
-            encoding = 'us-ascii'
-            self.elem_tree.write(fp, encoding=encoding)
-            fp.write(bytearray('\n', encoding=encoding))
-            print('Wrote', output_filepath)
+        with open(output_filepath, 'w') as fp:
+            xml_string = self.xml_doc.toprettyxml(indent=" ")
+            fp.write(xml_string)
             wrote_file = True
         return wrote_file
 
     def _new_list(self, parent, list_name, list_type='ParameterList'):
         """Appends ParameterList element to parent"""
-        new_list = ET.SubElement(parent, 'ParameterList')
-        new_list.set('name', list_name)
-        new_list.set('type', list_type)
+        new_list = self.xml_doc.createElement('ParameterList')
+        new_list.setAttribute('name', list_name)
+        new_list.setAttribute('type', list_type)
+        parent.appendChild(new_list)
         return new_list
 
     def _new_param(self, list_elem, param_name, param_type, param_value):
         """Appends Parameter element to list_elem"""
-        new_param = ET.SubElement(list_elem, 'Parameter')
-        new_param.set('name', param_name)
-        new_param.set('type', param_type)
-        new_param.set('value', param_value)
+        new_param = self.xml_doc.createElement('Parameter')
+        new_param.setAttribute('name', param_name)
+        new_param.setAttribute('type', param_type)
+        new_param.setAttribute('value', param_value)
+        list_elem.appendChild(new_param)
+        return new_param
+
+    def _render_items(self, parent_elem, att, param_names):
+        """Generates Parameter elements for items specified by param_names"""
+        for param_name in param_names:
+            item = att.find(param_name)
+            if item is None:
+                continue
+
+            type_string = TypeStringMap.get(item.type())
+            value = None
+            if item.type() == smtk.attribute.Item.VoidType:
+                value = 'true' if item.isEnabled() else 'false'
+            elif hasattr(item, 'numberOfValues') and item.numberOfValues() > 1:
+                type_string = 'Array({})'.format(type_string)
+                value_list = list()
+                for i in range(item.numberOfValues()):
+                    value_list.append(item.value(i))
+                string_list = [str(x) for x in value_list]
+                value = ', '.join(string_list)
+            elif hasattr(item, 'value'):
+                value = item.value()
+
+            self._new_param(parent_elem, param_name, type_string, value)
