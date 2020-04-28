@@ -42,6 +42,14 @@ class ATSWriter:
         self.elem_root = ET.Element('ParameterList', attrib=dict(name='Main', type='ParameterList'))
         self.elem_tree = ET.ElementTree(element=self.elem_root)
 
+        # Render mesh element
+        mesh_elem = self._new_list(self.elem_root, 'mesh')
+        att = self.sim_atts.findAttribute('domain')
+        domain_elem = self._new_list(mesh_elem, att.name())
+        type_item = att.findString('mesh type')
+        type_elem = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
+
+        # Write output file
         wrote_file = False
         with open(output_filepath, 'wb') as fp:
             encoding = 'us-ascii'
@@ -49,19 +57,18 @@ class ATSWriter:
             fp.write(bytearray('\n', encoding=encoding))
             print('Wrote', output_filepath)
             wrote_file = True
-
         return wrote_file
 
-    def _new_list(self, parent, list_name, list_type):
+    def _new_list(self, parent, list_name, list_type='ParameterList'):
         """Appends ParameterList element to parent"""
-        new_list = parent.append('ParameterList')
+        new_list = ET.SubElement(parent, 'ParameterList')
         new_list.set('name', list_name)
         new_list.set('type', list_type)
         return new_list
 
     def _new_param(self, list_elem, param_name, param_type, param_value):
         """Appends Parameter element to list_elem"""
-        new_param = list_elem.append('Parameter')
+        new_param = ET.SubElement(list_elem, 'Parameter')
         new_param.set('name', param_name)
         new_param.set('type', param_type)
         new_param.set('value', param_value)
