@@ -46,7 +46,7 @@
         <!-- TODO: if that bool is true, add array of flux directions? -->
 
         <Group Name="observation times">
-          <xi:include href="source/io-event.xml" />
+          <xi:include href="templates/source/io-event.xml" />
         </Group>
 
 

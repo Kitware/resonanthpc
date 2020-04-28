@@ -20,7 +20,7 @@
         </String>
 
         <Group Name="visualization times">
-          <xi:include href="source/io-event.xml" />
+          <xi:include href="templates/source/io-event.xml" />
         </Group>
 
       </ItemDefinitions>
