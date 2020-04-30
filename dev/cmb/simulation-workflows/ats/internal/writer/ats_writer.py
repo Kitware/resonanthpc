@@ -118,7 +118,7 @@ class ATSWriter:
                 for i in range(item.numberOfValues()):
                     value_list.append(item.value(i))
                 string_list = [str(x) for x in value_list]
-                value = ', '.join(string_list)
+                value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = item.value()
 
