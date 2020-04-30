@@ -29,7 +29,8 @@ class ATSWriter:
     """Top level writer class for ATS input files."""
 
     def __init__(self, export_params):
-        """"""
+        """Initializes the exporter class with the simulation parameters.
+        """
         self.checked_attributes = set()  # attributes that have been validated
         self.model_resource = None
         self.sim_atts = None
@@ -45,7 +46,7 @@ class ATSWriter:
             raise RuntimeError(msg)
 
     def write(self, output_filepath):
-        """Generate the xml output file"""
+        """Generate the xml output file."""
         self.xml_doc = minidom.Document()
         self.xml_root = self.xml_doc.createElement('ParameterList')
         self.xml_root.setAttribute('name', 'Main')
