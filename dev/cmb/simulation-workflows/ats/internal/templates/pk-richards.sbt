@@ -8,9 +8,17 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']"></Resource>
           </Accepts>
         </Component>
-        <!-- TODO: - priority - boundary conditions-->
-        <!-- TODO: permeability type-->
-        <!-- TODO: - priority - water retention evaluator-->
+        <!-- TODO: - priority - boundary conditions (subsurface-flow-bc-spec) -->
+        <!-- permeability type-->
+        <String Name="permeability type">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>scalar</Value>
+            <Value>horizontal and vertical</Value>
+            <Value>diagonal tensor</Value>
+            <Value>full tensor</Value>
+          </DiscreteInfo>
+        </String>
+        <!-- TODO: - priority - water retention evaluator (wrm-evaluator-spec) -->
         <Group Name="source term" Optional="true" IsEnabledByDefault="false">
           <ItemDefinitions>
             <String Name="source key" Units="mol s^-1">
@@ -20,11 +28,21 @@
             <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
           </ItemDefinitions>
         </Group>
-        <!-- TODO: - priority - diffusion-->
-        <!-- TODO: diffusion preconditioner-->
-        <!-- TODO: - priority - preconditioner-->
-        <!-- TODO: linear solver-->
+        <!-- TODO: - priority - diffusion (pde-diffusion-spec) -->
+        <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
+        <!-- TODO: - priority - preconditioner (preconditioner-typed-spec) -->
+        <!-- TODO: linear solver (linear-solver-typed-spec), oprional -->
+        <!-- surface rel perm strategy -->
         <String Name="surface rel perm strategy">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>none</Value>
+            <Value>clobber</Value>
+            <Value>max</Value>
+            <Value>unsaturated</Value>
+          </DiscreteInfo>
+        </String>
+        <!-- relative permeability method-->
+        <String Name="relative permeability method">
           <DiscreteInfo DefaultIndex="0">
             <Value>upwind with Darcy flux</Value>
             <Value>upwind with gravity</Value>
@@ -32,14 +50,32 @@
             <Value>arithmetic mean</Value>
           </DiscreteInfo>
         </String>
-        <!-- TODO: - priority - relative permeability method-->
-        <!-- TODO: modify predictor with consistent faces-->
-        <!-- TODO: modify predictor for flux BCs-->
-        <!-- TODO: modify predictor via water content-->
-        <!-- TODO: max valid change in saturation in a time step [-]-->
-        <!-- TODO: max valid change in ice saturation in a time step [-]-->
-        <!-- TODO: limit correction to pressure change [Pa]-->
-        <!-- TODO: limit correction to pressure change when crossing atmospheric [Pa]-->
+        <!-- modify predictor with consistent faces-->
+        <Void Name="modify predictor with consistent faces" Optional="true" IsEnabledByDefault="false"></Void>
+        <!-- modify predictor for flux BCs-->
+        <Void Name="modify predictor for flux BCs" Optional="true" IsEnabledByDefault="false"></Void>
+        <!-- modify predictor via water content-->
+        <Void Name="modify predictor via water content" Optional="true" IsEnabledByDefault="false"></Void>
+        <!-- max valid change in saturation in a time step [-]-->
+        <Double Name="max valid change in saturation in a time step [-]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+        <!-- max valid change in ice saturation in a time step [-]-->
+        <Double Name="max valid change in ice saturation in a time step [-]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+        <!-- limit correction to pressure change [Pa]-->
+        <Double Name="limit correction to pressure change [Pa]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+        <!-- limit correction to pressure change when crossing atmospheric [Pa]-->
+        <Double Name="limit correction to pressure change when crossing atmospheric [Pa]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+
+
+        <!--  TODO: there's a ton more but it says they aren't typically provided by user??? -->
+        <!-- permeability rescaling is one of those... -->
         <Double Name="permeability rescaling">
           <DefaultValue>1e7</DefaultValue>
           <RangeInfo>
