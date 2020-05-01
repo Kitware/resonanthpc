@@ -119,9 +119,21 @@ class ATSWriter:
     #### This section contains methods to write each Main element ####
 
     def _generate_mesh_xml(self):
+        # possible children parameters
+        children = {
+            'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
+            'read mesh file': ['file', 'format'],
+            'surface': ['urface sideset name', ], # TODO: more
+            'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
+            # TODO: column mesh
+        }
+        # TODO: some of the demo files do not have these - when should we include them and when not?
+        main_param_names = ['verify mesh', 'deformable mesh', 'partitioner']
+        ####
+        # Logic to render the mesh section
         mesh_elem = self._new_list(self.xml_root, 'mesh')
         mesh_att = self.sim_atts.findAttribute('mesh')
-        domain_elem = self._new_list(mesh_elem, mesh_att.name())
+        domain_elem = self._new_list(mesh_elem, 'domain')
 
         type_item = mesh_att.findString('mesh type')
         type_elem = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
@@ -129,12 +141,11 @@ class ATSWriter:
         #  Winging it here to generate the parameters list
         gen_params_list_name = '{} parameters'.format(type_item.value())
         gen_params_list = self._new_list(domain_elem, gen_params_list_name)
-        gen_param_names = ['number of cells', 'domain low coordinate', 'domain high coordinate']
-        self._render_items(gen_params_list, mesh_att, gen_param_names)
+        known_children = children.get(type_item.value(), [])
+        self._render_items(gen_params_list, type_item, known_children)
 
-        # TODO: some of the demo files do not have these - when should we include them and when not?
-        param_names = ['verify mesh', 'deformable mesh', 'partitioner']
-        self._render_items(domain_elem, mesh_att, param_names)
+        # Top level mesh parameters
+        self._render_items(domain_elem, mesh_att, main_param_names)
         return
 
     def _generate_regions_xml(self):
