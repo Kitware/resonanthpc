@@ -49,7 +49,7 @@
             <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
               <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
             </Void>
-            <String Name="export mesh to file" Optional="true" IsEnabledByDefault="false"></String>
+            <File Name="export mesh to file" ShouldExist="false" Optional="true" IsEnabledByDefault="false"></File>
           </ChildrenDefinitions>
           <!-- Here is where we list the options - they can adopt children from above -->
           <DiscreteInfo DefaultIndex="0">

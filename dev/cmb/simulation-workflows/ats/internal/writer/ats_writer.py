@@ -21,7 +21,8 @@ TypeStringMap = {
     smtk.attribute.Item.DoubleType: 'double',
     smtk.attribute.Item.IntType: 'int',
     smtk.attribute.Item.StringType: 'string',
-    smtk.attribute.Item.VoidType: 'bool'
+    smtk.attribute.Item.VoidType: 'bool',
+    smtk.attribute.Item.FileType: 'string',
 }
 
 
