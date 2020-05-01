@@ -16,6 +16,7 @@ Export operator for ATS workflows
 import imp
 import os
 import sys
+import traceback
 
 import smtk
 import smtk.attribute
@@ -46,8 +47,11 @@ class Export(smtk.operation.Operation):
     def operateInternal(self):
         try:
             success = ExportCMB(self)
-        except:
-            print('Error', self.log().convertToString())
+        except Exception as e:
+            print("\n\nERROR:")
+            track = traceback.format_exc()
+            print(track)
+            print("\n\n")
             #smtk.ErrorMessage(self.log(), sys.exc_info()[0])
             raise
             return self.createResult(smtk.operation.Operation.Outcome.FAILED)

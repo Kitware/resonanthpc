@@ -96,6 +96,7 @@ class ATSWriter:
 
     def _render_items(self, parent_elem, att, param_names):
         """Generates Parameter elements for items specified by param_names"""
+        assert isinstance(param_names, list)
         for param_name in param_names:
             item = att.find(param_name)
             if item is None:
