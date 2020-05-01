@@ -99,5 +99,5 @@ if __name__ == '__main__':
     if export_outcome != OPERATION_SUCCEEDED:
         raise RuntimeError('export operator failed, outcome {}'.format(export_outcome))
 
-    print('finis')
+    print('finish')
     sys.exit(0)

@@ -29,7 +29,8 @@ class ATSWriter:
     """Top level writer class for ATS input files."""
 
     def __init__(self, export_params):
-        """"""
+        """Initializes the exporter class with the simulation parameters.
+        """
         self.checked_attributes = set()  # attributes that have been validated
         self.model_resource = None
         self.sim_atts = None
@@ -45,35 +46,27 @@ class ATSWriter:
             raise RuntimeError(msg)
 
     def write(self, output_filepath):
-        """Generate the xml output file"""
+        """Generate the xml output file."""
         self.xml_doc = minidom.Document()
         self.xml_root = self.xml_doc.createElement('ParameterList')
         self.xml_root.setAttribute('name', 'Main')
         self.xml_root.setAttribute('type', 'ParameterList')
         self.xml_doc.appendChild(self.xml_root)
 
-        # Render mesh element
-        mesh_elem = self._new_list(self.xml_root, 'mesh')
-        mesh_att = self.sim_atts.findAttribute('mesh')
-        domain_elem = self._new_list(mesh_elem, mesh_att.name())
-        type_item = mesh_att.findString('mesh type')
-        type_elem = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
-        #  Winging it here to generate the parameters list
-        gen_params_list_name = '{} parameters'.format(type_item.value())
-        gen_params_list = self._new_list(domain_elem, gen_params_list_name)
-        gen_param_names = ['number of cells', 'domain low coordinate', 'domain high coordinate']
-        self._render_items(gen_params_list, mesh_att, gen_param_names)
 
-        param_names = ['verify mesh', 'deformable mesh', 'partitioner']
-        self._render_items(domain_elem, mesh_att, param_names)
+        ################################
 
-        # Render region elements
-        regions_elem = self._new_list(self.xml_root, 'regions')
-        region_atts = self.sim_atts.findAttributes('region')
-        for region_att in region_atts:
-            list_elem = self._new_list(regions_elem, region_att.name())
-            type_list = self._new_list(list_elem, region_att.type())
-            self._render_items(type_list, region_att, ['point', 'normal'])
+        self._generate_mesh_xml()
+        self._generate_regions_xml()
+        ## TODO: uncomment as implemented
+        # self._generate_cycle_driver_xml()
+        # self._generate_visualization_xml()
+        # self._generate_observations_xml()
+        # self._generate_checkpoint_xml()
+        # self._generate_pks_xml()
+        # self._generate_state_xml()
+
+        ################################
 
         # Write output file
         wrote_file = False
@@ -117,8 +110,83 @@ class ATSWriter:
                 for i in range(item.numberOfValues()):
                     value_list.append(item.value(i))
                 string_list = [str(x) for x in value_list]
-                value = ', '.join(string_list)
+                value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = item.value()
 
             self._new_param(parent_elem, param_name, type_string, value)
+        return
+
+    #### This section contains methods to write each Main element ####
+
+    def _generate_mesh_xml(self):
+        # possible children parameters
+        children = {
+            'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
+            'read mesh file': ['file', 'format'],
+            'surface': ['urface sideset name', ], # TODO: more
+            'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
+            # TODO: column mesh
+        }
+        # TODO: some of the demo files do not have these - when should we include them and when not?
+        #       other sim files have them under an `expert` param list??
+        main_param_names = ['verify mesh', 'deformable mesh', 'partitioner']
+        ####
+        # Logic to render the mesh section
+        mesh_elem = self._new_list(self.xml_root, 'mesh')
+        mesh_att = self.sim_atts.findAttribute('mesh')
+        domain_elem = self._new_list(mesh_elem, 'domain')
+
+        type_item = mesh_att.findString('mesh type')
+        _ = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
+
+        #  Winging it here to generate the parameters list
+        gen_params_list_name = '{} parameters'.format(type_item.value())
+        gen_params_list = self._new_list(domain_elem, gen_params_list_name)
+        known_children = children.get(type_item.value(), [])
+        self._render_items(gen_params_list, type_item, known_children)
+
+        # Top level mesh parameters
+        self._render_items(domain_elem, mesh_att, main_param_names)
+        return
+
+    def _generate_regions_xml(self):
+        # possible children parameters
+        children = {
+            'region: plane': ['point', 'normal',],
+            'region: box': ['low coordinate', 'high coordinate',],
+            'region: labeled set': ['label', 'file', 'entity',],
+            'region: color function': ['file', 'value',],
+            'region: point': ['point',],
+            'region: logical': ['operation',],
+            # TODO: there's more to fill in here!
+        }
+        ####
+        # Logic to render it - shouldn't need any changes
+        regions_elem = self._new_list(self.xml_root, 'regions')
+        region_atts = self.sim_atts.findAttributes('region')
+        for region_att in region_atts:
+            list_elem = self._new_list(regions_elem, region_att.name())
+            type_list = self._new_list(list_elem, region_att.type())
+            # Get list of known children for given attribute
+            known_children = children.get(region_att.type(), [])
+            self._render_items(type_list, region_att, known_children)
+        return
+
+    def _generate_cycle_driver_xml(self):
+        raise NotImplementedError()
+
+    def _generate_visualization_xml(self):
+        raise NotImplementedError()
+
+    def _generate_observations_xml(self):
+        raise NotImplementedError()
+
+    def _generate_checkpoint_xml(self):
+        raise NotImplementedError()
+
+    def _generate_pks_xml(self):
+        raise NotImplementedError()
+
+    def _generate_state_xml(self):
+        raise NotImplementedError()

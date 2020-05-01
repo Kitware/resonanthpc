@@ -8,7 +8,7 @@
     <File>internal/templates/coordinator.sbt</File>
     <!-- PKs -->
     <File>internal/templates/process-kernel.sbt</File>
-    <!-- TODO: add state -->
+    <File>internal/templates/state.sbt</File>
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
@@ -22,6 +22,7 @@
         <View Title="Visualization"/>
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
+        <View Title="State"/>
       </Views>
     </View>
     <View Type="Group" Title="Domain" Style="Tiled">
@@ -64,6 +65,11 @@
       <AttributeTypes>
         <Att Type="observation-base" Name="observations"/>
       </AttributeTypes>
+    </View>
+    <View Type="Instanced" Title="State">
+      <InstancedAttributes>
+        <Att Type="state" Name="state"/>
+      </InstancedAttributes>
     </View>
   </Views>
 </SMTK_AttributeResource>

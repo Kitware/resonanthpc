@@ -19,3 +19,10 @@ When making a new include, do not foget to add:
 ```xml
 <SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
 ```
+
+
+## For Bane to run locally:
+
+```
+alias pysmtk="/Applications/modelbuilder.app/Contents/bin/pvpython"
+```

@@ -3,9 +3,9 @@
   <Definitions>
     <AttDef Type="checkpoint driver" BaseType="" Version="0">
       <ItemDefinitions>
-        <!-- TODO: file name "checkpoint" -->
-        <!-- TODO: how to set a default value? -->
-        <File Name="file name base" ShouldExist="false"></File>
+        <File Name="file name base" ShouldExist="false">
+          <DefaultValue>checkpoint</DefaultValue>
+        </File>
         <Int Name="file name digits">
           <RangeInfo>
             <Min Inclusive="true">0</Min>
