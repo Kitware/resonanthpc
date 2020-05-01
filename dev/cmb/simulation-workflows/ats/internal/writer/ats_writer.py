@@ -102,6 +102,8 @@ class ATSWriter:
             if item is None:
                 continue
 
+            # TODO: we need to handle `ComponentType`
+
             # skip over optional items if not enabled. Bools are never optional... weird logic here.
             if item.type() != smtk.attribute.Item.VoidType and not item.isEnabled():
                 continue
@@ -119,6 +121,10 @@ class ATSWriter:
                 value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = item.value()
+
+            ####
+            if value is None or not isinstance(value, str):
+                raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
             self._new_param(parent_elem, param_name, type_string, value)
         return
