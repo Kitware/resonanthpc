@@ -115,6 +115,7 @@ class ATSWriter:
                 value = item.value()
 
             self._new_param(parent_elem, param_name, type_string, value)
+        return
 
     #### This section contains methods to write each Main element ####
 
@@ -128,6 +129,7 @@ class ATSWriter:
             # TODO: column mesh
         }
         # TODO: some of the demo files do not have these - when should we include them and when not?
+        #       other sim files have them under an `expert` param list??
         main_param_names = ['verify mesh', 'deformable mesh', 'partitioner']
         ####
         # Logic to render the mesh section
@@ -136,7 +138,7 @@ class ATSWriter:
         domain_elem = self._new_list(mesh_elem, 'domain')
 
         type_item = mesh_att.findString('mesh type')
-        type_elem = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
+        _ = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
 
         #  Winging it here to generate the parameters list
         gen_params_list_name = '{} parameters'.format(type_item.value())
