@@ -47,10 +47,10 @@
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
-    <View Type="Instanced" Title="Visualization">
-      <InstancedAttributes>
-        <Att Type="visualization driver" Name="visualization driver"/>
-      </InstancedAttributes>
+    <View Type="Attribute" Title="Visualization">
+      <AttributeTypes>
+        <Att Type="visualization driver"/>
+      </AttributeTypes>
     </View>
     <View Type="Instanced" Title="Checkpoint">
       <InstancedAttributes>
