@@ -102,9 +102,8 @@ class ATSWriter:
             if item is None:
                 continue
 
-            # if (optional and enabled and not a bool) else continue
-            # this allows us to skip optional parameters
-            if (hasattr(item, "isOptional") and item.type() != smtk.attribute.Item.VoidType) and not item.isEnabled():
+            # skip over optional items if not enabled. Bools are never optional... weird logic here.
+            if item.type() != smtk.attribute.Item.VoidType and not item.isEnabled():
                 continue
 
             type_string = TypeStringMap.get(item.type())
