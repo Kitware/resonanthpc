@@ -101,6 +101,11 @@ class ATSWriter:
             if item is None:
                 continue
 
+            # if (optional and enabled and not a bool) else continue
+            # this allows us to skip optional parameters
+            if (hasattr(item, "isOptional") and item.type() != smtk.attribute.Item.VoidType) and not item.isEnabled():
+                continue
+
             type_string = TypeStringMap.get(item.type())
             value = None
             if item.type() == smtk.attribute.Item.VoidType:
@@ -125,7 +130,6 @@ class ATSWriter:
         children = {
             'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
             'read mesh file': ['file', 'format'],
-            # TODO: `export mesh to file` is optional - don't include unless valid
             'surface': ['urface sideset name', 'export mesh to file', ], # TODO: more
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
             # TODO: column mesh
