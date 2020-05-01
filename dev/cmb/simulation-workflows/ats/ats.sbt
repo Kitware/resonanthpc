@@ -4,6 +4,7 @@
   <Includes>
     <!-- Mesh and Regions -->
     <File>internal/templates/domain.sbt</File>
+    <File>internal/templates/region.sbt</File>
     <!-- cycle driver -->
     <File>internal/templates/coordinator.sbt</File>
     <!-- PKs -->
@@ -16,7 +17,8 @@
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
       <Views>
-        <View Title="Domain"/>
+        <View Title="Domains"/>
+        <View Title="Regions"/>
         <View Title="Coordinator"/>
         <View Title="Process Kernel"/>
         <View Title="Visualization"/>
@@ -25,16 +27,10 @@
         <View Title="State"/>
       </Views>
     </View>
-    <View Type="Group" Title="Domain" Style="Tiled">
-      <Views>
-        <View Title="Mesh"/>
-        <View Title="Regions"/>
-      </Views>
-    </View>
-    <View Type="Instanced" Title="Mesh">
-      <InstancedAttributes>
-        <Att Type="mesh" Name="mesh"/>
-      </InstancedAttributes>
+    <View Type="Attribute" Title="Domains">
+      <AttributeTypes>
+        <Att Type="domain"/>
+      </AttributeTypes>
     </View>
     <View Type="Attribute" Title="Regions">
       <AttributeTypes>
