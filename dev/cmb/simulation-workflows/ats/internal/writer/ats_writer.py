@@ -134,9 +134,8 @@ class ATSWriter:
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
             # TODO: column mesh
         }
-        # TODO: some of the demo files do not have these - when should we include them and when not?
-        #       other sim files have them under an `expert` param list??
-        main_param_names = ['verify mesh', 'deformable mesh', 'partitioner']
+        main_param_names = ['verify mesh', 'deformable mesh']
+        # Note about `'partitioner'`: it only makes sense on the "domain" mesh
         ####
         # Logic to render the mesh section
         mesh_elem = self._new_list(self.xml_root, 'mesh')
@@ -152,6 +151,10 @@ class ATSWriter:
             gen_params_list = self._new_list(domain_elem, gen_params_list_name)
             known_children = children.get(mesh_type, [])
             self._render_items(gen_params_list, type_item, known_children)
+            # TODO: If a `domain` mesh, not a surface or otherwise, add the partitioner option:
+            #       there aren't any examples of this being used, so leaving out
+            # if domain mesh: # psuedo-code
+            #     self._render_items(gen_params_list, type_item, ['partitioner',])
             # Top level mesh parameters
             self._render_items(domain_elem, domain_att, main_param_names)
         return

@@ -102,7 +102,7 @@
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
         </Void>
         <!-- “partitioner” [string] (zoltan_rcb) Method to partition the mesh. -->
-        <String Name="partitioner">
+        <String Name="partitioner" Optional="true">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
             <Value Enum="METIS">metis</Value>
