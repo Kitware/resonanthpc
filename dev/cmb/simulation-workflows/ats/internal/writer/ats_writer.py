@@ -56,7 +56,7 @@ class ATSWriter:
 
         ################################
 
-        self._generate_mesh_xml()
+        self._generate_domains_xml()
         self._generate_regions_xml()
         ## TODO: uncomment as implemented
         # self._generate_cycle_driver_xml()
@@ -119,12 +119,13 @@ class ATSWriter:
 
     #### This section contains methods to write each Main element ####
 
-    def _generate_mesh_xml(self):
+    def _generate_domains_xml(self):
         # possible children parameters
         children = {
             'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
             'read mesh file': ['file', 'format'],
-            'surface': ['urface sideset name', ], # TODO: more
+            # TODO: `export mesh to file` is optional - don't include unless valid
+            'surface': ['urface sideset name', 'export mesh to file', ], # TODO: more
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
             # TODO: column mesh
         }
@@ -134,20 +135,20 @@ class ATSWriter:
         ####
         # Logic to render the mesh section
         mesh_elem = self._new_list(self.xml_root, 'mesh')
-        mesh_att = self.sim_atts.findAttribute('mesh')
-        domain_elem = self._new_list(mesh_elem, 'domain')
-
-        type_item = mesh_att.findString('mesh type')
-        _ = self._new_param(domain_elem, type_item.name(), 'string', type_item.value())
-
-        #  Winging it here to generate the parameters list
-        gen_params_list_name = '{} parameters'.format(type_item.value())
-        gen_params_list = self._new_list(domain_elem, gen_params_list_name)
-        known_children = children.get(type_item.value(), [])
-        self._render_items(gen_params_list, type_item, known_children)
-
-        # Top level mesh parameters
-        self._render_items(domain_elem, mesh_att, main_param_names)
+        domain_atts = self.sim_atts.findAttributes('domain')
+        for domain_att in domain_atts:
+            # save out each domain
+            domain_elem = self._new_list(mesh_elem, domain_att.name())
+            type_item = domain_att.findString('mesh type')
+            mesh_type = type_item.value()
+            _ = self._new_param(domain_elem, 'mesh type', 'string', mesh_type)
+            #  Winging it here to generate the parameters list
+            gen_params_list_name = '{} parameters'.format(mesh_type)
+            gen_params_list = self._new_list(domain_elem, gen_params_list_name)
+            known_children = children.get(mesh_type, [])
+            self._render_items(gen_params_list, type_item, known_children)
+            # Top level mesh parameters
+            self._render_items(domain_elem, domain_att, main_param_names)
         return
 
     def _generate_regions_xml(self):
