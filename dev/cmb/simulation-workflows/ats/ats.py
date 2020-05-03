@@ -87,6 +87,13 @@ def ExportCMB(export_op):
     params = export_op.parameters()
     logger = export_op.log()
 
+    # Get the simulation attribute resource
+    sim_atts = smtk.attribute.Resource.CastTo(params.find('attributes').value())
+    if sim_atts is None:
+        msg = 'ERROR - No simulation attributes'
+        print(msg)
+        raise RuntimeError(msg)
+
     # Get output filepath
     output_file_item = params.findFile('output-file')
     output_file = output_file_item.value(0)
@@ -99,7 +106,7 @@ def ExportCMB(export_op):
     from internal.writer import ats_writer
     imp.reload(ats_writer)
 
-    writer = ats_writer.ATSWriter(params)
+    writer = ats_writer.ATSWriter(sim_atts)
     completed = writer.write(output_file)
     print('Writer completion status: %s' % completed)
 

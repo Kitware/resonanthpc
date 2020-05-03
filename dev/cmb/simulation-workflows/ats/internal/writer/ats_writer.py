@@ -29,22 +29,18 @@ TypeStringMap = {
 class ATSWriter:
     """Top level writer class for ATS input files."""
 
-    def __init__(self, export_params):
+    def __init__(self, sim_atts):
         """Initializes the exporter class with the simulation parameters.
+
+        Inputs:
+          sim_atts: attribute resource specifying simulation
         """
         self.checked_attributes = set()  # attributes that have been validated
         self.model_resource = None
-        self.sim_atts = None
+        self.sim_atts = sim_atts
         self.warning_messages = list()
         self.xml_doc = None
         self.xml_root = None
-
-        self.sim_atts = smtk.attribute.Resource.CastTo(export_params.find('attributes').value())
-        # print('sim_atts', self.sim_atts)
-        if self.sim_atts is None:
-            msg = 'ERROR - No simulation attributes'
-            print(msg)
-            raise RuntimeError(msg)
 
     def write(self, output_filepath):
         """Generate the xml output file."""
