@@ -10,6 +10,7 @@
 #
 # =============================================================================
 
+import imp
 import os
 print('loading', os.path.basename(__file__))
 from xml.dom import minidom
@@ -17,17 +18,16 @@ from xml.dom import minidom
 import smtk
 import smtk.attribute
 
-TypeStringMap = {
-    smtk.attribute.Item.DoubleType: 'double',
-    smtk.attribute.Item.IntType: 'int',
-    smtk.attribute.Item.StringType: 'string',
-    smtk.attribute.Item.VoidType: 'bool',
-    smtk.attribute.Item.FileType: 'string',
-}
+from . import shared
+imp.reload(shared)
+
+from . import base_writer
+imp.reload(base_writer)
+from .base_writer import BaseWriter
 
 
-class ATSWriter:
-    """Top level writer class for ATS input files."""
+class ATSWriter(BaseWriter):
+    """Top level writer for ATS input files."""
 
     def __init__(self, sim_atts):
         """Initializes the exporter class with the simulation parameters.
@@ -35,25 +35,32 @@ class ATSWriter:
         Inputs:
           sim_atts: attribute resource specifying simulation
         """
-        self.checked_attributes = set()  # attributes that have been validated
-        self.model_resource = None
-        self.sim_atts = sim_atts
-        self.warning_messages = list()
-        self.xml_doc = None
+        super(ATSWriter, self).__init__()
         self.xml_root = None
+
+        # Initialize shared data
+        shared.checked_attributes = set()  # attributes that have been validated
+        shared.model_resource = None
+        shared.sim_atts = sim_atts
+        shared.warning_messages = list()
+        shared.xml_doc = None
 
     def write(self, output_filepath):
         """Generate the xml output file."""
-        self.xml_doc = minidom.Document()
-        self.xml_root = self.xml_doc.createElement('ParameterList')
+        shared.xml_doc = minidom.Document()
+        self.xml_root = shared.xml_doc.createElement('ParameterList')
         self.xml_root.setAttribute('name', 'Main')
         self.xml_root.setAttribute('type', 'ParameterList')
-        self.xml_doc.appendChild(self.xml_root)
-
+        shared.xml_doc.appendChild(self.xml_root)
 
         ################################
 
-        self._generate_domains_xml()
+        # self._generate_domains_xml()
+        from . import domain_writer
+        imp.reload(domain_writer)
+        domain_writer.DomainWriter().write(self.xml_root)
+
+
         self._generate_regions_xml()
         ## TODO: uncomment as implemented
         # self._generate_cycle_driver_xml()
@@ -68,98 +75,12 @@ class ATSWriter:
         # Write output file
         wrote_file = False
         with open(output_filepath, 'w') as fp:
-            xml_string = self.xml_doc.toprettyxml(indent=" ")
+            xml_string = shared.xml_doc.toprettyxml(indent=" ")
             fp.write(xml_string)
             wrote_file = True
         return wrote_file
 
-    def _new_list(self, parent, list_name, list_type='ParameterList'):
-        """Appends ParameterList element to parent"""
-        new_list = self.xml_doc.createElement('ParameterList')
-        new_list.setAttribute('name', list_name)
-        new_list.setAttribute('type', list_type)
-        parent.appendChild(new_list)
-        return new_list
-
-    def _new_param(self, list_elem, param_name, param_type, param_value):
-        """Appends Parameter element to list_elem"""
-        new_param = self.xml_doc.createElement('Parameter')
-        new_param.setAttribute('name', param_name)
-        new_param.setAttribute('type', param_type)
-        new_param.setAttribute('value', param_value)
-        list_elem.appendChild(new_param)
-        return new_param
-
-    def _render_items(self, parent_elem, att, param_names):
-        """Generates Parameter elements for items specified by param_names"""
-        assert isinstance(param_names, list)
-        for param_name in param_names:
-            item = att.find(param_name)
-            if item is None:
-                continue
-
-            # TODO: we need to handle `ComponentType`
-
-            # skip over optional items if not enabled. Bools are never optional... weird logic here.
-            if item.type() != smtk.attribute.Item.VoidType and not item.isEnabled():
-                continue
-
-            type_string = TypeStringMap.get(item.type())
-            value = None
-            if item.type() == smtk.attribute.Item.VoidType:
-                value = 'true' if item.isEnabled() else 'false'
-            elif hasattr(item, 'numberOfValues') and item.numberOfValues() > 1:
-                type_string = 'Array({})'.format(type_string)
-                value_list = list()
-                for i in range(item.numberOfValues()):
-                    value_list.append(item.value(i))
-                string_list = [str(x) for x in value_list]
-                value = r"{" + ', '.join(string_list) + r"}"
-            elif hasattr(item, 'value'):
-                value = item.value()
-
-            ####
-            if value is None or not isinstance(value, str):
-                raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
-
-            self._new_param(parent_elem, param_name, type_string, value)
-        return
-
     #### This section contains methods to write each Main element ####
-
-    def _generate_domains_xml(self):
-        # possible children parameters
-        children = {
-            'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
-            'read mesh file': ['file', 'format'],
-            'surface': ['urface sideset name', 'export mesh to file', ], # TODO: more
-            'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
-            # TODO: column mesh
-        }
-        main_param_names = ['verify mesh', 'deformable mesh']
-        # Note about `'partitioner'`: it only makes sense on the "domain" mesh
-        ####
-        # Logic to render the mesh section
-        mesh_elem = self._new_list(self.xml_root, 'mesh')
-        domain_atts = self.sim_atts.findAttributes('domain')
-        for domain_att in domain_atts:
-            # save out each domain
-            domain_elem = self._new_list(mesh_elem, domain_att.name())
-            type_item = domain_att.findString('mesh type')
-            mesh_type = type_item.value()
-            _ = self._new_param(domain_elem, 'mesh type', 'string', mesh_type)
-            #  Winging it here to generate the parameters list
-            gen_params_list_name = '{} parameters'.format(mesh_type)
-            gen_params_list = self._new_list(domain_elem, gen_params_list_name)
-            known_children = children.get(mesh_type, [])
-            self._render_items(gen_params_list, type_item, known_children)
-            # TODO: If a `domain` mesh, not a surface or otherwise, add the partitioner option:
-            #       there aren't any examples of this being used, so leaving out
-            # if domain mesh: # psuedo-code
-            #     self._render_items(gen_params_list, type_item, ['partitioner',])
-            # Top level mesh parameters
-            self._render_items(domain_elem, domain_att, main_param_names)
-        return
 
     def _generate_regions_xml(self):
         # possible children parameters
@@ -175,7 +96,7 @@ class ATSWriter:
         ####
         # Logic to render it - shouldn't need any changes
         regions_elem = self._new_list(self.xml_root, 'regions')
-        region_atts = self.sim_atts.findAttributes('region')
+        region_atts = shared.sim_atts.findAttributes('region')
         for region_att in region_atts:
             list_elem = self._new_list(regions_elem, region_att.name())
             type_list = self._new_list(list_elem, region_att.type())

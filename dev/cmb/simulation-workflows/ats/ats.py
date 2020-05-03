@@ -114,8 +114,8 @@ def ExportCMB(export_op):
     if sys.stdout is not None:
         sys.stdout.flush()
 
-    print('ats.py number of warnings:', len(writer.warning_messages))
-    for msg in writer.warning_messages:
-        logger.addWarning(msg)
+    # print('ats.py number of warnings:', len(writer.warning_messages))
+    # for msg in writer.warning_messages:
+    #     logger.addWarning(msg)
 
     return completed
