@@ -18,7 +18,7 @@ from xml.dom import minidom
 import smtk
 import smtk.attribute
 
-from . import shared
+from .shared_data import instance as shared
 from . import base_writer
 from .base_writer import BaseWriter
 

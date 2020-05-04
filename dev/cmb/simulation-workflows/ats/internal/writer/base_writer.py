@@ -19,7 +19,7 @@ from xml.dom import minidom
 import smtk
 import smtk.attribute
 
-from . import shared
+from .shared_data import instance as shared
 
 TypeStringMap = {
     smtk.attribute.Item.DoubleType: 'double',

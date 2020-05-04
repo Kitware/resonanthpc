@@ -18,8 +18,7 @@ from xml.dom import minidom
 import smtk
 import smtk.attribute
 
-from . import shared
-imp.reload(shared)
+from .shared_data import instance as shared
 
 from . import base_writer
 imp.reload(base_writer)
@@ -36,22 +35,18 @@ class ATSWriter(BaseWriter):
           sim_atts: attribute resource specifying simulation
         """
         super(ATSWriter, self).__init__()
+        self.sim_atts = sim_atts
         self.xml_root = None
-
-        # Initialize shared data
-        shared.checked_attributes = set()  # attributes that have been validated
-        shared.model_resource = None
-        shared.sim_atts = sim_atts
-        shared.warning_messages = list()
-        shared.xml_doc = None
 
     def write(self, output_filepath):
         """Generate the xml output file."""
-        shared.xml_doc = minidom.Document()
+        shared.initialize(self.sim_atts, minidom.Document())
+
         self.xml_root = shared.xml_doc.createElement('ParameterList')
         self.xml_root.setAttribute('name', 'Main')
         self.xml_root.setAttribute('type', 'ParameterList')
         shared.xml_doc.appendChild(self.xml_root)
+
 
         ################################
 
