@@ -3,7 +3,7 @@
   <Definitions>
 
     <!-- ATS mesh types -->
-    <AttDef Type="mesh" Label="Mesh" BaseType="" Version="0">
+    <AttDef Type="domain" Label="Domains" BaseType="" Version="0">
       <ItemDefinitions>
         <!-- Where the mesh type is chosen: only one per simulation -->
         <String Name="mesh type">
@@ -49,6 +49,7 @@
             <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
               <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
             </Void>
+            <File Name="export mesh to file" ShouldExist="false" Optional="true" IsEnabledByDefault="false"></File>
           </ChildrenDefinitions>
           <!-- Here is where we list the options - they can adopt children from above -->
           <DiscreteInfo DefaultIndex="0">
@@ -76,6 +77,7 @@
                 <!-- TODO: this can be `surface sideset name` or `surface sideset names`-->
                 <!-- TODO: How do we deal with option to have one or many? -->
                 <Item>surface sideset name</Item>
+                <Item>export mesh to file</Item>
               </Items>
             </Structure>
             <!-- "subgrid mesh" -->
@@ -100,7 +102,7 @@
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
         </Void>
         <!-- “partitioner” [string] (zoltan_rcb) Method to partition the mesh. -->
-        <String Name="partitioner">
+        <String Name="partitioner" Optional="true">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
             <Value Enum="METIS">metis</Value>
@@ -110,70 +112,5 @@
       </ItemDefinitions>
     </AttDef>
 
-
-    <!-- Region subdomains -->
-    <!-- TODO: can we ensure that a user never repeats a region name? -->
-    <AttDef Type="region" Label="Region" Abstract="true" Version="0"></AttDef>
-    <AttDef Type="region: all" BaseType="region"></AttDef>
-    <AttDef Type="region: box" BaseType="region">
-      <ItemDefinitions>
-        <Double Name="low coordinate" NumberOfRequiredValues="3"></Double>
-        <Double Name="high coordinate" NumberOfRequiredValues="3"></Double>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region: plane" BaseType="region">
-      <ItemDefinitions>
-        <Double Name="point" NumberOfRequiredValues="3"></Double>
-        <Double Name="normal" NumberOfRequiredValues="3"></Double>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region: labeled set" BaseType="region">
-      <ItemDefinitions>
-        <String Name="label"></String>
-        <!-- TODO: the spec says that this is the same mesh file as the section above. How do we link the two? Is this okay? -->
-        <Component Name="file">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='file']"></Resource>
-          </Accepts>
-        </Component>
-        <!-- TODO: same as above but for the mesh format! -->
-        <String Name="entity">
-          <DiscreteInfo  DefaultIndex="0">
-            <Value Enum="cell">cell</Value>
-            <Value Enum="face">face</Value>
-            <Value Enum="node">node</Value>
-          </DiscreteInfo>
-        </String>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region: color function" BaseType="region">
-      <ItemDefinitions>
-        <File Name="file" ShouldExist="true"></File>
-        <Int Name="value"></Int>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region: point" BaseType="region">
-      <ItemDefinitions>
-        <Double Name="point" NumberOfRequiredValues="3"></Double>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region: logical" BaseType="region">
-      <ItemDefinitions>
-        <String Name="operation">
-          <DiscreteInfo DefaultIndex="0">
-            <Value Enum="union">union</Value>
-            <Value Enum="intersect">intersect</Value>
-            <Value Enum="subtract">subtract</Value>
-            <Value Enum="complement">complement</Value>
-          </DiscreteInfo>
-        </String>
-        <!-- TODO: insert a list of Strings -->
-      </ItemDefinitions>
-    </AttDef>
-    <!-- TODO: Polygon -->
-    <!-- TODO: Enumerated -->
-    <!-- TODO: Boundary -->
-    <!-- TODO: Box Volume Fractions -->
-    <!-- TODO: Line Segment -->
   </Definitions>
 </SMTK_AttributeResource>

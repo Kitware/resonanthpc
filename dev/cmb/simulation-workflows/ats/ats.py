@@ -16,6 +16,7 @@ Export operator for ATS workflows
 import imp
 import os
 import sys
+import traceback
 
 import smtk
 import smtk.attribute
@@ -46,8 +47,11 @@ class Export(smtk.operation.Operation):
     def operateInternal(self):
         try:
             success = ExportCMB(self)
-        except:
-            print('Error', self.log().convertToString())
+        except Exception as e:
+            print("\n\nERROR:")
+            track = traceback.format_exc()
+            print(track)
+            print("\n\n")
             #smtk.ErrorMessage(self.log(), sys.exc_info()[0])
             raise
             return self.createResult(smtk.operation.Operation.Outcome.FAILED)
@@ -83,6 +87,13 @@ def ExportCMB(export_op):
     params = export_op.parameters()
     logger = export_op.log()
 
+    # Get the simulation attribute resource
+    sim_atts = smtk.attribute.Resource.CastTo(params.find('attributes').value())
+    if sim_atts is None:
+        msg = 'ERROR - No simulation attributes'
+        print(msg)
+        raise RuntimeError(msg)
+
     # Get output filepath
     output_file_item = params.findFile('output-file')
     output_file = output_file_item.value(0)
@@ -95,7 +106,7 @@ def ExportCMB(export_op):
     from internal.writer import ats_writer
     imp.reload(ats_writer)
 
-    writer = ats_writer.ATSWriter(params)
+    writer = ats_writer.ATSWriter(sim_atts)
     completed = writer.write(output_file)
     print('Writer completion status: %s' % completed)
 
@@ -103,8 +114,8 @@ def ExportCMB(export_op):
     if sys.stdout is not None:
         sys.stdout.flush()
 
-    print('ats.py number of warnings:', len(writer.warning_messages))
-    for msg in writer.warning_messages:
-        logger.addWarning(msg)
+    # print('ats.py number of warnings:', len(writer.warning_messages))
+    # for msg in writer.warning_messages:
+    #     logger.addWarning(msg)
 
     return completed

@@ -3,6 +3,12 @@
   <Definitions>
     <AttDef Type="visualization driver" BaseType="" Version="0">
       <ItemDefinitions>
+        <Component Name="domain">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='domain']"></Resource>
+          </Accepts>
+        </Component>
+
         <File Name="file name base" ShouldExist="false">
           <!-- TODO: file name "visdump_DOMAIN_data" -->
           <!-- CAN we dynamically set this based on the domain? -->
