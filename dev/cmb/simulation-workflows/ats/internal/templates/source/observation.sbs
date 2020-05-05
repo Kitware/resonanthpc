@@ -7,12 +7,15 @@
         <File Name="observation output filename" ShouldExist="false"></File>
 
         <String Name="variable">
-          <!-- TODO: ummm? should this be a drop down? It seems like available choices could depend on PK choice -->
+          <!-- TODO: ummm? should this be a drop down? It seems like available choices could depend on PK choice. For now, the user must know what they are doing.-->
           <BriefDescription>any ATS variable used by any PK, e.g. “pressure” or “surface-water_content”</BriefDescription>
         </String>
 
         <!-- NOTE: not documented, but in the example -->
-        <String Name="delimiter" DefauleValue=" "/>
+        <String Name="delimiter">
+          <!-- TODO: how do we make a space character the default value? -->
+          <DefaultValue> </DefaultValue>
+        </String>
 
         <Component Name="region">
           <Accepts>
