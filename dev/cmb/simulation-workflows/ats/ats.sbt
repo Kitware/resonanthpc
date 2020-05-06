@@ -62,10 +62,27 @@
         <Att Type="observation-base" Name="observations"/>
       </AttributeTypes>
     </View>
-    <View Type="Instanced" Title="State">
+
+    <!-- State stuff -->
+    <View Type="Group" Title="State" Style="Tiled">
+      <Views>
+        <View Title="field evaluators"/>
+        <View Title="initial conditions"/>
+      </Views>
+    </View>
+    <View Type="Instanced" Title="field evaluators">
       <InstancedAttributes>
-        <Att Type="state" Name="state"/>
+        <Att Type="field evaluators" Name="field evaluators"/>
       </InstancedAttributes>
     </View>
+    <View Type="Attribute" Title="initial conditions">
+      <AttributeTypes>
+        <Att Type="ic-base" Name="initial conditions"/>
+      </AttributeTypes>
+    </View>
+
+
+
+
   </Views>
 </SMTK_AttributeResource>
