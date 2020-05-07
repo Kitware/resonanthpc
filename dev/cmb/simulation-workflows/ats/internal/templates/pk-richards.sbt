@@ -55,7 +55,7 @@
               </DiscreteInfo>
             </String>
             <Void Name="scaled constraint equation" IsEnabledByDefault="false"></Void>
-            <Double Name="constraint equation scaling cutoff"></Double>
+            <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
             <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
           </ItemDefinitions>
         </Group>
