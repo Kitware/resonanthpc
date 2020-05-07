@@ -46,7 +46,7 @@
     </View>
 
     <!-- Process Kernel stuff -->
-    <View Type="Group" Title="Process Kernel Info" Style="Tabbed">
+    <View Type="Group" Title="Process Kernel Info" Style="Tabbed" TabPosition="North">
       <Views>
         <View Title="Process Kernel"/>
         <View Title="Preconditioners"/>
@@ -88,7 +88,7 @@
     </View>
 
     <!-- State stuff -->
-    <View Type="Group" Title="State" Style="Tabbed">
+    <View Type="Group" Title="State" Style="Tabbed" TabPosition="North">
       <Views>
         <View Title="field evaluators"/>
         <View Title="initial conditions"/>
