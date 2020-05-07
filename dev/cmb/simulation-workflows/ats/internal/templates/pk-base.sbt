@@ -40,7 +40,14 @@
       <ItemDefinitions>
         <!-- TODO: initial time step-->
         <!-- TODO: assemble preconditioner-->
-        <!-- TODO: time integrator-->
+
+        <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time-integrator-base']"></Resource>
+          </Accepts>
+        </Component>
+
+
         <!-- TODO: preconditioner-->
         <!-- TODO: includes pk-spec -->
       </ItemDefinitions>
