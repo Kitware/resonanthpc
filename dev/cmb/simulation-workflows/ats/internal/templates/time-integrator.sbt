@@ -9,9 +9,16 @@
 
     <AttDef Type="time-integrator-backward-euler" Label="Backward Euler" BaseType="time-integrator-base" Version="0">
       <ItemDefinitions>
-        <!-- TODO: verbose object -->
+        <!-- NOTE: called `verbose object` here not `verbosity level` like other places? -->
+        <String Name="verbose object">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>low</Value>
+            <Value>medium</Value>
+            <Value>high</Value>
+            <Value>extreme</Value>
+          </DiscreteInfo>
+        </String>
         <!-- TODO: residual debugger -->
-        <!--  -->
 
         <Int Name="max preconditioner lag iterations">
           <DefaultValue>0</DefaultValue>
