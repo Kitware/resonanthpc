@@ -22,13 +22,11 @@
         <View Title="Domains"/>
         <View Title="Regions"/>
         <View Title="Coordinator"/>
-        <View Title="Process Kernel"/>
+        <View Title="Process Kernel Info"/>
         <View Title="Visualization"/>
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
         <View Title="State"/>
-        <View Title="Preconditioners"/>
-        <View Title="Time Integrators"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Domains">
@@ -46,11 +44,33 @@
         <Att Type="cycle driver" Name="cycle driver"/>
       </InstancedAttributes>
     </View>
+
+    <!-- Process Kernel stuff -->
+    <View Type="Group" Title="Process Kernel Info" Style="Tabbed">
+      <Views>
+        <View Title="Process Kernel"/>
+        <View Title="Preconditioners"/>
+        <View Title="Time Integrators"/>
+      </Views>
+    </View>
     <View Type="Attribute" Title="Process Kernel">
       <AttributeTypes>
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
+    <View Type="Attribute" Title="Preconditioners">
+      <AttributeTypes>
+        <Att Type="preconditioner-base"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Time Integrators">
+      <AttributeTypes>
+        <Att Type="time-integrator-base"/>
+      </AttributeTypes>
+    </View>
+
+
+
     <View Type="Attribute" Title="Visualization">
       <AttributeTypes>
         <Att Type="visualization driver"/>
@@ -68,7 +88,7 @@
     </View>
 
     <!-- State stuff -->
-    <View Type="Group" Title="State" Style="Tiled">
+    <View Type="Group" Title="State" Style="Tabbed">
       <Views>
         <View Title="field evaluators"/>
         <View Title="initial conditions"/>
@@ -82,18 +102,6 @@
     <View Type="Attribute" Title="initial conditions">
       <AttributeTypes>
         <Att Type="ic-base" Name="initial conditions"/>
-      </AttributeTypes>
-    </View>
-
-    <View Type="Attribute" Title="Preconditioners">
-      <AttributeTypes>
-        <Att Type="preconditioner-base"/>
-      </AttributeTypes>
-    </View>
-
-    <View Type="Attribute" Title="Time Integrators">
-      <AttributeTypes>
-        <Att Type="time-integrator-base"/>
       </AttributeTypes>
     </View>
 
