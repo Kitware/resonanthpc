@@ -29,7 +29,7 @@
     </View>
     <View Type="Attribute" Title="Domains">
       <AttributeTypes>
-        <Att Type="domain"/>
+        <Att Type="mesh"/>
       </AttributeTypes>
     </View>
     <View Type="Attribute" Title="Regions">

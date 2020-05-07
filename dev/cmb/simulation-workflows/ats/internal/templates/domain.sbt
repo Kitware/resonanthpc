@@ -3,101 +3,73 @@
   <Definitions>
 
     <!-- ATS mesh types -->
-    <AttDef Type="domain" Label="Domains" BaseType="" Version="0">
-      <ItemDefinitions>
-        <!-- Where the mesh type is chosen: only one per simulation -->
-        <String Name="mesh type">
-          <ChildrenDefinitions>
-            <Double Name="domain low coordinate" NumberOfRequiredValues="3">
-              <DefaultValue>0.0</DefaultValue>
-            </Double>
-            <Double Name="domain high coordinate" NumberOfRequiredValues="3">
-              <DefaultValue>1.0</DefaultValue>
-            </Double>
-            <Int Name="number of cells" NumberOfRequiredValues="3">
-              <DefaultValue>1</DefaultValue>
-              <RangeInfo>
-                <Min Inclusive="true">1</Min>
-              </RangeInfo>
-            </Int>
-            <File Name="file" ShouldExist="true"></File>
-            <String Name="format">
-              <DiscreteInfo>
-                <Value Enum="MSTK">MSTK</Value>
-                <Value Enum="Exodus II">Exodus II</Value>
-              </DiscreteInfo>
-            </String>
-            <Component Name="surface sideset name">
-              <Accepts>
-                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-              </Accepts>
-            </Component>
-            <String Name="subgrid region name">
-              <!-- TODO: what is this?? -->
-            </String>
-            <String Name="entity kind">
-              <DiscreteInfo DefaultIndex="0">
-                <Value Enum="cell">cell</Value>
-                <Value Enum="face">face</Value>
-                <Value Enum="node">node</Value>
-              </DiscreteInfo>
-            </String>
-            <String Name="parent domain">
-              <!-- TODO: what even is this? should it be pointing to something else? -->
-              <DefaultValue>domain</DefaultValue>
-            </String>
-            <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
-              <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
-            </Void>
-            <File Name="export mesh to file" ShouldExist="false" Optional="true" IsEnabledByDefault="false"></File>
-          </ChildrenDefinitions>
-          <!-- Here is where we list the options - they can adopt children from above -->
-          <DiscreteInfo DefaultIndex="0">
-            <Structure>
-              <Value enum="generate mesh">generate mesh</Value>
-              <Items>
-                <Item>domain low coordinate</Item>
-                <Item>domain high coordinate</Item>
-                <Item>number of cells</Item>
-              </Items>
-            </Structure>
-            <!-- "read mesh file" in exodusII or MSTK format -->
-            <Structure>
-              <Value enum="read mesh file">read mesh file</Value>
-              <Items>
-                <Item>file</Item>
-                <Item>format</Item>
-              </Items>
-            </Structure>
-            <!-- NOTE: "logical mesh" (no documentaion) -->
-            <!-- TODO: "surface mesh" -->
-            <Structure>
-              <Value enum="surface">surface</Value>
-              <Items>
-                <!-- TODO: this can be `surface sideset name` or `surface sideset names`-->
-                <!-- TODO: How do we deal with option to have one or many? -->
-                <Item>surface sideset name</Item>
-                <Item>export mesh to file</Item>
-              </Items>
-            </Structure>
-            <!-- "subgrid mesh" -->
-            <Structure>
-              <Value enum="subgrid">subgrid</Value>
-              <Items>
-                <Item>subgrid region name</Item>
-                <Item>entity kind</Item>
-                <Item>parent domain</Item>
-                <Item>flyweight mesh</Item>
-              </Items>
-            </Structure>
-            <!-- TODO: "column mesh" -->
-          </DiscreteInfo>
-        </String>
+    <AttDef Type="mesh" Label="Domains" BaseType="" Abstract="true" Version="0" />
 
-        <!-- Specs for all mesh types below -->
+    <AttDef Type="mesh.generate-mesh" Label="Generate Mesh" BaseType="mesh">
+      <ItemDefinitions>
+        <Double Name="domain low coordinate" NumberOfRequiredValues="3">
+          <DefaultValue>0.0</DefaultValue>
+        </Double>
+        <Double Name="domain high coordinate" NumberOfRequiredValues="3">
+          <DefaultValue>1.0</DefaultValue>
+        </Double>
+        <Int Name="number of cells" NumberOfRequiredValues="3">
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">1</Min>
+          </RangeInfo>
+        </Int>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.resource" Label="Mesh File (Resource)" BaseType="mesh" BaseName="mesh-resource">
+      <ItemDefinitions>
+        <Resource Name="resource">
+          <Accepts>
+            <Resource Name="smtk::model::Resource" />
+          </Accepts>
+        </Resource>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.surface" Label="Surface" BaseType="mesh">
+      <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.labeled.surface']"></Resource>
+        </Accepts>
+      </AssociationsDef>
+      <BriefDescription>A set of regions containing surface faces.
+All regions must be from the same source mesh.</BriefDescription>
+      <ItemDefinitions>
         <Void Name="verify mesh" Label="verify the mesh" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>Perform a mesh audit</BriefDescription>
         </Void>
+        <File Name="export mesh to file" Optional="true" IsEnabledByDefault="false">
+        </File>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.subgrid" Label="TODO Subgrid" BaseType="mesh">
+      <ItemDefinitions>
+        <String Name="entity kind">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="cell">cell</Value>
+            <Value Enum="face">face</Value>
+            <Value Enum="node">node</Value>
+          </DiscreteInfo>
+        </String>
+        <String Name="parent domain">
+          <!-- TODO: what even is this? should it be pointing to something else? -->
+          <DefaultValue>domain</DefaultValue>
+        </String>
+        <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh">
+      <ItemDefinitions>
         <Void Name="deformable mesh" Label="deformable mesh" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
         </Void>

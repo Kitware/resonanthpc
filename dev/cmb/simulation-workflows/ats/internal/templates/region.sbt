@@ -3,52 +3,47 @@
   <Definitions>
 
     <!-- Region subdomains -->
-    <!-- TODO: can we ensure that a user never repeats a region name? -->
     <AttDef Type="region" Label="Region" Abstract="true" Version="0"></AttDef>
-    <AttDef Type="region: all" BaseType="region"></AttDef>
-    <AttDef Type="region: box" BaseType="region">
+    <AttDef Type="region.physical" BaseType="region" Abstract="true" Version="0"></AttDef>
+
+    <AttDef Type="region.all" Label="region: all" BaseType="region.physical"></AttDef>
+    <AttDef Type="region.box" Label="region: box" BaseType="region.physical">
       <ItemDefinitions>
         <Double Name="low coordinate" NumberOfRequiredValues="3"></Double>
         <Double Name="high coordinate" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region: plane" BaseType="region">
+    <AttDef Type="region.plane" Label="region: plane" BaseType="region.physical">
       <ItemDefinitions>
         <Double Name="point" NumberOfRequiredValues="3"></Double>
         <Double Name="normal" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region: labeled set" BaseType="region">
-      <ItemDefinitions>
-        <String Name="label"></String>
-        <!-- TODO: the spec says that this is the same mesh file as the section above. How do we link the two? Is this okay? -->
-        <Component Name="file">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='file']"></Resource>
-          </Accepts>
-        </Component>
-        <!-- TODO: same as above but for the mesh format! -->
-        <String Name="entity">
-          <DiscreteInfo  DefaultIndex="0">
-            <Value Enum="cell">cell</Value>
-            <Value Enum="face">face</Value>
-            <Value Enum="node">node</Value>
-          </DiscreteInfo>
-        </String>
-      </ItemDefinitions>
+    <!-- For now, all labeled regions must be surface entities -->
+    <AttDef Type="region.labeled.surface" Label="region: labeled set" BaseType="region.physical">
+      <AssociationsDef Extensible="true" NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::model::Resource" Filter="face"></Resource>
+        </Accepts>
+      </AssociationsDef>
     </AttDef>
-    <AttDef Type="region: color function" BaseType="region">
+    <AttDef Type="region.color-function" Label="region: color function" BaseType="region.physical">
       <ItemDefinitions>
         <File Name="file" ShouldExist="true"></File>
         <Int Name="value"></Int>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region: point" BaseType="region">
+    <AttDef Type="region.point" Label="region: point" BaseType="region.physical">
       <ItemDefinitions>
         <Double Name="point" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region: logical" BaseType="region">
+    <AttDef Type="region.logical" Label="region: logical" BaseType="region">
+      <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.physical']"></Resource>
+        </Accepts>
+      </AssociationsDef>
       <ItemDefinitions>
         <String Name="operation">
           <DiscreteInfo DefaultIndex="0">
@@ -58,7 +53,6 @@
             <Value Enum="complement">complement</Value>
           </DiscreteInfo>
         </String>
-        <!-- TODO: insert a list of Strings -->
       </ItemDefinitions>
     </AttDef>
     <!-- TODO: Polygon -->
