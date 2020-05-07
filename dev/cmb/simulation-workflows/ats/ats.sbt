@@ -26,7 +26,7 @@
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
         <View Title="State"/>
-        <View Title="Precondioners"/>
+        <View Title="Preconditioners"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Domains">
@@ -83,7 +83,7 @@
       </AttributeTypes>
     </View>
 
-    <View Type="Attribute" Title="Precondioners">
+    <View Type="Attribute" Title="Preconditioners">
       <AttributeTypes>
         <Att Type="preconditioner-base"/>
       </AttributeTypes>
