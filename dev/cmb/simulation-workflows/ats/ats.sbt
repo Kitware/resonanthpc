@@ -13,6 +13,7 @@
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
+    <File>internal/templates/preconditioner.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -25,6 +26,7 @@
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
         <View Title="State"/>
+        <View Title="Precondioners"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Domains">
@@ -78,6 +80,12 @@
     <View Type="Attribute" Title="initial conditions">
       <AttributeTypes>
         <Att Type="ic-base" Name="initial conditions"/>
+      </AttributeTypes>
+    </View>
+
+    <View Type="Attribute" Title="Precondioners">
+      <AttributeTypes>
+        <Att Type="preconditioner-base"/>
       </AttributeTypes>
     </View>
 

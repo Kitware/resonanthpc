@@ -63,7 +63,13 @@
 
 
 
-        <!-- TODO: - priority - preconditioner (preconditioner-typed-spec) -->
+        <!-- preconditioner (preconditioner-typed-spec) -->
+        <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
+          </Accepts>
+        </Component>
+
         <!-- TODO: linear solver (linear-solver-typed-spec), oprional -->
         <!-- surface rel perm strategy -->
         <String Name="surface rel perm strategy">
