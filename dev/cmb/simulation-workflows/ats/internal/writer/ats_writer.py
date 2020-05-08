@@ -78,14 +78,20 @@ class ATSWriter(BaseWriter):
     #### This section contains methods to write each Main element ####
 
     def _generate_regions_xml(self):
+        """"""
+        # Define names that are not directly function of attribute type
+        region_type_params = {
+            'region.labeled.surface': 'region: labeled set',
+        }
+
         # possible children parameters
         children = {
-            'region: plane': ['point', 'normal',],
-            'region: box': ['low coordinate', 'high coordinate',],
-            'region: labeled set': ['label', 'file', 'entity',],
-            'region: color function': ['file', 'value',],
-            'region: point': ['point',],
-            'region: logical': ['operation',],
+            'region.plane': ['point', 'normal',],
+            'region.box': ['low coordinate', 'high coordinate',],
+            'region.labeled.surface': ['label', 'file', 'entity',],
+            'region.color-function': ['file', 'value',],
+            'region.point': ['point',],
+            'region.logical': ['operation',],
             # TODO: there's more to fill in here!
         }
         ####
@@ -93,7 +99,12 @@ class ATSWriter(BaseWriter):
         regions_elem = self._new_list(self.xml_root, 'regions')
         region_atts = shared.sim_atts.findAttributes('region')
         for region_att in region_atts:
-            list_elem = self._new_list(regions_elem, region_att.name())
+            att_type = region_att.type()
+            param_name = region_type_params.get(att_type)
+            if param_name is None:
+                param_name = att_type.replace('.', ': ')
+
+            list_elem = self._new_list(regions_elem, param_name)
             type_list = self._new_list(list_elem, region_att.type())
             # Get list of known children for given attribute
             known_children = children.get(region_att.type(), [])
