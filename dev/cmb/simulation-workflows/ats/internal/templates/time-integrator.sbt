@@ -18,7 +18,15 @@
             <Value>extreme</Value>
           </DiscreteInfo>
         </String>
+
         <!-- TODO: residual debugger -->
+        <!-- NOTE: I am not sure if this is done right -->
+        <!-- <Group Name="residual debugger">
+          <ItemDefinitions>
+            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+          </ItemDefinitions>
+        </Group> -->
 
         <Int Name="max preconditioner lag iterations">
           <DefaultValue>0</DefaultValue>
@@ -35,8 +43,10 @@
           <DefaultValue>1</DefaultValue>
         </Double>
 
-        <!-- TODO: BDF1 slover interface -->
-        <!-- TODO: solver spec -->
+        <!-- TODO: BDF1 slover interface - this isn't documneted -->
+
+        <!-- TODO: solver spec... linear or nonlinear? these get big -->
+
         <!-- TODO: timestep controller -->
 
 
