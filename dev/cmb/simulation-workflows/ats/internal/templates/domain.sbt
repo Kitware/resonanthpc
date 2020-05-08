@@ -2,10 +2,46 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
-    <!-- ATS mesh types -->
-    <AttDef Type="mesh" Label="Domains" BaseType="" Abstract="true" Version="0" />
+    <!-- One mesh is designated the "domain" mesh -->
+    <AttDef Type="domain" Label="Domain Mesh">
+      <BriefDescription>Designate one mesh as the "domain" mesh</BriefDescription>
+      <ItemDefinitions>
+        <Component Name="domain-mesh" Label="Domain Mesh">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']" />
+          </Accepts>
+        </Component>
 
-    <AttDef Type="mesh.generate-mesh" Label="Generate Mesh" BaseType="mesh">
+        <!-- TODO Is mesh partitioner required? -->
+        <String Name="partitioner" Optional="true" IsEnabledByDefault="false">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
+            <Value Enum="METIS">metis</Value>
+            <Value Enum="Zoltan">zoltan</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+
+    <!-- ATS mesh types -->
+    <AttDef Type="mesh" Label="Mesh" BaseType="" Abstract="true">
+      <ItemDefinitions>
+        <Void Name="deformable mesh" Label="Deformable" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>Will this mesh be deformed?</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <!-- Use mesh.audit base for mesh types that include "verify mesh" -->
+    <AttDef Type="mesh.audit" BaseType="mesh" Abstract="true">
+      <ItemDefinitions>
+        <Void Name="verify mesh" Label="Verify" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>Perform a mesh audit</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh">
       <ItemDefinitions>
         <Double Name="domain low coordinate" NumberOfRequiredValues="3">
           <DefaultValue>0.0</DefaultValue>
@@ -22,8 +58,9 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.resource" Label="Mesh File (Resource)" BaseType="mesh" BaseName="mesh-resource">
+    <AttDef Type="mesh.resource" Label="Mesh File (Resource)" BaseType="mesh.audit" BaseName="MeshFile">
       <ItemDefinitions>
+        <!-- Should this instead be named "model" or "model-resource"? -->
         <Resource Name="resource">
           <Accepts>
             <Resource Name="smtk::model::Resource" />
@@ -32,7 +69,7 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.surface" Label="Surface" BaseType="mesh">
+    <AttDef Type="mesh.surface" Label="Surface" BaseType="mesh.audit" BaseName="SurfaceMesh">
       <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="1">
         <Accepts>
           <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.labeled.surface']"></Resource>
@@ -41,16 +78,18 @@
       <BriefDescription>A set of regions containing surface faces.
 All regions must be from the same source mesh.</BriefDescription>
       <ItemDefinitions>
-        <Void Name="verify mesh" Label="verify the mesh" Optional="true" IsEnabledByDefault="false">
-          <BriefDescription>Perform a mesh audit</BriefDescription>
-        </Void>
         <File Name="export mesh to file" Optional="true" IsEnabledByDefault="false">
         </File>
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.subgrid" Label="TODO Subgrid" BaseType="mesh">
+    <AttDef Type="mesh.subgrid" Label="Subgrid" BaseType="mesh">
       <ItemDefinitions>
+        <Component Name="region" Label="Region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']" />
+          </Accepts>
+        </Component>
         <String Name="entity kind">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="cell">cell</Value>
@@ -58,31 +97,14 @@ All regions must be from the same source mesh.</BriefDescription>
             <Value Enum="node">node</Value>
           </DiscreteInfo>
         </String>
-        <String Name="parent domain">
-          <!-- TODO: what even is this? should it be pointing to something else? -->
-          <DefaultValue>domain</DefaultValue>
-        </String>
-        <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
+<!--         <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
-        </Void>
+        </Void> -->
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh">
-      <ItemDefinitions>
-        <Void Name="deformable mesh" Label="deformable mesh" Optional="true" IsEnabledByDefault="false">
-          <BriefDescription>Will this mesh be deformed?</BriefDescription>
-        </Void>
-        <!-- “partitioner” [string] (zoltan_rcb) Method to partition the mesh. -->
-        <String Name="partitioner" Optional="true">
-          <DiscreteInfo DefaultIndex="0">
-            <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
-            <Value Enum="METIS">metis</Value>
-            <Value Enum="Zoltan">zoltan</Value>
-          </DiscreteInfo>
-        </String>
-      </ItemDefinitions>
-    </AttDef>
+<!--     <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh">
+    </AttDef> -->
 
   </Definitions>
 </SMTK_AttributeResource>

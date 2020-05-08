@@ -17,8 +17,8 @@
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
       <Views>
-        <View Title="Domains"/>
-        <View Title="Regions"/>
+        <View Title="Mesh"/>
+        <View Title="Region"/>
         <View Title="Coordinator"/>
         <View Title="Process Kernel"/>
         <View Title="Visualization"/>
@@ -27,12 +27,25 @@
         <View Title="State"/>
       </Views>
     </View>
-    <View Type="Attribute" Title="Domains">
+
+    <View Type="Group" Title="Mesh" Style="Tiled">
+      <Views>
+        <View Title="Domain" />
+        <View Title="Mesh Attributes" />
+      </Views>
+    </View>
+    <View Type="Instanced" Title="Domain">
+      <InstancedAttributes>
+        <Att Type="domain" Name="Domain Mesh"/>
+      </InstancedAttributes>
+    </View>
+    <View Type="Attribute" Title="Mesh Attributes">
       <AttributeTypes>
         <Att Type="mesh"/>
       </AttributeTypes>
     </View>
-    <View Type="Attribute" Title="Regions">
+
+    <View Type="Attribute" Title="Region">
       <AttributeTypes>
         <Att Type="region"/>
       </AttributeTypes>
