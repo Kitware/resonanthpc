@@ -29,11 +29,19 @@ class DomainWriter(BaseWriter):
         super(DomainWriter, self).__init__()
 
     def write(self, xml_root):
+        """"""
+        # lookup table for mesh type
+        mesh_type_dict = {
+            'mesh.generate-mesh': 'generate mesh',
+            'mesh.resource': 'read mesh file',
+            'mesh.surface': 'surface',
+        }
+
         # possible children parameters
         children = {
-            'generate mesh': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
-            'read mesh file': ['file', 'format'],
-            'surface': ['urface sideset name', 'export mesh to file', ], # TODO: more
+            'mesh.generate': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
+            'mesh.resource': ['file', 'format'],
+            'mesh.surface': ['surface sideset name', 'export mesh to file', ], # TODO: more
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
             # TODO: column mesh
         }
@@ -42,22 +50,24 @@ class DomainWriter(BaseWriter):
         ####
         # Logic to render the mesh section
         mesh_elem = self._new_list(xml_root, 'mesh')
-        domain_atts = shared.sim_atts.findAttributes('domain')
+        domain_atts = shared.sim_atts.findAttributes('mesh')
         for domain_att in domain_atts:
             # save out each domain
             domain_elem = self._new_list(mesh_elem, domain_att.name())
-            type_item = domain_att.findString('mesh type')
-            mesh_type = type_item.value()
+            mesh_type = mesh_type_dict.get(domain_att.type())
+            if mesh_type is None:
+                raise NotImplementedError('Unsupported mesh type', domain_att.type())
             _ = self._new_param(domain_elem, 'mesh type', 'string', mesh_type)
             #  Winging it here to generate the parameters list
             gen_params_list_name = '{} parameters'.format(mesh_type)
             gen_params_list = self._new_list(domain_elem, gen_params_list_name)
-            known_children = children.get(mesh_type, [])
-            self._render_items(gen_params_list, type_item, known_children)
+            known_children = children.get(mesh_type, []) + main_param_names
+            self._render_items(gen_params_list, domain_att, known_children)
             # TODO: If a `domain` mesh, not a surface or otherwise, add the partitioner option:
             #       there aren't any examples of this being used, so leaving out
             # if domain mesh: # psuedo-code
             #     self._render_items(gen_params_list, type_item, ['partitioner',])
             # Top level mesh parameters
-            self._render_items(domain_elem, domain_att, main_param_names)
+
+            # self._render_items(domain_elem, domain_att, main_param_names)
         return
