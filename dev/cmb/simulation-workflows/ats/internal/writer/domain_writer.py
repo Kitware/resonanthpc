@@ -10,7 +10,6 @@
 #
 # =============================================================================
 
-import imp
 import os
 print('loading', os.path.basename(__file__))
 from xml.dom import minidom
@@ -19,7 +18,6 @@ import smtk
 import smtk.attribute
 
 from .shared_data import instance as shared
-from . import base_writer
 from .base_writer import BaseWriter
 
 
@@ -91,13 +89,10 @@ class DomainWriter(BaseWriter):
             if assoc_params_list:
                 self._render_associations(gen_params_list, domain_att, assoc_params_list)
 
-            # Remaining params
+            # Type-specific mesh parameters
             known_children_params = children_params.get(mesh_type, [])
             self._render_items(gen_params_list, domain_att, known_children_params)
-            # TODO: If a `domain` mesh, not a surface or otherwise, add the partitioner option:
-            #       there aren't any examples of this being used, so leaving out
-            # if domain mesh: # psuedo-code
-            #     self._render_items(gen_params_list, type_item, ['partitioner',])
-            # Top level mesh parameters
+
+            # Common mesh parameters
             self._render_items(domain_elem, domain_att, main_param_names)
         return
