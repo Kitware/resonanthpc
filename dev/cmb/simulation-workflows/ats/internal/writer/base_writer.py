@@ -61,10 +61,14 @@ class BaseWriter:
         return prop_list[0]
 
     def _new_list(self, parent, list_name, list_type='ParameterList'):
-        """Appends ParameterList element to parent"""
+        """Appends ParameterList element to parent
+
+        If list_type is None, then that xml attribute is omitted
+        """
         new_list = shared.xml_doc.createElement('ParameterList')
         new_list.setAttribute('name', list_name)
-        new_list.setAttribute('type', list_type)
+        if list_type is not None:
+            new_list.setAttribute('type', list_type)
         parent.appendChild(new_list)
         return new_list
 

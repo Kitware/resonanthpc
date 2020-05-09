@@ -19,14 +19,37 @@
         <Double Name="normal" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
-    <!-- For now, all labeled regions must be surface entities -->
-    <AttDef Type="region.labeled.surface" Label="region: labeled set" BaseType="region.physical">
-      <AssociationsDef Extensible="true" NumberOfRequiredValues="1">
+
+    <!-- labeled sets are separated by dimension -->
+    <AttDef Type="region.labeled.volume" Label="region: labeled set - volume" BaseType="region.physical">
+      <AssociationsDef NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::model::Resource" Filter="volume"></Resource>
+        </Accepts>
+      </AssociationsDef>
+    </AttDef>
+    <AttDef Type="region.labeled.surface" Label="region: labeled set - face" BaseType="region.physical">
+      <AssociationsDef NumberOfRequiredValues="1">
         <Accepts>
           <Resource Name="smtk::model::Resource" Filter="face"></Resource>
         </Accepts>
       </AssociationsDef>
     </AttDef>
+    <AttDef Type="region.labeled.edge" Label="region: labeled set - edge" BaseType="region.physical">
+      <AssociationsDef NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::model::Resource" Filter="edge"></Resource>
+        </Accepts>
+      </AssociationsDef>
+    </AttDef>
+    <AttDef Type="region.labeled.vertex" Label="region: labeled set - node" BaseType="region.physical">
+      <AssociationsDef NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::model::Resource" Filter="vertex"></Resource>
+        </Accepts>
+      </AssociationsDef>
+    </AttDef>
+
     <AttDef Type="region.color-function" Label="region: color function" BaseType="region.physical">
       <ItemDefinitions>
         <File Name="file" ShouldExist="true"></File>
@@ -39,7 +62,7 @@
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="region.logical" Label="region: logical" BaseType="region">
-      <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="1">
+      <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="2">
         <Accepts>
           <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.physical']"></Resource>
         </Accepts>
