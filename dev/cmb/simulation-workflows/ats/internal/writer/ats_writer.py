@@ -24,7 +24,6 @@ from . import base_writer
 imp.reload(base_writer)
 from .base_writer import BaseWriter
 
-
 class ATSWriter(BaseWriter):
     """Top level writer for ATS input files."""
 
@@ -38,8 +37,33 @@ class ATSWriter(BaseWriter):
         self.sim_atts = sim_atts
         self.xml_root = None
 
-    def write(self, output_filepath):
-        """Generate the xml output file."""
+    def write(self, output_filepath=None):
+        """Generate the xml output file.
+
+        Return:
+            True if output file written
+            False if output file failed to write
+            None if no output file specified
+        """
+        self.generate_xml()
+
+        # Write output file
+        if output_filepath is not None:
+            wrote_file = False
+            with open(output_filepath, 'w') as fp:
+                xml_string = shared.xml_doc.toprettyxml(indent=" ")
+                fp.write(xml_string)
+                wrote_file = True
+            return wrote_file
+
+        # (else)
+        return None
+
+    def generate_xml(self):
+        """Builds xml document from current sim_atts resource.
+
+        Returns shared.xml_doc for testing
+        """
         shared.initialize(self.sim_atts, minidom.Document())
 
         self.xml_root = shared.xml_doc.createElement('ParameterList')
@@ -55,6 +79,8 @@ class ATSWriter(BaseWriter):
         imp.reload(region_writer)
         region_writer.RegionWriter().write(self.xml_root)
 
+        ################################
+
         ## TODO: uncomment as implemented
         # self._generate_cycle_driver_xml()
         # self._generate_visualization_xml()
@@ -64,14 +90,7 @@ class ATSWriter(BaseWriter):
         # self._generate_state_xml()
 
         ################################
-
-        # Write output file
-        wrote_file = False
-        with open(output_filepath, 'w') as fp:
-            xml_string = shared.xml_doc.toprettyxml(indent=" ")
-            fp.write(xml_string)
-            wrote_file = True
-        return wrote_file
+        return shared.xml_doc
 
     #### This section contains methods to write each Main element ####
 
