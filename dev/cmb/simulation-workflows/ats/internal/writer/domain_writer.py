@@ -31,7 +31,7 @@ class DomainWriter(BaseWriter):
         # First get the domain mesh instance
         domain_mesh_att = None
         # Todo use attribute name "domain-mesh" instead of type "domain"
-        domain_att = shared.sim_atts.findAttributes('domain')[0]
+        domain_att = shared.sim_atts.findAttribute('domain-mesh')
         if domain_att is not None:
             domain_item = domain_att.findComponent('domain-mesh')
             if domain_item.isSet():
