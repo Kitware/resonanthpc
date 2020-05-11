@@ -2,107 +2,20 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
-    <!-- ATS mesh types -->
-    <AttDef Type="domain" Label="Domains" BaseType="" Version="0">
+    <!-- One mesh is designated the "domain" mesh -->
+    <AttDef Type="domain" Label="Domain Mesh">
+      <BriefDescription>Designate one mesh as the "domain" mesh</BriefDescription>
       <ItemDefinitions>
-        <!-- Where the mesh type is chosen: only one per simulation -->
-        <String Name="mesh type">
-          <ChildrenDefinitions>
-            <Double Name="domain low coordinate" NumberOfRequiredValues="3">
-              <DefaultValue>0.0</DefaultValue>
-            </Double>
-            <Double Name="domain high coordinate" NumberOfRequiredValues="3">
-              <DefaultValue>1.0</DefaultValue>
-            </Double>
-            <Int Name="number of cells" NumberOfRequiredValues="3">
-              <DefaultValue>1</DefaultValue>
-              <RangeInfo>
-                <Min Inclusive="true">1</Min>
-              </RangeInfo>
-            </Int>
-            <File Name="file" ShouldExist="true"></File>
-            <String Name="format">
-              <DiscreteInfo>
-                <Value Enum="MSTK">MSTK</Value>
-                <Value Enum="Exodus II">Exodus II</Value>
-              </DiscreteInfo>
-            </String>
-            <Component Name="surface sideset name">
-              <Accepts>
-                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-              </Accepts>
-            </Component>
-            <String Name="subgrid region name">
-              <!-- TODO: what is this?? -->
-            </String>
-            <String Name="entity kind">
-              <DiscreteInfo DefaultIndex="0">
-                <Value Enum="cell">cell</Value>
-                <Value Enum="face">face</Value>
-                <Value Enum="node">node</Value>
-              </DiscreteInfo>
-            </String>
-            <String Name="parent domain">
-              <!-- TODO: what even is this? should it be pointing to something else? -->
-              <DefaultValue>domain</DefaultValue>
-            </String>
-            <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
-              <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
-            </Void>
-            <File Name="export mesh to file" ShouldExist="false" Optional="true" IsEnabledByDefault="false"></File>
-          </ChildrenDefinitions>
-          <!-- Here is where we list the options - they can adopt children from above -->
-          <DiscreteInfo DefaultIndex="0">
-            <Structure>
-              <Value enum="generate mesh">generate mesh</Value>
-              <Items>
-                <Item>domain low coordinate</Item>
-                <Item>domain high coordinate</Item>
-                <Item>number of cells</Item>
-              </Items>
-            </Structure>
-            <!-- "read mesh file" in exodusII or MSTK format -->
-            <Structure>
-              <Value enum="read mesh file">read mesh file</Value>
-              <Items>
-                <Item>file</Item>
-                <Item>format</Item>
-              </Items>
-            </Structure>
-            <!-- NOTE: "logical mesh" (no documentaion) -->
-            <!-- TODO: "surface mesh" -->
-            <Structure>
-              <Value enum="surface">surface</Value>
-              <Items>
-                <!-- TODO: this can be `surface sideset name` or `surface sideset names`-->
-                <!-- TODO: How do we deal with option to have one or many? -->
-                <Item>surface sideset name</Item>
-                <Item>export mesh to file</Item>
-              </Items>
-            </Structure>
-            <!-- "subgrid mesh" -->
-            <Structure>
-              <Value enum="subgrid">subgrid</Value>
-              <Items>
-                <Item>subgrid region name</Item>
-                <Item>entity kind</Item>
-                <Item>parent domain</Item>
-                <Item>flyweight mesh</Item>
-              </Items>
-            </Structure>
-            <!-- TODO: "column mesh" -->
-          </DiscreteInfo>
-        </String>
+        <Component Name="domain-mesh" Label="Domain Mesh">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.generate']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.resource']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.logical']" />
+          </Accepts>
+        </Component>
 
-        <!-- Specs for all mesh types below -->
-        <Void Name="verify mesh" Label="verify the mesh" Optional="true" IsEnabledByDefault="false">
-          <BriefDescription>Perform a mesh audit</BriefDescription>
-        </Void>
-        <Void Name="deformable mesh" Label="deformable mesh" Optional="true" IsEnabledByDefault="false">
-          <BriefDescription>Will this mesh be deformed?</BriefDescription>
-        </Void>
-        <!-- “partitioner” [string] (zoltan_rcb) Method to partition the mesh. -->
-        <String Name="partitioner" Optional="true">
+        <!-- TODO Is mesh partitioner required? -->
+        <String Name="partitioner" Optional="true" IsEnabledByDefault="false">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
             <Value Enum="METIS">metis</Value>
@@ -111,6 +24,89 @@
         </String>
       </ItemDefinitions>
     </AttDef>
+
+    <!-- ATS mesh types -->
+    <AttDef Type="mesh" Label="Mesh" BaseType="" Abstract="true">
+      <ItemDefinitions>
+        <Void Name="deformable mesh" Label="Deformable" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>Will this mesh be deformed?</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <!-- Use mesh.audit base for mesh types that include "verify mesh" -->
+    <AttDef Type="mesh.audit" BaseType="mesh" Abstract="true">
+      <ItemDefinitions>
+        <Void Name="verify mesh" Label="Verify" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>Perform a mesh audit</BriefDescription>
+        </Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh">
+      <ItemDefinitions>
+        <Double Name="domain low coordinate" NumberOfRequiredValues="3">
+          <DefaultValue>0.0</DefaultValue>
+        </Double>
+        <Double Name="domain high coordinate" NumberOfRequiredValues="3">
+          <DefaultValue>1.0</DefaultValue>
+        </Double>
+        <Int Name="number of cells" NumberOfRequiredValues="3">
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">1</Min>
+          </RangeInfo>
+        </Int>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.resource" Label="Mesh File (Resource)" BaseType="mesh.audit" BaseName="MeshFile">
+      <ItemDefinitions>
+        <!-- Should this instead be named "model" or "model-resource"? -->
+        <Resource Name="resource">
+          <Accepts>
+            <Resource Name="smtk::model::Resource" />
+          </Accepts>
+        </Resource>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.surface" Label="Surface" BaseType="mesh.audit" BaseName="SurfaceMesh">
+      <AssociationsDef Name="associations" Extensible="true" NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.labeled.surface']"></Resource>
+        </Accepts>
+      </AssociationsDef>
+      <BriefDescription>A set of regions containing surface faces.
+All regions must be from the same source mesh.</BriefDescription>
+      <ItemDefinitions>
+        <File Name="export mesh to file" Optional="true" IsEnabledByDefault="false">
+        </File>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.subgrid" Label="Subgrid" BaseType="mesh">
+      <ItemDefinitions>
+        <Component Name="region" Label="Region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']" />
+          </Accepts>
+        </Component>
+        <String Name="entity kind">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="cell">cell</Value>
+            <Value Enum="face">face</Value>
+            <Value Enum="node">node</Value>
+          </DiscreteInfo>
+        </String>
+<!--         <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
+        </Void> -->
+      </ItemDefinitions>
+    </AttDef>
+
+<!--     <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh">
+    </AttDef> -->
 
   </Definitions>
 </SMTK_AttributeResource>
