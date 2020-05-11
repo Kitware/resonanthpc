@@ -4,12 +4,8 @@
   <Definitions>
     <!-- Base class for all time integrators -->
     <AttDef Type="time-integrator-base" BaseType="" Abstract="true" Version="0">
-    </AttDef>
-
-
-    <AttDef Type="time-integrator-backward-euler" Label="Backward Euler" BaseType="time-integrator-base" Version="0">
       <ItemDefinitions>
-        <!-- NOTE: called `verbose object` here not `verbosity level` like other places? -->
+      <!-- NOTE: called `verbose object` here not `verbosity level` like other places? -->
         <String Name="verbose object">
           <DiscreteInfo DefaultIndex="0">
             <Value>low</Value>
@@ -18,7 +14,29 @@
             <Value>extreme</Value>
           </DiscreteInfo>
         </String>
+      </ItemDefinitions>
+    </AttDef>
 
+
+    <AttDef Type="time-integrator-explicit" BaseType="time-integrator-base" Label="Explicit" Version="0">
+      <ItemDefinitions>
+        <String Name="RK method">
+          <DiscreteInfo DefaultIndex="0">
+            <Value>forward Euler</Value>
+            <Value>heun euler</Value>
+            <Value>midpoint</Value>
+            <Value>ralston</Value>
+            <Value>tvd 3rd order</Value>
+            <Value>kutta 3rd order</Value>
+            <Value>runge kutta 4th order</Value>
+          </DiscreteInfo>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+
+
+    <AttDef Type="time-integrator-backward-euler" Label="Backward Euler" BaseType="time-integrator-base" Version="0">
+      <ItemDefinitions>
         <!-- TODO: residual debugger -->
         <!-- NOTE: I am not sure if this is done right -->
         <!-- <Group Name="residual debugger">
