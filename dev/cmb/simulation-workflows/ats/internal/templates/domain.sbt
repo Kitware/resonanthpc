@@ -8,7 +8,9 @@
       <ItemDefinitions>
         <Component Name="domain-mesh" Label="Domain Mesh">
           <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.generate']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.resource']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.logical']" />
           </Accepts>
         </Component>
 

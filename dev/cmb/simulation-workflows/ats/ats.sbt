@@ -36,7 +36,7 @@
     </View>
     <View Type="Instanced" Title="Domain">
       <InstancedAttributes>
-        <Att Type="domain" Name="Domain Mesh"/>
+        <Att Type="domain" Name="domain-mesh"/>
       </InstancedAttributes>
     </View>
     <View Type="Attribute" Title="Mesh Attributes">

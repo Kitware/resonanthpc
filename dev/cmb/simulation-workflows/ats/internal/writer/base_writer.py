@@ -147,12 +147,8 @@ class BaseWriter:
                 value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = item.value()
-
-            ####
-            if value is None or not isinstance(value, str):
+            else:
                 raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
             self._new_param(parent_elem, param_name, type_string, value)
         return
-
-

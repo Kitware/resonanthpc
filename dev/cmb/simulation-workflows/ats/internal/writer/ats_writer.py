@@ -51,7 +51,7 @@ class ATSWriter(BaseWriter):
         if output_filepath is not None:
             wrote_file = False
             with open(output_filepath, 'w') as fp:
-                xml_string = shared.xml_doc.toprettyxml(indent=" ")
+                xml_string = shared.xml_doc.toprettyxml(indent="  ")
                 fp.write(xml_string)
                 wrote_file = True
             return wrote_file
