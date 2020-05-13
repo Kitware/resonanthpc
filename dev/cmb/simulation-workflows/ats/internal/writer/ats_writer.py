@@ -81,33 +81,7 @@ class ATSWriter(BaseWriter):
 
         ################################
 
-        ## TODO: uncomment as implemented
-        # self._generate_cycle_driver_xml()
-        # self._generate_visualization_xml()
-        # self._generate_observations_xml()
-        # self._generate_checkpoint_xml()
-        # self._generate_pks_xml()
-        # self._generate_state_xml()
+        ## TODO: implement other writers
 
         ################################
         return shared.xml_doc
-
-    #### This section contains methods to write each Main element ####
-
-    def _generate_cycle_driver_xml(self):
-        raise NotImplementedError()
-
-    def _generate_visualization_xml(self):
-        raise NotImplementedError()
-
-    def _generate_observations_xml(self):
-        raise NotImplementedError()
-
-    def _generate_checkpoint_xml(self):
-        raise NotImplementedError()
-
-    def _generate_pks_xml(self):
-        raise NotImplementedError()
-
-    def _generate_state_xml(self):
-        raise NotImplementedError()
