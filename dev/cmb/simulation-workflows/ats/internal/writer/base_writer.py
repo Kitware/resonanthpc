@@ -156,8 +156,7 @@ class BaseWriter:
         return
 
 
-    def _render_io_event_specs(self, parent_elem, att):
-        io_event = att.find('visualization times')
+    def _render_io_event_specs(self, parent_elem, io_event):
         sub_groups = {
             'cycles start period stop': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
             'times start period stop': ['Start Time', 'Time Period', 'Stop Time', ]#TODO:'time units'],

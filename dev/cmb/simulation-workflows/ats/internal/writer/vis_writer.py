@@ -46,5 +46,6 @@ class VisualizationWriter(BaseWriter):
             self._render_items(domain_list_elem, att, known_children)
 
             # Now handle the IO Event spec group all in this main list
-            self._render_io_event_specs(domain_list_elem, att)
+            io_event = att.find('visualization times')
+            self._render_io_event_specs(domain_list_elem, io_event)
         return
