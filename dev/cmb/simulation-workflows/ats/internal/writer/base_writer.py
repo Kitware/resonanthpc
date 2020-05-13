@@ -154,3 +154,26 @@ class BaseWriter:
 
             self._new_param(parent_elem, param_name, type_string, value)
         return
+
+
+    def _render_io_event_specs(self, parent_elem, att):
+        io_event = att.find('visualization times')
+        sub_groups = {
+            'cycles start period stop': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
+            'times start period stop': ['Start Time', 'Time Period', 'Stop Time', ]#TODO:'time units'],
+            #TODO: 'times': ['times', 'time units'],
+        }
+        sub_items = [
+            'cycles', # Int
+        ]
+        # Now add the sub items
+        self._render_items(parent_elem, io_event, sub_items)
+        # Now add each array of values
+        for group_name, items in sub_groups.items():
+            event_group = io_event.find(group_name)
+            type_string = 'Array({})'.format('double')
+            value_list = [event_group.find(nm).value() for nm in items]
+            string_list = [str(x) for x in value_list]
+            value = r"{" + ', '.join(string_list) + r"}"
+            self._new_param(parent_elem, group_name, type_string, value)
+        return
