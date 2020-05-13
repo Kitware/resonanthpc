@@ -41,12 +41,9 @@ class ObservationWriter(BaseWriter):
 
         obs_elem = self._new_list(xml_root, 'observations')
         obs_atts = shared.sim_atts.findAttributes('observation-base')
-        print([a.name() for a in shared.sim_atts.attributes()])
-        print(obs_atts)
         for att in obs_atts:
             # Outermost element is ParameterList with name of the attribute
             name = att.name()
-            print("boooooyah")
             obs_list_elem = self._new_list(obs_elem, name)
 
             # Now populate that list with all the attributes - no sub lists
