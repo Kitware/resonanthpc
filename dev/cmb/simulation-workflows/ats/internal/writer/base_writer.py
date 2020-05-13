@@ -74,6 +74,8 @@ class BaseWriter:
 
     def _new_param(self, list_elem, param_name, param_type, param_value):
         """Appends Parameter element to list_elem"""
+        if not isinstance(param_value, str):
+            raise TypeError("trying to insert and invalid value for: ({}: {})".format(param_name, param_value))
         new_param = shared.xml_doc.createElement('Parameter')
         new_param.setAttribute('name', param_name)
         new_param.setAttribute('type', param_type)
@@ -146,7 +148,7 @@ class BaseWriter:
                 string_list = [str(x) for x in value_list]
                 value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
-                value = item.value()
+                value = str(item.value())
             else:
                 raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
