@@ -39,7 +39,7 @@ class VisualizationWriter(BaseWriter):
         vis_atts = shared.sim_atts.findAttributes('visualization driver')
         for att in vis_atts:
             # Outermost element is ParameterList with name of domain/mesh
-            name = att.find('domain').name()
+            name = att.find('domain').value().name()
             domain_list_elem = self._new_list(vis_elem, name)
 
             # Now populate that list with all the attributes - no sub lists
