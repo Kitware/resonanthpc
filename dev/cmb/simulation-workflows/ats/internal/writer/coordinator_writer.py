@@ -56,7 +56,7 @@ class CoordinatorWriter(BaseWriter):
         # Now handle the IO Event spec group all in this main list
         io_event = coord_inst.find('required times') # NOTE: this is optional
         if io_event.isEnabled():
-            io_elem = self._new_list(xml_root, 'required times')
+            io_elem = self._new_list(coord_elem, 'required times')
             self._render_io_event_specs(io_elem, io_event)
 
         # And now handle the PK tree which can get pretty complicated
