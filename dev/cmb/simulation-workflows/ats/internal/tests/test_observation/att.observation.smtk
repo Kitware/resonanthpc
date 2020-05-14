@@ -1,0 +1,4030 @@
+{
+  "Attributes": [
+    {
+      "ID": "8ec2c39a-a5e5-4f4f-93e2-a50e17598a2a",
+      "Items": [
+        {
+          "Name": "file name base",
+          "Value": "checkpoint"
+        },
+        {
+          "Name": "file name digits",
+          "Val": 5
+        },
+        {
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Cycle",
+                          "Val": 0
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Cycle Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Cycle",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      }
+                    }
+                  },
+                  "Name": "cycles start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "cycles",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
+                      }
+                    }
+                  ]
+                },
+                "Type": "Int"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Time",
+                          "Val": 0.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Time Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Time",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 3": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "times",
+                          "NumberOfValues": 1,
+                          "Values": [
+                            {
+                              "UnsetVal": {
+                                "Ith": 0
+                              }
+                            }
+                          ]
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times"
+                },
+                "Type": "Group"
+              }
+            }
+          },
+          "Name": "checkpoint times"
+        }
+      ],
+      "Name": "checkpoint driver",
+      "Type": "checkpoint driver"
+    },
+    {
+      "ID": "b0c82519-0b10-4fa6-bbd9-024be2e92129",
+      "Items": [
+        {
+          "Name": "start time",
+          "Val": 0.0
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "start time units"
+        },
+        {
+          "ChildrenItems": {
+            "Index 0": {
+              "ItemValue": {
+                "Name": "end cycle",
+                "UnsetVal": true
+              },
+              "Type": "Int"
+            },
+            "Index 1": {
+              "ItemValue": {
+                "Name": "end time",
+                "UnsetVal": true
+              },
+              "Type": "Double"
+            },
+            "Index 2": {
+              "ItemValue": {
+                "Discrete": true,
+                "DiscreteIndex": 0,
+                "Name": "end time units"
+              },
+              "Type": "String"
+            }
+          },
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "end-spec"
+        },
+        {
+          "Enabled": false,
+          "Name": "restart from checkpoint file",
+          "RecentValues": [
+            ""
+          ]
+        },
+        {
+          "Enabled": false,
+          "Name": "wallclock duration [hrs]",
+          "UnsetVal": true
+        },
+        {
+          "Enabled": false,
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Cycle",
+                          "Val": 0
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Cycle Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Cycle",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      }
+                    }
+                  },
+                  "Name": "cycles start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "cycles",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
+                      }
+                    }
+                  ]
+                },
+                "Type": "Int"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Time",
+                          "Val": 0.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Time Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Time",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 3": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "times",
+                          "NumberOfValues": 1,
+                          "Values": [
+                            {
+                              "UnsetVal": {
+                                "Ith": 0
+                              }
+                            }
+                          ]
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times"
+                },
+                "Type": "Group"
+              }
+            }
+          },
+          "Name": "required times"
+        },
+        {
+          "Name": "PK tree",
+          "Values": [
+            [
+              null,
+              null
+            ]
+          ]
+        }
+      ],
+      "Name": "cycle driver",
+      "Type": "cycle driver"
+    },
+    {
+      "ID": "72c6f2b7-03f6-4376-ae6f-44772afdea6a",
+      "Items": [
+        {
+          "Name": "domain-mesh",
+          "Values": [
+            [
+              null,
+              null
+            ]
+          ]
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Enabled": false,
+          "Name": "partitioner"
+        }
+      ],
+      "Name": "domain-mesh",
+      "Type": "domain"
+    },
+    {
+      "ID": "5d5767eb-6499-4779-ae04-a6e365c1b714",
+      "Name": "field evaluators",
+      "Type": "field evaluators"
+    },
+    {
+      "ID": "136026e9-d1be-438b-a3d7-df091332e5d6",
+      "Items": [
+        {
+          "Name": "observation output filename",
+          "Value": "fooooooo"
+        },
+        {
+          "Name": "variable",
+          "Val": "pressure"
+        },
+        {
+          "Name": "delimiter",
+          "Val": " "
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "9c7e217f-50ae-4bed-8f6b-483e6513b4a1",
+              "f9eaf265-85a1-4586-9512-fb09b6ec9313"
+            ]
+          ]
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "location name"
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "functional"
+        },
+        {
+          "Enabled": true,
+          "Name": "direction normalized flux"
+        },
+        {
+          "Enabled": true,
+          "Name": "direction normalized flux direction",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 1.0
+              }
+            }
+          ]
+        },
+        {
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Cycle",
+                          "Val": 0
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Cycle Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Cycle",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      }
+                    }
+                  },
+                  "Name": "cycles start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "cycles",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
+                      }
+                    }
+                  ]
+                },
+                "Type": "Int"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": true,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Time",
+                          "Val": 0.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Time Period",
+                          "Val": 10800.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Time",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 3": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "times",
+                          "NumberOfValues": 1,
+                          "Values": [
+                            {
+                              "UnsetVal": {
+                                "Ith": 0
+                              }
+                            }
+                          ]
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times"
+                },
+                "Type": "Group"
+              }
+            }
+          },
+          "Name": "observation times"
+        }
+      ],
+      "Name": "observation-base-0",
+      "Type": "observation-base"
+    },
+    {
+      "ID": "b75d5a1b-d532-405f-a08b-5702d375c8ae",
+      "Items": [
+        {
+          "Name": "observation output filename",
+          "Value": "dfasfsaf"
+        },
+        {
+          "Name": "variable",
+          "Val": "sfsfsa"
+        },
+        {
+          "Name": "delimiter",
+          "Val": " "
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "9c7e217f-50ae-4bed-8f6b-483e6513b4a1",
+              "65970135-cf7e-4c1d-ba0a-cdf5298908dc"
+            ]
+          ]
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 2,
+          "Name": "location name"
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "functional"
+        },
+        {
+          "Enabled": false,
+          "Name": "direction normalized flux"
+        },
+        {
+          "Enabled": false,
+          "Name": "direction normalized flux direction",
+          "Values": [
+            {
+              "UnsetVal": {
+                "Ith": 0
+              }
+            },
+            {
+              "UnsetVal": {
+                "Ith": 1
+              }
+            },
+            {
+              "UnsetVal": {
+                "Ith": 2
+              }
+            }
+          ]
+        },
+        {
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Cycle",
+                          "Val": 0
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Cycle Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Cycle",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      }
+                    }
+                  },
+                  "Name": "cycles start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "cycles",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
+                      }
+                    }
+                  ]
+                },
+                "Type": "Int"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Time",
+                          "Val": 0.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Time Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Time",
+                          "UnsetVal": true
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 3": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "times",
+                          "NumberOfValues": 1,
+                          "Values": [
+                            {
+                              "UnsetVal": {
+                                "Ith": 0
+                              }
+                            }
+                          ]
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times"
+                },
+                "Type": "Group"
+              }
+            }
+          },
+          "Name": "observation times"
+        }
+      ],
+      "Name": "observation-base-1",
+      "Type": "observation-base"
+    },
+    {
+      "ID": "1ef14ca3-29e6-4354-b9fb-d5a74ec95493",
+      "Items": [
+        {
+          "Name": "low coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "high coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 1.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "region.box-0",
+      "Type": "region.box"
+    },
+    {
+      "ID": "1da54c94-d9a7-4277-b819-14b92d7f6600",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.5
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "region.point-0",
+      "Type": "region.point"
+    }
+  ],
+  "Definitions": [
+    {
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": "checkpoint",
+          "Name": "file name base",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "File",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            5
+          ],
+          "Name": "file name digits",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "RangeInfo": {
+            "Min": {
+              "Inclusive": true,
+              "Value": 0
+            }
+          },
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0
+                  ],
+                  "Name": "Start Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Cycle Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Int",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                }
+              ],
+              "Name": "cycles start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "Extensible": true,
+              "Name": "cycles",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0.0
+                  ],
+                  "Name": "Start Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Time Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Double",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: start/period/stop",
+              "Name": "times start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "Extensible": true,
+                  "Name": "times",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: explicit",
+              "Name": "times",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "checkpoint times",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Type": "Group",
+          "Version": 0
+        }
+      ],
+      "Label": "checkpoint driver",
+      "Type": "checkpoint driver",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            0.0
+          ],
+          "Name": "start time",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "RangeInfo": {
+            "Min": {
+              "Inclusive": true,
+              "Value": 0.0
+            }
+          },
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "second": "s"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "day": "d"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "year": "yr"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "start time units",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "ChildrenDefinitions": [
+            {
+              "Name": "end cycle",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Type": "Int",
+              "Version": 0
+            },
+            {
+              "Name": "end time",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "RangeInfo": {
+                "Min": {
+                  "Inclusive": true,
+                  "Value": 0.0
+                }
+              },
+              "Type": "Double",
+              "Version": 0
+            },
+            {
+              "DiscreteInfo": {
+                "DefaultIndex": 0,
+                "ValueAndStructure": [
+                  {
+                    "Value": {
+                      "Enum": {
+                        "second": "s"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "day": "d"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "year": "yr"
+                      }
+                    }
+                  }
+                ]
+              },
+              "Name": "end time units",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Type": "String",
+              "Version": 0
+            }
+          ],
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Structure": {
+                  "Items": [
+                    "end time",
+                    "end time units"
+                  ],
+                  "Value": {
+                    "Enum": {
+                      "time": "time"
+                    }
+                  }
+                }
+              },
+              {
+                "Structure": {
+                  "Items": [
+                    "end cycle"
+                  ],
+                  "Value": {
+                    "Enum": {
+                      "cycle": "cycle"
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "Label": "end",
+          "Name": "end-spec",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "Name": "restart from checkpoint file",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "ShouldExit": true,
+          "Type": "File",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "wallclock duration [hrs]",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "RangeInfo": {
+            "Min": {
+              "Inclusive": false,
+              "Value": 0.0
+            }
+          },
+          "Type": "Double",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0
+                  ],
+                  "Name": "Start Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Cycle Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Int",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                }
+              ],
+              "Name": "cycles start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "Extensible": true,
+              "Name": "cycles",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0.0
+                  ],
+                  "Name": "Start Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Time Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Double",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: start/period/stop",
+              "Name": "times start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "Extensible": true,
+                  "Name": "times",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: explicit",
+              "Name": "times",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "required times",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Group",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='pk-base']"
+          ],
+          "Name": "PK tree",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        }
+      ],
+      "Label": "cycle driver",
+      "Type": "cycle driver",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "",
+      "BriefDescription": "Designate one mesh as the \"domain\" mesh",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='mesh.generate']",
+            "smtk::attribute::Resource",
+            "attribute[type='mesh.resource']",
+            "smtk::attribute::Resource",
+            "attribute[type='mesh.logical']"
+          ],
+          "Label": "Domain Mesh",
+          "Name": "domain-mesh",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "zoltan_rcb/map view": "zoltan_rcb"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "METIS": "metis"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "Zoltan": "zoltan"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "partitioner",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "String",
+          "Version": 0,
+          "isEnabledByDefault": false
+        }
+      ],
+      "Label": "Domain Mesh",
+      "Type": "domain",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "",
+      "Label": "Field Evaluators",
+      "Type": "field evaluators",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "Label": "ic-base",
+      "Type": "ic-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "BriefDescription": "Will this mesh be deformed?",
+          "Label": "Deformable",
+          "Name": "deformable mesh",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        }
+      ],
+      "Label": "Mesh",
+      "Type": "mesh",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "Name": "observation output filename",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "File",
+          "Version": 0
+        },
+        {
+          "BriefDescription": "any ATS variable used by any PK, e.g. “pressure” or “surface-water_content”",
+          "Name": "variable",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            ""
+          ],
+          "Name": "delimiter",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
+          ],
+          "Name": "region",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        },
+        {
+          "BriefDescription": "the mesh location of the thing to be measured, i.e. “cell”, “face”, or “node”",
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "cell": "cell"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "face": "face"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "node": "node"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "location name",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "BriefDescription": "the type of function to apply to the variable on the region",
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "observation data: point": "observation data: point"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "observation data: average": "observation data: average"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "observation data: extensive integral": "observation data: extensive integral"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "observation data: minimum": "observation data: minimum"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "observation data: maximum": "observation data: maximum"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "functional",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "BriefDescription": "For flux observations, dots the face-normal flux with a vector to ensure fluxes are integrated pointing the same direction.",
+          "Name": "direction normalized flux",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "direction normalized flux direction",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Double",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0
+                  ],
+                  "Name": "Start Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Cycle Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Int",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                }
+              ],
+              "Name": "cycles start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "Extensible": true,
+              "Name": "cycles",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0.0
+                  ],
+                  "Name": "Start Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Time Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Double",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: start/period/stop",
+              "Name": "times start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "Extensible": true,
+                  "Name": "times",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: explicit",
+              "Name": "times",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "observation times",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Type": "Group",
+          "Version": 0
+        }
+      ],
+      "Label": "observation-base",
+      "Type": "observation-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "low": "low"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "medium": "medium"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "high": "high"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "extreme": "extreme"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "verbosity level",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "pk-base",
+      "Type": "pk-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "Label": "preconditioner-base",
+      "Type": "preconditioner-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "Label": "Region",
+      "Type": "region",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "low": "low"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "medium": "medium"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "high": "high"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "extreme": "extreme"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "verbose object",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "time-integrator-base",
+      "Type": "time-integrator-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='domain']"
+          ],
+          "Name": "domain",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        },
+        {
+          "DefaultValue": "visdump_DOMAIN_data",
+          "Name": "file name base",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "File",
+          "Version": 0
+        },
+        {
+          "BriefDescription": "Write mesh data for every visualization dump; this facilitates visualizing deforming meshes.",
+          "Name": "dynamic mesh",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0
+                  ],
+                  "Name": "Start Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Cycle Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Int",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Cycle",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Int",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                }
+              ],
+              "Name": "cycles start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "Extensible": true,
+              "Name": "cycles",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "DefaultValue": [
+                    0.0
+                  ],
+                  "Name": "Start Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Time Period",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "Name": "Stop Time",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Optional": true,
+                  "Type": "Double",
+                  "Version": 0,
+                  "isEnabledByDefault": false
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: start/period/stop",
+              "Name": "times start period stop",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "ItemDefinitions": [
+                {
+                  "Extensible": true,
+                  "Name": "times",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "Double",
+                  "Version": 0
+                },
+                {
+                  "DiscreteInfo": {
+                    "DefaultIndex": 0,
+                    "ValueAndStructure": [
+                      {
+                        "Value": {
+                          "Enum": {
+                            "second": "s"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "day": "d"
+                          }
+                        }
+                      },
+                      {
+                        "Value": {
+                          "Enum": {
+                            "year": "yr"
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "Name": "time units",
+                  "NumberOfRequiredValues": 1,
+                  "OkToInheritCategories": true,
+                  "Type": "String",
+                  "Version": 0
+                }
+              ],
+              "Label": "Times: explicit",
+              "Name": "times",
+              "NumberOfRequiredGroups": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Group",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "visualization times",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Type": "Group",
+          "Version": 0
+        }
+      ],
+      "Label": "visualization driver",
+      "Type": "visualization driver",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
+        {
+          "Name": "name",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "ic-const-scalar",
+      "Type": "ic-const-scalar",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
+        {
+          "Name": "name",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "ic-const-vector",
+      "Type": "ic-const-vector",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "Label": "ic-file",
+      "Type": "ic-file",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "Label": "ic-scalar-field",
+      "Type": "ic-scalar-field",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "Label": "ic-tensor-field",
+      "Type": "ic-tensor-field",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "mesh",
+      "ItemDefinitions": [
+        {
+          "BriefDescription": "Perform a mesh audit",
+          "Label": "Verify",
+          "Name": "verify mesh",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        }
+      ],
+      "Label": "mesh.audit",
+      "Type": "mesh.audit",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "mesh",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            0.0
+          ],
+          "Name": "domain low coordinate",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "domain high coordinate",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1
+          ],
+          "Name": "number of cells",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "RangeInfo": {
+            "Min": {
+              "Inclusive": true,
+              "Value": 1
+            }
+          },
+          "Type": "Int",
+          "Version": 0
+        }
+      ],
+      "Label": "Generate Mesh",
+      "Type": "mesh.generate",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "mesh",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
+          ],
+          "Label": "Region",
+          "Name": "region",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "cell": "cell"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "face": "face"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "node": "node"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "entity kind",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "Subgrid",
+      "Type": "mesh.subgrid",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "pk-base",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='time-integrator-base']"
+          ],
+          "Name": "time integrator",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0,
+          "isEnabledByDefault": false
+        }
+      ],
+      "Label": "pk-bdf",
+      "Type": "pk-bdf",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "pk-base",
+      "ItemDefinitions": [
+        {
+          "BriefDescription": "Can we get a list from each PK?",
+          "Name": "primary variable key",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "Extensible": true,
+              "Name": "debug cells",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            },
+            {
+              "Extensible": true,
+              "Name": "debug faces",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Int",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "debugger",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Type": "Group",
+          "Version": 0
+        }
+      ],
+      "Label": "pk-physical",
+      "Type": "pk-physical",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "fact: relax value",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "fact: absolute threshold",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "fact: relative threshold",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0
+          ],
+          "Name": "fact: level-of-fill",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0
+          ],
+          "Name": "overlap",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            "Add"
+          ],
+          "Name": "schwarz: combine mode",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "Block ILU",
+      "Type": "preconditioner-block-ilu",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            0.0
+          ],
+          "Name": "tolerance",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            3
+          ],
+          "Name": "smoother sweeps",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            5
+          ],
+          "Name": "cycle applications",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0.5
+          ],
+          "Name": "strong threshold",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            6
+          ],
+          "Name": "relaxation type",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0
+          ],
+          "Name": "coarsen type",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "Name": "max multigrid levels",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Int",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "use block indices",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "DefaultValue": [
+            1
+          ],
+          "Name": "number of functions",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0
+          ],
+          "Name": "nodal strength of connection norm",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "summary of run time settings and timing information": "0"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "coarsening info": "1"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "smoothing info": "2"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "both coarsening and smoothing": "3"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "verbosity",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "Boomer AMG",
+      "Type": "preconditioner-boomer-amg",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "Label": "Diagonal",
+      "Type": "preconditioner-diagonal",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            1
+          ],
+          "Name": "ilu(k) fill level",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            0.0
+          ],
+          "Name": "ilut drop tolerance",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "Name": "rescale row",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "summary of run time settings and timing information": "0"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "verbosity",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "Euclid",
+      "Type": "preconditioner-euclid",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "Label": "Identity",
+      "Type": "preconditioner-identity",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "preconditioner-base",
+      "Label": "TODO: ML (Trilinos AMG)",
+      "Type": "preconditioner-ml",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::attribute::Resource",
+          "attribute[type='region.physical']"
+        ],
+        "Extensible": true,
+        "Name": "associations",
+        "NumberOfRequiredValues": 2,
+        "OkToInheritCategories": true,
+        "ReferenceLabels": {
+          "Label": [
+            "",
+            ""
+          ]
+        },
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "region",
+      "ItemDefinitions": [
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "union": "union"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "intersect": "intersect"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "subtract": "subtract"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "complement": "complement"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "operation",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "region: logical",
+      "Type": "region.logical",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "region",
+      "Label": "region.physical",
+      "Type": "region.physical",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "time-integrator-base",
+      "ItemDefinitions": [
+        {
+          "DefaultValue": [
+            0
+          ],
+          "Name": "max preconditioner lag iterations",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "Name": "freeze preconditioner",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "extrapolate initial guess",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": true
+        },
+        {
+          "DefaultValue": [
+            1
+          ],
+          "Name": "nonlinear iteration initial guess extrapolation order",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "restart tolerance relaxation factor",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            1.0
+          ],
+          "Name": "restart tolerance relaxation factor damping",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "Backward Euler",
+      "Type": "time-integrator-backward-euler",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "time-integrator-base",
+      "ItemDefinitions": [
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "forward Euler": "forward Euler"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "heun euler": "heun euler"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "midpoint": "midpoint"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "ralston": "ralston"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "tvd 3rd order": "tvd 3rd order"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "kutta 3rd order": "kutta 3rd order"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "runge kutta 4th order": "runge kutta 4th order"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "RK method",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        }
+      ],
+      "Label": "Explicit",
+      "Type": "time-integrator-explicit",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "mesh.audit",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::model::Resource",
+            ""
+          ],
+          "Name": "resource",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Resource",
+          "Version": 0
+        }
+      ],
+      "Label": "Mesh File (Resource)",
+      "Type": "mesh.resource",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::attribute::Resource",
+          "attribute[type='region.labeled.surface']"
+        ],
+        "Extensible": true,
+        "Name": "associations",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "mesh.audit",
+      "BriefDescription": "A set of regions containing surface faces.\nAll regions must be from the same source mesh.",
+      "ItemDefinitions": [
+        {
+          "Name": "export mesh to file",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "File",
+          "Version": 0,
+          "isEnabledByDefault": false
+        }
+      ],
+      "Label": "Surface",
+      "Type": "mesh.surface",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "pk-physical",
+      "Label": "pk-physical-bdf",
+      "Type": "pk-physical-bdf",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "region.physical",
+      "Label": "region: all",
+      "Type": "region.all",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "region.physical",
+      "ItemDefinitions": [
+        {
+          "Name": "low coordinate",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "Name": "high coordinate",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "region: box",
+      "Type": "region.box",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "region.physical",
+      "ItemDefinitions": [
+        {
+          "Name": "file",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "ShouldExit": true,
+          "Type": "File",
+          "Version": 0
+        },
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Int",
+          "Version": 0
+        }
+      ],
+      "Label": "region: color function",
+      "Type": "region.color-function",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::model::Resource",
+          "edge"
+        ],
+        "Name": "region.labeled.edgeAssociations",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "region.physical",
+      "Label": "region: labeled set - edge",
+      "Type": "region.labeled.edge",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::model::Resource",
+          "face"
+        ],
+        "Name": "region.labeled.surfaceAssociations",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "region.physical",
+      "Label": "region: labeled set - face",
+      "Type": "region.labeled.surface",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::model::Resource",
+          "vertex"
+        ],
+        "Name": "region.labeled.vertexAssociations",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "region.physical",
+      "Label": "region: labeled set - node",
+      "Type": "region.labeled.vertex",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::model::Resource",
+          "volume"
+        ],
+        "Name": "region.labeled.volumeAssociations",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
+      "BaseType": "region.physical",
+      "Label": "region: labeled set - volume",
+      "Type": "region.labeled.volume",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "region.physical",
+      "ItemDefinitions": [
+        {
+          "Name": "point",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "Name": "normal",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "region: plane",
+      "Type": "region.plane",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "region.physical",
+      "ItemDefinitions": [
+        {
+          "Name": "point",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "region: point",
+      "Type": "region.point",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "pk-physical-bdf",
+      "ItemDefinitions": [
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='mesh']"
+          ],
+          "Name": "domain",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "scalar": "scalar"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "horizontal and vertical": "horizontal and vertical"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "diagonal tensor": "diagonal tensor"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "full tensor": "full tensor"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "permeability type",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "DefaultValue": [
+                "mass_source"
+              ],
+              "Name": "source key",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Type": "String",
+              "Units": "mol s^-1",
+              "Version": 0
+            },
+            {
+              "Name": "source term is differentiable",
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Void",
+              "Version": 0,
+              "isEnabledByDefault": true
+            },
+            {
+              "Name": "explicit source term",
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Void",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "source term",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Group",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "ItemDefinitions": [
+            {
+              "DiscreteInfo": {
+                "DefaultIndex": 0,
+                "ValueAndStructure": [
+                  {
+                    "Value": {
+                      "Enum": {
+                        "fv: default": "fv: default"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "nlfv: default": "nlfv: default"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: default": "mfd: default"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: monotone for hex": "mfd: monotone for hex"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: optimized for monotonicity": "mfd: optimized for monotonicity"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: two-point flux approximation": "mfd: two-point flux approximation"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: optimized for sparsity": "mfd: optimized for sparsity"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "mfd: support operator": "mfd: support operator"
+                      }
+                    }
+                  }
+                ]
+              },
+              "Name": "discretization primary",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Type": "String",
+              "Version": 0
+            },
+            {
+              "Name": "gravity",
+              "OkToInheritCategories": true,
+              "Type": "Void",
+              "Version": 0
+            },
+            {
+              "DiscreteInfo": {
+                "DefaultIndex": 0,
+                "ValueAndStructure": [
+                  {
+                    "Value": {
+                      "Enum": {
+                        "true Jacobian": "true Jacobian"
+                      }
+                    }
+                  },
+                  {
+                    "Value": {
+                      "Enum": {
+                        "approximate Jacobian": "approximate Jacobian"
+                      }
+                    }
+                  }
+                ]
+              },
+              "Name": "Newton correction",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Type": "String",
+              "Version": 0
+            },
+            {
+              "Name": "scaled constraint equation",
+              "OkToInheritCategories": true,
+              "Type": "Void",
+              "Version": 0
+            },
+            {
+              "Name": "constraint equation scaling cutoff",
+              "NumberOfRequiredValues": 1,
+              "OkToInheritCategories": true,
+              "Optional": true,
+              "Type": "Double",
+              "Version": 0,
+              "isEnabledByDefault": false
+            }
+          ],
+          "Name": "diffusion",
+          "NumberOfRequiredGroups": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Group",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='preconditioner-base']"
+          ],
+          "Name": "preconditioner",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "none": "none"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "clobber": "clobber"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "max": "max"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "unsaturated": "unsaturated"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "surface rel perm strategy",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "upwind with Darcy flux": "upwind with Darcy flux"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "upwind with gravity": "upwind with gravity"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "cell centered": "cell centered"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "arithmetic mean": "arithmetic mean"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "relative permeability method",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
+          "Name": "modify predictor with consistent faces",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "modify predictor for flux BCs",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "modify predictor via water content",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "DefaultValue": [
+            -1.0
+          ],
+          "Name": "max valid change in saturation in a time step [-]",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            -1.0
+          ],
+          "Name": "max valid change in ice saturation in a time step [-]",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            -1.0
+          ],
+          "Name": "limit correction to pressure change [Pa]",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            -1.0
+          ],
+          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DefaultValue": [
+            10000000.0
+          ],
+          "Name": "permeability rescaling",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "RangeInfo": {
+            "Min": {
+              "Inclusive": false,
+              "Value": 0.0
+            }
+          },
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "Richards PK",
+      "Type": "pk-richards",
+      "Unique": false,
+      "Version": 0
+    }
+  ],
+  "Views": [
+    {
+      "Component": {
+        "Attributes": {
+          "FilterByAdvanceLevel": "true",
+          "FilterByCategory": "false",
+          "TabPosition": "North",
+          "TopLevel": "true"
+        },
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Title": "Mesh"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Region"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Coordinator"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Process Kernel Info"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Visualization"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Checkpoint"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Observation"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "State"
+                },
+                "Name": "View"
+              }
+            ],
+            "Name": "Views"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "ATS",
+      "Type": "Group"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "checkpoint driver",
+                  "Type": "checkpoint driver"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "InstancedAttributes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Checkpoint",
+      "Type": "Instanced"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "cycle driver",
+                  "Type": "cycle driver"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "InstancedAttributes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Coordinator",
+      "Type": "Instanced"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "domain-mesh",
+                  "Type": "domain"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "InstancedAttributes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Domain",
+      "Type": "Instanced"
+    },
+    {
+      "Component": {
+        "Attributes": {
+          "Style": "Tiled"
+        },
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Title": "Domain"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Mesh Attributes"
+                },
+                "Name": "View"
+              }
+            ],
+            "Name": "Views"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Mesh",
+      "Type": "Group"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "mesh"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Mesh Attributes",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "observations",
+                  "Type": "observation-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Observation",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "preconditioner-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Preconditioners",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "pk-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Process Kernel",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Attributes": {
+          "Style": "Tabbed",
+          "TabPosition": "North"
+        },
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Title": "Process Kernel"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Preconditioners"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "Time Integrators"
+                },
+                "Name": "View"
+              }
+            ],
+            "Name": "Views"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Process Kernel Info",
+      "Type": "Group"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "region"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Region",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Attributes": {
+          "Style": "Tabbed",
+          "TabPosition": "North"
+        },
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Title": "field evaluators"
+                },
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "initial conditions"
+                },
+                "Name": "View"
+              }
+            ],
+            "Name": "Views"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "State",
+      "Type": "Group"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "time-integrator-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Time Integrators",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Type": "visualization driver"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Visualization",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "field evaluators",
+                  "Type": "field evaluators"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "InstancedAttributes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "field evaluators",
+      "Type": "Instanced"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "initial conditions",
+                  "Type": "ic-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "initial conditions",
+      "Type": "Attribute"
+    }
+  ],
+  "id": "10967036-74f6-4bcf-9dee-8a95cb833f9a",
+  "links": [
+    {
+      "base": {
+        "linkData": [
+          {
+            "base": null,
+            "id": "65970135-cf7e-4c1d-ba0a-cdf5298908dc",
+            "left": "b75d5a1b-d532-405f-a08b-5702d375c8ae",
+            "right": "1da54c94-d9a7-4277-b819-14b92d7f6600",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "f9eaf265-85a1-4586-9512-fb09b6ec9313",
+            "left": "136026e9-d1be-438b-a3d7-df091332e5d6",
+            "right": "1ef14ca3-29e6-4354-b9fb-d5a74ec95493",
+            "role": -2
+          }
+        ],
+        "surrogate": {
+          "id": "10967036-74f6-4bcf-9dee-8a95cb833f9a",
+          "index": 4712334560,
+          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_observation/att.observation.smtk",
+          "type": "smtk::attribute::Resource"
+        }
+      },
+      "id": "9c7e217f-50ae-4bed-8f6b-483e6513b4a1",
+      "left": "10967036-74f6-4bcf-9dee-8a95cb833f9a",
+      "right": "10967036-74f6-4bcf-9dee-8a95cb833f9a",
+      "role": -2147483648
+    }
+  ],
+  "name": "ats",
+  "properties": {
+    "unordered_map<uuid, double>": {},
+    "unordered_map<uuid, long>": {},
+    "unordered_map<uuid, string>": {},
+    "unordered_map<uuid, vector<double>>": {},
+    "unordered_map<uuid, vector<long>>": {},
+    "unordered_map<uuid, vector<string>>": {}
+  },
+  "type": "smtk::attribute::Resource",
+  "version": "4.0"
+}

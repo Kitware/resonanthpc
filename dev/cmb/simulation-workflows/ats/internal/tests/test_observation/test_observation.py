@@ -1,18 +1,16 @@
 import os
 import unittest
 
-from writer import ats_writer, domain_writer, region_writer
+from writer import ats_writer, observation_writer
 
 from tests.base import BaseTestCase
 
-ATT_RESOURCE_FILENAME = 'att.mesh_regions.smtk'
-MODEL_RESOURCE_FILENAME = 'model.concave.smtk'
-BASLINE_XML_FILENAME = 'baseline_mesh_regions.xml'
+ATT_RESOURCE_FILENAME = 'att.observation.smtk'
+BASLINE_XML_FILENAME = 'baseline_observation.xml'
 
+class ObservationEventTest(BaseTestCase):
 
-class MeshRegionsTest(BaseTestCase):
-
-    def test_mesh_regions(self):
+    def test_vis_event(self):
         """"""
         source_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -20,14 +18,11 @@ class MeshRegionsTest(BaseTestCase):
         atts_path = os.path.join(source_dir, ATT_RESOURCE_FILENAME)
         self.att_resource = self._read_resource(atts_path)
 
-        model_path = os.path.join(source_dir, os.pardir, 'data', MODEL_RESOURCE_FILENAME)
-        self.model_resource = self._read_resource(model_path)
 
         # Generate xml
         writer = ats_writer.ATSWriter(self.att_resource)
         writer.setup_xml_root()
-        domain_writer.DomainWriter().write(writer.xml_root)
-        region_writer.RegionWriter().write(writer.xml_root)
+        observation_writer.ObservationWriter().write(writer.xml_root)
         xml_string = writer.get_xml_doc(pretty=True)
 
         baseline_path = os.path.join(source_dir, BASLINE_XML_FILENAME)

@@ -56,9 +56,19 @@ class CoordinatorWriter(BaseWriter):
         # Now handle the IO Event spec group all in this main list
         io_event = coord_inst.find('required times') # NOTE: this is optional
         if io_event.isEnabled():
-            io_elem = self._new_list(xml_root, 'required times')
+            io_elem = self._new_list(coord_elem, 'required times')
             self._render_io_event_specs(io_elem, io_event)
 
         # And now handle the PK tree which can get pretty complicated
-        raise NotImplementedError('PK tree linking is non-trivial and seems we did not do it exactly right in the templates.')
+        # raise NotImplementedError('PK tree linking is non-trivial and seems we did not do it exactly right in the templates.')
+        pk_tree_item = coord_inst.findComponent('PK tree')
+        if not pk_tree_item.isSet():
+            raise AssertionError("PK tree is not set in coordinator.")
+        pk_att = pk_tree_item.value()
+        pk_name = pk_att.name()
+        pk_tree_elem = self._new_list(coord_elem, 'PK tree')
+        pk_elem = self._new_list(pk_tree_elem, pk_name)
+        self._render_items(pk_elem, pk_att, ['PK type',]) # TODO: this attribute isn't set by us! We need some sort of mapping between our PK classes and the names in ATS
+        # TODO: if the PK is a coupler, we have to included the coupled PKs in the tree
+
         return
