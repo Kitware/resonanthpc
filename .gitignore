@@ -4,4 +4,3 @@
 dist/
 build/
 *.py[cod]
-*foo.*

@@ -46,3 +46,14 @@ class BaseTestCase(unittest.TestCase):
         resource = read_result.find('resource').value()
         self.assertIsNotNone(resource)
         return resource
+
+    def _read_baseline(self, baseline_path):
+        """A helper in case we want to change how we read the XML."""
+        with open(baseline_path) as fp:
+            baseline_string = fp.read()
+        return baseline_string
+
+    def _compare_xml_content(self, astr, bstr):
+        """A helper in case we want to get fancier in how we compare the XML."""
+        self.assertEqual(astr, bstr)
+        return

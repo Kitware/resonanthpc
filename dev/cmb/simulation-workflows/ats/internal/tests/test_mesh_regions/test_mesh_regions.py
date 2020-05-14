@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from writer import ats_writer
+from writer import ats_writer, domain_writer, region_writer
 
 from tests.base import BaseTestCase
 
@@ -25,14 +25,14 @@ class MeshRegionsTest(BaseTestCase):
 
         # Generate xml
         writer = ats_writer.ATSWriter(self.att_resource)
-        xml_doc = writer.generate_xml()
-        xml_string = xml_doc.toprettyxml(indent='  ')
+        writer.setup_xml_root()
+        domain_writer.DomainWriter().write(writer.xml_root)
+        region_writer.RegionWriter().write(writer.xml_root)
+        xml_string = writer.get_xml_doc(pretty=True)
 
-        # Compare xml
         baseline_path = os.path.join(source_dir, BASLINE_XML_FILENAME)
-        with open(baseline_path) as fp:
-            baseline_string = fp.read()
-        self.assertEqual(xml_string, baseline_string)
+        baseline_string = self._read_baseline(baseline_path)
+        self._compare_xml_content(xml_string, baseline_string)
 
 
 if __name__ == '__main__':

@@ -7,7 +7,7 @@ from writer import ats_writer, checkpoint_writer
 from tests.base import BaseTestCase
 
 ATT_RESOURCE_FILENAME = 'att.checkpoint.smtk'
-# BASLINE_XML_FILENAME = 'baseline_vis.xml'
+BASLINE_XML_FILENAME = 'baseline_checkpoint.xml'
 
 class CheckpointTest(BaseTestCase):
 
@@ -26,13 +26,9 @@ class CheckpointTest(BaseTestCase):
         checkpoint_writer.CheckpointWriter().write(writer.xml_root)
         xml_string = writer.get_xml_doc(pretty=True)
 
-        # TODO: Compare xml
-        with open(os.path.join(source_dir, 'foo.xml'), 'w') as fout:
-            fout.write(xml_string)
-        # baseline_path = os.path.join(source_dir, BASLINE_XML_FILENAME)
-        # with open(baseline_path) as fp:
-        #     baseline_string = fp.read()
-        # self.assertEqual(xml_string, baseline_string)
+        baseline_path = os.path.join(source_dir, BASLINE_XML_FILENAME)
+        baseline_string = self._read_baseline(baseline_path)
+        self._compare_xml_content(xml_string, baseline_string)
 
 
 if __name__ == '__main__':
