@@ -18,7 +18,7 @@
             <Value>full tensor</Value>
           </DiscreteInfo>
         </String>
-        <!-- TODO: - priority - water retention evaluator (wrm-evaluator-spec) -->
+        <!-- TODO: - priority - water retention evaluator (wrm-evaluator-spec)... what is this? not dcoumented? -->
         <Group Name="source term" Optional="true" IsEnabledByDefault="false">
           <ItemDefinitions>
             <String Name="source key" Units="mol s^-1">
@@ -28,9 +28,48 @@
             <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
           </ItemDefinitions>
         </Group>
-        <!-- TODO: - priority - diffusion (pde-diffusion-spec) -->
+
+
+        <!-- operator - diffusion (pde-diffusion-spec) -->
         <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
-        <!-- TODO: - priority - preconditioner (preconditioner-typed-spec) -->
+        <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
+        <Group Name="diffusion" Optional="true">
+          <ItemDefinitions>
+            <String Name="discretization primary">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>fv: default</Value>
+                <Value>nlfv: default</Value>
+                <Value>mfd: default</Value>
+                <Value>mfd: monotone for hex</Value>
+                <Value>mfd: optimized for monotonicity</Value>
+                <Value>mfd: two-point flux approximation</Value>
+                <Value>mfd: optimized for sparsity</Value>
+                <Value>mfd: support operator</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="gravity" IsEnabledByDefault="false"></Void>
+            <String Name="Newton correction">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>true Jacobian</Value>
+                <Value>approximate Jacobian</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="scaled constraint equation" IsEnabledByDefault="false"></Void>
+            <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
+            <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
+          </ItemDefinitions>
+        </Group>
+
+
+
+
+        <!-- preconditioner (preconditioner-typed-spec) -->
+        <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
+          </Accepts>
+        </Component>
+
         <!-- TODO: linear solver (linear-solver-typed-spec), oprional -->
         <!-- surface rel perm strategy -->
         <String Name="surface rel perm strategy">

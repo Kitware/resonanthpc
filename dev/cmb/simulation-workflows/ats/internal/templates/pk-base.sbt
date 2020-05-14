@@ -23,7 +23,7 @@
         <String Name="primary variable key">
           <BriefDescription>Can we get a list from each PK?</BriefDescription>
         </String>
-        <!-- TODO: -priority - initial condition-->
+        <!-- TODO: initial condition: this is different than the ICs for state... at least I am pretty sure... -->
         <!-- TODO: max valid change-->
         <!-- TODO: includes pk-spec -->
         <Group Name="debugger">
@@ -40,7 +40,14 @@
       <ItemDefinitions>
         <!-- TODO: initial time step-->
         <!-- TODO: assemble preconditioner-->
-        <!-- TODO: time integrator-->
+
+        <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time-integrator-base']"></Resource>
+          </Accepts>
+        </Component>
+
+
         <!-- TODO: preconditioner-->
         <!-- TODO: includes pk-spec -->
       </ItemDefinitions>

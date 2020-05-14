@@ -13,6 +13,8 @@
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
+    <File>internal/templates/preconditioner.sbt</File>
+    <File>internal/templates/time-integrator.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -20,7 +22,7 @@
         <View Title="Mesh"/>
         <View Title="Region"/>
         <View Title="Coordinator"/>
-        <View Title="Process Kernel"/>
+        <View Title="Process Kernel Info"/>
         <View Title="Visualization"/>
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
@@ -55,11 +57,33 @@
         <Att Type="cycle driver" Name="cycle driver"/>
       </InstancedAttributes>
     </View>
+
+    <!-- Process Kernel stuff -->
+    <View Type="Group" Title="Process Kernel Info" Style="Tabbed" TabPosition="North">
+      <Views>
+        <View Title="Process Kernel"/>
+        <View Title="Preconditioners"/>
+        <View Title="Time Integrators"/>
+      </Views>
+    </View>
     <View Type="Attribute" Title="Process Kernel">
       <AttributeTypes>
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
+    <View Type="Attribute" Title="Preconditioners">
+      <AttributeTypes>
+        <Att Type="preconditioner-base"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Time Integrators">
+      <AttributeTypes>
+        <Att Type="time-integrator-base"/>
+      </AttributeTypes>
+    </View>
+
+
+
     <View Type="Attribute" Title="Visualization">
       <AttributeTypes>
         <Att Type="visualization driver"/>
@@ -75,10 +99,27 @@
         <Att Type="observation-base" Name="observations"/>
       </AttributeTypes>
     </View>
-    <View Type="Instanced" Title="State">
+
+    <!-- State stuff -->
+    <View Type="Group" Title="State" Style="Tabbed" TabPosition="North">
+      <Views>
+        <View Title="field evaluators"/>
+        <View Title="initial conditions"/>
+      </Views>
+    </View>
+    <View Type="Instanced" Title="field evaluators">
       <InstancedAttributes>
-        <Att Type="state" Name="state"/>
+        <Att Type="field evaluators" Name="field evaluators"/>
       </InstancedAttributes>
     </View>
+    <View Type="Attribute" Title="initial conditions">
+      <AttributeTypes>
+        <Att Type="ic-base" Name="initial conditions"/>
+      </AttributeTypes>
+    </View>
+
+
+
+
   </Views>
 </SMTK_AttributeResource>

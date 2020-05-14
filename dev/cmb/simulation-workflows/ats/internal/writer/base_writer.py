@@ -74,6 +74,8 @@ class BaseWriter:
 
     def _new_param(self, list_elem, param_name, param_type, param_value):
         """Appends Parameter element to list_elem"""
+        if not isinstance(param_value, str):
+            raise TypeError("trying to insert and invalid value for: ({}: {})".format(param_name, param_value))
         new_param = shared.xml_doc.createElement('Parameter')
         new_param.setAttribute('name', param_name)
         new_param.setAttribute('type', param_type)
@@ -146,9 +148,31 @@ class BaseWriter:
                 string_list = [str(x) for x in value_list]
                 value = r"{" + ', '.join(string_list) + r"}"
             elif hasattr(item, 'value'):
-                value = item.value()
+                value = str(item.value())
             else:
                 raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
             self._new_param(parent_elem, param_name, type_string, value)
+        return
+
+
+    def _render_io_event_specs(self, parent_elem, io_event):
+        sub_groups = {
+            'cycles start period stop': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
+            'times start period stop': ['Start Time', 'Time Period', 'Stop Time', ]#TODO:'time units'],
+            #TODO: 'times': ['times', 'time units'],
+        }
+        sub_items = [
+            'cycles', # Int
+        ]
+        # Now add the sub items
+        self._render_items(parent_elem, io_event, sub_items)
+        # Now add each array of values
+        for group_name, items in sub_groups.items():
+            event_group = io_event.find(group_name)
+            type_string = 'Array({})'.format('double')
+            value_list = [event_group.find(nm).value() for nm in items]
+            string_list = [str(x) for x in value_list]
+            value = r"{" + ', '.join(string_list) + r"}"
+            self._new_param(parent_elem, group_name, type_string, value)
         return

@@ -24,6 +24,10 @@ from . import base_writer
 imp.reload(base_writer)
 from .base_writer import BaseWriter
 
+
+TAB_SPACING = '  '
+
+
 class ATSWriter(BaseWriter):
     """Top level writer for ATS input files."""
 
@@ -51,7 +55,7 @@ class ATSWriter(BaseWriter):
         if output_filepath is not None:
             wrote_file = False
             with open(output_filepath, 'w') as fp:
-                xml_string = shared.xml_doc.toprettyxml(indent="  ")
+                xml_string = shared.xml_doc.toprettyxml(indent=TAB_SPACING)
                 fp.write(xml_string)
                 wrote_file = True
             return wrote_file
@@ -59,17 +63,29 @@ class ATSWriter(BaseWriter):
         # (else)
         return None
 
-    def generate_xml(self):
-        """Builds xml document from current sim_atts resource.
 
-        Returns shared.xml_doc for testing
-        """
+    def setup_xml_root(self):
         shared.initialize(self.sim_atts, minidom.Document())
 
         self.xml_root = shared.xml_doc.createElement('ParameterList')
         self.xml_root.setAttribute('name', 'Main')
         self.xml_root.setAttribute('type', 'ParameterList')
         shared.xml_doc.appendChild(self.xml_root)
+        return
+
+
+    def get_xml_doc(self, pretty=False):
+        if pretty:
+            return shared.xml_doc.toprettyxml(indent=TAB_SPACING)
+        return shared.xml_doc
+
+
+    def generate_xml(self):
+        """Builds xml document from current sim_atts resource.
+
+        Returns shared.xml_doc for testing
+        """
+        self.setup_xml_root()
 
         from . import domain_writer
         imp.reload(domain_writer)
@@ -81,33 +97,7 @@ class ATSWriter(BaseWriter):
 
         ################################
 
-        ## TODO: uncomment as implemented
-        # self._generate_cycle_driver_xml()
-        # self._generate_visualization_xml()
-        # self._generate_observations_xml()
-        # self._generate_checkpoint_xml()
-        # self._generate_pks_xml()
-        # self._generate_state_xml()
+        ## TODO: implement other writers
 
         ################################
         return shared.xml_doc
-
-    #### This section contains methods to write each Main element ####
-
-    def _generate_cycle_driver_xml(self):
-        raise NotImplementedError()
-
-    def _generate_visualization_xml(self):
-        raise NotImplementedError()
-
-    def _generate_observations_xml(self):
-        raise NotImplementedError()
-
-    def _generate_checkpoint_xml(self):
-        raise NotImplementedError()
-
-    def _generate_pks_xml(self):
-        raise NotImplementedError()
-
-    def _generate_state_xml(self):
-        raise NotImplementedError()
