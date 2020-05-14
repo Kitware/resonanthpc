@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "c3de92df-c985-4b56-a484-c1b9caadf617",
+      "ID": "3050c76f-8870-4d13-a247-552d3d3efa28",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "83fed4b5-dd67-4da4-b978-4938de8dede5",
+      "ID": "238eca51-b127-4f39-8fc7-fe190b7b8763",
       "Items": [
         {
           "Name": "start time",
@@ -203,7 +203,7 @@
             "Cluster 0": {
               "Index 0": {
                 "ItemValue": {
-                  "Enabled": true,
+                  "Enabled": false,
                   "GroupClusters": {
                     "Cluster 0": {
                       "Index 0": {
@@ -216,7 +216,7 @@
                       "Index 1": {
                         "ItemValue": {
                           "Name": "Cycle Period",
-                          "Val": 10
+                          "UnsetVal": true
                         },
                         "Type": "Int"
                       },
@@ -251,7 +251,7 @@
               },
               "Index 2": {
                 "ItemValue": {
-                  "Enabled": false,
+                  "Enabled": true,
                   "GroupClusters": {
                     "Cluster 0": {
                       "Index 0": {
@@ -264,15 +264,15 @@
                       "Index 1": {
                         "ItemValue": {
                           "Name": "Time Period",
-                          "UnsetVal": true
+                          "Val": 10080.0
                         },
                         "Type": "Double"
                       },
                       "Index 2": {
                         "ItemValue": {
-                          "Enabled": false,
+                          "Enabled": true,
                           "Name": "Stop Time",
-                          "UnsetVal": true
+                          "Val": -1.0
                         },
                         "Type": "Double"
                       },
@@ -331,8 +331,8 @@
           "Name": "PK tree",
           "Values": [
             [
-              null,
-              null
+              "a7003921-cf19-4028-b2a2-0fc03e0fb8ab",
+              "c0666a86-341c-44f5-ac78-5ed4b20cba22"
             ]
           ]
         }
@@ -341,7 +341,7 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "ad20ca7b-cf17-4b34-84aa-733c2e8fa68c",
+      "ID": "daf69736-13a1-4772-965d-550a686fb529",
       "Items": [
         {
           "Name": "domain-mesh",
@@ -363,73 +363,21 @@
       "Type": "domain"
     },
     {
-      "ID": "8b4890a1-be3b-4f86-b87c-b575c11dcda6",
+      "ID": "16804b8e-460f-4f1d-a117-c82445f3f5f3",
       "Name": "field evaluators",
       "Type": "field evaluators"
     },
     {
-      "ID": "c40588b5-af8a-4495-ac11-2b2f66fca5f7",
+      "ID": "be740ed1-d97a-4f82-a663-c0c5f683a7b3",
       "Items": [
         {
-          "Name": "observation output filename"
-        },
-        {
-          "Name": "variable",
-          "UnsetVal": true
-        },
-        {
-          "Name": "delimiter",
-          "Val": ""
-        },
-        {
-          "Name": "region",
-          "Values": [
-            [
-              null,
-              null
-            ]
-          ]
-        },
-        {
           "Discrete": true,
           "DiscreteIndex": 0,
-          "Name": "location name"
+          "Name": "verbosity level"
         },
         {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "functional"
-        },
-        {
-          "Enabled": false,
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Name": "direction normalized flux direction",
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    },
-                    {
-                      "UnsetVal": {
-                        "Ith": 1
-                      }
-                    },
-                    {
-                      "UnsetVal": {
-                        "Ith": 2
-                      }
-                    }
-                  ]
-                },
-                "Type": "Double"
-              }
-            }
-          },
-          "Name": "direction normalized flux"
+          "Name": "primary variable key",
+          "Val": "pressure"
         },
         {
           "GroupClusters": {
@@ -437,40 +385,7 @@
               "Index 0": {
                 "ItemValue": {
                   "Enabled": false,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "Start Cycle",
-                          "Val": 0
-                        },
-                        "Type": "Int"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Name": "Cycle Period",
-                          "UnsetVal": true
-                        },
-                        "Type": "Int"
-                      },
-                      "Index 2": {
-                        "ItemValue": {
-                          "Enabled": false,
-                          "Name": "Stop Cycle",
-                          "UnsetVal": true
-                        },
-                        "Type": "Int"
-                      }
-                    }
-                  },
-                  "Name": "cycles start period stop"
-                },
-                "Type": "Group"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "cycles",
+                  "Name": "debug cells",
                   "NumberOfValues": 1,
                   "Values": [
                     {
@@ -482,87 +397,168 @@
                 },
                 "Type": "Int"
               },
-              "Index 2": {
+              "Index 1": {
                 "ItemValue": {
                   "Enabled": false,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "Start Time",
-                          "Val": 0.0
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Name": "Time Period",
-                          "UnsetVal": true
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 2": {
-                        "ItemValue": {
-                          "Enabled": false,
-                          "Name": "Stop Time",
-                          "UnsetVal": true
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 3": {
-                        "ItemValue": {
-                          "Discrete": true,
-                          "DiscreteIndex": 0,
-                          "Name": "time units"
-                        },
-                        "Type": "String"
+                  "Name": "debug faces",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
                       }
                     }
-                  },
-                  "Name": "times start period stop"
+                  ]
                 },
-                "Type": "Group"
-              },
-              "Index 3": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "times",
-                          "NumberOfValues": 1,
-                          "Values": [
-                            {
-                              "UnsetVal": {
-                                "Ith": 0
-                              }
-                            }
-                          ]
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Discrete": true,
-                          "DiscreteIndex": 0,
-                          "Name": "time units"
-                        },
-                        "Type": "String"
-                      }
-                    }
-                  },
-                  "Name": "times"
-                },
-                "Type": "Group"
+                "Type": "Int"
               }
             }
           },
-          "Name": "observation times"
+          "Name": "debugger"
+        },
+        {
+          "Enabled": false,
+          "Name": "domain",
+          "Values": [
+            [
+              null,
+              null
+            ]
+          ]
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "permeability type"
+        },
+        {
+          "Enabled": false,
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Name": "source key",
+                  "Val": "mass_source"
+                },
+                "Type": "String"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "source term is differentiable"
+                },
+                "Type": "Void"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "explicit source term"
+                },
+                "Type": "Void"
+              }
+            }
+          },
+          "Name": "source term"
+        },
+        {
+          "Enabled": false,
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Discrete": true,
+                  "DiscreteIndex": 0,
+                  "Name": "discretization primary"
+                },
+                "Type": "String"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Name": "gravity"
+                },
+                "Type": "Void"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Discrete": true,
+                  "DiscreteIndex": 0,
+                  "Name": "Newton correction"
+                },
+                "Type": "String"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Name": "scaled constraint equation"
+                },
+                "Type": "Void"
+              },
+              "Index 4": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "constraint equation scaling cutoff",
+                  "UnsetVal": true
+                },
+                "Type": "Double"
+              }
+            }
+          },
+          "Name": "diffusion"
+        },
+        {
+          "Enabled": false,
+          "Name": "preconditioner",
+          "Values": [
+            [
+              null,
+              null
+            ]
+          ]
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "surface rel perm strategy"
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "relative permeability method"
+        },
+        {
+          "Enabled": false,
+          "Name": "modify predictor with consistent faces"
+        },
+        {
+          "Enabled": false,
+          "Name": "modify predictor for flux BCs"
+        },
+        {
+          "Enabled": false,
+          "Name": "modify predictor via water content"
+        },
+        {
+          "Name": "max valid change in saturation in a time step [-]",
+          "Val": -1.0
+        },
+        {
+          "Name": "max valid change in ice saturation in a time step [-]",
+          "Val": -1.0
+        },
+        {
+          "Name": "limit correction to pressure change [Pa]",
+          "Val": -1.0
+        },
+        {
+          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
+          "Val": -1.0
+        },
+        {
+          "Name": "permeability rescaling",
+          "Val": 10000000.0
         }
       ],
-      "Name": "observation-base-0",
-      "Type": "observation-base"
+      "Name": "pk-richards-0",
+      "Type": "pk-richards"
     }
   ],
   "Definitions": [
@@ -1370,20 +1366,19 @@
         },
         {
           "BriefDescription": "For flux observations, dots the face-normal flux with a vector to ensure fluxes are integrated pointing the same direction.",
-          "ItemDefinitions": [
-            {
-              "Name": "direction normalized flux direction",
-              "NumberOfRequiredValues": 3,
-              "OkToInheritCategories": true,
-              "Type": "Double",
-              "Version": 0
-            }
-          ],
           "Name": "direction normalized flux",
-          "NumberOfRequiredGroups": 1,
           "OkToInheritCategories": true,
           "Optional": true,
-          "Type": "Group",
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "direction normalized flux direction",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Double",
           "Version": 0,
           "isEnabledByDefault": false
         },
@@ -3711,8 +3706,32 @@
       "Type": "Attribute"
     }
   ],
-  "id": "8586e222-1533-4b09-9150-dd39f5b0c26a",
-  "links": null,
+  "id": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+  "links": [
+    {
+      "base": {
+        "linkData": [
+          {
+            "base": null,
+            "id": "c0666a86-341c-44f5-ac78-5ed4b20cba22",
+            "left": "238eca51-b127-4f39-8fc7-fe190b7b8763",
+            "right": "be740ed1-d97a-4f82-a663-c0c5f683a7b3",
+            "role": -2
+          }
+        ],
+        "surrogate": {
+          "id": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+          "index": 4763706592,
+          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_coordinator/att.coordinator.smtk",
+          "type": "smtk::attribute::Resource"
+        }
+      },
+      "id": "a7003921-cf19-4028-b2a2-0fc03e0fb8ab",
+      "left": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+      "right": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+      "role": -2147483648
+    }
+  ],
   "name": "ats",
   "properties": {
     "unordered_map<uuid, double>": {},
