@@ -13,8 +13,8 @@
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
-    <File>internal/templates/preconditioner.sbt</File>
-    <File>internal/templates/time-integrator.sbt</File>
+    <!-- <File>internal/templates/preconditioner.sbt</File>
+    <File>internal/templates/time-integrator.sbt</File> -->
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -62,8 +62,8 @@
     <View Type="Group" Title="Process Kernel Info" Style="Tabbed" TabPosition="North">
       <Views>
         <View Title="Process Kernel"/>
-        <View Title="Preconditioners"/>
-        <View Title="Time Integrators"/>
+        <!-- <View Title="Preconditioners"/>
+        <View Title="Time Integrators"/> -->
       </Views>
     </View>
     <View Type="Attribute" Title="Process Kernel">
@@ -71,7 +71,7 @@
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
-    <View Type="Attribute" Title="Preconditioners">
+    <!-- <View Type="Attribute" Title="Preconditioners">
       <AttributeTypes>
         <Att Type="preconditioner-base"/>
       </AttributeTypes>
@@ -80,7 +80,7 @@
       <AttributeTypes>
         <Att Type="time-integrator-base"/>
       </AttributeTypes>
-    </View>
+    </View> -->
 
 
 
