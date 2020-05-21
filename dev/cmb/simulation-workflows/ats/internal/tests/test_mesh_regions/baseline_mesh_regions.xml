@@ -18,9 +18,7 @@
       </ParameterList>
       <Parameter name="deformable mesh" type="bool" value="false"/>
     </ParameterList>
-  </ParameterList>
-  <ParameterList name="domain" type="ParameterList">
-    <ParameterList name="Concave File" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="read mesh file"/>
       <Parameter name="file" type="string" value="concave.exo"/>
       <Parameter name="format" type="string" value="Exodus II"/>

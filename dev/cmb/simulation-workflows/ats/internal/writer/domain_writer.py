@@ -47,11 +47,10 @@ class DomainWriter(BaseWriter):
 
         # Render the domain elements
         if domain_mesh_att is not None:
-            domain_list_elem = self._new_list(xml_root, 'domain')
             # Todo, how do we stick in partitioner?
-            self._write_mesh_elem(domain_list_elem, domain_mesh_att, domain_att)
+            self._write_mesh_elem(mesh_list_elem, domain_mesh_att, domain_att, override_name="domain")
 
-    def _write_mesh_elem(self, parent_elem, mesh_att, domain_att=None):
+    def _write_mesh_elem(self, parent_elem, mesh_att, domain_att=None, override_name=None):
         """"""
         # Lookup table for mesh type to xml attribute
         mesh_type_params = {
@@ -81,7 +80,8 @@ class DomainWriter(BaseWriter):
             raise NotImplementedError('Unsupported mesh type', mesh_att.type())
 
         # Create list element
-        mesh_elem = self._new_list(parent_elem, mesh_att.name())
+        name = override_name if override_name is not None else mesh_att.name()
+        mesh_elem = self._new_list(parent_elem, name)
         _ = self._new_param(mesh_elem, 'mesh type', 'string', mesh_type_string)
 
         # Special cases
