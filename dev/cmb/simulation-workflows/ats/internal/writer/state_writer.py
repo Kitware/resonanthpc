@@ -45,8 +45,7 @@ class StateWriter(BaseWriter):
 
         ic_atts = shared.sim_atts.findAttributes('ic-base')
         for att in ic_atts:
-            name = att.find('name').value()
-            print(name)
+            name = att.name()
             ic_list_elem = self._new_list(ic_elem, name)
             self._render_items(ic_list_elem, att, known_children)
 

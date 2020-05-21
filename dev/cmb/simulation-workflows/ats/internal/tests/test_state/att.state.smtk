@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "18963952-7a3e-4352-a9d7-9c984a84d8af",
+      "ID": "c6d8e28d-e240-465d-9aed-7e3dfa9dc755",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "9799fb1f-6bdf-4a85-8098-3d00ebfe1f7a",
+      "ID": "0c09adad-c9a4-4bb1-91cd-762c21bec2f6",
       "Items": [
         {
           "Name": "start time",
@@ -341,7 +341,7 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "b3563e9b-17a5-421d-843a-64565f888e01",
+      "ID": "ba9e6ae5-d57a-445c-b603-fb11c1a10042",
       "Items": [
         {
           "Name": "domain-mesh",
@@ -363,32 +363,19 @@
       "Type": "domain"
     },
     {
-      "ID": "7995c75d-8ea9-4776-9ce1-05fbe24c9ed5",
-      "Name": "field evaluators",
-      "Type": "field evaluators"
-    },
-    {
-      "ID": "4d8b9b6e-57d3-426d-a058-74022fedc511",
+      "ID": "cf1698bd-6c6f-458e-a8f1-2e2737dcdef0",
       "Items": [
-        {
-          "Name": "name",
-          "Val": "atmospheric_pressure"
-        },
         {
           "Name": "value",
           "Val": 101325.0
         }
       ],
-      "Name": "ic-const-scalar-0",
+      "Name": "atmospheric_pressure",
       "Type": "ic-const-scalar"
     },
     {
-      "ID": "5f5aade7-8246-4380-b41f-5610d981c17a",
+      "ID": "dcc6f3b0-017b-4fee-8acb-cc5d5418e940",
       "Items": [
-        {
-          "Name": "name",
-          "Val": "gravity"
-        },
         {
           "Name": "value",
           "Values": [
@@ -413,202 +400,8 @@
           ]
         }
       ],
-      "Name": "ic-const-vector-0",
+      "Name": "gravity",
       "Type": "ic-const-vector"
-    },
-    {
-      "ID": "fd145d55-703a-4cd9-a276-d46261b34a57",
-      "Items": [
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "verbosity level"
-        },
-        {
-          "Name": "primary variable key",
-          "UnsetVal": true
-        },
-        {
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "debug cells",
-                  "NumberOfValues": 1,
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    }
-                  ]
-                },
-                "Type": "Int"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "debug faces",
-                  "NumberOfValues": 1,
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    }
-                  ]
-                },
-                "Type": "Int"
-              }
-            }
-          },
-          "Name": "debugger"
-        },
-        {
-          "Enabled": false,
-          "Name": "domain",
-          "Values": [
-            [
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "permeability type"
-        },
-        {
-          "Enabled": false,
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Name": "source key",
-                  "Val": "mass_source"
-                },
-                "Type": "String"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "source term is differentiable"
-                },
-                "Type": "Void"
-              },
-              "Index 2": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "explicit source term"
-                },
-                "Type": "Void"
-              }
-            }
-          },
-          "Name": "source term"
-        },
-        {
-          "Enabled": false,
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Discrete": true,
-                  "DiscreteIndex": 0,
-                  "Name": "discretization primary"
-                },
-                "Type": "String"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "gravity"
-                },
-                "Type": "Void"
-              },
-              "Index 2": {
-                "ItemValue": {
-                  "Discrete": true,
-                  "DiscreteIndex": 0,
-                  "Name": "Newton correction"
-                },
-                "Type": "String"
-              },
-              "Index 3": {
-                "ItemValue": {
-                  "Name": "scaled constraint equation"
-                },
-                "Type": "Void"
-              },
-              "Index 4": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "constraint equation scaling cutoff",
-                  "UnsetVal": true
-                },
-                "Type": "Double"
-              }
-            }
-          },
-          "Name": "diffusion"
-        },
-        {
-          "Enabled": false,
-          "Name": "preconditioner",
-          "Values": [
-            [
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "surface rel perm strategy"
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "relative permeability method"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor with consistent faces"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor for flux BCs"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor via water content"
-        },
-        {
-          "Name": "max valid change in saturation in a time step [-]",
-          "Val": -1.0
-        },
-        {
-          "Name": "max valid change in ice saturation in a time step [-]",
-          "Val": -1.0
-        },
-        {
-          "Name": "limit correction to pressure change [Pa]",
-          "Val": -1.0
-        },
-        {
-          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
-          "Val": -1.0
-        },
-        {
-          "Name": "permeability rescaling",
-          "Val": 10000000.0
-        }
-      ],
-      "Name": "pk-richards-0",
-      "Type": "pk-richards"
     }
   ],
   "Definitions": [
@@ -1258,9 +1051,10 @@
       "Version": 0
     },
     {
+      "Abstract": true,
       "BaseType": "",
-      "Label": "Field Evaluators",
-      "Type": "field evaluators",
+      "Label": "field-evaluator-base",
+      "Type": "field-evaluator-base",
       "Unique": false,
       "Version": 0
     },
@@ -1953,15 +1747,60 @@
       "Version": 0
     },
     {
-      "BaseType": "ic-base",
+      "BaseType": "field-evaluator-base",
+      "Label": "capillary pressure, atmospheric gas over liquid",
+      "Type": "capillary pressure, atmospheric gas over liquid",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "effective_pressure",
+      "Type": "effective_pressure",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
       "ItemDefinitions": [
         {
-          "Name": "name",
+          "Name": "constant in time",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": true
+        },
+        {
+          "Name": "value",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Type": "String",
+          "Type": "Double",
           "Version": 0
-        },
+        }
+      ],
+      "Label": "independent variable",
+      "Type": "independent variable",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "richards water content",
+      "Type": "richards water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "viscosity",
+      "Type": "viscosity",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
         {
           "Name": "value",
           "NumberOfRequiredValues": 1,
@@ -1979,13 +1818,6 @@
       "BaseType": "ic-base",
       "ItemDefinitions": [
         {
-          "Name": "name",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
           "Name": "value",
           "NumberOfRequiredValues": 3,
           "OkToInheritCategories": true,
@@ -1995,27 +1827,6 @@
       ],
       "Label": "ic-const-vector",
       "Type": "ic-const-vector",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-file",
-      "Type": "ic-file",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-scalar-field",
-      "Type": "ic-scalar-field",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-tensor-field",
-      "Type": "ic-tensor-field",
       "Unique": false,
       "Version": 0
     },
@@ -3723,18 +3534,18 @@
               {
                 "Attributes": {
                   "Name": "field evaluators",
-                  "Type": "field evaluators"
+                  "Type": "field-evaluator-base"
                 },
                 "Name": "Att"
               }
             ],
-            "Name": "InstancedAttributes"
+            "Name": "AttributeTypes"
           }
         ],
         "Name": "Details"
       },
       "Name": "field evaluators",
-      "Type": "Instanced"
+      "Type": "Attribute"
     },
     {
       "Component": {
@@ -3758,7 +3569,7 @@
       "Type": "Attribute"
     }
   ],
-  "id": "6d556025-a1a1-47fa-89ea-9371ae4f92b6",
+  "id": "0cfeda38-4109-4c8e-9e39-7f730ed4b3ae",
   "links": null,
   "name": "ats",
   "properties": {

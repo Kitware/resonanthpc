@@ -28,7 +28,6 @@
     <!-- Class for Initialization of constant scalars -->
     <AttDef Type="ic-const-scalar" BaseType="ic-base" Version="0">
       <ItemDefinitions>
-        <String Name="name"></String>
         <Double Name="value"></Double>
       </ItemDefinitions>
     </AttDef>
@@ -36,7 +35,6 @@
     <!-- Class for Initialization of constant vectors -->
     <AttDef Type="ic-const-vector" BaseType="ic-base" Version="0">
       <ItemDefinitions>
-        <String Name="name"></String>
         <!-- NOTE: this can be 2 or 3D, i.e. the list can be 2 elements or 3. For now, we keep as 3-->
         <Double Name="value" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
