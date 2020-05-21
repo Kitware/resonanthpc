@@ -76,7 +76,13 @@ class ATSWriter(BaseWriter):
 
     def get_xml_doc(self, pretty=False):
         if pretty:
-            return shared.xml_doc.toprettyxml(indent=TAB_SPACING)
+            content = shared.xml_doc.toprettyxml(indent=TAB_SPACING)
+            formatted = ""
+            for line in content.splitlines():
+                line = line.rstrip()
+                if len(line) > 0:
+                    formatted += (line + "\n")
+            return formatted
         return shared.xml_doc
 
 
