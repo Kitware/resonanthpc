@@ -11,7 +11,7 @@
     </ParameterList>
     <ParameterList name="PK tree" type="ParameterList">
       <ParameterList name="pk-richards-0" type="ParameterList">
-        <Parameter name="PK type" type="string" value="richards steady state" />
+        <Parameter name="PK type" type="string" value="richards steady state"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>
