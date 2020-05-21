@@ -170,9 +170,10 @@ class BaseWriter:
         # Now add each array of values
         for group_name, items in sub_groups.items():
             event_group = io_event.find(group_name)
-            type_string = 'Array({})'.format('double')
-            value_list = [event_group.find(nm).value() for nm in items]
-            string_list = [str(x) for x in value_list]
-            value = r"{" + ', '.join(string_list) + r"}"
-            self._new_param(parent_elem, group_name, type_string, value)
+            if event_group.isEnabled():
+                type_string = 'Array({})'.format('double')
+                value_list = [event_group.find(nm).value() for nm in items]
+                string_list = [str(x) for x in value_list]
+                value = r"{" + ', '.join(string_list) + r"}"
+                self._new_param(parent_elem, group_name, type_string, value)
         return
