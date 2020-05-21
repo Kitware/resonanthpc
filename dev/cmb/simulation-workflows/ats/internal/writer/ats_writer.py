@@ -105,9 +105,9 @@ class ATSWriter(BaseWriter):
         imp.reload(coordinator_writer)
         coordinator_writer.CoordinatorWriter().write(self.xml_root)
 
-        from . import checkpoint_writer
-        imp.reload(checkpoint_writer)
-        checkpoint_writer.CheckpointWriter().write(self.xml_root)
+        # from . import checkpoint_writer
+        # imp.reload(checkpoint_writer)
+        # checkpoint_writer.CheckpointWriter().write(self.xml_root)
 
         from . import pk_writer
         imp.reload(pk_writer)

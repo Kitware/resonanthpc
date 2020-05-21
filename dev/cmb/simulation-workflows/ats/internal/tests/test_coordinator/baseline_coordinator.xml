@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <ParameterList name="Main" type="ParameterList">
-  <ParameterList name="cylce driver" type="ParameterList">
+  <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/>
     <Parameter name="end time" type="double" value="1.0"/>

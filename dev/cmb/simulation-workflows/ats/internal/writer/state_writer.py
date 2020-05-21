@@ -31,7 +31,7 @@ def map_independent_variable(att):
         # TODO: forcing these for now.
         r"${COMPONENT_NAME}": "components",
         r"${COMPONENT_TYPE}": "Array(string)",
-        r"${COMPONENTS}": r"{cell, boundary_face}",
+        r"${COMPONENTS}": r"{cell}",
         r"${VALUE}": "{:.1f}".format(att.find("value").value())
     }
     return mapping

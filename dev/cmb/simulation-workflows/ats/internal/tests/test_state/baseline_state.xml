@@ -34,7 +34,7 @@
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <!-- can be component or components (string or array(string)) -->
-            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}"/>
+            <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.0"/>
@@ -53,7 +53,7 @@
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <!-- can be component or components (string or array(string)) -->
-            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}"/>
+            <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.2"/>
@@ -72,7 +72,7 @@
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <!-- can be component or components (string or array(string)) -->
-            <Parameter name="components" type="Array(string)" value="{cell, boundary_face}"/>
+            <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="273.6"/>

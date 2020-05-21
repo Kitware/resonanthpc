@@ -27,9 +27,6 @@ class DemoTest(BaseTestCase):
         baseline_string = self._read_baseline(baseline_path)
         self._compare_xml_content(xml_string, baseline_string)
 
-        # with open(os.path.join(source_dir, "foo.xml"), "w") as f:
-        #     f.write(xml_string)
-
 
 if __name__ == '__main__':
     unittest.main()

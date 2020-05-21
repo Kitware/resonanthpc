@@ -40,10 +40,10 @@ class CoordinatorWriter(BaseWriter):
 
         end_spec_opts = {
             'time': ['end time', 'end time units',],
-            'cylce': ['end cycle',],
+            'cycle': ['end cycle',],
         }
 
-        coord_elem = self._new_list(xml_root, 'cylce driver')
+        coord_elem = self._new_list(xml_root, 'cycle driver')
         coord_inst = shared.sim_atts.findAttribute('cycle driver')
 
         # Now populate that list with all the attributes - no sub lists
