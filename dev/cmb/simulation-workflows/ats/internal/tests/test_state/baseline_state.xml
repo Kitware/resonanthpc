@@ -103,7 +103,7 @@
         <Parameter name="value" type="double" value="101325.0"/>
       </ParameterList>
       <ParameterList name="gravity" type="ParameterList">
-        <Parameter name="value" type="Array(double)" value="{0.0, 0.0, -9.80665}"/>
+        <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>

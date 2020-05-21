@@ -32,7 +32,6 @@
 
     <View Type="Group" Title="Mesh" Style="Tiled">
       <Views>
-        <View Title="Domain" />
         <View Title="Mesh Attributes" />
       </Views>
     </View>

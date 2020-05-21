@@ -146,7 +146,7 @@ class BaseWriter:
                 for i in range(item.numberOfValues()):
                     value_list.append(item.value(i))
                 string_list = [str(x) for x in value_list]
-                value = r"{" + ', '.join(string_list) + r"}"
+                value = r"{" + ','.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = str(item.value())
             else:
@@ -174,6 +174,6 @@ class BaseWriter:
                 type_string = 'Array({})'.format('double')
                 value_list = [event_group.find(nm).value() for nm in items]
                 string_list = [str(x) for x in value_list]
-                value = r"{" + ', '.join(string_list) + r"}"
+                value = r"{" + ','.join(string_list) + r"}"
                 self._new_param(parent_elem, group_name, type_string, value)
         return

@@ -2,35 +2,20 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
-    <!-- One mesh is designated the "domain" mesh -->
-    <AttDef Type="domain" Label="Domain Mesh">
-      <BriefDescription>Designate one mesh as the "domain" mesh</BriefDescription>
-      <ItemDefinitions>
-        <Component Name="domain-mesh" Label="Domain Mesh">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.generate']" />
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.resource']" />
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.logical']" />
-          </Accepts>
-        </Component>
-
-        <!-- TODO Is mesh partitioner required? -->
-        <String Name="partitioner" Optional="true" IsEnabledByDefault="false">
-          <DiscreteInfo DefaultIndex="0">
-            <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
-            <Value Enum="METIS">metis</Value>
-            <Value Enum="Zoltan">zoltan</Value>
-          </DiscreteInfo>
-        </String>
-      </ItemDefinitions>
-    </AttDef>
-
     <!-- ATS mesh types -->
     <AttDef Type="mesh" Label="Mesh" BaseType="" Abstract="true">
       <ItemDefinitions>
         <Void Name="deformable mesh" Label="Deformable" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
         </Void>
+        <!-- TODO Is mesh partitioner required? -->
+        <!-- <String Name="partitioner" Optional="true" IsEnabledByDefault="false">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
+            <Value Enum="METIS">metis</Value>
+            <Value Enum="Zoltan">zoltan</Value>
+          </DiscreteInfo>
+        </String> -->
       </ItemDefinitions>
     </AttDef>
 
