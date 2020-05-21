@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "c6d8e28d-e240-465d-9aed-7e3dfa9dc755",
+      "ID": "0e39b1f9-0527-43e8-8b97-8aaac60ba736",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "0c09adad-c9a4-4bb1-91cd-762c21bec2f6",
+      "ID": "ec203700-5237-40a9-a41d-b74ef03e2509",
       "Items": [
         {
           "Name": "start time",
@@ -341,7 +341,7 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "ba9e6ae5-d57a-445c-b603-fb11c1a10042",
+      "ID": "c7269016-ecce-4320-a773-26b243578458",
       "Items": [
         {
           "Name": "domain-mesh",
@@ -363,7 +363,104 @@
       "Type": "domain"
     },
     {
-      "ID": "cf1698bd-6c6f-458e-a8f1-2e2737dcdef0",
+      "ID": "b4068dca-6c7b-4999-9da6-891a593988ac",
+      "Name": "capillary_pressure_gas_liq",
+      "Type": "capillary pressure, atmospheric gas over liquid"
+    },
+    {
+      "ID": "fb4f7417-e943-4de0-ac1a-a86cc8437916",
+      "Name": "effective_pressure",
+      "Type": "effective_pressure"
+    },
+    {
+      "ID": "beb522ca-9771-474a-a78e-5267c0537fdc",
+      "Name": "molar_density_liquid",
+      "Type": "eos"
+    },
+    {
+      "ID": "76961e4e-4d6a-420d-9e5d-207f8b332173",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 2.5e-12
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "d4e184d2-c3cf-4e78-bb63-57d90e3861f6",
+              "adcc3b80-bdd4-439a-b51b-fc9bfcdd9bd5"
+            ]
+          ]
+        }
+      ],
+      "Name": "permeability",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "e3036a10-da11-4028-9986-ee2c3459ed98",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 0.25
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "d4e184d2-c3cf-4e78-bb63-57d90e3861f6",
+              "68830362-0b9a-4024-97dc-ea14d87d1cc7"
+            ]
+          ]
+        }
+      ],
+      "Name": "porosity",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "169b1863-d1f6-4b85-8524-943700abc83c",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 273.65
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "d4e184d2-c3cf-4e78-bb63-57d90e3861f6",
+              "59e09416-8bd5-4a63-9d49-638c1a049b8a"
+            ]
+          ]
+        }
+      ],
+      "Name": "temperature",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "5af58d38-3df2-4285-b935-aebfbb7c2d77",
+      "Name": "water_content",
+      "Type": "richards water content"
+    },
+    {
+      "ID": "ed6d3de1-b290-4384-9f93-7977eade15fd",
+      "Name": "viscosity_liquid",
+      "Type": "viscosity"
+    },
+    {
+      "ID": "bd110074-b48e-4b14-8f0d-c580d6a55781",
       "Items": [
         {
           "Name": "value",
@@ -374,7 +471,7 @@
       "Type": "ic-const-scalar"
     },
     {
-      "ID": "dcc6f3b0-017b-4fee-8acb-cc5d5418e940",
+      "ID": "4ac8c5c7-03b1-4c6a-a6ad-c0a8ddf65797",
       "Items": [
         {
           "Name": "value",
@@ -402,6 +499,59 @@
       ],
       "Name": "gravity",
       "Type": "ic-const-vector"
+    },
+    {
+      "ID": "059da3f1-2c2d-46eb-8399-0c42f6d7bb5d",
+      "Items": [
+        {
+          "Name": "low coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "high coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 10.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "computational domain",
+      "Type": "region.box"
     }
   ],
   "Definitions": [
@@ -1762,6 +1912,13 @@
     },
     {
       "BaseType": "field-evaluator-base",
+      "Label": "eos",
+      "Type": "eos",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
       "ItemDefinitions": [
         {
           "Name": "constant in time",
@@ -1777,10 +1934,50 @@
           "OkToInheritCategories": true,
           "Type": "Double",
           "Version": 0
+        },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
+          ],
+          "Name": "region",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
         }
       ],
       "Label": "independent variable",
       "Type": "independent variable",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "molar fraction gas",
+      "Type": "molar fraction gas",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "overland pressure water content",
+      "Type": "overland pressure water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth",
+      "Type": "ponded depth",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth bar",
+      "Type": "ponded depth bar",
       "Unique": false,
       "Version": 0
     },
@@ -3569,8 +3766,46 @@
       "Type": "Attribute"
     }
   ],
-  "id": "0cfeda38-4109-4c8e-9e39-7f730ed4b3ae",
-  "links": null,
+  "id": "71f5ff56-210d-441a-a0ef-8f72a145f373",
+  "links": [
+    {
+      "base": {
+        "linkData": [
+          {
+            "base": null,
+            "id": "59e09416-8bd5-4a63-9d49-638c1a049b8a",
+            "left": "169b1863-d1f6-4b85-8524-943700abc83c",
+            "right": "059da3f1-2c2d-46eb-8399-0c42f6d7bb5d",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "68830362-0b9a-4024-97dc-ea14d87d1cc7",
+            "left": "e3036a10-da11-4028-9986-ee2c3459ed98",
+            "right": "059da3f1-2c2d-46eb-8399-0c42f6d7bb5d",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "adcc3b80-bdd4-439a-b51b-fc9bfcdd9bd5",
+            "left": "76961e4e-4d6a-420d-9e5d-207f8b332173",
+            "right": "059da3f1-2c2d-46eb-8399-0c42f6d7bb5d",
+            "role": -2
+          }
+        ],
+        "surrogate": {
+          "id": "71f5ff56-210d-441a-a0ef-8f72a145f373",
+          "index": 4750263520,
+          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_state/att.state.smtk",
+          "type": "smtk::attribute::Resource"
+        }
+      },
+      "id": "d4e184d2-c3cf-4e78-bb63-57d90e3861f6",
+      "left": "71f5ff56-210d-441a-a0ef-8f72a145f373",
+      "right": "71f5ff56-210d-441a-a0ef-8f72a145f373",
+      "role": -2147483648
+    }
+  ],
   "name": "ats",
   "properties": {
     "unordered_map<uuid, double>": {},

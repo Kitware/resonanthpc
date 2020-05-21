@@ -1,0 +1,6 @@
+<ParameterList name="${NAME}" type="ParameterList">
+  <Parameter name="field evaluator type" type="string" value="capillary pressure, atmospheric gas over liquid" />
+  <ParameterList name="verbose object" type="ParameterList">
+    <Parameter name="verbosity level" type="string" value="low" />
+  </ParameterList>
+</ParameterList>

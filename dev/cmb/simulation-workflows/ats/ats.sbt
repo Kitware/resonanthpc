@@ -107,10 +107,10 @@
         <View Title="initial conditions"/>
       </Views>
     </View>
-    <View Type="Instanced" Title="field evaluators">
-      <InstancedAttributes>
-        <Att Type="field evaluators" Name="field evaluators"/>
-      </InstancedAttributes>
+    <View Type="Attribute" Title="field evaluators">
+      <AttributeTypes>
+        <Att Type="field-evaluator-base" Name="field evaluators"/>
+      </AttributeTypes>
     </View>
     <View Type="Attribute" Title="initial conditions">
       <AttributeTypes>

@@ -2,17 +2,50 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
     <!-- TODO: field evaluators -->
-    <AttDef Type="field evaluators" Label="Field Evaluators" BaseType="" Version="0">
-      <ItemDefinitions>
-        <!-- TODO: PrimaryVariableEvaluator -->
-        <!-- TODO: IndependentVariableEvaluator -->
-        <!-- TODO: Water Content -->
-        <!-- TODO: Surface Water potential surfaces -->
-        <!-- TODO: Generic Evaluators -->
+    <AttDef Type="field-evaluator-base" BaseType="" Abstract="true" Version="0">
+    </AttDef>
 
+    <AttDef Type="richards water content" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="capillary pressure, atmospheric gas over liquid" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="viscosity" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="effective_pressure" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="independent variable" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
+        <!-- name is the name of the attribute in the list -->
+        <Double Name="value"></Double>
+        <Component Name="region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+        <!-- TODO: also need region components. one of: cell, face, boundary_face (can have just one or all three) -->
       </ItemDefinitions>
     </AttDef>
 
+    <AttDef Type="eos" BaseType="field-evaluator-base" Version="0">
+      <!-- TODO add stuff -->
+    </AttDef>
+
+    <AttDef Type="molar fraction gas" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="overland pressure water content" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="ponded depth" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="ponded depth bar" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
 
 
 
