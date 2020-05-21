@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<ParameterList name="Main" type="ParameterList">
+  <ParameterList name="state" type="ParameterList">
+
+    <!-- TODO add field evaluatos -->
+
+    <ParameterList name="initial conditions" type="ParameterList">
+      <ParameterList name="atmospheric_pressure" type="ParameterList">
+        <Parameter name="value" type="double" value="101325.0" />
+      </ParameterList>
+      <ParameterList name="gravity" type="ParameterList">
+        <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}" />
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>

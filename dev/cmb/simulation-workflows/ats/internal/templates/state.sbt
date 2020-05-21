@@ -45,25 +45,22 @@
     <!-- The rest don't seem needed for the demos. -->
 
     <!-- TODO: Initialization of scalar fields -->
-    <AttDef Type="ic-scalar-field" BaseType="ic-base" Version="0">
+    <!-- <AttDef Type="ic-scalar-field" BaseType="ic-base" Version="0">
       <ItemDefinitions>
-        <!-- TODO: items! -->
       </ItemDefinitions>
-    </AttDef>
+    </AttDef> -->
 
     <!-- TODO: Initialization of tensor fields -->
-    <AttDef Type="ic-tensor-field" BaseType="ic-base" Version="0">
+    <!-- <AttDef Type="ic-tensor-field" BaseType="ic-base" Version="0">
       <ItemDefinitions>
-        <!-- TODO: items! -->
       </ItemDefinitions>
-    </AttDef>
+    </AttDef> -->
 
     <!-- TODO: Initialization from a file -->
-    <AttDef Type="ic-file" BaseType="ic-base" Version="0">
+    <!-- <AttDef Type="ic-file" BaseType="ic-base" Version="0">
       <ItemDefinitions>
-        <!-- TODO: items! -->
       </ItemDefinitions>
-    </AttDef>
+    </AttDef> -->
 
 
     <!-- ////////////////////////////////////////////////////////////// -->
