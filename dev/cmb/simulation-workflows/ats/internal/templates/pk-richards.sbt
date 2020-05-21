@@ -47,7 +47,7 @@
                 <Value>mfd: support operator</Value>
               </DiscreteInfo>
             </String>
-            <Void Name="gravity" IsEnabledByDefault="false"></Void>
+            <Void Name="gravity" IsEnabledByDefault="false" Optional="true"></Void>
             <String Name="Newton correction">
               <DiscreteInfo DefaultIndex="0">
                 <Value>true Jacobian</Value>
