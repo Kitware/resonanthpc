@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "5c8bfa57-45c8-4e05-8929-d70289942205",
+      "ID": "d14012a0-80b2-4554-8123-4e0008582f35",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "17825d3c-ea01-4c4d-b70c-37467eb7dfb0",
+      "ID": "110c6fbb-7b86-4990-9c56-5130f193a2db",
       "Items": [
         {
           "Name": "start time",
@@ -331,8 +331,8 @@
           "Name": "PK tree",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "5d88f771-d97f-4394-9737-d8fae2e9b845"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "806bcdc7-3ab6-4087-8ab6-af9b2ff628d8"
             ]
           ]
         }
@@ -341,44 +341,175 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "1f4a5c69-8bbf-4329-96bb-c495c175108b",
+      "ID": "64f6383c-efcb-4390-902d-8ec6cec2ce7e",
       "Items": [
         {
-          "Name": "domain-mesh",
+          "Name": "domain",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "97c9e3bc-727a-4544-b912-bf2ed95a1b9e"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "c66dc4a0-9d24-4753-8a42-26ed33f4c47a"
             ]
           ]
         },
         {
-          "Discrete": true,
-          "DiscreteIndex": 0,
+          "Name": "file name base",
+          "Value": "visdump"
+        },
+        {
           "Enabled": false,
-          "Name": "partitioner"
+          "Name": "dynamic mesh"
+        },
+        {
+          "GroupClusters": {
+            "Cluster 0": {
+              "Index 0": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Cycle",
+                          "Val": 0
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Cycle Period",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": false,
+                          "Name": "Stop Cycle",
+                          "UnsetVal": true
+                        },
+                        "Type": "Int"
+                      }
+                    }
+                  },
+                  "Name": "cycles start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 1": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "Name": "cycles",
+                  "NumberOfValues": 1,
+                  "Values": [
+                    {
+                      "UnsetVal": {
+                        "Ith": 0
+                      }
+                    }
+                  ]
+                },
+                "Type": "Int"
+              },
+              "Index 2": {
+                "ItemValue": {
+                  "Enabled": true,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "Start Time",
+                          "Val": 0.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Name": "Time Period",
+                          "Val": 1.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 2": {
+                        "ItemValue": {
+                          "Enabled": true,
+                          "Name": "Stop Time",
+                          "Val": -1.0
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 3": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times start period stop"
+                },
+                "Type": "Group"
+              },
+              "Index 3": {
+                "ItemValue": {
+                  "Enabled": false,
+                  "GroupClusters": {
+                    "Cluster 0": {
+                      "Index 0": {
+                        "ItemValue": {
+                          "Name": "times",
+                          "NumberOfValues": 1,
+                          "Values": [
+                            {
+                              "UnsetVal": {
+                                "Ith": 0
+                              }
+                            }
+                          ]
+                        },
+                        "Type": "Double"
+                      },
+                      "Index 1": {
+                        "ItemValue": {
+                          "Discrete": true,
+                          "DiscreteIndex": 0,
+                          "Name": "time units"
+                        },
+                        "Type": "String"
+                      }
+                    }
+                  },
+                  "Name": "times"
+                },
+                "Type": "Group"
+              }
+            }
+          },
+          "Name": "visualization times"
         }
       ],
-      "Name": "domain-mesh",
-      "Type": "domain"
+      "Name": "visualization driver-0",
+      "Type": "visualization driver"
     },
     {
-      "ID": "5a63e574-f88d-4419-9f4d-5c76d6eddbee",
+      "ID": "836e1963-bab9-4634-949b-13d90bbbbf7e",
       "Name": "capillary_pressure_gas_liq",
       "Type": "capillary pressure, atmospheric gas over liquid"
     },
     {
-      "ID": "c7dccce9-ae0a-4258-a84e-5ab939cc5836",
+      "ID": "ffb0dbf7-eb86-42ea-aadb-db2e4dfa700f",
       "Name": "effective_pressure",
       "Type": "effective_pressure"
     },
     {
-      "ID": "fa3a8c08-bb1d-4342-8b00-0c0b742d719b",
+      "ID": "fe93aa0f-3773-4021-b5a1-7f4c85807cf0",
       "Name": "molar_density_liquid",
       "Type": "eos"
     },
     {
-      "ID": "7a96b3f1-8f23-4548-8c9b-64dac06f0fed",
+      "ID": "a91fcb60-e52f-4e15-96e7-2278670a535f",
       "Items": [
         {
           "Enabled": true,
@@ -392,8 +523,8 @@
           "Name": "region",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "05b3a394-211e-44e6-ad50-7db54e0d912b"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "3d17078b-7a2b-4cac-8c3b-63066ac25db1"
             ]
           ]
         }
@@ -402,7 +533,7 @@
       "Type": "independent variable"
     },
     {
-      "ID": "35297aac-b01c-45ff-a0d2-1e6a4168b61b",
+      "ID": "980ce4e3-caaf-4dc5-9a32-9a0771500ccf",
       "Items": [
         {
           "Enabled": true,
@@ -416,8 +547,8 @@
           "Name": "region",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "1ec4ad66-709c-4d48-9db2-300c12c3c083"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "19270a7d-ea2b-4a0d-8b6c-61df3c591729"
             ]
           ]
         }
@@ -426,7 +557,7 @@
       "Type": "independent variable"
     },
     {
-      "ID": "e2dde50c-f9e8-4e56-bc31-2043a57c5b87",
+      "ID": "244eb4a3-4527-47e2-9719-312c10f34d3c",
       "Items": [
         {
           "Enabled": true,
@@ -440,8 +571,8 @@
           "Name": "region",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "da703a2b-5b2f-435d-b0cc-6dad66603a3f"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "69ef7dd6-e967-4ca3-bc96-3534d99cb2ec"
             ]
           ]
         }
@@ -450,17 +581,17 @@
       "Type": "independent variable"
     },
     {
-      "ID": "192c06a8-8402-45aa-a5e5-88b54e02bb4e",
+      "ID": "321443b7-db86-49f8-aab6-a34273d3721f",
       "Name": "water_content",
       "Type": "richards water content"
     },
     {
-      "ID": "da8da18e-4341-46c6-8f73-980c24e4fc91",
+      "ID": "1b5d2ad3-925f-47a0-8553-28380b5b442b",
       "Name": "viscosity_liquid",
       "Type": "viscosity"
     },
     {
-      "ID": "bc21d0b0-e99a-4ff9-85b0-a2be2363b0cd",
+      "ID": "238e70d3-5282-4c07-86c4-1c3a9ea9fbc4",
       "Items": [
         {
           "Name": "value",
@@ -471,7 +602,7 @@
       "Type": "ic-const-scalar"
     },
     {
-      "ID": "34facac2-5b6c-43f8-ac7f-bbf299bcf998",
+      "ID": "0644fdaa-e649-48ff-89e1-ae8d5b7cfdb2",
       "Items": [
         {
           "Name": "value",
@@ -501,7 +632,7 @@
       "Type": "ic-const-vector"
     },
     {
-      "ID": "d31b65b3-e79b-4647-862f-955fc5df11ff",
+      "ID": "9a6df7de-17c2-4c63-9d98-3066861e3bc5",
       "Items": [
         {
           "Enabled": false,
@@ -577,11 +708,11 @@
           ]
         }
       ],
-      "Name": "mesh.generate-0",
+      "Name": "domain",
       "Type": "mesh.generate"
     },
     {
-      "ID": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+      "ID": "92316ee9-08ce-445b-a242-e14f04eca1f5",
       "Items": [
         {
           "Name": "low coordinate",
@@ -634,7 +765,7 @@
       "Type": "region.box"
     },
     {
-      "ID": "82841f5a-58ca-4ab6-8a90-7a6f7242fbe8",
+      "ID": "4bd60073-c91d-466e-a01c-a953318f9ec3",
       "Items": [
         {
           "Name": "point",
@@ -687,7 +818,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "7fb9c093-ca58-40d7-9fc5-6e45ab0e4df2",
+      "ID": "3f1c189f-2134-4d0b-a7cf-1fc809ca7138",
       "Items": [
         {
           "Name": "point",
@@ -740,7 +871,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "c422a848-12fe-487b-bd67-03284f16609b",
+      "ID": "696c6f1e-2f5b-4e9d-861b-d1687eab5289",
       "Items": [
         {
           "Name": "point",
@@ -793,7 +924,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "f822bf7f-936a-433b-9090-410f63ce1997",
+      "ID": "d6a73e8a-73ff-4a11-ae43-e425fd565e94",
       "Items": [
         {
           "Name": "point",
@@ -846,7 +977,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "9fc12349-3709-421b-9b39-8c31899bbb29",
+      "ID": "571ae6f3-8e8e-4072-8c63-ff4895200ec3",
       "Items": [
         {
           "Name": "point",
@@ -899,7 +1030,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "32c14c33-a232-449c-b91a-42bec0175c40",
+      "ID": "4698fa2b-6ec5-4336-8c32-edbd76dcd6f9",
       "Items": [
         {
           "Name": "point",
@@ -956,19 +1087,19 @@
         "Name": "boundary conditions",
         "Values": [
           [
-            "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-            "d88273d3-330b-4127-a924-b4af9c45c869"
+            "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+            "74a5fe85-efb5-4ebf-aec1-4cdde2f27cd4"
           ]
         ]
       },
-      "ID": "e9d148c1-b088-4955-a9e6-81592805353e",
+      "ID": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
       "Items": [
         {
           "Name": "initial condition",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "ed5cf778-4bb2-49a8-97ae-1e7410e509f0"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "73b25398-7ee5-4f27-a5c2-8749fb9a5311"
             ]
           ]
         },
@@ -976,8 +1107,8 @@
           "Name": "water retention evaluator",
           "Values": [
             [
-              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-              "28d6b3bf-db3c-4ef2-b56b-f053266ea73c"
+              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+              "c707bda8-87da-4371-9488-a49142e8f735"
             ]
           ]
         }
@@ -1571,68 +1702,6 @@
       "Version": 0
     },
     {
-      "BaseType": "",
-      "BriefDescription": "Designate one mesh as the \"domain\" mesh",
-      "ItemDefinitions": [
-        {
-          "Accepts": [
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.generate']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.resource']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.logical']"
-          ],
-          "Label": "Domain Mesh",
-          "Name": "domain-mesh",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Role": -2,
-          "Type": "Component",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "zoltan_rcb/map view": "zoltan_rcb"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "METIS": "metis"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "Zoltan": "zoltan"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "partitioner",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "String",
-          "Version": 0,
-          "isEnabledByDefault": false
-        }
-      ],
-      "Label": "Domain Mesh",
-      "Type": "domain",
-      "Unique": false,
-      "Version": 0
-    },
-    {
       "Abstract": true,
       "BaseType": "",
       "Label": "field-evaluator-base",
@@ -2016,7 +2085,7 @@
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='domain']"
+            "attribute[type='mesh']"
           ],
           "Name": "domain",
           "NumberOfRequiredValues": 1,
@@ -2989,12 +3058,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Title": "Domain"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
                   "Title": "Mesh Attributes"
                 },
                 "Name": "View"
@@ -3206,78 +3269,78 @@
       "Type": "Attribute"
     }
   ],
-  "id": "334f0f81-ecd2-4570-90ab-7002f519080f",
+  "id": "b98bfa4c-c410-481f-8a21-df421fd755ca",
   "links": [
     {
       "base": {
         "linkData": [
           {
             "base": null,
-            "id": "05b3a394-211e-44e6-ad50-7db54e0d912b",
-            "left": "7a96b3f1-8f23-4548-8c9b-64dac06f0fed",
-            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+            "id": "19270a7d-ea2b-4a0d-8b6c-61df3c591729",
+            "left": "980ce4e3-caaf-4dc5-9a32-9a0771500ccf",
+            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
             "role": -2
           },
           {
             "base": null,
-            "id": "1ec4ad66-709c-4d48-9db2-300c12c3c083",
-            "left": "35297aac-b01c-45ff-a0d2-1e6a4168b61b",
-            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+            "id": "3d17078b-7a2b-4cac-8c3b-63066ac25db1",
+            "left": "a91fcb60-e52f-4e15-96e7-2278670a535f",
+            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
             "role": -2
           },
           {
             "base": null,
-            "id": "28d6b3bf-db3c-4ef2-b56b-f053266ea73c",
-            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
-            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+            "id": "69ef7dd6-e967-4ca3-bc96-3534d99cb2ec",
+            "left": "244eb4a3-4527-47e2-9719-312c10f34d3c",
+            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
             "role": -2
           },
           {
             "base": null,
-            "id": "5d88f771-d97f-4394-9737-d8fae2e9b845",
-            "left": "17825d3c-ea01-4c4d-b70c-37467eb7dfb0",
-            "right": "e9d148c1-b088-4955-a9e6-81592805353e",
+            "id": "73b25398-7ee5-4f27-a5c2-8749fb9a5311",
+            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
+            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
             "role": -2
           },
           {
             "base": null,
-            "id": "97c9e3bc-727a-4544-b912-bf2ed95a1b9e",
-            "left": "1f4a5c69-8bbf-4329-96bb-c495c175108b",
-            "right": "d31b65b3-e79b-4647-862f-955fc5df11ff",
-            "role": -2
-          },
-          {
-            "base": null,
-            "id": "d88273d3-330b-4127-a924-b4af9c45c869",
-            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
-            "right": "82841f5a-58ca-4ab6-8a90-7a6f7242fbe8",
+            "id": "74a5fe85-efb5-4ebf-aec1-4cdde2f27cd4",
+            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
+            "right": "4bd60073-c91d-466e-a01c-a953318f9ec3",
             "role": -1
           },
           {
             "base": null,
-            "id": "da703a2b-5b2f-435d-b0cc-6dad66603a3f",
-            "left": "e2dde50c-f9e8-4e56-bc31-2043a57c5b87",
-            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+            "id": "806bcdc7-3ab6-4087-8ab6-af9b2ff628d8",
+            "left": "110c6fbb-7b86-4990-9c56-5130f193a2db",
+            "right": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
             "role": -2
           },
           {
             "base": null,
-            "id": "ed5cf778-4bb2-49a8-97ae-1e7410e509f0",
-            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
-            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
+            "id": "c66dc4a0-9d24-4753-8a42-26ed33f4c47a",
+            "left": "64f6383c-efcb-4390-902d-8ec6cec2ce7e",
+            "right": "9a6df7de-17c2-4c63-9d98-3066861e3bc5",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "c707bda8-87da-4371-9488-a49142e8f735",
+            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
+            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
             "role": -2
           }
         ],
         "surrogate": {
-          "id": "334f0f81-ecd2-4570-90ab-7002f519080f",
-          "index": 4851627232,
+          "id": "b98bfa4c-c410-481f-8a21-df421fd755ca",
+          "index": 4757882080,
           "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_demos/att.demo.01.smtk",
           "type": "smtk::attribute::Resource"
         }
       },
-      "id": "2e18c4d4-cbe8-4211-9330-a363560a83b6",
-      "left": "334f0f81-ecd2-4570-90ab-7002f519080f",
-      "right": "334f0f81-ecd2-4570-90ab-7002f519080f",
+      "id": "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
+      "left": "b98bfa4c-c410-481f-8a21-df421fd755ca",
+      "right": "b98bfa4c-c410-481f-8a21-df421fd755ca",
       "role": -2147483648
     }
   ],

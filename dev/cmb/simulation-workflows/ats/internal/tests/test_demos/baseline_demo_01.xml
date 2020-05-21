@@ -4,54 +4,54 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh"/>
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0, 1.0, 10.0}"/>
-        <Parameter name="number of cells" type="Array(int)" value="{1, 1, 100}"/>
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}"/>
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,100}"/>
       </ParameterList>
       <Parameter name="deformable mesh" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="regions" type="ParameterList">
-    <ParameterList name="computational domain">
-      <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{1.0, 1.0, 10.0}"/>
+    <ParameterList name="computational domain" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,10.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="bottom face">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{0.5, 0.5, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 0.0, -1.0}"/>
+    <ParameterList name="bottom face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,-1.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="east face">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{1.0, 1.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{1.0, 0.0, 0.0}"/>
+    <ParameterList name="east face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{1.0,0.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="north face">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{1.0, 1.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 1.0, 0.0}"/>
+    <ParameterList name="north face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="south face">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, -1.0, 0.0}"/>
+    <ParameterList name="south face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,-1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="surface">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{0.5, 0.5, 10.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 0.0, 1.0}"/>
+    <ParameterList name="surface" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,10.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,1.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="west face">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{-1.0, 0.0, 0.0}"/>
+    <ParameterList name="west face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{-1.0,0.0,0.0}"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>
@@ -268,9 +268,15 @@
         <Parameter name="value" type="double" value="101325.0"/>
       </ParameterList>
       <ParameterList name="gravity" type="ParameterList">
-        <Parameter name="value" type="Array(double)" value="{0.0, 0.0, -9.80665}"/>
+        <Parameter name="value" type="Array(double)" value="{0.0,0.0,-9.80665}"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>
-  <ParameterList name="visualization" type="ParameterList"/>
+  <ParameterList name="visualization" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump"/>
+      <Parameter name="dynamic mesh" type="bool" value="false"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}"/>
+    </ParameterList>
+  </ParameterList>
 </ParameterList>
