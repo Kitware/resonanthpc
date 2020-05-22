@@ -1,0 +1,9 @@
+<ParameterList name="${NAME}" type="ParameterList">
+  <Parameter name="field evaluator type" type="string" value="compressible porosity" />
+  <ParameterList name="compressible porosity model parameters" type="ParameterList">
+    <ParameterList name="${REGION}" type="ParameterList">
+      <Parameter name="region" type="string" value="${REGION}" />
+      <Parameter name="pore compressibility [Pa^-1]" type="double" value="1e-09" />
+    </ParameterList>
+  </ParameterList>
+</ParameterList>

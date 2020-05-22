@@ -3,5 +3,7 @@
   <Includes>
     <File>internal/templates/pk-base.sbt</File>
     <File>internal/templates/pk-richards.sbt</File>
+    <File>internal/templates/pk-overland-flow.sbt</File>
+    <File>internal/templates/pk-coupled.sbt</File>
   </Includes>
 </SMTK_AttributeResource>

@@ -5,6 +5,7 @@
   <Parameter name="mass density key" type="string" value="${MASS_DENSITY_KEY}" />
   <ParameterList name="EOS parameters" type="ParameterList">
     <Parameter name="EOS type" type="string" value="${EOS_TYPE}" />
+    <Parameter name="${KEY}" type="double" value="${VALUE}" />
   </ParameterList>
   <ParameterList name="verbose object" type="ParameterList">
     <Parameter name="verbosity level" type="string" value="low" />

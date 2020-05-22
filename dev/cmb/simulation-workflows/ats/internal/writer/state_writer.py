@@ -32,27 +32,44 @@ def map_independent_variable(att):
         r"${COMPONENT_NAME}": "components",
         r"${COMPONENT_TYPE}": "Array(string)",
         r"${COMPONENTS}": "{" + str(att.find("components").value()) + "}",
-        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value())
+        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value()),
     }
     return mapping
 
 
 def map_eos(att):
-    # <Parameter name="density [kg/m^3]" type="double" value="1000.0" />
-
-    # <ParameterList name="gas EOS parameters" type="ParameterList">
-    #   <Parameter name="EOS type" type="string" value="ideal gas" />
-    # </ParameterList>
-
-    # TODO: hard coding for demo 01
-
     mapping = {
         r"${NAME}": att.name(),
-        r"${EOS_BASIS}": "both",
-        r"${MOLAR_DENSITY_KEY}": "molar_density_liquid",
-        r"${MASS_DENSITY_KEY}": "mass_density_liquid",
+        r"${EOS_BASIS}": str(att.find("EOS basis").value()),
+        r"${MOLAR_DENSITY_KEY}": str(att.find("molar density key").value()),
+        r"${MASS_DENSITY_KEY}": str(att.find("mass density key").value()),
         r"${EOS_TYPE}": "liquid water",
-        r"${ADDITIONAL_EOS_PARAMETERS}": "",
+    }
+    return mapping
+
+
+def map_eos_constant(att):
+    mapping = map_eos(att)
+    mapping.update({
+        r"${EOS_TYPE}": "constant",
+        r"${KEY}": str(att.find("key").value()),
+        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value()),
+    })
+    return mapping
+
+
+def map_eos_vapor(att):
+    mapping = map_eos(att)
+    mapping.update({
+        r"${EOS_TYPE}": "vapor in gas",
+    })
+    return mapping
+
+
+def map_compressible_porosity(att):
+    mapping = {
+        r"${NAME}": att.name(),
+        r"${REGION}": att.findComponent('region').value().name(),
     }
     return mapping
 
@@ -85,6 +102,9 @@ class StateWriter(BaseWriter):
         smart_templates = {
             "independent variable": ("fe-independent-variable.xml", map_independent_variable),
             "eos": ("fe-eos.xml", map_eos),
+            "eos-constant": ("fe-eos-constant.xml", map_eos_constant),
+            "eos-vapor": ("fe-eos-vapor.xml", map_eos_vapor),
+            "compressible porosity": ("fe-compressible-porosity.xml", map_compressible_porosity),
         }
 
         fe_atts = shared.sim_atts.findAttributes('field-evaluator-base')

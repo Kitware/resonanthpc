@@ -64,9 +64,12 @@ class BaseTestCase(unittest.TestCase):
             baseline_string = fp.read()
         return baseline_string
 
-    def _compare_xml_content(self, xml_string):
+    def _compare_xml_content(self, xml_string, dump=False):
         """A helper in case we want to get fancier in how we compare the XML."""
         baseline_path = os.path.join(self.SOURCE_DIR, self.BASLINE_XML_FILENAME)
         baseline_string = self._read_baseline(baseline_path)
+        if dump:
+            with open(os.path.join(self.SOURCE_DIR, "foo.xml"), "w") as f:
+                f.write(xml_string)
         self.assertEqual(xml_string, baseline_string)
         return

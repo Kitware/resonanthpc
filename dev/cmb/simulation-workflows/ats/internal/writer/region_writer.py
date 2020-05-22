@@ -42,7 +42,9 @@ class RegionWriter(BaseWriter):
         # possible children parameters
         children = {
             'region.plane': ['point', 'normal',],
+            'region.plane.2d': ['point', 'normal',],
             'region.box': ['low coordinate', 'high coordinate',],
+            'region.box.2d': ['low coordinate', 'high coordinate',],
             'region.labeled.surface': ['label', 'file', 'entity',],
             'region.color-function': ['file', 'value',],
             'region.point': ['point',],
