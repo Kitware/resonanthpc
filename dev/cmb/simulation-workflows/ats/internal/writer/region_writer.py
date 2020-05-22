@@ -69,7 +69,8 @@ class RegionWriter(BaseWriter):
             region_type = region_att.type()
             param_name = region_type_params.get(region_type)
             if param_name is None:
-                param_name = region_type.replace('.', ': ')
+                param_name = region_type.replace(".2d", "")
+                param_name = param_name.replace('.', ': ')
             type_list_elem = self._new_list(name_list_elem, param_name)
 
             # surface.labeled is special case

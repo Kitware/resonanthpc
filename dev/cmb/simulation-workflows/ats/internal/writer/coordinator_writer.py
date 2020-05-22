@@ -72,6 +72,15 @@ class CoordinatorWriter(BaseWriter):
         pk_elem = self._new_list(pk_tree_elem, pk_name)
         self._new_param(pk_elem, "PK type", "string", PK_MAPPING[pk_type])
 
-        # TODO: if the PK is a coupler, we have to included the coupled PKs in the tree
+        # if the PK is a coupler, we have to included the coupled PKs in the tree
+        if pk_type == "pk-coupled-water":
+            assocs = pk_att.associations()
+            for i in range(assocs.numberOfValues()):
+                if assocs.isSet(i):
+                    nested = assocs.value(i)
+                    nested_name = nested.name()
+                    nested_type = nested.type()
+                    nested_elem = self._new_list(pk_elem, nested_name)
+                    self._new_param(nested_elem, "PK type", "string", PK_MAPPING[nested_type])
 
         return

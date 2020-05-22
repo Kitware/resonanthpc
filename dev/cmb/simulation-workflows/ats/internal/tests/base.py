@@ -34,6 +34,10 @@ class BaseTestCase(unittest.TestCase):
         smtk.operation.Registrar.registerTo(self.op_manager)
         self.op_manager.registerResourceManager(self.res_manager)
 
+        if hasattr(self, "MODEL_RESOURCE_FILENAME"):
+            model_path = os.path.join(self.SOURCE_DIR, self.MODEL_RESOURCE_FILENAME)
+            self.model_resource = self._read_resource(model_path)
+
         # Load resource files
         atts_path = os.path.join(self.SOURCE_DIR, self.ATT_RESOURCE_FILENAME)
         self.att_resource = self._read_resource(atts_path)
