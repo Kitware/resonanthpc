@@ -61,13 +61,13 @@
     <Parameter name="end time" type="double" value="1.0"/>
     <Parameter name="end time units" type="string" value="s"/>
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="Richards" type="ParameterList">
+      <ParameterList name="pk-richards-0" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards steady state"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
-    <ParameterList name="Richards" type="ParameterList">
+    <ParameterList name="pk-richards-0" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards steady state"/>
       <Parameter name="primary variable key" type="string" value="pressure"/>
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
@@ -202,7 +202,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0"/>
+                <Parameter name="value" type="double" value="2.500000e-12"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -221,7 +221,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.2"/>
+                <Parameter name="value" type="double" value="2.500000e-01"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -237,10 +237,10 @@
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <!-- can be component or components (string or array(string)) -->
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="273.6"/>
+                <Parameter name="value" type="double" value="2.736500e+02"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>

@@ -22,6 +22,13 @@
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
         <!-- name is the name of the attribute in the list -->
         <Double Name="value"></Double>
+        <String Name="components">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="cell">cell</Value>
+            <Value Enum="boundary_face">boundary_face</Value>
+            <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+          </DiscreteInfo>
+        </String>
         <Component Name="region">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>

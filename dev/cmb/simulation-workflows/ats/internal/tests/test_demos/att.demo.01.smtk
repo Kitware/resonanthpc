@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "d14012a0-80b2-4554-8123-4e0008582f35",
+      "ID": "d249b4e8-74a0-4eea-a128-df6d5dd80a82",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "110c6fbb-7b86-4990-9c56-5130f193a2db",
+      "ID": "8c048eb8-bb7e-4545-a78d-5bd0849f7e98",
       "Items": [
         {
           "Name": "start time",
@@ -331,8 +331,8 @@
           "Name": "PK tree",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "806bcdc7-3ab6-4087-8ab6-af9b2ff628d8"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "1505560f-9c4b-4fa4-af2f-4ca9f893779a"
             ]
           ]
         }
@@ -341,14 +341,14 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "64f6383c-efcb-4390-902d-8ec6cec2ce7e",
+      "ID": "53fd0fa0-fe05-439a-97e7-e71640d03b97",
       "Items": [
         {
           "Name": "domain",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "c66dc4a0-9d24-4753-8a42-26ed33f4c47a"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "32dbe14f-a935-4f81-9bac-2c95c417a4ff"
             ]
           ]
         },
@@ -494,22 +494,22 @@
       "Type": "visualization driver"
     },
     {
-      "ID": "836e1963-bab9-4634-949b-13d90bbbbf7e",
+      "ID": "5193f3db-d724-466a-a1f3-40d9343d7b9e",
       "Name": "capillary_pressure_gas_liq",
       "Type": "capillary pressure, atmospheric gas over liquid"
     },
     {
-      "ID": "ffb0dbf7-eb86-42ea-aadb-db2e4dfa700f",
+      "ID": "654ce309-fb30-4cb2-81ac-576d49bf0c06",
       "Name": "effective_pressure",
       "Type": "effective_pressure"
     },
     {
-      "ID": "fe93aa0f-3773-4021-b5a1-7f4c85807cf0",
+      "ID": "c7512cc2-167e-4cb8-9a7d-0e46c5e28025",
       "Name": "molar_density_liquid",
       "Type": "eos"
     },
     {
-      "ID": "a91fcb60-e52f-4e15-96e7-2278670a535f",
+      "ID": "57f4e9f3-a364-4fa9-87d1-a3c04e42ee00",
       "Items": [
         {
           "Enabled": true,
@@ -520,11 +520,16 @@
           "Val": 2.5e-12
         },
         {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "components"
+        },
+        {
           "Name": "region",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "3d17078b-7a2b-4cac-8c3b-63066ac25db1"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "028b9a79-0e0d-4382-b8f3-c257dd5564df"
             ]
           ]
         }
@@ -533,7 +538,7 @@
       "Type": "independent variable"
     },
     {
-      "ID": "980ce4e3-caaf-4dc5-9a32-9a0771500ccf",
+      "ID": "6414b056-1c96-4c8c-94dc-36b8e9f809fd",
       "Items": [
         {
           "Enabled": true,
@@ -544,11 +549,16 @@
           "Val": 0.25
         },
         {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "components"
+        },
+        {
           "Name": "region",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "19270a7d-ea2b-4a0d-8b6c-61df3c591729"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "294666bd-6636-4de8-8ea1-010d0fc3ad9f"
             ]
           ]
         }
@@ -557,7 +567,7 @@
       "Type": "independent variable"
     },
     {
-      "ID": "244eb4a3-4527-47e2-9719-312c10f34d3c",
+      "ID": "609adbd0-32de-49c6-ae87-de18ca4001d5",
       "Items": [
         {
           "Enabled": true,
@@ -568,11 +578,16 @@
           "Val": 273.65
         },
         {
+          "Discrete": true,
+          "DiscreteIndex": 2,
+          "Name": "components"
+        },
+        {
           "Name": "region",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "69ef7dd6-e967-4ca3-bc96-3534d99cb2ec"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "6896186a-2fc9-4b0a-8231-ea8a2a05b6d1"
             ]
           ]
         }
@@ -581,17 +596,17 @@
       "Type": "independent variable"
     },
     {
-      "ID": "321443b7-db86-49f8-aab6-a34273d3721f",
+      "ID": "3746b4ea-4c0d-4657-b7ef-529b1ecd0f6c",
       "Name": "water_content",
       "Type": "richards water content"
     },
     {
-      "ID": "1b5d2ad3-925f-47a0-8553-28380b5b442b",
+      "ID": "e4249af0-e2ce-41d2-b3dc-e35b1352a40f",
       "Name": "viscosity_liquid",
       "Type": "viscosity"
     },
     {
-      "ID": "238e70d3-5282-4c07-86c4-1c3a9ea9fbc4",
+      "ID": "8b9578a6-4f57-4e74-9489-b9792e8d1c95",
       "Items": [
         {
           "Name": "value",
@@ -602,7 +617,7 @@
       "Type": "ic-const-scalar"
     },
     {
-      "ID": "0644fdaa-e649-48ff-89e1-ae8d5b7cfdb2",
+      "ID": "8415d8c2-8106-4024-a428-25fed1e3c3ea",
       "Items": [
         {
           "Name": "value",
@@ -632,7 +647,7 @@
       "Type": "ic-const-vector"
     },
     {
-      "ID": "9a6df7de-17c2-4c63-9d98-3066861e3bc5",
+      "ID": "04b7f9c5-8300-4937-b53f-0325898ceab1",
       "Items": [
         {
           "Enabled": false,
@@ -712,7 +727,7 @@
       "Type": "mesh.generate"
     },
     {
-      "ID": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+      "ID": "68c37cca-6714-4d0c-91b7-329030cc01a3",
       "Items": [
         {
           "Name": "low coordinate",
@@ -765,7 +780,7 @@
       "Type": "region.box"
     },
     {
-      "ID": "4bd60073-c91d-466e-a01c-a953318f9ec3",
+      "ID": "7cdfe522-e64c-443c-9638-b642ecbba428",
       "Items": [
         {
           "Name": "point",
@@ -818,7 +833,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "3f1c189f-2134-4d0b-a7cf-1fc809ca7138",
+      "ID": "aa11f4c3-cd51-46c6-87d2-d950fc451937",
       "Items": [
         {
           "Name": "point",
@@ -871,7 +886,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "696c6f1e-2f5b-4e9d-861b-d1687eab5289",
+      "ID": "d5bf7127-8edb-4731-afa2-020065b9e5fc",
       "Items": [
         {
           "Name": "point",
@@ -924,7 +939,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "d6a73e8a-73ff-4a11-ae43-e425fd565e94",
+      "ID": "6c3e14c6-13cf-48b1-a3df-61073b3a3172",
       "Items": [
         {
           "Name": "point",
@@ -977,7 +992,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "571ae6f3-8e8e-4072-8c63-ff4895200ec3",
+      "ID": "695e1457-896f-453b-8277-e2ac821096e8",
       "Items": [
         {
           "Name": "point",
@@ -1030,7 +1045,7 @@
       "Type": "region.plane"
     },
     {
-      "ID": "4698fa2b-6ec5-4336-8c32-edbd76dcd6f9",
+      "ID": "c9731f26-d425-48b5-9e5b-5f31f53c7f93",
       "Items": [
         {
           "Name": "point",
@@ -1087,19 +1102,19 @@
         "Name": "boundary conditions",
         "Values": [
           [
-            "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-            "74a5fe85-efb5-4ebf-aec1-4cdde2f27cd4"
+            "59856bda-99cc-4e46-8030-10d623a97377",
+            "49fe9371-4d92-41f0-833b-96727a461d80"
           ]
         ]
       },
-      "ID": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
+      "ID": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
       "Items": [
         {
           "Name": "initial condition",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "73b25398-7ee5-4f27-a5c2-8749fb9a5311"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "cc29071d-ba64-47ef-b492-5eebd8c83000"
             ]
           ]
         },
@@ -1107,13 +1122,13 @@
           "Name": "water retention evaluator",
           "Values": [
             [
-              "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-              "c707bda8-87da-4371-9488-a49142e8f735"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "1f66fa5d-81a5-4f1a-9978-dced8c68c634"
             ]
           ]
         }
       ],
-      "Name": "Richards",
+      "Name": "pk-richards-0",
       "Type": "pk-richards"
     }
   ],
@@ -2337,6 +2352,39 @@
           "Version": 0
         },
         {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "cell": "cell"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "boundary_face": "boundary_face"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "cell,boundary_face": "cell,boundary_face"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "components",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
+          "Version": 0
+        },
+        {
           "Accepts": [
             "smtk::attribute::Resource",
             "attribute[type='region']"
@@ -3269,78 +3317,78 @@
       "Type": "Attribute"
     }
   ],
-  "id": "b98bfa4c-c410-481f-8a21-df421fd755ca",
+  "id": "bd89af88-45d3-4c65-bd73-5354919f4d29",
   "links": [
     {
       "base": {
         "linkData": [
           {
             "base": null,
-            "id": "19270a7d-ea2b-4a0d-8b6c-61df3c591729",
-            "left": "980ce4e3-caaf-4dc5-9a32-9a0771500ccf",
-            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+            "id": "028b9a79-0e0d-4382-b8f3-c257dd5564df",
+            "left": "57f4e9f3-a364-4fa9-87d1-a3c04e42ee00",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           },
           {
             "base": null,
-            "id": "3d17078b-7a2b-4cac-8c3b-63066ac25db1",
-            "left": "a91fcb60-e52f-4e15-96e7-2278670a535f",
-            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+            "id": "1505560f-9c4b-4fa4-af2f-4ca9f893779a",
+            "left": "8c048eb8-bb7e-4545-a78d-5bd0849f7e98",
+            "right": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
             "role": -2
           },
           {
             "base": null,
-            "id": "69ef7dd6-e967-4ca3-bc96-3534d99cb2ec",
-            "left": "244eb4a3-4527-47e2-9719-312c10f34d3c",
-            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+            "id": "1f66fa5d-81a5-4f1a-9978-dced8c68c634",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           },
           {
             "base": null,
-            "id": "73b25398-7ee5-4f27-a5c2-8749fb9a5311",
-            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
-            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+            "id": "294666bd-6636-4de8-8ea1-010d0fc3ad9f",
+            "left": "6414b056-1c96-4c8c-94dc-36b8e9f809fd",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           },
           {
             "base": null,
-            "id": "74a5fe85-efb5-4ebf-aec1-4cdde2f27cd4",
-            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
-            "right": "4bd60073-c91d-466e-a01c-a953318f9ec3",
+            "id": "32dbe14f-a935-4f81-9bac-2c95c417a4ff",
+            "left": "53fd0fa0-fe05-439a-97e7-e71640d03b97",
+            "right": "04b7f9c5-8300-4937-b53f-0325898ceab1",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "49fe9371-4d92-41f0-833b-96727a461d80",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "7cdfe522-e64c-443c-9638-b642ecbba428",
             "role": -1
           },
           {
             "base": null,
-            "id": "806bcdc7-3ab6-4087-8ab6-af9b2ff628d8",
-            "left": "110c6fbb-7b86-4990-9c56-5130f193a2db",
-            "right": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
+            "id": "6896186a-2fc9-4b0a-8231-ea8a2a05b6d1",
+            "left": "609adbd0-32de-49c6-ae87-de18ca4001d5",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           },
           {
             "base": null,
-            "id": "c66dc4a0-9d24-4753-8a42-26ed33f4c47a",
-            "left": "64f6383c-efcb-4390-902d-8ec6cec2ce7e",
-            "right": "9a6df7de-17c2-4c63-9d98-3066861e3bc5",
-            "role": -2
-          },
-          {
-            "base": null,
-            "id": "c707bda8-87da-4371-9488-a49142e8f735",
-            "left": "b4dd6b32-ce25-4607-b59e-e8d51fef60f4",
-            "right": "92316ee9-08ce-445b-a242-e14f04eca1f5",
+            "id": "cc29071d-ba64-47ef-b492-5eebd8c83000",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           }
         ],
         "surrogate": {
-          "id": "b98bfa4c-c410-481f-8a21-df421fd755ca",
-          "index": 4757882080,
+          "id": "bd89af88-45d3-4c65-bd73-5354919f4d29",
+          "index": 4636067040,
           "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_demos/att.demo.01.smtk",
           "type": "smtk::attribute::Resource"
         }
       },
-      "id": "2405a9a6-f496-47ec-83e1-3c0ee2e8aad9",
-      "left": "b98bfa4c-c410-481f-8a21-df421fd755ca",
-      "right": "b98bfa4c-c410-481f-8a21-df421fd755ca",
+      "id": "59856bda-99cc-4e46-8030-10d623a97377",
+      "left": "bd89af88-45d3-4c65-bd73-5354919f4d29",
+      "right": "bd89af88-45d3-4c65-bd73-5354919f4d29",
       "role": -2147483648
     }
   ],
