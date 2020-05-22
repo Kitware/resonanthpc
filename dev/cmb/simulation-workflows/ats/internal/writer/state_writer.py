@@ -18,7 +18,7 @@ import smtk
 import smtk.attribute
 
 from .shared_data import instance as shared
-from .base_writer import BaseWriter
+from .base_writer import BaseWriter, FLOAT_FORMAT
 from .templates.creator import append_template
 
 
@@ -32,7 +32,7 @@ def map_independent_variable(att):
         r"${COMPONENT_NAME}": "components",
         r"${COMPONENT_TYPE}": "Array(string)",
         r"${COMPONENTS}": r"{cell}",
-        r"${VALUE}": "{:.1f}".format(att.find("value").value())
+        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value())
     }
     return mapping
 

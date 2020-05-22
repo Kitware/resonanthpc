@@ -37,7 +37,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.0"/>
+                <Parameter name="value" type="double" value="2.5e-12"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -56,7 +56,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="0.2"/>
+                <Parameter name="value" type="double" value="0.25"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
@@ -75,7 +75,7 @@
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="273.6"/>
+                <Parameter name="value" type="double" value="273.65"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>

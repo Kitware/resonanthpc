@@ -30,6 +30,8 @@ TypeStringMap = {
     smtk.attribute.Item.FileType: 'string',
 }
 
+FLOAT_FORMAT = r"{:e}"
+
 
 class BaseWriter:
     """Base writer class for ATS input files.
@@ -118,7 +120,7 @@ class BaseWriter:
             return
 
         # (else) n > 1
-        value_string = ', '.join(value_list)
+        value_string = ','.join(value_list)
         array_string = '{{{}}}'.format(value_string)
         self._new_param(parent_elem, array_name, 'Array(string)', array_string)
 
@@ -149,6 +151,10 @@ class BaseWriter:
                 value = r"{" + ','.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = str(item.value())
+                if isinstance(value, float):
+                    value = FLOAT_FORMAT.format(value)
+                else:
+                    value = str(value)
             else:
                 raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
