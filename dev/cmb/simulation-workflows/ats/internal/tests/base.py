@@ -1,3 +1,4 @@
+import os
 import unittest
 
 import smtk
@@ -6,6 +7,8 @@ import smtk.io
 import smtk.operation
 import smtk.resource
 import smtk.session.vtk
+
+from writer import ats_writer
 
 
 OPERATION_SUCCEEDED = int(smtk.operation.Operation.SUCCEEDED)  # 3
@@ -31,6 +34,14 @@ class BaseTestCase(unittest.TestCase):
         smtk.operation.Registrar.registerTo(self.op_manager)
         self.op_manager.registerResourceManager(self.res_manager)
 
+        # Load resource files
+        atts_path = os.path.join(self.SOURCE_DIR, self.ATT_RESOURCE_FILENAME)
+        self.att_resource = self._read_resource(atts_path)
+
+        # Initialize writer
+        self.writer = ats_writer.ATSWriter(self.att_resource)
+        self.writer.setup_xml_root()
+
     def tearDown(self):
         self.res_manager = None
         self.op_manager = None
@@ -53,7 +64,9 @@ class BaseTestCase(unittest.TestCase):
             baseline_string = fp.read()
         return baseline_string
 
-    def _compare_xml_content(self, astr, bstr):
+    def _compare_xml_content(self, xml_string):
         """A helper in case we want to get fancier in how we compare the XML."""
-        self.assertEqual(astr, bstr)
+        baseline_path = os.path.join(self.SOURCE_DIR, self.BASLINE_XML_FILENAME)
+        baseline_string = self._read_baseline(baseline_path)
+        self.assertEqual(xml_string, baseline_string)
         return
