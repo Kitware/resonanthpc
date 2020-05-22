@@ -9,8 +9,7 @@
       <Parameter name="functional" type="string" value="observation data: point"/>
       <Parameter name="direction normalized flux" type="bool" value="true"/>
       <Parameter name="region" type="string" value="region.box-0"/>
-      <Parameter name="cycles start period stop" type="Array(double)" value="{0, 0, 0}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 10800.0, 0.0}"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,10800.0,0.0}"/>
     </ParameterList>
     <ParameterList name="observation-base-1" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="dfasfsaf"/>
@@ -20,8 +19,6 @@
       <Parameter name="functional" type="string" value="observation data: point"/>
       <Parameter name="direction normalized flux" type="bool" value="false"/>
       <Parameter name="region" type="string" value="region.point-0"/>
-      <Parameter name="cycles start period stop" type="Array(double)" value="{0, 0, 0}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
     </ParameterList>
   </ParameterList>
 </ParameterList>

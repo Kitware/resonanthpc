@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "a99f83a7-fa38-4ffd-8bc4-bec2e42fa3b4",
+      "ID": "5c8bfa57-45c8-4e05-8929-d70289942205",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "4089cffc-1ec7-4991-8e97-3e4fed4e8969",
+      "ID": "17825d3c-ea01-4c4d-b70c-37467eb7dfb0",
       "Items": [
         {
           "Name": "start time",
@@ -341,14 +341,14 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "49df7e5d-7be3-4e69-ba39-e7a13f9c3569",
+      "ID": "1f4a5c69-8bbf-4329-96bb-c495c175108b",
       "Items": [
         {
           "Name": "domain-mesh",
           "Values": [
             [
-              "4965b9ac-0000-4089-bef2-83a26c2c7953",
-              "9baf7298-e212-41b8-a20c-99e2f79d7bd3"
+              null,
+              null
             ]
           ]
         },
@@ -363,167 +363,10 @@
       "Type": "domain"
     },
     {
-      "ID": "c59f29ab-c939-44a6-aa8e-c4577acba210",
+      "ID": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
       "Items": [
         {
-          "Name": "domain",
-          "Values": [
-            [
-              "4965b9ac-0000-4089-bef2-83a26c2c7953",
-              "132c9292-c32e-4a25-9d53-289aad82c969"
-            ]
-          ]
-        },
-        {
-          "Name": "file name base",
-          "Value": "visdump"
-        },
-        {
-          "Enabled": false,
-          "Name": "dynamic mesh"
-        },
-        {
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "Start Cycle",
-                          "Val": 0
-                        },
-                        "Type": "Int"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Name": "Cycle Period",
-                          "UnsetVal": true
-                        },
-                        "Type": "Int"
-                      },
-                      "Index 2": {
-                        "ItemValue": {
-                          "Enabled": false,
-                          "Name": "Stop Cycle",
-                          "UnsetVal": true
-                        },
-                        "Type": "Int"
-                      }
-                    }
-                  },
-                  "Name": "cycles start period stop"
-                },
-                "Type": "Group"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "cycles",
-                  "NumberOfValues": 1,
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    }
-                  ]
-                },
-                "Type": "Int"
-              },
-              "Index 2": {
-                "ItemValue": {
-                  "Enabled": true,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "Start Time",
-                          "Val": 0.0
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Name": "Time Period",
-                          "Val": 1.0
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 2": {
-                        "ItemValue": {
-                          "Enabled": true,
-                          "Name": "Stop Time",
-                          "Val": -1.0
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 3": {
-                        "ItemValue": {
-                          "Discrete": true,
-                          "DiscreteIndex": 0,
-                          "Name": "time units"
-                        },
-                        "Type": "String"
-                      }
-                    }
-                  },
-                  "Name": "times start period stop"
-                },
-                "Type": "Group"
-              },
-              "Index 3": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "GroupClusters": {
-                    "Cluster 0": {
-                      "Index 0": {
-                        "ItemValue": {
-                          "Name": "times",
-                          "NumberOfValues": 1,
-                          "Values": [
-                            {
-                              "UnsetVal": {
-                                "Ith": 0
-                              }
-                            }
-                          ]
-                        },
-                        "Type": "Double"
-                      },
-                      "Index 1": {
-                        "ItemValue": {
-                          "Discrete": true,
-                          "DiscreteIndex": 0,
-                          "Name": "time units"
-                        },
-                        "Type": "String"
-                      }
-                    }
-                  },
-                  "Name": "times"
-                },
-                "Type": "Group"
-              }
-            }
-          },
-          "Name": "visualization times"
-        }
-      ],
-      "Name": "visualization driver-0",
-      "Type": "visualization driver"
-    },
-    {
-      "ID": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
-      "Items": [
-        {
-          "Enabled": false,
-          "Name": "deformable mesh"
-        },
-        {
-          "Name": "domain low coordinate",
+          "Name": "low coordinate",
           "Values": [
             {
               "Val": {
@@ -546,7 +389,7 @@
           ]
         },
         {
-          "Name": "domain high coordinate",
+          "Name": "high coordinate",
           "Values": [
             {
               "Val": {
@@ -567,33 +410,362 @@
               }
             }
           ]
-        },
+        }
+      ],
+      "Name": "computational domain",
+      "Type": "region.box"
+    },
+    {
+      "ID": "82841f5a-58ca-4ab6-8a90-7a6f7242fbe8",
+      "Items": [
         {
-          "Name": "number of cells",
+          "Name": "point",
           "Values": [
             {
               "Val": {
                 "Ith": 0,
-                "Name": 1
+                "Name": 0.5
               }
             },
             {
               "Val": {
                 "Ith": 1,
-                "Name": 1
+                "Name": 0.5
               }
             },
             {
               "Val": {
                 "Ith": 2,
-                "Name": 100
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": -1.0
               }
             }
           ]
         }
       ],
-      "Name": "domain",
-      "Type": "mesh.generate"
+      "Name": "bottom face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "7fb9c093-ca58-40d7-9fc5-6e45ab0e4df2",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "east face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "c422a848-12fe-487b-bd67-03284f16609b",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "north face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "f822bf7f-936a-433b-9090-410f63ce1997",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": -1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "south face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "9fc12349-3709-421b-9b39-8c31899bbb29",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 10.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 1.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "surface",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "32c14c33-a232-449c-b91a-42bec0175c40",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": -1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "west face",
+      "Type": "region.plane"
+    },
+    {
+      "Associations": {
+        "Name": "boundary conditions",
+        "Values": [
+          [
+            "2e18c4d4-cbe8-4211-9330-a363560a83b6",
+            "d88273d3-330b-4127-a924-b4af9c45c869"
+          ]
+        ]
+      },
+      "ID": "e9d148c1-b088-4955-a9e6-81592805353e",
+      "Items": [
+        {
+          "Name": "initial condition",
+          "Values": [
+            [
+              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
+              "ed5cf778-4bb2-49a8-97ae-1e7410e509f0"
+            ]
+          ]
+        },
+        {
+          "Name": "water retention evaluator",
+          "Values": [
+            [
+              "2e18c4d4-cbe8-4211-9330-a363560a83b6",
+              "28d6b3bf-db3c-4ef2-b56b-f053266ea73c"
+            ]
+          ]
+        }
+      ],
+      "Name": "Richards",
+      "Type": "pk-richards"
     }
   ],
   "Definitions": [
@@ -1626,7 +1798,7 @@
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='mesh']"
+            "attribute[type='domain']"
           ],
           "Name": "domain",
           "NumberOfRequiredValues": 1,
@@ -2816,36 +2988,43 @@
       "Type": "Attribute"
     }
   ],
-  "id": "95670b79-ed58-45df-9cec-9b754480e83f",
+  "id": "334f0f81-ecd2-4570-90ab-7002f519080f",
   "links": [
     {
       "base": {
         "linkData": [
           {
             "base": null,
-            "id": "132c9292-c32e-4a25-9d53-289aad82c969",
-            "left": "c59f29ab-c939-44a6-aa8e-c4577acba210",
-            "right": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
+            "id": "28d6b3bf-db3c-4ef2-b56b-f053266ea73c",
+            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
+            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
             "role": -2
           },
           {
             "base": null,
-            "id": "9baf7298-e212-41b8-a20c-99e2f79d7bd3",
-            "left": "49df7e5d-7be3-4e69-ba39-e7a13f9c3569",
-            "right": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
+            "id": "d88273d3-330b-4127-a924-b4af9c45c869",
+            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
+            "right": "82841f5a-58ca-4ab6-8a90-7a6f7242fbe8",
+            "role": -1
+          },
+          {
+            "base": null,
+            "id": "ed5cf778-4bb2-49a8-97ae-1e7410e509f0",
+            "left": "e9d148c1-b088-4955-a9e6-81592805353e",
+            "right": "6ce8bc62-e76d-45f0-aeb3-d2e41db0af2e",
             "role": -2
           }
         ],
         "surrogate": {
-          "id": "95670b79-ed58-45df-9cec-9b754480e83f",
-          "index": 4785865952,
-          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_vis/att.vis.smtk",
+          "id": "334f0f81-ecd2-4570-90ab-7002f519080f",
+          "index": 4851627232,
+          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_pk/att.pk.smtk",
           "type": "smtk::attribute::Resource"
         }
       },
-      "id": "4965b9ac-0000-4089-bef2-83a26c2c7953",
-      "left": "95670b79-ed58-45df-9cec-9b754480e83f",
-      "right": "95670b79-ed58-45df-9cec-9b754480e83f",
+      "id": "2e18c4d4-cbe8-4211-9330-a363560a83b6",
+      "left": "334f0f81-ecd2-4570-90ab-7002f519080f",
+      "right": "334f0f81-ecd2-4570-90ab-7002f519080f",
       "role": -2147483648
     }
   ],

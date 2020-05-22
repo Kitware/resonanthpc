@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "a99f83a7-fa38-4ffd-8bc4-bec2e42fa3b4",
+      "ID": "d249b4e8-74a0-4eea-a128-df6d5dd80a82",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "4089cffc-1ec7-4991-8e97-3e4fed4e8969",
+      "ID": "8c048eb8-bb7e-4545-a78d-5bd0849f7e98",
       "Items": [
         {
           "Name": "start time",
@@ -168,7 +168,7 @@
             "Index 1": {
               "ItemValue": {
                 "Name": "end time",
-                "UnsetVal": true
+                "Val": 1.0
               },
               "Type": "Double"
             },
@@ -331,8 +331,8 @@
           "Name": "PK tree",
           "Values": [
             [
-              null,
-              null
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "1505560f-9c4b-4fa4-af2f-4ca9f893779a"
             ]
           ]
         }
@@ -341,36 +341,14 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "49df7e5d-7be3-4e69-ba39-e7a13f9c3569",
-      "Items": [
-        {
-          "Name": "domain-mesh",
-          "Values": [
-            [
-              "4965b9ac-0000-4089-bef2-83a26c2c7953",
-              "9baf7298-e212-41b8-a20c-99e2f79d7bd3"
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Enabled": false,
-          "Name": "partitioner"
-        }
-      ],
-      "Name": "domain-mesh",
-      "Type": "domain"
-    },
-    {
-      "ID": "c59f29ab-c939-44a6-aa8e-c4577acba210",
+      "ID": "53fd0fa0-fe05-439a-97e7-e71640d03b97",
       "Items": [
         {
           "Name": "domain",
           "Values": [
             [
-              "4965b9ac-0000-4089-bef2-83a26c2c7953",
-              "132c9292-c32e-4a25-9d53-289aad82c969"
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "32dbe14f-a935-4f81-9bac-2c95c417a4ff"
             ]
           ]
         },
@@ -516,7 +494,160 @@
       "Type": "visualization driver"
     },
     {
-      "ID": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
+      "ID": "5193f3db-d724-466a-a1f3-40d9343d7b9e",
+      "Name": "capillary_pressure_gas_liq",
+      "Type": "capillary pressure, atmospheric gas over liquid"
+    },
+    {
+      "ID": "654ce309-fb30-4cb2-81ac-576d49bf0c06",
+      "Name": "effective_pressure",
+      "Type": "effective_pressure"
+    },
+    {
+      "ID": "c7512cc2-167e-4cb8-9a7d-0e46c5e28025",
+      "Name": "molar_density_liquid",
+      "Type": "eos"
+    },
+    {
+      "ID": "57f4e9f3-a364-4fa9-87d1-a3c04e42ee00",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 2.5e-12
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "components"
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "028b9a79-0e0d-4382-b8f3-c257dd5564df"
+            ]
+          ]
+        }
+      ],
+      "Name": "permeability",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "6414b056-1c96-4c8c-94dc-36b8e9f809fd",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 0.25
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 0,
+          "Name": "components"
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "294666bd-6636-4de8-8ea1-010d0fc3ad9f"
+            ]
+          ]
+        }
+      ],
+      "Name": "porosity",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "609adbd0-32de-49c6-ae87-de18ca4001d5",
+      "Items": [
+        {
+          "Enabled": true,
+          "Name": "constant in time"
+        },
+        {
+          "Name": "value",
+          "Val": 273.65
+        },
+        {
+          "Discrete": true,
+          "DiscreteIndex": 2,
+          "Name": "components"
+        },
+        {
+          "Name": "region",
+          "Values": [
+            [
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "6896186a-2fc9-4b0a-8231-ea8a2a05b6d1"
+            ]
+          ]
+        }
+      ],
+      "Name": "temperature",
+      "Type": "independent variable"
+    },
+    {
+      "ID": "3746b4ea-4c0d-4657-b7ef-529b1ecd0f6c",
+      "Name": "water_content",
+      "Type": "richards water content"
+    },
+    {
+      "ID": "e4249af0-e2ce-41d2-b3dc-e35b1352a40f",
+      "Name": "viscosity_liquid",
+      "Type": "viscosity"
+    },
+    {
+      "ID": "8b9578a6-4f57-4e74-9489-b9792e8d1c95",
+      "Items": [
+        {
+          "Name": "value",
+          "Val": 101325.0
+        }
+      ],
+      "Name": "atmospheric_pressure",
+      "Type": "ic-const-scalar"
+    },
+    {
+      "ID": "8415d8c2-8106-4024-a428-25fed1e3c3ea",
+      "Items": [
+        {
+          "Name": "value",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": -9.80665
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "gravity",
+      "Type": "ic-const-vector"
+    },
+    {
+      "ID": "04b7f9c5-8300-4937-b53f-0325898ceab1",
       "Items": [
         {
           "Enabled": false,
@@ -594,6 +725,411 @@
       ],
       "Name": "domain",
       "Type": "mesh.generate"
+    },
+    {
+      "ID": "68c37cca-6714-4d0c-91b7-329030cc01a3",
+      "Items": [
+        {
+          "Name": "low coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "high coordinate",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 10.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "computational domain",
+      "Type": "region.box"
+    },
+    {
+      "ID": "7cdfe522-e64c-443c-9638-b642ecbba428",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": -1.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "bottom face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "aa11f4c3-cd51-46c6-87d2-d950fc451937",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "east face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "d5bf7127-8edb-4731-afa2-020065b9e5fc",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "north face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "6c3e14c6-13cf-48b1-a3df-61073b3a3172",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": -1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "south face",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "695e1457-896f-453b-8277-e2ac821096e8",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 10.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 1.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "surface",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "c9731f26-d425-48b5-9e5b-5f31f53c7f93",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": -1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "west face",
+      "Type": "region.plane"
+    },
+    {
+      "Associations": {
+        "Name": "boundary conditions",
+        "Values": [
+          [
+            "59856bda-99cc-4e46-8030-10d623a97377",
+            "49fe9371-4d92-41f0-833b-96727a461d80"
+          ]
+        ]
+      },
+      "ID": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+      "Items": [
+        {
+          "Name": "initial condition",
+          "Values": [
+            [
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "cc29071d-ba64-47ef-b492-5eebd8c83000"
+            ]
+          ]
+        },
+        {
+          "Name": "water retention evaluator",
+          "Values": [
+            [
+              "59856bda-99cc-4e46-8030-10d623a97377",
+              "1f66fa5d-81a5-4f1a-9978-dced8c68c634"
+            ]
+          ]
+        }
+      ],
+      "Name": "pk-richards-0",
+      "Type": "pk-richards"
     }
   ],
   "Definitions": [
@@ -1177,68 +1713,6 @@
       ],
       "Label": "cycle driver",
       "Type": "cycle driver",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "",
-      "BriefDescription": "Designate one mesh as the \"domain\" mesh",
-      "ItemDefinitions": [
-        {
-          "Accepts": [
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.generate']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.resource']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.logical']"
-          ],
-          "Label": "Domain Mesh",
-          "Name": "domain-mesh",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Role": -2,
-          "Type": "Component",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "zoltan_rcb/map view": "zoltan_rcb"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "METIS": "metis"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "Zoltan": "zoltan"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "partitioner",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "String",
-          "Version": 0,
-          "isEnabledByDefault": false
-        }
-      ],
-      "Label": "Domain Mesh",
-      "Type": "domain",
       "Unique": false,
       "Version": 0
     },
@@ -1875,6 +2349,39 @@
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
           "Type": "Double",
+          "Version": 0
+        },
+        {
+          "DiscreteInfo": {
+            "DefaultIndex": 0,
+            "ValueAndStructure": [
+              {
+                "Value": {
+                  "Enum": {
+                    "cell": "cell"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "boundary_face": "boundary_face"
+                  }
+                }
+              },
+              {
+                "Value": {
+                  "Enum": {
+                    "cell,boundary_face": "cell,boundary_face"
+                  }
+                }
+              }
+            ]
+          },
+          "Name": "components",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "String",
           "Version": 0
         },
         {
@@ -2599,12 +3106,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Title": "Domain"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
                   "Title": "Mesh Attributes"
                 },
                 "Name": "View"
@@ -2816,36 +3317,78 @@
       "Type": "Attribute"
     }
   ],
-  "id": "95670b79-ed58-45df-9cec-9b754480e83f",
+  "id": "bd89af88-45d3-4c65-bd73-5354919f4d29",
   "links": [
     {
       "base": {
         "linkData": [
           {
             "base": null,
-            "id": "132c9292-c32e-4a25-9d53-289aad82c969",
-            "left": "c59f29ab-c939-44a6-aa8e-c4577acba210",
-            "right": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
+            "id": "028b9a79-0e0d-4382-b8f3-c257dd5564df",
+            "left": "57f4e9f3-a364-4fa9-87d1-a3c04e42ee00",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           },
           {
             "base": null,
-            "id": "9baf7298-e212-41b8-a20c-99e2f79d7bd3",
-            "left": "49df7e5d-7be3-4e69-ba39-e7a13f9c3569",
-            "right": "65a96375-b1b4-4326-b0de-cd5900c80ce4",
+            "id": "1505560f-9c4b-4fa4-af2f-4ca9f893779a",
+            "left": "8c048eb8-bb7e-4545-a78d-5bd0849f7e98",
+            "right": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "1f66fa5d-81a5-4f1a-9978-dced8c68c634",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "294666bd-6636-4de8-8ea1-010d0fc3ad9f",
+            "left": "6414b056-1c96-4c8c-94dc-36b8e9f809fd",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "32dbe14f-a935-4f81-9bac-2c95c417a4ff",
+            "left": "53fd0fa0-fe05-439a-97e7-e71640d03b97",
+            "right": "04b7f9c5-8300-4937-b53f-0325898ceab1",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "49fe9371-4d92-41f0-833b-96727a461d80",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "7cdfe522-e64c-443c-9638-b642ecbba428",
+            "role": -1
+          },
+          {
+            "base": null,
+            "id": "6896186a-2fc9-4b0a-8231-ea8a2a05b6d1",
+            "left": "609adbd0-32de-49c6-ae87-de18ca4001d5",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
+            "role": -2
+          },
+          {
+            "base": null,
+            "id": "cc29071d-ba64-47ef-b492-5eebd8c83000",
+            "left": "fd82d3b9-69c6-4671-a8dd-85e317e6ccdf",
+            "right": "68c37cca-6714-4d0c-91b7-329030cc01a3",
             "role": -2
           }
         ],
         "surrogate": {
-          "id": "95670b79-ed58-45df-9cec-9b754480e83f",
-          "index": 4785865952,
-          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_vis/att.vis.smtk",
+          "id": "bd89af88-45d3-4c65-bd73-5354919f4d29",
+          "index": 4636067040,
+          "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_demos/att.demo.01.smtk",
           "type": "smtk::attribute::Resource"
         }
       },
-      "id": "4965b9ac-0000-4089-bef2-83a26c2c7953",
-      "left": "95670b79-ed58-45df-9cec-9b754480e83f",
-      "right": "95670b79-ed58-45df-9cec-9b754480e83f",
+      "id": "59856bda-99cc-4e46-8030-10d623a97377",
+      "left": "bd89af88-45d3-4c65-bd73-5354919f4d29",
+      "right": "bd89af88-45d3-4c65-bd73-5354919f4d29",
       "role": -2147483648
     }
   ],

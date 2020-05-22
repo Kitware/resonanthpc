@@ -30,6 +30,8 @@ TypeStringMap = {
     smtk.attribute.Item.FileType: 'string',
 }
 
+FLOAT_FORMAT = r"{:e}"
+
 
 class BaseWriter:
     """Base writer class for ATS input files.
@@ -118,7 +120,7 @@ class BaseWriter:
             return
 
         # (else) n > 1
-        value_string = ', '.join(value_list)
+        value_string = ','.join(value_list)
         array_string = '{{{}}}'.format(value_string)
         self._new_param(parent_elem, array_name, 'Array(string)', array_string)
 
@@ -146,9 +148,13 @@ class BaseWriter:
                 for i in range(item.numberOfValues()):
                     value_list.append(item.value(i))
                 string_list = [str(x) for x in value_list]
-                value = r"{" + ', '.join(string_list) + r"}"
+                value = r"{" + ','.join(string_list) + r"}"
             elif hasattr(item, 'value'):
                 value = str(item.value())
+                if isinstance(value, float):
+                    value = FLOAT_FORMAT.format(value)
+                else:
+                    value = str(value)
             else:
                 raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
 
@@ -170,9 +176,10 @@ class BaseWriter:
         # Now add each array of values
         for group_name, items in sub_groups.items():
             event_group = io_event.find(group_name)
-            type_string = 'Array({})'.format('double')
-            value_list = [event_group.find(nm).value() for nm in items]
-            string_list = [str(x) for x in value_list]
-            value = r"{" + ', '.join(string_list) + r"}"
-            self._new_param(parent_elem, group_name, type_string, value)
+            if event_group.isEnabled():
+                type_string = 'Array({})'.format('double')
+                value_list = [event_group.find(nm).value() for nm in items]
+                string_list = [str(x) for x in value_list]
+                value = r"{" + ','.join(string_list) + r"}"
+                self._new_param(parent_elem, group_name, type_string, value)
         return

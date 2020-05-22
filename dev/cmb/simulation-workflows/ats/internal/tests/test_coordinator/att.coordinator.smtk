@@ -1,7 +1,7 @@
 {
   "Attributes": [
     {
-      "ID": "3050c76f-8870-4d13-a247-552d3d3efa28",
+      "ID": "3a64851e-7708-496c-bace-dc087720ffa6",
       "Items": [
         {
           "Name": "file name base",
@@ -145,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "238eca51-b127-4f39-8fc7-fe190b7b8763",
+      "ID": "f324a435-d139-47cc-bd80-f9b4f8b50513",
       "Items": [
         {
           "Name": "start time",
@@ -175,7 +175,7 @@
             "Index 2": {
               "ItemValue": {
                 "Discrete": true,
-                "DiscreteIndex": 2,
+                "DiscreteIndex": 0,
                 "Name": "end time units"
               },
               "Type": "String"
@@ -198,7 +198,7 @@
           "UnsetVal": true
         },
         {
-          "Enabled": true,
+          "Enabled": false,
           "GroupClusters": {
             "Cluster 0": {
               "Index 0": {
@@ -251,7 +251,7 @@
               },
               "Index 2": {
                 "ItemValue": {
-                  "Enabled": true,
+                  "Enabled": false,
                   "GroupClusters": {
                     "Cluster 0": {
                       "Index 0": {
@@ -264,15 +264,15 @@
                       "Index 1": {
                         "ItemValue": {
                           "Name": "Time Period",
-                          "Val": 10080.0
+                          "UnsetVal": true
                         },
                         "Type": "Double"
                       },
                       "Index 2": {
                         "ItemValue": {
-                          "Enabled": true,
+                          "Enabled": false,
                           "Name": "Stop Time",
-                          "Val": -1.0
+                          "UnsetVal": true
                         },
                         "Type": "Double"
                       },
@@ -331,8 +331,8 @@
           "Name": "PK tree",
           "Values": [
             [
-              "a7003921-cf19-4028-b2a2-0fc03e0fb8ab",
-              "c0666a86-341c-44f5-ac78-5ed4b20cba22"
+              "9474c5b7-8dcf-4f5b-ad5e-188a9460b684",
+              "53aa15af-19a6-4ebe-ad20-d763bf4beeb3"
             ]
           ]
         }
@@ -341,10 +341,19 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "daf69736-13a1-4772-965d-550a686fb529",
+      "Associations": {
+        "Name": "boundary conditions",
+        "Values": [
+          [
+            null,
+            null
+          ]
+        ]
+      },
+      "ID": "3cafecd1-296b-47ea-91f0-d38bde18b062",
       "Items": [
         {
-          "Name": "domain-mesh",
+          "Name": "initial condition",
           "Values": [
             [
               null,
@@ -353,211 +362,16 @@
           ]
         },
         {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Enabled": false,
-          "Name": "partitioner"
+          "Name": "water retention evaluator",
+          "Values": [
+            [
+              null,
+              null
+            ]
+          ]
         }
       ],
-      "Name": "domain-mesh",
-      "Type": "domain"
-    },
-    {
-      "ID": "16804b8e-460f-4f1d-a117-c82445f3f5f3",
-      "Name": "field evaluators",
-      "Type": "field evaluators"
-    },
-    {
-      "ID": "be740ed1-d97a-4f82-a663-c0c5f683a7b3",
-      "Items": [
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "verbosity level"
-        },
-        {
-          "Name": "primary variable key",
-          "Val": "pressure"
-        },
-        {
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "debug cells",
-                  "NumberOfValues": 1,
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    }
-                  ]
-                },
-                "Type": "Int"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "debug faces",
-                  "NumberOfValues": 1,
-                  "Values": [
-                    {
-                      "UnsetVal": {
-                        "Ith": 0
-                      }
-                    }
-                  ]
-                },
-                "Type": "Int"
-              }
-            }
-          },
-          "Name": "debugger"
-        },
-        {
-          "Enabled": false,
-          "Name": "domain",
-          "Values": [
-            [
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "permeability type"
-        },
-        {
-          "Enabled": false,
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Name": "source key",
-                  "Val": "mass_source"
-                },
-                "Type": "String"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "source term is differentiable"
-                },
-                "Type": "Void"
-              },
-              "Index 2": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "explicit source term"
-                },
-                "Type": "Void"
-              }
-            }
-          },
-          "Name": "source term"
-        },
-        {
-          "Enabled": false,
-          "GroupClusters": {
-            "Cluster 0": {
-              "Index 0": {
-                "ItemValue": {
-                  "Discrete": true,
-                  "DiscreteIndex": 0,
-                  "Name": "discretization primary"
-                },
-                "Type": "String"
-              },
-              "Index 1": {
-                "ItemValue": {
-                  "Name": "gravity"
-                },
-                "Type": "Void"
-              },
-              "Index 2": {
-                "ItemValue": {
-                  "Discrete": true,
-                  "DiscreteIndex": 0,
-                  "Name": "Newton correction"
-                },
-                "Type": "String"
-              },
-              "Index 3": {
-                "ItemValue": {
-                  "Name": "scaled constraint equation"
-                },
-                "Type": "Void"
-              },
-              "Index 4": {
-                "ItemValue": {
-                  "Enabled": false,
-                  "Name": "constraint equation scaling cutoff",
-                  "UnsetVal": true
-                },
-                "Type": "Double"
-              }
-            }
-          },
-          "Name": "diffusion"
-        },
-        {
-          "Enabled": false,
-          "Name": "preconditioner",
-          "Values": [
-            [
-              null,
-              null
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "surface rel perm strategy"
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "relative permeability method"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor with consistent faces"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor for flux BCs"
-        },
-        {
-          "Enabled": false,
-          "Name": "modify predictor via water content"
-        },
-        {
-          "Name": "max valid change in saturation in a time step [-]",
-          "Val": -1.0
-        },
-        {
-          "Name": "max valid change in ice saturation in a time step [-]",
-          "Val": -1.0
-        },
-        {
-          "Name": "limit correction to pressure change [Pa]",
-          "Val": -1.0
-        },
-        {
-          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
-          "Val": -1.0
-        },
-        {
-          "Name": "permeability rescaling",
-          "Val": 10000000.0
-        }
-      ],
-      "Name": "pk-richards-0",
+      "Name": "Richards",
       "Type": "pk-richards"
     }
   ],
@@ -1146,71 +960,10 @@
       "Version": 0
     },
     {
+      "Abstract": true,
       "BaseType": "",
-      "BriefDescription": "Designate one mesh as the \"domain\" mesh",
-      "ItemDefinitions": [
-        {
-          "Accepts": [
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.generate']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.resource']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.logical']"
-          ],
-          "Label": "Domain Mesh",
-          "Name": "domain-mesh",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Role": -2,
-          "Type": "Component",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "zoltan_rcb/map view": "zoltan_rcb"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "METIS": "metis"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "Zoltan": "zoltan"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "partitioner",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "String",
-          "Version": 0,
-          "isEnabledByDefault": false
-        }
-      ],
-      "Label": "Domain Mesh",
-      "Type": "domain",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "",
-      "Label": "Field Evaluators",
-      "Type": "field evaluators",
+      "Label": "field-evaluator-base",
+      "Type": "field-evaluator-base",
       "Unique": false,
       "Version": 0
     },
@@ -1571,58 +1324,8 @@
     {
       "Abstract": true,
       "BaseType": "",
-      "ItemDefinitions": [
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "low": "low"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "medium": "medium"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "high": "high"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "extreme": "extreme"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "verbosity level",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
       "Label": "pk-base",
       "Type": "pk-base",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "Abstract": true,
-      "BaseType": "",
-      "Label": "preconditioner-base",
-      "Type": "preconditioner-base",
       "Unique": false,
       "Version": 0
     },
@@ -1635,62 +1338,12 @@
       "Version": 0
     },
     {
-      "Abstract": true,
-      "BaseType": "",
-      "ItemDefinitions": [
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "low": "low"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "medium": "medium"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "high": "high"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "extreme": "extreme"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "verbose object",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
-      "Label": "time-integrator-base",
-      "Type": "time-integrator-base",
-      "Unique": false,
-      "Version": 0
-    },
-    {
       "BaseType": "",
       "ItemDefinitions": [
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='domain']"
+            "attribute[type='mesh']"
           ],
           "Name": "domain",
           "NumberOfRequiredValues": 1,
@@ -1903,15 +1556,107 @@
       "Version": 0
     },
     {
-      "BaseType": "ic-base",
+      "BaseType": "field-evaluator-base",
+      "Label": "capillary pressure, atmospheric gas over liquid",
+      "Type": "capillary pressure, atmospheric gas over liquid",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "effective_pressure",
+      "Type": "effective_pressure",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "eos",
+      "Type": "eos",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
       "ItemDefinitions": [
         {
-          "Name": "name",
+          "Name": "constant in time",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": true
+        },
+        {
+          "Name": "value",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Type": "String",
+          "Type": "Double",
           "Version": 0
         },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
+          ],
+          "Name": "region",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        }
+      ],
+      "Label": "independent variable",
+      "Type": "independent variable",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "molar fraction gas",
+      "Type": "molar fraction gas",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "overland pressure water content",
+      "Type": "overland pressure water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth",
+      "Type": "ponded depth",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth bar",
+      "Type": "ponded depth bar",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "richards water content",
+      "Type": "richards water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "viscosity",
+      "Type": "viscosity",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
         {
           "Name": "value",
           "NumberOfRequiredValues": 1,
@@ -1929,13 +1674,6 @@
       "BaseType": "ic-base",
       "ItemDefinitions": [
         {
-          "Name": "name",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
           "Name": "value",
           "NumberOfRequiredValues": 3,
           "OkToInheritCategories": true,
@@ -1945,27 +1683,6 @@
       ],
       "Label": "ic-const-vector",
       "Type": "ic-const-vector",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-file",
-      "Type": "ic-file",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-scalar-field",
-      "Type": "ic-scalar-field",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "ic-base",
-      "Label": "ic-tensor-field",
-      "Type": "ic-tensor-field",
       "Unique": false,
       "Version": 0
     },
@@ -2092,22 +1809,6 @@
     {
       "Abstract": true,
       "BaseType": "pk-base",
-      "ItemDefinitions": [
-        {
-          "Accepts": [
-            "smtk::attribute::Resource",
-            "attribute[type='time-integrator-base']"
-          ],
-          "Name": "time integrator",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Role": -2,
-          "Type": "Component",
-          "Version": 0,
-          "isEnabledByDefault": false
-        }
-      ],
       "Label": "pk-bdf",
       "Type": "pk-bdf",
       "Unique": false,
@@ -2116,339 +1817,8 @@
     {
       "Abstract": true,
       "BaseType": "pk-base",
-      "ItemDefinitions": [
-        {
-          "BriefDescription": "Can we get a list from each PK?",
-          "Name": "primary variable key",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "ItemDefinitions": [
-            {
-              "Extensible": true,
-              "Name": "debug cells",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Int",
-              "Version": 0,
-              "isEnabledByDefault": false
-            },
-            {
-              "Extensible": true,
-              "Name": "debug faces",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Int",
-              "Version": 0,
-              "isEnabledByDefault": false
-            }
-          ],
-          "Name": "debugger",
-          "NumberOfRequiredGroups": 1,
-          "OkToInheritCategories": true,
-          "Type": "Group",
-          "Version": 0
-        }
-      ],
       "Label": "pk-physical",
       "Type": "pk-physical",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "ItemDefinitions": [
-        {
-          "DefaultValue": [
-            1.0
-          ],
-          "Name": "fact: relax value",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            1.0
-          ],
-          "Name": "fact: absolute threshold",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            1.0
-          ],
-          "Name": "fact: relative threshold",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0
-          ],
-          "Name": "fact: level-of-fill",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0
-          ],
-          "Name": "overlap",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            "Add"
-          ],
-          "Name": "schwarz: combine mode",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
-      "Label": "Block ILU",
-      "Type": "preconditioner-block-ilu",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "ItemDefinitions": [
-        {
-          "DefaultValue": [
-            0.0
-          ],
-          "Name": "tolerance",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            3
-          ],
-          "Name": "smoother sweeps",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            5
-          ],
-          "Name": "cycle applications",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0.5
-          ],
-          "Name": "strong threshold",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            6
-          ],
-          "Name": "relaxation type",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0
-          ],
-          "Name": "coarsen type",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "Name": "max multigrid levels",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Int",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "use block indices",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DefaultValue": [
-            1
-          ],
-          "Name": "number of functions",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0
-          ],
-          "Name": "nodal strength of connection norm",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "summary of run time settings and timing information": "0"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "coarsening info": "1"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "smoothing info": "2"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "both coarsening and smoothing": "3"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "verbosity",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
-      "Label": "Boomer AMG",
-      "Type": "preconditioner-boomer-amg",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "Label": "Diagonal",
-      "Type": "preconditioner-diagonal",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "ItemDefinitions": [
-        {
-          "DefaultValue": [
-            1
-          ],
-          "Name": "ilu(k) fill level",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            0.0
-          ],
-          "Name": "ilut drop tolerance",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "Name": "rescale row",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "summary of run time settings and timing information": "0"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "verbosity",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
-      "Label": "Euclid",
-      "Type": "preconditioner-euclid",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "Label": "Identity",
-      "Type": "preconditioner-identity",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "preconditioner-base",
-      "Label": "TODO: ML (Trilinos AMG)",
-      "Type": "preconditioner-ml",
       "Unique": false,
       "Version": 0
     },
@@ -2525,141 +1895,6 @@
       "BaseType": "region",
       "Label": "region.physical",
       "Type": "region.physical",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "time-integrator-base",
-      "ItemDefinitions": [
-        {
-          "DefaultValue": [
-            0
-          ],
-          "Name": "max preconditioner lag iterations",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "Name": "freeze preconditioner",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "extrapolate initial guess",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": true
-        },
-        {
-          "DefaultValue": [
-            1
-          ],
-          "Name": "nonlinear iteration initial guess extrapolation order",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Int",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            1.0
-          ],
-          "Name": "restart tolerance relaxation factor",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            1.0
-          ],
-          "Name": "restart tolerance relaxation factor damping",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        }
-      ],
-      "Label": "Backward Euler",
-      "Type": "time-integrator-backward-euler",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "time-integrator-base",
-      "ItemDefinitions": [
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "forward Euler": "forward Euler"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "heun euler": "heun euler"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "midpoint": "midpoint"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "ralston": "ralston"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "tvd 3rd order": "tvd 3rd order"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "kutta 3rd order": "kutta 3rd order"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "runge kutta 4th order": "runge kutta 4th order"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "RK method",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
-      "Label": "Explicit",
-      "Type": "time-integrator-explicit",
       "Unique": false,
       "Version": 0
     },
@@ -2894,398 +2129,42 @@
       "Version": 0
     },
     {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::attribute::Resource",
+          "attribute[type='region']"
+        ],
+        "Name": "boundary conditions",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
       "BaseType": "pk-physical-bdf",
       "ItemDefinitions": [
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='mesh']"
+            "attribute[type='region']"
           ],
-          "Name": "domain",
+          "Name": "initial condition",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Optional": true,
           "Role": -2,
           "Type": "Component",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "scalar": "scalar"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "horizontal and vertical": "horizontal and vertical"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "diagonal tensor": "diagonal tensor"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "full tensor": "full tensor"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "permeability type",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
           "Version": 0
-        },
-        {
-          "ItemDefinitions": [
-            {
-              "DefaultValue": [
-                "mass_source"
-              ],
-              "Name": "source key",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Type": "String",
-              "Units": "mol s^-1",
-              "Version": 0
-            },
-            {
-              "Name": "source term is differentiable",
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Void",
-              "Version": 0,
-              "isEnabledByDefault": true
-            },
-            {
-              "Name": "explicit source term",
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Void",
-              "Version": 0,
-              "isEnabledByDefault": false
-            }
-          ],
-          "Name": "source term",
-          "NumberOfRequiredGroups": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Group",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "ItemDefinitions": [
-            {
-              "DiscreteInfo": {
-                "DefaultIndex": 0,
-                "ValueAndStructure": [
-                  {
-                    "Value": {
-                      "Enum": {
-                        "fv: default": "fv: default"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "nlfv: default": "nlfv: default"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: default": "mfd: default"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: monotone for hex": "mfd: monotone for hex"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: optimized for monotonicity": "mfd: optimized for monotonicity"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: two-point flux approximation": "mfd: two-point flux approximation"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: optimized for sparsity": "mfd: optimized for sparsity"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "mfd: support operator": "mfd: support operator"
-                      }
-                    }
-                  }
-                ]
-              },
-              "Name": "discretization primary",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Type": "String",
-              "Version": 0
-            },
-            {
-              "Name": "gravity",
-              "OkToInheritCategories": true,
-              "Type": "Void",
-              "Version": 0
-            },
-            {
-              "DiscreteInfo": {
-                "DefaultIndex": 0,
-                "ValueAndStructure": [
-                  {
-                    "Value": {
-                      "Enum": {
-                        "true Jacobian": "true Jacobian"
-                      }
-                    }
-                  },
-                  {
-                    "Value": {
-                      "Enum": {
-                        "approximate Jacobian": "approximate Jacobian"
-                      }
-                    }
-                  }
-                ]
-              },
-              "Name": "Newton correction",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Type": "String",
-              "Version": 0
-            },
-            {
-              "Name": "scaled constraint equation",
-              "OkToInheritCategories": true,
-              "Type": "Void",
-              "Version": 0
-            },
-            {
-              "Name": "constraint equation scaling cutoff",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Double",
-              "Version": 0,
-              "isEnabledByDefault": false
-            }
-          ],
-          "Name": "diffusion",
-          "NumberOfRequiredGroups": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Group",
-          "Version": 0,
-          "isEnabledByDefault": false
         },
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='preconditioner-base']"
+            "attribute[type='region']"
           ],
-          "Name": "preconditioner",
+          "Name": "water retention evaluator",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Optional": true,
           "Role": -2,
           "Type": "Component",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "none": "none"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "clobber": "clobber"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "max": "max"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "unsaturated": "unsaturated"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "surface rel perm strategy",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "upwind with Darcy flux": "upwind with Darcy flux"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "upwind with gravity": "upwind with gravity"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "cell centered": "cell centered"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "arithmetic mean": "arithmetic mean"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "relative permeability method",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "Name": "modify predictor with consistent faces",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "modify predictor for flux BCs",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "modify predictor via water content",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "max valid change in saturation in a time step [-]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "max valid change in ice saturation in a time step [-]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "limit correction to pressure change [Pa]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            10000000.0
-          ],
-          "Name": "permeability rescaling",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "RangeInfo": {
-            "Min": {
-              "Inclusive": false,
-              "Value": 0.0
-            }
-          },
-          "Type": "Double",
           "Version": 0
         }
       ],
@@ -3437,12 +2316,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Title": "Domain"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
                   "Title": "Mesh Attributes"
                 },
                 "Name": "View"
@@ -3504,26 +2377,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Type": "preconditioner-base"
-                },
-                "Name": "Att"
-              }
-            ],
-            "Name": "AttributeTypes"
-          }
-        ],
-        "Name": "Details"
-      },
-      "Name": "Preconditioners",
-      "Type": "Attribute"
-    },
-    {
-      "Component": {
-        "Children": [
-          {
-            "Children": [
-              {
-                "Attributes": {
                   "Type": "pk-base"
                 },
                 "Name": "Att"
@@ -3549,18 +2402,6 @@
               {
                 "Attributes": {
                   "Title": "Process Kernel"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
-                  "Title": "Preconditioners"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
-                  "Title": "Time Integrators"
                 },
                 "Name": "View"
               }
@@ -3630,26 +2471,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Type": "time-integrator-base"
-                },
-                "Name": "Att"
-              }
-            ],
-            "Name": "AttributeTypes"
-          }
-        ],
-        "Name": "Details"
-      },
-      "Name": "Time Integrators",
-      "Type": "Attribute"
-    },
-    {
-      "Component": {
-        "Children": [
-          {
-            "Children": [
-              {
-                "Attributes": {
                   "Type": "visualization driver"
                 },
                 "Name": "Att"
@@ -3671,18 +2492,18 @@
               {
                 "Attributes": {
                   "Name": "field evaluators",
-                  "Type": "field evaluators"
+                  "Type": "field-evaluator-base"
                 },
                 "Name": "Att"
               }
             ],
-            "Name": "InstancedAttributes"
+            "Name": "AttributeTypes"
           }
         ],
         "Name": "Details"
       },
       "Name": "field evaluators",
-      "Type": "Instanced"
+      "Type": "Attribute"
     },
     {
       "Component": {
@@ -3706,29 +2527,29 @@
       "Type": "Attribute"
     }
   ],
-  "id": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+  "id": "384927b6-f1d6-405e-bea0-213eebe85552",
   "links": [
     {
       "base": {
         "linkData": [
           {
             "base": null,
-            "id": "c0666a86-341c-44f5-ac78-5ed4b20cba22",
-            "left": "238eca51-b127-4f39-8fc7-fe190b7b8763",
-            "right": "be740ed1-d97a-4f82-a663-c0c5f683a7b3",
+            "id": "53aa15af-19a6-4ebe-ad20-d763bf4beeb3",
+            "left": "f324a435-d139-47cc-bd80-f9b4f8b50513",
+            "right": "3cafecd1-296b-47ea-91f0-d38bde18b062",
             "role": -2
           }
         ],
         "surrogate": {
-          "id": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
-          "index": 4763706592,
+          "id": "384927b6-f1d6-405e-bea0-213eebe85552",
+          "index": 4705912032,
           "location": "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/ats/internal/tests/test_coordinator/att.coordinator.smtk",
           "type": "smtk::attribute::Resource"
         }
       },
-      "id": "a7003921-cf19-4028-b2a2-0fc03e0fb8ab",
-      "left": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
-      "right": "f88eebf8-e31b-4436-80ea-20c976a0a44f",
+      "id": "9474c5b7-8dcf-4f5b-ad5e-188a9460b684",
+      "left": "384927b6-f1d6-405e-bea0-213eebe85552",
+      "right": "384927b6-f1d6-405e-bea0-213eebe85552",
       "role": -2147483648
     }
   ],

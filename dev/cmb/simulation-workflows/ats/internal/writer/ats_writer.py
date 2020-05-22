@@ -76,7 +76,13 @@ class ATSWriter(BaseWriter):
 
     def get_xml_doc(self, pretty=False):
         if pretty:
-            return shared.xml_doc.toprettyxml(indent=TAB_SPACING)
+            content = shared.xml_doc.toprettyxml(indent=TAB_SPACING)
+            formatted = ""
+            for line in content.splitlines():
+                line = line.rstrip()
+                if len(line) > 0:
+                    formatted += (line + "\n")
+            return formatted
         return shared.xml_doc
 
 
@@ -95,9 +101,24 @@ class ATSWriter(BaseWriter):
         imp.reload(region_writer)
         region_writer.RegionWriter().write(self.xml_root)
 
-        ################################
+        from . import coordinator_writer
+        imp.reload(coordinator_writer)
+        coordinator_writer.CoordinatorWriter().write(self.xml_root)
 
-        ## TODO: implement other writers
+        # from . import checkpoint_writer
+        # imp.reload(checkpoint_writer)
+        # checkpoint_writer.CheckpointWriter().write(self.xml_root)
 
-        ################################
+        from . import pk_writer
+        imp.reload(pk_writer)
+        pk_writer.PKWriter().write(self.xml_root)
+
+        from . import state_writer
+        imp.reload(state_writer)
+        state_writer.StateWriter().write(self.xml_root)
+
+        from . import vis_writer
+        imp.reload(vis_writer)
+        vis_writer.VisualizationWriter().write(self.xml_root)
+
         return shared.xml_doc

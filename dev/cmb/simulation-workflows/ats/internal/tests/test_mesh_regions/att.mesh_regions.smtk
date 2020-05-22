@@ -1,10 +1,11 @@
 {
   "Attributes": [
     {
-      "ID": "8fc4d9ca-f07f-4fad-a866-e2f96ea4b2b8",
+      "ID": "d14012a0-80b2-4554-8123-4e0008582f35",
       "Items": [
         {
-          "Name": "file name base"
+          "Name": "file name base",
+          "Value": "checkpoint"
         },
         {
           "Name": "file name digits",
@@ -144,7 +145,7 @@
       "Type": "checkpoint driver"
     },
     {
-      "ID": "0290bb08-9475-411d-8f97-40610d534b08",
+      "ID": "110c6fbb-7b86-4990-9c56-5130f193a2db",
       "Items": [
         {
           "Name": "start time",
@@ -340,34 +341,7 @@
       "Type": "cycle driver"
     },
     {
-      "ID": "44bb09cb-7d42-4030-8905-ef769faacf4f",
-      "Items": [
-        {
-          "Name": "domain-mesh",
-          "Values": [
-            [
-              "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-              "a5c626de-6402-4804-930d-0d24cb65b4c6"
-            ]
-          ]
-        },
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Enabled": false,
-          "Name": "partitioner"
-        }
-      ],
-      "Name": "domain-mesh",
-      "Type": "domain"
-    },
-    {
-      "ID": "07360ae0-b4a7-4bd2-aa34-25308624060a",
-      "Name": "state",
-      "Type": "state"
-    },
-    {
-      "ID": "ca029db8-9714-437a-b433-e3205c2492a9",
+      "ID": "9a6df7de-17c2-4c63-9d98-3066861e3bc5",
       "Items": [
         {
           "Enabled": false,
@@ -443,97 +417,11 @@
           ]
         }
       ],
-      "Name": "Generated Mesh",
+      "Name": "domain",
       "Type": "mesh.generate"
     },
     {
-      "Associations": {
-        "Name": "associations",
-        "Values": [
-          [
-            "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-            "aeebff3a-fddc-4e9b-9989-161be29db010"
-          ],
-          [
-            "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-            "405d2c40-ce86-496e-a1d6-f16c6ca340fe"
-          ]
-        ]
-      },
-      "ID": "1d8c8c88-f3be-4938-9c42-ad13c6ec2d16",
-      "Items": [
-        {
-          "Discrete": true,
-          "DiscreteIndex": 0,
-          "Name": "operation"
-        }
-      ],
-      "Name": "Logical",
-      "Type": "region.logical"
-    },
-    {
-      "ID": "0a57573c-41b6-49d2-97d4-3b95c6bc5e4e",
-      "Items": [
-        {
-          "Enabled": false,
-          "Name": "deformable mesh"
-        },
-        {
-          "Enabled": false,
-          "Name": "verify mesh"
-        },
-        {
-          "Name": "resource",
-          "Values": [
-            [
-              "e8f20ea8-2ee4-41a3-af4d-a3a5ddb049c2",
-              "885b1431-b229-4837-a990-8cb9931bb19e"
-            ]
-          ]
-        }
-      ],
-      "Name": "Concave File",
-      "Type": "mesh.resource"
-    },
-    {
-      "Associations": {
-        "Name": "associations",
-        "Values": [
-          [
-            "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-            "b3c16f5d-5cf4-47bf-9447-211cda1e19b2"
-          ],
-          [
-            "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-            "0ca9a9a4-9b84-4605-9857-f3a0e3c0fafe"
-          ]
-        ]
-      },
-      "ID": "79fc2b50-2fa1-4b6c-983d-8f5b1d4122a2",
-      "Items": [
-        {
-          "Enabled": false,
-          "Name": "deformable mesh"
-        },
-        {
-          "Enabled": false,
-          "Name": "verify mesh"
-        },
-        {
-          "Enabled": false,
-          "Name": "export mesh to file"
-        }
-      ],
-      "Name": "Surface Mesh",
-      "Type": "mesh.surface"
-    },
-    {
-      "ID": "45e2f5be-f36f-40f5-8f66-aad532d17339",
-      "Name": "All",
-      "Type": "region.all"
-    },
-    {
-      "ID": "0a11c081-6ba7-4c97-a75d-001fe1198640",
+      "ID": "92316ee9-08ce-445b-a242-e14f04eca1f5",
       "Items": [
         {
           "Name": "low coordinate",
@@ -541,19 +429,19 @@
             {
               "Val": {
                 "Ith": 0,
-                "Name": 0.1
+                "Name": 0.0
               }
             },
             {
               "Val": {
                 "Ith": 1,
-                "Name": 0.1
+                "Name": 0.0
               }
             },
             {
               "Val": {
                 "Ith": 2,
-                "Name": 1.1
+                "Name": 0.0
               }
             }
           ]
@@ -564,71 +452,188 @@
             {
               "Val": {
                 "Ith": 0,
-                "Name": 0.9
+                "Name": 1.0
               }
             },
             {
               "Val": {
                 "Ith": 1,
-                "Name": 0.9
+                "Name": 1.0
               }
             },
             {
               "Val": {
                 "Ith": 2,
-                "Name": 9.9
+                "Name": 10.0
               }
             }
           ]
         }
       ],
-      "Name": "Box",
+      "Name": "computational domain",
       "Type": "region.box"
     },
     {
-      "Associations": {
-        "Name": "region.labeled.surfaceAssociations",
-        "Values": [
-          [
-            "e8f20ea8-2ee4-41a3-af4d-a3a5ddb049c2",
-            "578c59a1-a10d-48ec-9f3f-efc045c790ff"
+      "ID": "4bd60073-c91d-466e-a01c-a953318f9ec3",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.5
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
           ]
-        ]
-      },
-      "ID": "5187654f-14ad-496a-9b33-affd86d7f0b0",
-      "Name": "SideSet 4",
-      "Type": "region.labeled.surface"
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": -1.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "bottom face",
+      "Type": "region.plane"
     },
     {
-      "Associations": {
-        "Name": "region.labeled.surfaceAssociations",
-        "Values": [
-          [
-            "e8f20ea8-2ee4-41a3-af4d-a3a5ddb049c2",
-            "e20ad2e8-d2f4-42a2-8ae2-f0f1735d123f"
+      "ID": "3f1c189f-2134-4d0b-a7cf-1fc809ca7138",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
           ]
-        ]
-      },
-      "ID": "f31a4fcf-6996-4305-b5b9-8a1b5001d188",
-      "Name": "SideSet 5",
-      "Type": "region.labeled.surface"
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "east face",
+      "Type": "region.plane"
     },
     {
-      "Associations": {
-        "Name": "region.labeled.vertexAssociations",
-        "Values": [
-          [
-            "e8f20ea8-2ee4-41a3-af4d-a3a5ddb049c2",
-            "f189c740-e466-4c49-b6fb-3fe243cb422d"
+      "ID": "696c6f1e-2f5b-4e9d-861b-d1687eab5289",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
           ]
-        ]
-      },
-      "ID": "44b137af-00d1-445c-bb41-482d1e6fb0ff",
-      "Name": "Node",
-      "Type": "region.labeled.vertex"
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "north face",
+      "Type": "region.plane"
     },
     {
-      "ID": "64a9babf-6a42-45a3-af52-fa4f327f4337",
+      "ID": "d6a73e8a-73ff-4a11-ae43-e425fd565e94",
       "Items": [
         {
           "Name": "point",
@@ -665,7 +670,7 @@
             {
               "Val": {
                 "Ith": 1,
-                "Name": 1.0
+                "Name": -1.0
               }
             },
             {
@@ -677,11 +682,11 @@
           ]
         }
       ],
-      "Name": "North Side",
+      "Name": "south face",
       "Type": "region.plane"
     },
     {
-      "ID": "3bb96f41-09d1-48d6-b0f9-a37db4d83b30",
+      "ID": "571ae6f3-8e8e-4072-8c63-ff4895200ec3",
       "Items": [
         {
           "Name": "point",
@@ -689,26 +694,102 @@
             {
               "Val": {
                 "Ith": 0,
-                "Name": 1.1
+                "Name": 0.5
               }
             },
             {
               "Val": {
                 "Ith": 1,
-                "Name": 2.2
+                "Name": 0.5
               }
             },
             {
               "Val": {
                 "Ith": 2,
-                "Name": 3.3
+                "Name": 10.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 1.0
               }
             }
           ]
         }
       ],
-      "Name": "Point",
-      "Type": "region.point"
+      "Name": "surface",
+      "Type": "region.plane"
+    },
+    {
+      "ID": "4698fa2b-6ec5-4336-8c32-edbd76dcd6f9",
+      "Items": [
+        {
+          "Name": "point",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        },
+        {
+          "Name": "normal",
+          "Values": [
+            {
+              "Val": {
+                "Ith": 0,
+                "Name": -1.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 1,
+                "Name": 0.0
+              }
+            },
+            {
+              "Val": {
+                "Ith": 2,
+                "Name": 0.0
+              }
+            }
+          ]
+        }
+      ],
+      "Name": "west face",
+      "Type": "region.plane"
     }
   ],
   "Definitions": [
@@ -716,6 +797,7 @@
       "BaseType": "",
       "ItemDefinitions": [
         {
+          "DefaultValue": "checkpoint",
           "Name": "file name base",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
@@ -1295,64 +1377,18 @@
       "Version": 0
     },
     {
+      "Abstract": true,
       "BaseType": "",
-      "BriefDescription": "Designate one mesh as the \"domain\" mesh",
-      "ItemDefinitions": [
-        {
-          "Accepts": [
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.generate']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.resource']",
-            "smtk::attribute::Resource",
-            "attribute[type='mesh.logical']"
-          ],
-          "Label": "Domain Mesh",
-          "Name": "domain-mesh",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Role": -2,
-          "Type": "Component",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "zoltan_rcb/map view": "zoltan_rcb"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "METIS": "metis"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "Zoltan": "zoltan"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "partitioner",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "String",
-          "Version": 0,
-          "isEnabledByDefault": false
-        }
-      ],
-      "Label": "Domain Mesh",
-      "Type": "domain",
+      "Label": "field-evaluator-base",
+      "Type": "field-evaluator-base",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "Abstract": true,
+      "BaseType": "",
+      "Label": "ic-base",
+      "Type": "ic-base",
       "Unique": false,
       "Version": 0
     },
@@ -1380,6 +1416,13 @@
       "BaseType": "",
       "ItemDefinitions": [
         {
+          "Name": "observation output filename",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "File",
+          "Version": 0
+        },
+        {
           "BriefDescription": "any ATS variable used by any PK, e.g. “pressure” or “surface-water_content”",
           "Name": "variable",
           "NumberOfRequiredValues": 1,
@@ -1388,13 +1431,9 @@
           "Version": 0
         },
         {
-          "Name": "observation output filename",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "File",
-          "Version": 0
-        },
-        {
+          "DefaultValue": [
+            ""
+          ],
           "Name": "delimiter",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
@@ -1406,7 +1445,7 @@
             "smtk::attribute::Resource",
             "attribute[type='region']"
           ],
-          "Name": "Region",
+          "Name": "region",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
           "Role": -2,
@@ -1421,21 +1460,21 @@
               {
                 "Value": {
                   "Enum": {
-                    "cell": "0"
+                    "cell": "cell"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "face": "1"
+                    "face": "face"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "node": "2"
+                    "node": "node"
                   }
                 }
               }
@@ -1455,35 +1494,35 @@
               {
                 "Value": {
                   "Enum": {
-                    "observation data: point": "0"
+                    "observation data: point": "observation data: point"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "observation data: average": "1"
+                    "observation data: average": "observation data: average"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "observation data: extensive integral": "2"
+                    "observation data: extensive integral": "observation data: extensive integral"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "observation data: minimum": "3"
+                    "observation data: minimum": "observation data: minimum"
                   }
                 }
               },
               {
                 "Value": {
                   "Enum": {
-                    "observation data: maximum": "4"
+                    "observation data: maximum": "observation data: maximum"
                   }
                 }
               }
@@ -1501,6 +1540,15 @@
           "OkToInheritCategories": true,
           "Optional": true,
           "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": false
+        },
+        {
+          "Name": "direction normalized flux direction",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Double",
           "Version": 0,
           "isEnabledByDefault": false
         },
@@ -1693,48 +1741,6 @@
     {
       "Abstract": true,
       "BaseType": "",
-      "ItemDefinitions": [
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "low": "low"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "medium": "medium"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "high": "high"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "extreme": "extreme"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "verbosity level",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        }
-      ],
       "Label": "pk-base",
       "Type": "pk-base",
       "Unique": false,
@@ -1750,15 +1756,21 @@
     },
     {
       "BaseType": "",
-      "Label": "state",
-      "Type": "state",
-      "Unique": false,
-      "Version": 0
-    },
-    {
-      "BaseType": "",
       "ItemDefinitions": [
         {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='mesh']"
+          ],
+          "Name": "domain",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        },
+        {
+          "DefaultValue": "visdump_DOMAIN_data",
           "Name": "file name base",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
@@ -1773,39 +1785,6 @@
           "Type": "Void",
           "Version": 0,
           "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "second": "s"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "day": "d"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "year": "yr 365"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "time units",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
         },
         {
           "ItemDefinitions": [
@@ -1994,6 +1973,137 @@
       "Version": 0
     },
     {
+      "BaseType": "field-evaluator-base",
+      "Label": "capillary pressure, atmospheric gas over liquid",
+      "Type": "capillary pressure, atmospheric gas over liquid",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "effective_pressure",
+      "Type": "effective_pressure",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "eos",
+      "Type": "eos",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "ItemDefinitions": [
+        {
+          "Name": "constant in time",
+          "OkToInheritCategories": true,
+          "Optional": true,
+          "Type": "Void",
+          "Version": 0,
+          "isEnabledByDefault": true
+        },
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        },
+        {
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
+          ],
+          "Name": "region",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Role": -2,
+          "Type": "Component",
+          "Version": 0
+        }
+      ],
+      "Label": "independent variable",
+      "Type": "independent variable",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "molar fraction gas",
+      "Type": "molar fraction gas",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "overland pressure water content",
+      "Type": "overland pressure water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth",
+      "Type": "ponded depth",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "ponded depth bar",
+      "Type": "ponded depth bar",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "richards water content",
+      "Type": "richards water content",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "field-evaluator-base",
+      "Label": "viscosity",
+      "Type": "viscosity",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 1,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "ic-const-scalar",
+      "Type": "ic-const-scalar",
+      "Unique": false,
+      "Version": 0
+    },
+    {
+      "BaseType": "ic-base",
+      "ItemDefinitions": [
+        {
+          "Name": "value",
+          "NumberOfRequiredValues": 3,
+          "OkToInheritCategories": true,
+          "Type": "Double",
+          "Version": 0
+        }
+      ],
+      "Label": "ic-const-vector",
+      "Type": "ic-const-vector",
+      "Unique": false,
+      "Version": 0
+    },
+    {
       "Abstract": true,
       "BaseType": "mesh",
       "ItemDefinitions": [
@@ -2124,45 +2234,6 @@
     {
       "Abstract": true,
       "BaseType": "pk-base",
-      "ItemDefinitions": [
-        {
-          "BriefDescription": "Can we get a list from each PK?",
-          "Name": "primary variable key",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "ItemDefinitions": [
-            {
-              "Extensible": true,
-              "Name": "debug cells",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Int",
-              "Version": 0,
-              "isEnabledByDefault": false
-            },
-            {
-              "Extensible": true,
-              "Name": "debug faces",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Int",
-              "Version": 0,
-              "isEnabledByDefault": false
-            }
-          ],
-          "Name": "debugger",
-          "NumberOfRequiredGroups": 1,
-          "OkToInheritCategories": true,
-          "Type": "Group",
-          "Version": 0
-        }
-      ],
       "Label": "pk-physical",
       "Type": "pk-physical",
       "Unique": false,
@@ -2475,258 +2546,42 @@
       "Version": 0
     },
     {
+      "AssociationsDef": {
+        "Accepts": [
+          "smtk::attribute::Resource",
+          "attribute[type='region']"
+        ],
+        "Name": "boundary conditions",
+        "NumberOfRequiredValues": 1,
+        "OkToInheritCategories": true,
+        "Role": -1,
+        "Type": "Reference",
+        "Version": 0
+      },
       "BaseType": "pk-physical-bdf",
       "ItemDefinitions": [
         {
           "Accepts": [
             "smtk::attribute::Resource",
-            "attribute[type='mesh']"
+            "attribute[type='region']"
           ],
-          "Name": "domain",
+          "Name": "initial condition",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Optional": true,
           "Role": -2,
           "Type": "Component",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "scalar": "scalar"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "horizontal and vertical": "horizontal and vertical"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "diagonal tensor": "diagonal tensor"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "full tensor": "full tensor"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "permeability type",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
           "Version": 0
         },
         {
-          "ItemDefinitions": [
-            {
-              "DefaultValue": [
-                "mass_source"
-              ],
-              "Name": "source key",
-              "NumberOfRequiredValues": 1,
-              "OkToInheritCategories": true,
-              "Type": "String",
-              "Units": "mol s^-1",
-              "Version": 0
-            },
-            {
-              "Name": "source term is differentiable",
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Void",
-              "Version": 0,
-              "isEnabledByDefault": true
-            },
-            {
-              "Name": "explicit source term",
-              "OkToInheritCategories": true,
-              "Optional": true,
-              "Type": "Void",
-              "Version": 0,
-              "isEnabledByDefault": false
-            }
+          "Accepts": [
+            "smtk::attribute::Resource",
+            "attribute[type='region']"
           ],
-          "Name": "source term",
-          "NumberOfRequiredGroups": 1,
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Group",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "none": "none"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "clobber": "clobber"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "max": "max"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "unsaturated": "unsaturated"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "surface rel perm strategy",
+          "Name": "water retention evaluator",
           "NumberOfRequiredValues": 1,
           "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "DiscreteInfo": {
-            "DefaultIndex": 0,
-            "ValueAndStructure": [
-              {
-                "Value": {
-                  "Enum": {
-                    "upwind with Darcy flux": "upwind with Darcy flux"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "upwind with gravity": "upwind with gravity"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "cell centered": "cell centered"
-                  }
-                }
-              },
-              {
-                "Value": {
-                  "Enum": {
-                    "arithmetic mean": "arithmetic mean"
-                  }
-                }
-              }
-            ]
-          },
-          "Name": "relative permeability method",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "String",
-          "Version": 0
-        },
-        {
-          "Name": "modify predictor with consistent faces",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "modify predictor for flux BCs",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "Name": "modify predictor via water content",
-          "OkToInheritCategories": true,
-          "Optional": true,
-          "Type": "Void",
-          "Version": 0,
-          "isEnabledByDefault": false
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "max valid change in saturation in a time step [-]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "max valid change in ice saturation in a time step [-]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "limit correction to pressure change [Pa]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            -1.0
-          ],
-          "Name": "limit correction to pressure change when crossing atmospheric [Pa]",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "Type": "Double",
-          "Version": 0
-        },
-        {
-          "DefaultValue": [
-            10000000.0
-          ],
-          "Name": "permeability rescaling",
-          "NumberOfRequiredValues": 1,
-          "OkToInheritCategories": true,
-          "RangeInfo": {
-            "Min": {
-              "Inclusive": false,
-              "Value": 0.0
-            }
-          },
-          "Type": "Double",
+          "Role": -2,
+          "Type": "Component",
           "Version": 0
         }
       ],
@@ -2768,7 +2623,7 @@
               },
               {
                 "Attributes": {
-                  "Title": "Process Kernel"
+                  "Title": "Process Kernel Info"
                 },
                 "Name": "View"
               },
@@ -2878,12 +2733,6 @@
             "Children": [
               {
                 "Attributes": {
-                  "Title": "Domain"
-                },
-                "Name": "View"
-              },
-              {
-                "Attributes": {
                   "Title": "Mesh Attributes"
                 },
                 "Name": "View"
@@ -2960,6 +2809,30 @@
     },
     {
       "Component": {
+        "Attributes": {
+          "Style": "Tabbed",
+          "TabPosition": "North"
+        },
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Title": "Process Kernel"
+                },
+                "Name": "View"
+              }
+            ],
+            "Name": "Views"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "Process Kernel Info",
+      "Type": "Group"
+    },
+    {
+      "Component": {
         "Children": [
           {
             "Children": [
@@ -2980,24 +2853,33 @@
     },
     {
       "Component": {
+        "Attributes": {
+          "Style": "Tabbed",
+          "TabPosition": "North"
+        },
         "Children": [
           {
             "Children": [
               {
                 "Attributes": {
-                  "Name": "state",
-                  "Type": "state"
+                  "Title": "field evaluators"
                 },
-                "Name": "Att"
+                "Name": "View"
+              },
+              {
+                "Attributes": {
+                  "Title": "initial conditions"
+                },
+                "Name": "View"
               }
             ],
-            "Name": "InstancedAttributes"
+            "Name": "Views"
           }
         ],
         "Name": "Details"
       },
       "Name": "State",
-      "Type": "Instanced"
+      "Type": "Group"
     },
     {
       "Component": {
@@ -3018,106 +2900,52 @@
       },
       "Name": "Visualization",
       "Type": "Attribute"
-    }
-  ],
-  "id": "c4801423-8735-4832-9304-ed52dec74345",
-  "links": [
-    {
-      "base": {
-        "linkData": [
-          {
-            "base": null,
-            "id": "0ca9a9a4-9b84-4605-9857-f3a0e3c0fafe",
-            "left": "79fc2b50-2fa1-4b6c-983d-8f5b1d4122a2",
-            "right": "f31a4fcf-6996-4305-b5b9-8a1b5001d188",
-            "role": -1
-          },
-          {
-            "base": null,
-            "id": "405d2c40-ce86-496e-a1d6-f16c6ca340fe",
-            "left": "1d8c8c88-f3be-4938-9c42-ad13c6ec2d16",
-            "right": "64a9babf-6a42-45a3-af52-fa4f327f4337",
-            "role": -1
-          },
-          {
-            "base": null,
-            "id": "a5c626de-6402-4804-930d-0d24cb65b4c6",
-            "left": "44bb09cb-7d42-4030-8905-ef769faacf4f",
-            "right": "0a57573c-41b6-49d2-97d4-3b95c6bc5e4e",
-            "role": -2
-          },
-          {
-            "base": null,
-            "id": "aeebff3a-fddc-4e9b-9989-161be29db010",
-            "left": "1d8c8c88-f3be-4938-9c42-ad13c6ec2d16",
-            "right": "3bb96f41-09d1-48d6-b0f9-a37db4d83b30",
-            "role": -1
-          },
-          {
-            "base": null,
-            "id": "b3c16f5d-5cf4-47bf-9447-211cda1e19b2",
-            "left": "79fc2b50-2fa1-4b6c-983d-8f5b1d4122a2",
-            "right": "5187654f-14ad-496a-9b33-affd86d7f0b0",
-            "role": -1
-          }
-        ],
-        "surrogate": {
-          "id": "c4801423-8735-4832-9304-ed52dec74345",
-          "index": 6665470105103913621,
-          "location": "/home/john/projects/resonant-hpc/git/resonantrpc/dev/cmb/simulation-workflows/ats/internal/tests/test_mesh_regions/att.mesh_regions.smtk",
-          "type": "smtk::attribute::Resource"
-        }
-      },
-      "id": "dd59d920-fdb3-491c-9c73-962d84cd11ab",
-      "left": "c4801423-8735-4832-9304-ed52dec74345",
-      "right": "c4801423-8735-4832-9304-ed52dec74345",
-      "role": -2147483648
     },
     {
-      "base": {
-        "linkData": [
+      "Component": {
+        "Children": [
           {
-            "base": null,
-            "id": "578c59a1-a10d-48ec-9f3f-efc045c790ff",
-            "left": "5187654f-14ad-496a-9b33-affd86d7f0b0",
-            "right": "951e0c38-599f-45c7-8c8b-4a6bd0912bca",
-            "role": -1
-          },
-          {
-            "base": null,
-            "id": "885b1431-b229-4837-a990-8cb9931bb19e",
-            "left": "0a57573c-41b6-49d2-97d4-3b95c6bc5e4e",
-            "right": null,
-            "role": -2
-          },
-          {
-            "base": null,
-            "id": "e20ad2e8-d2f4-42a2-8ae2-f0f1735d123f",
-            "left": "f31a4fcf-6996-4305-b5b9-8a1b5001d188",
-            "right": "5d4f1932-77b3-427d-8d0d-ffc1d676aace",
-            "role": -1
-          },
-          {
-            "base": null,
-            "id": "f189c740-e466-4c49-b6fb-3fe243cb422d",
-            "left": "44b137af-00d1-445c-bb41-482d1e6fb0ff",
-            "right": "9f3c3bb2-0d30-4ac2-9e0e-c2f91ab26cc1",
-            "role": -1
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "field evaluators",
+                  "Type": "field-evaluator-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
           }
         ],
-        "surrogate": {
-          "id": "b6eaa34a-d200-4144-97c0-f764cab9f215",
-          "index": 480292284751846861,
-          "location": "/home/john/projects/resonant-hpc/git/resonantrpc/dev/cmb/simulation-workflows/ats/internal/tests/data/model.concave.smtk",
-          "type": "smtk::session::vtk::Resource"
-        }
+        "Name": "Details"
       },
-      "id": "e8f20ea8-2ee4-41a3-af4d-a3a5ddb049c2",
-      "left": "c4801423-8735-4832-9304-ed52dec74345",
-      "right": "b6eaa34a-d200-4144-97c0-f764cab9f215",
-      "role": -2147483648
+      "Name": "field evaluators",
+      "Type": "Attribute"
+    },
+    {
+      "Component": {
+        "Children": [
+          {
+            "Children": [
+              {
+                "Attributes": {
+                  "Name": "initial conditions",
+                  "Type": "ic-base"
+                },
+                "Name": "Att"
+              }
+            ],
+            "Name": "AttributeTypes"
+          }
+        ],
+        "Name": "Details"
+      },
+      "Name": "initial conditions",
+      "Type": "Attribute"
     }
   ],
+  "id": "b98bfa4c-c410-481f-8a21-df421fd755ca",
+  "links": null,
   "name": "ats",
   "properties": {
     "unordered_map<uuid, double>": {},

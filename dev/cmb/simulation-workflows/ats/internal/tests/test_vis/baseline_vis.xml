@@ -1,17 +1,10 @@
 <?xml version="1.0" ?>
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="visualization" type="ParameterList">
-    <ParameterList name="domain-mesh" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_DOMAIN_data"/>
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump"/>
       <Parameter name="dynamic mesh" type="bool" value="false"/>
-      <Parameter name="cycles start period stop" type="Array(double)" value="{0, 0, 0}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 10800.0, -1.0}"/>
-    </ParameterList>
-    <ParameterList name="domain-mesh" type="ParameterList">
-      <Parameter name="file name base" type="string" value="visdump_data_2"/>
-      <Parameter name="dynamic mesh" type="bool" value="true"/>
-      <Parameter name="cycles start period stop" type="Array(double)" value="{0, 0, 0}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 1000.0, 0.0}"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}"/>
     </ParameterList>
   </ParameterList>
 </ParameterList>

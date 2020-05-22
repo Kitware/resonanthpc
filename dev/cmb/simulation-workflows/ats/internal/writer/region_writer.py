@@ -61,14 +61,14 @@ class RegionWriter(BaseWriter):
         region_atts = shared.sim_atts.findAttributes('region')
         for region_att in region_atts:
             # Outermost element is ParameterList with name of region
-            name_list_elem = self._new_list(regions_elem, region_att.name(), None)
+            name_list_elem = self._new_list(regions_elem, region_att.name())
 
             # Next level is ParameterList with type of region
             region_type = region_att.type()
             param_name = region_type_params.get(region_type)
             if param_name is None:
                 param_name = region_type.replace('.', ': ')
-            type_list_elem = self._new_list(name_list_elem, param_name, None)
+            type_list_elem = self._new_list(name_list_elem, param_name)
 
             # surface.labeled is special case
             if region_type.startswith('region.labeled'):

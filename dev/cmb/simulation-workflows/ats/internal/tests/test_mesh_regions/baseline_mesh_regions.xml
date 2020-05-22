@@ -1,81 +1,57 @@
 <?xml version="1.0" ?>
 <ParameterList name="Main" type="ParameterList">
   <ParameterList name="mesh" type="ParameterList">
-    <ParameterList name="Surface Mesh" type="ParameterList">
-      <Parameter name="mesh type" type="string" value="surface"/>
-      <ParameterList name="surface parameters" type="ParameterList">
-        <Parameter name="surface sideset names" type="Array(string)" value="{SideSet 4, SideSet 5}"/>
-      </ParameterList>
-      <Parameter name="verify mesh" type="bool" value="false"/>
-      <Parameter name="deformable mesh" type="bool" value="false"/>
-    </ParameterList>
-    <ParameterList name="Generated Mesh" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="generate mesh"/>
       <ParameterList name="generate mesh parameters" type="ParameterList">
-        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0, 1.0, 10.0}"/>
-        <Parameter name="number of cells" type="Array(int)" value="{1, 1, 100}"/>
+        <Parameter name="domain low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="domain high coordinate" type="Array(double)" value="{1.0,1.0,10.0}"/>
+        <Parameter name="number of cells" type="Array(int)" value="{1,1,100}"/>
       </ParameterList>
-      <Parameter name="deformable mesh" type="bool" value="false"/>
-    </ParameterList>
-    <ParameterList name="domain" type="ParameterList">
-      <Parameter name="mesh type" type="string" value="read mesh file"/>
-      <Parameter name="file" type="string" value="concave.exo"/>
-      <Parameter name="format" type="string" value="Exodus II"/>
-      <ParameterList name="read mesh file parameters" type="ParameterList"/>
-      <Parameter name="verify mesh" type="bool" value="false"/>
       <Parameter name="deformable mesh" type="bool" value="false"/>
     </ParameterList>
   </ParameterList>
   <ParameterList name="regions" type="ParameterList">
-    <ParameterList name="Logical">
-      <ParameterList name="region: logical">
-        <Parameter name="operation" type="string" value="union"/>
-        <Parameter name="regions" type="Array(string)" value="{Point, North Side}"/>
+    <ParameterList name="computational domain" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="high coordinate" type="Array(double)" value="{1.0,1.0,10.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="All">
-      <ParameterList name="region: all"/>
-    </ParameterList>
-    <ParameterList name="Box">
-      <ParameterList name="region: box">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.1, 0.1, 1.1}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{0.9, 0.9, 9.9}"/>
+    <ParameterList name="bottom face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,-1.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="SideSet 4">
-      <ParameterList name="region: labeled set">
-        <Parameter name="file" type="string" value="concave.exo"/>
-        <Parameter name="format" type="string" value="Exodus II"/>
-        <Parameter name="entity" type="string" value="face"/>
-        <Parameter name="label" type="string" value="Unnamed set ID: 4"/>
+    <ParameterList name="east face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{1.0,0.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="SideSet 5">
-      <ParameterList name="region: labeled set">
-        <Parameter name="file" type="string" value="concave.exo"/>
-        <Parameter name="format" type="string" value="Exodus II"/>
-        <Parameter name="entity" type="string" value="face"/>
-        <Parameter name="label" type="string" value="Unnamed set ID: 5"/>
+    <ParameterList name="north face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{1.0,1.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="Node">
-      <ParameterList name="region: labeled: vertex">
-        <Parameter name="file" type="string" value="concave.exo"/>
-        <Parameter name="format" type="string" value="Exodus II"/>
-        <Parameter name="entity" type="string" value="node"/>
-        <Parameter name="label" type="string" value="Unnamed set ID: 1"/>
+    <ParameterList name="south face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,-1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="North Side">
-      <ParameterList name="region: plane">
-        <Parameter name="point" type="Array(double)" value="{0.0, 0.0, 0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0, 1.0, 0.0}"/>
+    <ParameterList name="surface" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.5,0.5,10.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,0.0,1.0}"/>
       </ParameterList>
     </ParameterList>
-    <ParameterList name="Point">
-      <ParameterList name="region: point">
-        <Parameter name="point" type="Array(double)" value="{1.1, 2.2, 3.3}"/>
+    <ParameterList name="west face" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{-1.0,0.0,0.0}"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>

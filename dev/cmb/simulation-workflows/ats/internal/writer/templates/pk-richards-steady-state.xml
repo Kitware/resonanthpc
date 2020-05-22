@@ -1,0 +1,104 @@
+<ParameterList name="${NAME}" type="ParameterList">
+  <Parameter name="PK type" type="string" value="richards steady state" />
+  <Parameter name="primary variable key" type="string" value="pressure" />
+  <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux" />
+  <Parameter name="permeability rescaling" type="double" value="10000000.0" />
+  <Parameter name="debug cells" type="Array(int)" value="{0,99}" />
+  <ParameterList name="verbose object" type="ParameterList">
+    <Parameter name="verbosity level" type="string" value="high" />
+  </ParameterList>
+
+  <ParameterList name="time integrator" type="ParameterList">
+    <Parameter name="extrapolate initial guess" type="bool" value="true" />
+    <Parameter name="solver type" type="string" value="nka_bt_ats" />
+    <Parameter name="timestep controller type" type="string" value="smarter" />
+    <Parameter name="initial time step" type="double" value="86400.0" />
+    <ParameterList name="nka_bt_ats parameters" type="ParameterList">
+      <Parameter name="max error growth factor" type="double" value="1000.0" />
+      <Parameter name="modify correction" type="bool" value="true" />
+      <Parameter name="monitor" type="string" value="monitor residual" />
+      <Parameter name="nonlinear tolerance" type="double" value="1e-13" />
+      <Parameter name="diverged tolerance" type="double" value="1000.0" />
+      <Parameter name="limit iterations" type="int" value="51" />
+      <ParameterList name="verbose object" type="ParameterList">
+        <Parameter name="verbosity level" type="string" value="high" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="verbose object" type="ParameterList">
+      <Parameter name="verbosity level" type="string" value="high" />
+    </ParameterList>
+    <ParameterList name="ResidualDebugger" type="ParameterList">
+      <Parameter name="cycles" type="Array(int)" value="{0}" />
+    </ParameterList>
+    <ParameterList name="timestep controller smarter parameters" type="ParameterList">
+      <Parameter name="max iterations" type="int" value="18" />
+      <Parameter name="min iterations" type="int" value="10" />
+      <Parameter name="time step reduction factor" type="double" value="0.75" />
+      <Parameter name="time step increase factor" type="double" value="1.25" />
+      <Parameter name="max time step" type="double" value="10000000000.0" />
+      <Parameter name="min time step" type="double" value="1.0" />
+      <Parameter name="growth wait after fail" type="int" value="2" />
+      <Parameter name="count before increasing increase factor" type="int" value="2" />
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="diffusion" type="ParameterList">
+    <Parameter name="discretization primary" type="string" value="fv: default" />
+  </ParameterList>
+
+  <ParameterList name="preconditioner" type="ParameterList">
+    <Parameter name="preconditioner type" type="string" value="boomer amg" />
+    <ParameterList name="boomer amg parameters" type="ParameterList">
+      <Parameter name="cycle applications" type="int" value="2" />
+      <Parameter name="smoother sweeps" type="int" value="3" />
+      <Parameter name="strong threshold" type="double" value="0.5" />
+      <Parameter name="tolerance" type="double" value="0.0" />
+      <Parameter name="relaxation type" type="int" value="6" />
+      <Parameter name="verbosity" type="int" value="0" />
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="boundary conditions" type="ParameterList">
+    <ParameterList name="pressure" type="ParameterList">
+      <ParameterList name="bottom" type="ParameterList">
+        <Parameter name="regions" type="Array(string)" value="${BC_REGIONS}" />
+        <ParameterList name="boundary pressure" type="ParameterList">
+          <ParameterList name="function-constant" type="ParameterList">
+            <Parameter name="value" type="double" value="140000.0" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="initial condition" type="ParameterList">
+    <Parameter name="initialize faces from cells" type="bool" value="true" />
+    <ParameterList name="function" type="ParameterList">
+      <ParameterList name="initial pressure cells" type="ParameterList">
+        <Parameter name="region" type="string" value="${IC_REGION}" />
+        <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="function-constant" type="ParameterList">
+            <Parameter name="value" type="double" value="101325.0" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="water retention evaluator" type="ParameterList">
+    <ParameterList name="WRM parameters" type="ParameterList">
+      <ParameterList name="${WRE_REGION}" type="ParameterList">
+        <Parameter name="region" type="string" value="${WRE_REGION}" />
+        <Parameter name="WRM Type" type="string" value="van Genuchten" />
+        <Parameter name="van Genuchten alpha" type="double" value="0.00015" />
+        <Parameter name="van Genuchten m" type="double" value="0.8" />
+        <Parameter name="van Genuchten residual saturation" type="double" value="0.0" />
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="verbose object" type="ParameterList">
+      <Parameter name="verbosity level" type="string" value="high" />
+    </ParameterList>
+  </ParameterList>
+
+</ParameterList>

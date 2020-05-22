@@ -5,29 +5,17 @@ from writer import ats_writer, observation_writer
 
 from tests.base import BaseTestCase
 
-ATT_RESOURCE_FILENAME = 'att.observation.smtk'
-BASLINE_XML_FILENAME = 'baseline_observation.xml'
 
 class ObservationEventTest(BaseTestCase):
 
-    def test_vis_event(self):
-        """"""
-        source_dir = os.path.abspath(os.path.dirname(__file__))
+    ATT_RESOURCE_FILENAME = 'att.observation.smtk'
+    BASLINE_XML_FILENAME = 'baseline_observation.xml'
+    SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
 
-        # Load resource files
-        atts_path = os.path.join(source_dir, ATT_RESOURCE_FILENAME)
-        self.att_resource = self._read_resource(atts_path)
-
-
-        # Generate xml
-        writer = ats_writer.ATSWriter(self.att_resource)
-        writer.setup_xml_root()
-        observation_writer.ObservationWriter().write(writer.xml_root)
-        xml_string = writer.get_xml_doc(pretty=True)
-
-        baseline_path = os.path.join(source_dir, BASLINE_XML_FILENAME)
-        baseline_string = self._read_baseline(baseline_path)
-        self._compare_xml_content(xml_string, baseline_string)
+    def test_observation_event(self):
+        observation_writer.ObservationWriter().write(self.writer.xml_root)
+        xml_string = self.writer.get_xml_doc(pretty=True)
+        self._compare_xml_content(xml_string)
 
 
 if __name__ == '__main__':

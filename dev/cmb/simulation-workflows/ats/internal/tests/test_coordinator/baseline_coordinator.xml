@@ -1,17 +1,13 @@
 <?xml version="1.0" ?>
 <ParameterList name="Main" type="ParameterList">
-  <ParameterList name="cylce driver" type="ParameterList">
+  <ParameterList name="cycle driver" type="ParameterList">
     <Parameter name="start time" type="double" value="0.0"/>
     <Parameter name="start time units" type="string" value="s"/>
     <Parameter name="end time" type="double" value="1.0"/>
-    <Parameter name="end time units" type="string" value="yr"/>
-    <ParameterList name="required times" type="ParameterList">
-      <Parameter name="cycles start period stop" type="Array(double)" value="{0, 0, 0}"/>
-      <Parameter name="times start period stop" type="Array(double)" value="{0.0, 10080.0, -1.0}"/>
-    </ParameterList>
+    <Parameter name="end time units" type="string" value="s"/>
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="pk-richards-0" type="ParameterList">
-        <Parameter name="PK type" type="string" value="richards steady state" />
+      <ParameterList name="Richards" type="ParameterList">
+        <Parameter name="PK type" type="string" value="richards steady state"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>

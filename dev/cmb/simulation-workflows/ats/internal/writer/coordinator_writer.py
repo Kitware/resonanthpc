@@ -19,6 +19,7 @@ import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
+from .extra import PK_MAPPING
 
 
 class CoordinatorWriter(BaseWriter):
@@ -39,10 +40,10 @@ class CoordinatorWriter(BaseWriter):
 
         end_spec_opts = {
             'time': ['end time', 'end time units',],
-            'cylce': ['end cycle',],
+            'cycle': ['end cycle',],
         }
 
-        coord_elem = self._new_list(xml_root, 'cylce driver')
+        coord_elem = self._new_list(xml_root, 'cycle driver')
         coord_inst = shared.sim_atts.findAttribute('cycle driver')
 
         # Now populate that list with all the attributes - no sub lists
@@ -66,9 +67,11 @@ class CoordinatorWriter(BaseWriter):
             raise AssertionError("PK tree is not set in coordinator.")
         pk_att = pk_tree_item.value()
         pk_name = pk_att.name()
+        pk_type = pk_att.type()
         pk_tree_elem = self._new_list(coord_elem, 'PK tree')
         pk_elem = self._new_list(pk_tree_elem, pk_name)
-        self._render_items(pk_elem, pk_att, ['PK type',]) # TODO: this attribute isn't set by us! We need some sort of mapping between our PK classes and the names in ATS
+        self._new_param(pk_elem, "PK type", "string", PK_MAPPING[pk_type])
+
         # TODO: if the PK is a coupler, we have to included the coupled PKs in the tree
 
         return
