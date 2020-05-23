@@ -1,0 +1,32 @@
+---
+# Example specification for build_attributes.py
+
+# Empty list will create instances
+instanced: []
+
+# Each list item specifies one attribute to be created
+attributes:
+  - type: mesh.generate
+    name: domain
+    items:
+      - 'domain low coordinate': [0, 0, 0]
+      - 'domain high coordinate': [1, 1, 10]
+      - 'number of cells': [1, 1, 100]
+
+  - type: region.all
+
+  - type: region.box
+    name: computational domain
+    items:
+      - 'low coordinate': [0, 0, 0]
+      - 'high coordinate': [1, 1, 10]
+
+  - type: region.point
+    items:
+      - 'point': [1.1, 2.2, 3.3]
+
+  - type: region.plane
+    name: bottom face
+    items:
+      - 'point':  [0.5, 0.5,  0.0]
+      - 'normal': [0.0, 0.0, -1.0]
