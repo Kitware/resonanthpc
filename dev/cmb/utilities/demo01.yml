@@ -10,7 +10,6 @@
       - name: end-spec
         children:
         - 'end time': 1.0
-    # Todo 'PK tree'
 
 - create:
   # Mesh
@@ -77,13 +76,77 @@
       - 'water retention evaluator': computational domain
 
   # Visualization
+  - type: visualization driver
+    items:
+      - 'domain': domain
+      - 'file name base': visdump
+      - name: 'visualization times'
+        enable: true
+        items:
+          - name: times start period stop
+            enable: true
+            items:
+              - 'Time Period': 1.0
+              - name: Stop Time
+                enable: true
+                value: -1.0
 
-  # Checkpoint
+  # Checkpoint (not used)
 
-  # Observation
+  # Observation (not used)
 
   # State
+  # State field evaluators
+  - type: capillary pressure, atmospheric gas over liquid
+    name: capillary_pressure_gas_liq
 
+  - type: effective_pressure
+    name: effective_pressure
+
+  - type: eos
+    name: molar_density_liquid
+
+  - type: independent variable
+    name: permeability
+    items:
+      - value: 2.5e-12
+      - components: cell
+      - region: computational domain
+
+  - type: independent variable
+    name: porosity
+    items:
+      - value: 0.25
+      - components: cell
+      - region: computational domain
+
+  - type: independent variable
+    name: temperature
+    items:
+      - value: 273.65
+      - components: cell,boundary_face
+      - region: computational domain
+
+  - type: richards water content
+    name: water_content
+
+  - type: viscosity
+    name: viscosity_liquid
+
+  # State initial conditions
+  - type: ic-const-scalar
+    name: atmospheric_pressure
+    items:
+      - value: 101325.0
+
+  - type: ic-const-vector
+    name: gravity
+    items:
+      - value: [0.0, 0.0, -9.80665]
+
+
+# Coordinator
+# Set PK tree (ref item) on cycle driver
 - modify:
   - type: cycle driver
     items:

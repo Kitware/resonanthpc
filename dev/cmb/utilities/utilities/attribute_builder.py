@@ -79,18 +79,19 @@ class AttributeBuilder:
                 create_spec = value
                 assert isinstance(create_spec, list), 'create spec must be a list, not'.format(type(create_spec))
                 for create_element in create_spec:
-                    assert isinstance(create_element, dict)
+                    assert isinstance(create_element, dict), \
+                        'create element spec must be a dict, not'.format(type(create_element))
                     att = self._create_attribute(create_element)
-                    assert att is not None
+                    assert att is not None, 'failed to create attribute'
                     self._configure_attribute(att, create_element)
 
             elif key == 'modify':
                 modify_spec = value
                 assert isinstance(modify_spec, list), 'modify spec must be a list, not'.format(type(modify_spec))
                 for modify_element in modify_spec:
-                    assert isinstance(modify_element, dict)
+                    assert isinstance(modify_element, dict), 'modify element spec must be a dict, not'.format(type(modify_element))
                     att = self._find_attribute(modify_element)
-                    assert att is not None
+                    assert att is not None, 'failed to find attribute'
                     self._post_message(
                         'Modifying attribute \"{}\"'.format(att.name()))
                     self._configure_attribute(att, modify_element)
@@ -101,10 +102,10 @@ class AttributeBuilder:
     def _associate_attribute(self, att, spec):
         """"""
         assert isinstance(spec, list), 'association spec is not a list'
-        for entry in spec:
-            assert isinstance(entry, dict), 'association entry is not a dict'
-            assert len(entry.keys()) == 1, 'association entry not a single key/value'
-            key, value = entry.popitem()
+        for element in spec:
+            assert isinstance(element, dict), 'association element is not a dict'
+            assert len(element.keys()) == 1, 'association element not a single key/value'
+            key, value = element.popitem()
             if key == 'attribute':
                 ref_name = value
                 ref_att = self.att_resource.findAttribute(ref_name)
@@ -140,19 +141,19 @@ class AttributeBuilder:
             parent: Attribute or GroupItem or ValueItem
             spec: list of item specifications
         """
-        assert isinstance(spec, list)
-        for entry in spec:
-            assert isinstance(entry, dict)
+        assert isinstance(spec, list), 'items spec must be a list, not {}'.format(type(spec))
+        for element in spec:
+            assert isinstance(element, dict), 'item element spec must be a dict, not {}'.format(type(element))
             value = None
             # Checkfor for name/value shortcut
-            if len(entry.keys()) == 1:
-                name, value = entry.popitem()
+            if len(element.keys()) == 1:
+                name, value = element.popitem()
                 # print('name', name, 'value', value, type(value))
             else:
-                name = entry.get('name')
-                value = entry.get('value')
-            assert name is not None
-            assert isinstance(name, str)
+                name = element.get('name')
+                value = element.get('value')
+            assert name is not None, 'no name found for element'
+            assert isinstance(name, str), 'name element must be a string, not {}'.format(type(name))
 
             # Get the item
             if hasattr(parent, 'findChild'):  # value item
@@ -176,19 +177,25 @@ class AttributeBuilder:
                     for i in range(len(value)):
                         item.setValue(i, value[i])
 
+            # Check for enabled flag
+            enable_key = element.get('enable')
+            if enable_key is not None:
+                enable_state = bool(enable_key)
+                item.setIsEnabled(enable_state)
+
             # Check for children item spec
             for key in ['items', 'children']:
-                children_spec = entry.get(key)
+                children_spec = element.get(key)
                 if children_spec:
                     self._configure_items(item, children_spec)
 
     def _create_attribute(self, spec):
         """"""
         att_type = spec.get('type')
-        assert att_type is not None
+        assert att_type is not None, 'missing attribute \"type\" specification'
 
         defn = self.att_resource.findDefinition(att_type)
-        assert defn is not None
+        assert defn is not None, 'missing att definition {}'.format(att_type)
 
         # Attribute name is optional
         att_name = spec.get('name')
@@ -196,7 +203,7 @@ class AttributeBuilder:
             att = self.att_resource.createAttribute(defn)
         else:
             att = self.att_resource.createAttribute(att_name, defn)
-        assert att is not None
+        assert att is not None, 'failed to create attribute type {}'.format(att_type)
         self._post_message(
             'Created attribute type \"{}\", name \"{}\"'.format(att.type(), att.name()))
 
@@ -213,7 +220,7 @@ class AttributeBuilder:
         att_type = spec.get('type')
         if att_type is not None:
             att_list = self.att_resource.findAttributes(att_type)
-            assert len(att_list) <= 1
+            assert len(att_list) <= 1, 'found multiple attributes of type {}'.format(att_type)
             if att_list:
                 return att_list[0]
 
