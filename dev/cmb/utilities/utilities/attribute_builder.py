@@ -21,6 +21,9 @@ attributes:
 
 """
 
+import smtk
+import smtk.attribute
+
 from . import instanced_util
 
 
@@ -72,7 +75,8 @@ class AttributeBuilder:
                 assert isinstance(entry, dict)
                 att = self._find_instance(entry)
                 assert att is not None
-                self.configure_attribute(att, entry)
+                self._post_message('Updating attribute {}'.format(att.name()))
+                self._configure_attribute(att, entry)
 
         # Build attributes
         attributes_list = spec.get('attributes')
@@ -90,13 +94,38 @@ class AttributeBuilder:
         att_count_end = len(att_resource.attributes())
         self._post_message('Final attribute count: {}'.format(att_count_end))
 
-    def _configure_attribute(self, att, spec):
+    def _associate_attribute(self, att, spec):
         """"""
+        assert isinstance(spec, list), 'association spec is not a list'
+        for entry in spec:
+            assert isinstance(entry, dict), 'association entry is not a dict'
+            assert len(entry.keys()) == 1, 'association entry not a single key/value'
+            key, value = entry.popitem()
+            if key == 'attribute':
+                ref_name = value
+                ref_att = self.att_resource.findAttribute(ref_name)
+                assert ref_att is not None, 'attribute with name {} not found'.format(ref_name)
+                assert att.associate(ref_att), \
+                    'failed to associate attribute {} to {}'.format(ref_name, att.name())
+            elif key == 'pedigree':
+                raise NotImplementedError('sorry -support for pedigree association is todo')
+            else:
+                raise RuntimeError('Unrecognized association type'.format(key))
+
+    def _configure_attribute(self, att, spec):
+        """Updates attribute contents.
+
+        Args:
+            att: smtk.attribute.Attribute
+            spec: dictionary specifying contents
+        """
         for key,value in spec.items():
             if key in ['type', 'name']:
                 continue
             elif key == 'items':
                 self._configure_items(att, value)
+            elif key == 'associate':
+                self._associate_attribute(att, value)
             else:
                 raise RuntimeError('Unrecognized spec key \"{}\"'.format(key))
 
@@ -121,17 +150,33 @@ class AttributeBuilder:
             assert name is not None
             assert isinstance(name, str)
 
-            item = parent.find(name)
-            assert item is not None
+            # Get the item
+            if hasattr(parent, 'findChild'):  # value item
+                item = parent.findChild(name, smtk.attribute.SearchStyle.IMMEDIATE_ACTIVE)
+            elif hasattr(parent, 'find'):     # attribute or group item
+                item = parent.find(name)
+            else:
+                msg = 'item {} has no find() or findChild() method',format(item.name())
+                raise RuntimeError(msg)
 
+            assert item is not None, 'no item with name \"{}\"'.format(name)
+
+            # Apply value if specified
             if value is not None and hasattr(item, 'setValue'):
-                if isinstance(value, (float, int, str)):
+                if self._is_reference_item(item):
+                    self._set_reference_item(item, value)
+                elif isinstance(value, (float, int, str)):
                     item.setValue(value)
                 elif isinstance(value, list):
                     item.setNumberOfValues(len(value))
                     for i in range(len(value)):
                         item.setValue(i, value[i])
 
+            # Check for children item spec
+            for key in ['items', 'children']:
+                children_spec = entry.get(key)
+                if children_spec:
+                    self._configure_items(item, children_spec)
 
     def _create_attribute(self, spec):
         """"""
@@ -171,7 +216,33 @@ class AttributeBuilder:
         # (else)
         return None
 
+    def _is_reference_item(self, item):
+        """"""
+        return item.type() in [
+            smtk.attribute.Item.ComponentType,
+            smtk.attribute.Item.ResourceType]
+
     def _post_message(self, msg):
         """"""
         if self.verbose:
             print(msg)
+
+    def _set_reference_item(self, item, target):
+        """Assigns a persistent object (target) to a reference item
+
+        Args:
+            item: smtk.attribute.ReferenceItem
+            target: either (i)  string for attribute name, or
+                           (ii) int for pedigree id
+
+        Note the the target is a HACK to keep things simple.
+        """
+        if isinstance(target, str):
+            target_att = self.att_resource.findAttribute(target)
+            assert target_att is not None, 'failed for find attribute with name {}'.format(target)
+            assert item.setValue(target_att), 'failed to set reference value {} with attribute {}' \
+                .format(item.name(), target)
+        elif isinstance(target, int):
+            raise NotImplementedError('sorry references to model entities not supportted yet.')
+        else:
+            raise RuntimeError('Unexpected target type {}. Should be str or int'.format(type(target)))

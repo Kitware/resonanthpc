@@ -1,0 +1,83 @@
+---
+# build_attributes.py input for demo01
+
+instanced:
+  # Coordinator
+  - type: cycle driver
+    items:
+      - name: end-spec
+        children:
+        - 'end time': 1.0
+    # Todo 'PK tree'
+
+attributes:
+  # Mesh
+  - type: mesh.generate
+    name: domain
+    items:
+      - 'domain low coordinate': [0.0, 0.0, 0.0]
+      - 'domain high coordinate': [1.0, 1.0, 10.0]
+      - 'number of cells': [1, 1, 100]
+
+  # Region
+  - type: region.box
+    name: computational domain
+    items:
+      - 'low coordinate': [0.0, 0.0, 0.0]
+      - 'high coordinate': [1.0, 1.0, 10.0]
+
+  - type: region.plane
+    name: bottom face
+    items:
+      - 'point':  [0.5, 0.5,  0.0]
+      - 'normal': [0.0, 0.0, -1.0]
+
+  - type: region.plane
+    name: east face
+    items:
+      - 'point':  [1.0, 1.0, 0.0]
+      - 'normal': [1.0, 0.0, 0.0]
+
+  - type: region.plane
+    name: north face
+    items:
+      - 'point':  [1.0, 1.0, 0.0]
+      - 'normal': [0.0, 1.0, 0.0]
+
+  - type: region.plane
+    name: south face
+    items:
+      - 'point':  [0.0,  0.0, 0.0]
+      - 'normal': [0.0, -1.0, 0.0]
+
+
+  - type: region.plane
+    name: surface
+    items:
+      - 'point':  [0.5, 0.5, 10.0]
+      - 'normal': [0.0, 0.0, 1.0]
+
+
+  - type: region.plane
+    name: west face
+    items:
+      - 'point':  [0.5, 0.5,  10.0]
+      - 'normal': [0.0, 0.0,   1.0]
+
+
+  # Process Kernel
+  - type: pk-richards
+    name: pk-richards-0
+    associate:
+      - attribute: bottom face
+    items:
+      - 'initial condition': computational domain
+      - 'water retention evaluator': computational domain
+
+  # Visualization
+
+  # Checkpoint
+
+  # Observation
+
+  # State
