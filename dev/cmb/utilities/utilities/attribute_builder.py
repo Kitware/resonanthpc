@@ -3,19 +3,22 @@
 Basic yml format:
 
 # Update instanced attributes
-instanced:
-    - type: string
+- instanced: true  # to create instanced attributes
+
+# Modify (existing) attributes
+- modify:
+    - type: string  # must be instanced unless name provided
       name: string  # optional but when included has priority over type
       items:
-        # Option 1: shorthand for only setting value
+        # Option 1: shorthand for setting value
         - name: float | int | str | list
 
         # Option 2: for more options
         - name: string
           value: float | int | str | list
 
-# Create and update attributes
-attributes:
+# Create attributes
+- create:
     - type: string
       name: string  # optional
 
@@ -48,7 +51,7 @@ class AttributeBuilder:
             spec: dict with 'instanced' and 'attributes' keys
             verbose: boolean to enable print statements
         """
-        assert isinstance(spec, dict), 'spec is type {}'.format(type(spec))
+        assert isinstance(spec, list), 'input spec must be a list, not {}'.format(type(spec))
         self.spec = spec
 
         if verbose is not None:
@@ -58,38 +61,39 @@ class AttributeBuilder:
         atts = att_resource.attributes()
         self._post_message('Initial attribute count: {}'.format(len(atts)))
 
-        # Build instanced attributes
-        instanced_list = spec.get('instanced')
-        if instanced_list is not None:
-            assert isinstance(instanced_list, list)
+        # Traverse the elements in the input spec
+        for element in spec:
+            assert isinstance(element, dict), 'top-level list item must be dict not {}'.format(type(element))
+            assert len(element) == 1, 'top-level dict elements must be length 1 not {}'.format(len(element))
 
-            # Create instanced attributes
-            self._post_message('Generating instanced attributes')
-            instanced_util.create_instanced_atts(self.att_resource)
-            instanced_count = len(att_resource.attributes())
-            self._post_message(
-                'After creating instanced attributes, count: {}'.format(instanced_count))
+            key, value = element.popitem()
+            if key == 'instanced' and bool(value):
+                # Create instanced attributes
+                self._post_message('Generating instanced attributes')
+                instanced_util.create_instanced_atts(self.att_resource)
+                instanced_count = len(att_resource.attributes())
+                self._post_message(
+                    'After creating instanced attributes, count: {}'.format(instanced_count))
 
-            # Update instanced attributes
-            for entry in instanced_list:
-                assert isinstance(entry, dict)
-                att = self._find_instance(entry)
-                assert att is not None
-                self._post_message('Updating attribute {}'.format(att.name()))
-                self._configure_attribute(att, entry)
+            elif key == 'create':
+                create_spec = value
+                assert isinstance(create_spec, list), 'create spec must be a list, not'.format(type(create_spec))
+                for create_element in create_spec:
+                    assert isinstance(create_element, dict)
+                    att = self._create_attribute(create_element)
+                    assert att is not None
+                    self._configure_attribute(att, create_element)
 
-        # Build attributes
-        attributes_list = spec.get('attributes')
-        if attributes_list:
-            assert isinstance(attributes_list, list)
-            for entry in attributes_list:
-                assert isinstance(entry, dict)
-                att = self._create_attribute(entry)
-                assert att is not None
-                self._configure_attribute(att, entry)
-
-        # Todo connect attribute associations
-        # Todo connect ReferenceItem values
+            elif key == 'modify':
+                modify_spec = value
+                assert isinstance(modify_spec, list), 'modify spec must be a list, not'.format(type(modify_spec))
+                for modify_element in modify_spec:
+                    assert isinstance(modify_element, dict)
+                    att = self._find_attribute(modify_element)
+                    assert att is not None
+                    self._post_message(
+                        'Modifying attribute \"{}\"'.format(att.name()))
+                    self._configure_attribute(att, modify_element)
 
         att_count_end = len(att_resource.attributes())
         self._post_message('Final attribute count: {}'.format(att_count_end))
@@ -198,7 +202,7 @@ class AttributeBuilder:
 
         return att
 
-    def _find_instance(self, spec):
+    def _find_attribute(self, spec):
         """"""
         # Attribute name is optional, but if specified, takes precedence
         att_name = spec.get('name')

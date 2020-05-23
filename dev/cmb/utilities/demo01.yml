@@ -1,7 +1,9 @@
 ---
 # build_attributes.py input for demo01
 
-instanced:
+- instanced: create
+
+- modify:
   # Coordinator
   - type: cycle driver
     items:
@@ -10,7 +12,7 @@ instanced:
         - 'end time': 1.0
     # Todo 'PK tree'
 
-attributes:
+- create:
   # Mesh
   - type: mesh.generate
     name: domain
@@ -81,3 +83,8 @@ attributes:
   # Observation
 
   # State
+
+- modify:
+  - type: cycle driver
+    items:
+      - 'PK tree': pk-richards-0
