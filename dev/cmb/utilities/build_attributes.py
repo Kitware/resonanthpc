@@ -12,9 +12,10 @@ if __name__ == '__main__':
     parser.add_argument('template_filepath', help='Attribute template filename/path (.sbt)')
     parser.add_argument('yml_filepath', help='YAML file specifying the attributes to generate')
     parser.add_argument('-l', '--less_verbose', action='store_true', help='reduce output dumped to the console')
-    parser.add_argument('-o', '--output_filepath', default='attributes.smtk', help='output filename/path (ats_input.xml)')
+    parser.add_argument('-m', '--model_filepath', help='path to SMTK model resource (.smtk)')
+    parser.add_argument('-o', '--output_filepath', default='attributes.smtk', help='output filename/path (attributes.smtk)')
     # parser.add_argument('-s', '--skip_instances', action='store_true', help='skip initializing instanced attributes')
-    parser.add_argument('-y', '--yml_module_path', help='Path to yaml parser library')
+    parser.add_argument('-y', '--yml_module_path', help='path to yaml parser library')
 
     args = parser.parse_args()
     # print(args)
@@ -40,15 +41,24 @@ if __name__ == '__main__':
         spec = yaml.safe_load(content)
     assert spec is not None
 
-    # Initialize ResourceIO and load template
+    # Initialize ResourceIO and load resources
+    model_resource = None
     res_io = ResourceIO()
+    if args.model_filepath:
+        print('Loading model resource file:', args.model_filepath)
+        model_resource = res_io.read_resource(args.model_filepath)
+        assert model_resource is not None, 'failed to load model resource from file {}'.format(args.model_filepath)
     att_resource = res_io.import_resource(args.template_filepath)
-    assert att_resource is not None
+    assert att_resource is not None, 'failed to import attribute template from {}'.format(args.template_filepath)
+
+    # Associate the model resource
+    if model_resource is not None:
+        att_resource.associate(model_resource)
 
     # Initialize builder and populate the attributes
     verbose = not args.less_verbose
     builder = AttributeBuilder(verbose=verbose)
-    builder.build_attributes(att_resource, spec)
+    builder.build_attributes(att_resource, spec, model_resource=model_resource)
 
     # Write the result
     res_io.write_resource(att_resource, args.output_filepath)

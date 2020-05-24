@@ -26,6 +26,7 @@ Basic yml format:
 
 import smtk
 import smtk.attribute
+import smtk.model
 
 from . import instanced_util
 
@@ -40,15 +41,18 @@ class AttributeBuilder:
     def __init__(self, verbose=False):
         """"""
         self.att_resource = None
+        self.model_resource = None
+        self.pedigree_lookup = dict()  # <face/volume.pedigree-id, smtk.model.Entity>
         self.spec = None
         self.verbose = verbose
 
-    def build_attributes(self, att_resource, spec, verbose=None):
+    def build_attributes(self, att_resource, spec, model_resource=None, verbose=None):
         """Create and populate attributes based on input specification.
 
         Args:
             att_resource: smtk::attribute::Resource
             spec: dict with 'instanced' and 'attributes' keys
+            model_resource: smtk::attribute::Model
             verbose: boolean to enable print statements
         """
         assert isinstance(spec, list), 'input spec must be a list, not {}'.format(type(spec))
@@ -58,8 +62,12 @@ class AttributeBuilder:
             self.verbose = verbose
 
         self.att_resource = att_resource
+        self.model_resource = model_resource
         atts = att_resource.attributes()
         self._post_message('Initial attribute count: {}'.format(len(atts)))
+
+        if model_resource is not None:
+            self._build_pedigree_lookup(model_resource)
 
         # Traverse the elements in the input spec
         for element in spec:
@@ -112,10 +120,32 @@ class AttributeBuilder:
                 assert ref_att is not None, 'attribute with name {} not found'.format(ref_name)
                 assert att.associate(ref_att), \
                     'failed to associate attribute {} to {}'.format(ref_name, att.name())
-            elif key == 'pedigree':
-                raise NotImplementedError('sorry -support for pedigree association is todo')
+            elif key in ['face', 'volume']:
+                lookup_key = '{}.{}'.format(key, value)
+                entity = self.pedigree_lookup.get(lookup_key)
+                assert entity is not None, 'lookup {} returned None'.format(lookup_key)
+                assert att.associate(entity), \
+                    'failed to associate entity {} to attribute {}'.format(entity.name(), att.name())
             else:
                 raise RuntimeError('Unrecognized association type'.format(key))
+
+    def _build_pedigree_lookup(self, model_resource):
+        """Buils a dictionary mapping pedigree id to model entity."""
+        self.pedigree_lookup.clear()
+        type_info = [ ('face', smtk.model.FACE), ('volume', smtk.model.VOLUME) ]
+        for t in type_info:
+            prefix, ent_type = t
+            uuid_list = model_resource.entitiesMatchingFlags(ent_type, True)
+            for uuid in uuid_list:
+                if not model_resource.hasIntegerProperty(uuid, 'pedigree id'):
+                    continue
+                prop_list = model_resource.integerProperty(uuid, 'pedigree id')
+                if not prop_list:
+                    continue
+                ped_id = prop_list[0]
+                key = '{}.{}'.format(prefix, ped_id)
+                ent = model_resource.findEntity(uuid)
+                self.pedigree_lookup[key] = ent
 
     def _configure_attribute(self, att, spec):
         """Updates attribute contents.
@@ -248,7 +278,11 @@ class AttributeBuilder:
 
         Note the the target is a HACK to keep things simple.
         """
-        if isinstance(target, str):
+        if target == 'model':
+            # Special case
+            assert self.model_resource is not None, 'model resource required to set item {}'.format(item.name())
+            assert item.setValue(self.model_resource), 'failed to set model resource on item {}'.format(item.name())
+        elif isinstance(target, str):
             target_att = self.att_resource.findAttribute(target)
             assert target_att is not None, 'failed for find attribute with name {}'.format(target)
             assert item.setValue(target_att), 'failed to set reference value {} with attribute {}' \
