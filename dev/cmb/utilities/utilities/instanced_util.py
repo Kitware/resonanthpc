@@ -4,7 +4,7 @@ import smtk
 import smtk.view
 
 
-def _instantiate_instanced_view(att_resource, view):
+def _create_instanced_view_atts(att_resource, view):
     """Initialize attributes specified in instanced view
 
     """
@@ -43,7 +43,7 @@ def _recursive_create_instanced_atts(att_resource, comp):
             raise RuntimeError('View {} not found'.format(title))
 
         if view.type() == 'Instanced':
-            _instantiate_instanced_view(att_resource, view)
+            _create_instanced_view_atts(att_resource, view)
         else:
             _recursive_create_instanced_atts(att_resource, view.details())
         return

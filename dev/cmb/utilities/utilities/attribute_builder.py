@@ -1,27 +1,21 @@
 """
-
 Basic yml format:
 
-# Update instanced attributes
-- instanced: true  # to create instanced attributes
+# Create attribute (default "action: create")
+- type: string  # must be instanced unless name provided
+    name: string  # optional but when included has priority over type
+    items:
+    # Option 1: shorthand for setting value
+    - name: float | int | str | list
 
-# Modify (existing) attributes
-- modify:
-    - type: string  # must be instanced unless name provided
-      name: string  # optional but when included has priority over type
-      items:
-        # Option 1: shorthand for setting value
-        - name: float | int | str | list
+    # Option 2: for more options
+    - name: string
+        value: float | int | str | list
 
-        # Option 2: for more options
-        - name: string
-          value: float | int | str | list
-
-# Create attributes
-- create:
-    - type: string
-      name: string  # optional
-
+# Used "edit" to find and modify existing attribute
+- action: edit
+  type: string
+  name: string  # optional
 """
 
 import smtk
@@ -51,7 +45,7 @@ class AttributeBuilder:
 
         Args:
             att_resource: smtk::attribute::Resource
-            spec: dict with 'instanced' and 'attributes' keys
+            spec: dict with attribute specfications
             model_resource: smtk::attribute::Model
             verbose: boolean to enable print statements
         """
@@ -69,40 +63,32 @@ class AttributeBuilder:
         if model_resource is not None:
             self._build_pedigree_lookup(model_resource)
 
+        # Create instanced attributes first
+        self._post_message('Generating instanced attributes')
+        instanced_util.create_instanced_atts(self.att_resource)
+        instanced_count = len(att_resource.attributes())
+        self._post_message(
+            'After creating instanced attributes, count: {}'.format(instanced_count))
+
         # Traverse the elements in the input spec
+        assert isinstance(spec, list), 'top-level specification be a list not {}'.format(type(spec))
         for element in spec:
-            assert isinstance(element, dict), 'top-level list item must be dict not {}'.format(type(element))
-            assert len(element) == 1, 'top-level dict elements must be length 1 not {}'.format(len(element))
+            assert isinstance(element, dict), 'top-level element must be a dict not {}'.format(type(element))
 
-            key, value = element.popitem()
-            if key == 'instanced' and bool(value):
-                # Create instanced attributes
-                self._post_message('Generating instanced attributes')
-                instanced_util.create_instanced_atts(self.att_resource)
-                instanced_count = len(att_resource.attributes())
+            action = element.get('action', 'create')  # default action is to create attribute
+            if action == 'create':
+                att = self._create_attribute(element)
+                assert att is not None, 'failed to create attribute'
+                self._edit_attribute(att, element)
+
+            elif action == 'edit':
+                att = self._find_attribute(element)
+                assert att is not None, 'failed to find attribute'
                 self._post_message(
-                    'After creating instanced attributes, count: {}'.format(instanced_count))
-
-            elif key == 'create':
-                create_spec = value
-                assert isinstance(create_spec, list), 'create spec must be a list, not'.format(type(create_spec))
-                for create_element in create_spec:
-                    assert isinstance(create_element, dict), \
-                        'create element spec must be a dict, not'.format(type(create_element))
-                    att = self._create_attribute(create_element)
-                    assert att is not None, 'failed to create attribute'
-                    self._configure_attribute(att, create_element)
-
-            elif key == 'modify':
-                modify_spec = value
-                assert isinstance(modify_spec, list), 'modify spec must be a list, not'.format(type(modify_spec))
-                for modify_element in modify_spec:
-                    assert isinstance(modify_element, dict), 'modify element spec must be a dict, not'.format(type(modify_element))
-                    att = self._find_attribute(modify_element)
-                    assert att is not None, 'failed to find attribute'
-                    self._post_message(
-                        'Modifying attribute \"{}\"'.format(att.name()))
-                    self._configure_attribute(att, modify_element)
+                    'Editing attribute \"{}\"'.format(att.name()))
+                self._edit_attribute(att, element)
+            else:
+                raise RuntimeError('Unrecognized action \"{}\"'.format(action))
 
         att_count_end = len(att_resource.attributes())
         self._post_message('Final attribute count: {}'.format(att_count_end))
@@ -147,25 +133,25 @@ class AttributeBuilder:
                 ent = model_resource.findEntity(uuid)
                 self.pedigree_lookup[key] = ent
 
-    def _configure_attribute(self, att, spec):
-        """Updates attribute contents.
+    def _edit_attribute(self, att, spec):
+        """Updates attribute as specified.
 
         Args:
             att: smtk.attribute.Attribute
             spec: dictionary specifying contents
         """
         for key,value in spec.items():
-            if key in ['type', 'name']:
+            if key in ['action', 'type', 'name']:
                 continue
             elif key == 'items':
-                self._configure_items(att, value)
+                self._edit_items(att, value)
             elif key == 'associate':
                 self._associate_attribute(att, value)
             else:
                 raise RuntimeError('Unrecognized spec key \"{}\"'.format(key))
 
-    def _configure_items(self, parent, spec):
-        """Process items corresponding to all entries in spec.
+    def _edit_items(self, parent, spec):
+        """Updates items as specified.
 
         Args:
             parent: Attribute or GroupItem or ValueItem
@@ -217,7 +203,7 @@ class AttributeBuilder:
             for key in ['items', 'children']:
                 children_spec = element.get(key)
                 if children_spec:
-                    self._configure_items(item, children_spec)
+                    self._edit_items(item, children_spec)
 
     def _create_attribute(self, spec):
         """"""
