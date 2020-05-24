@@ -21,8 +21,7 @@ Basic yml format:
 import smtk
 import smtk.attribute
 import smtk.model
-
-from . import instanced_util
+import smtk.view
 
 
 class AttributeBuilder:
@@ -64,11 +63,7 @@ class AttributeBuilder:
             self._build_pedigree_lookup(model_resource)
 
         # Create instanced attributes first
-        self._post_message('Generating instanced attributes')
-        instanced_util.create_instanced_atts(self.att_resource)
-        instanced_count = len(att_resource.attributes())
-        self._post_message(
-            'After creating instanced attributes, count: {}'.format(instanced_count))
+        self.create_instanced_atts(self.att_resource)
 
         # Traverse the elements in the input spec
         assert isinstance(spec, list), 'top-level specification be a list not {}'.format(type(spec))
@@ -92,6 +87,23 @@ class AttributeBuilder:
 
         att_count_end = len(att_resource.attributes())
         self._post_message('Final attribute count: {}'.format(att_count_end))
+
+    def create_instanced_atts(self, att_resource):
+        """Instantiates all attributes referenced in Instanced views.
+
+        Traverses from top-level view to find all instanced views that
+        can potentially be displayed, and creates all instanced attributes.
+        """
+        top_view = att_resource.findTopLevelView()
+        if top_view is None:
+            print('WARNING: Attribute resource has no top-level view')
+            return
+
+        self._post_message('Generating instanced attributes')
+        self._recursive_create_instanced_atts(att_resource, top_view.details())
+        instanced_count = len(att_resource.attributes())
+        self._post_message(
+            'After creating instanced attributes, count: {}'.format(instanced_count))
 
     def _associate_attribute(self, att, spec):
         """"""
@@ -225,6 +237,29 @@ class AttributeBuilder:
 
         return att
 
+    def _create_instanced_view_atts(self, att_resource, view):
+        """Create attributes specified in instanced view.
+
+        """
+        comp = view.details()
+        atts_comp = comp.child(0)
+        for i in range(atts_comp.numberOfChildren()):
+            att_comp = atts_comp.child(i)
+            att_name = att_comp.attributes().get('Name')
+            att_type = att_comp.attributes().get('Type')
+
+            # Attributes can appear in multiple instanced views, so check if
+            # att has already been created.
+            att = att_resource.findAttribute(att_name)
+            if att is not None:
+                return
+
+            defn = att_resource.findDefinition(att_type)
+            if defn is None:
+                raise RuntimeError('Definition {} not found'.format(att_type))
+            att = att_resource.createAttribute(att_name, defn)
+            # print('Created attribute \"{}\" type \"{}\"').format(att_name, att_type)
+
     def _find_attribute(self, spec):
         """"""
         # Attribute name is optional, but if specified, takes precedence
@@ -253,6 +288,30 @@ class AttributeBuilder:
         """"""
         if self.verbose:
             print(msg)
+
+    def _recursive_create_instanced_atts(self, att_resource, comp):
+        """Traverse view components to find/create instanced attributes.
+
+        """
+        if comp is None:
+            raise RuntimeError('Component is None')
+
+        if comp.name() == 'View':
+            title = comp.attributes().get('Title')
+            view = att_resource.findView(title)
+            if view is None:
+                raise RuntimeError('View {} not found'.format(title))
+
+            if view.type() == 'Instanced':
+                self._create_instanced_view_atts(att_resource, view)
+            else:
+                self._recursive_create_instanced_atts(att_resource, view.details())
+            return
+
+        # (else) process component children
+        for i in range(comp.numberOfChildren()):
+            child = comp.child(i)
+            self._recursive_create_instanced_atts(att_resource, child)
 
     def _set_reference_item(self, item, target):
         """Assigns a persistent object (target) to a reference item
