@@ -88,7 +88,7 @@
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="vapor in gas"/>
           <ParameterList name="gas EOS parameters" type="ParameterList">
-            <Parameter name="EOS type" type="string" value="vapor in gas"/>
+            <Parameter name="EOS type" type="string" value="ideal gas"/>
           </ParameterList>
         </ParameterList>
         <ParameterList name="verbose object" type="ParameterList">
@@ -209,6 +209,22 @@
           <Parameter name="verbosity level" type="string" value="low"/>
         </ParameterList>
       </ParameterList>
+      <ParameterList name="surface-mass_source" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain rain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-tabular" type="ParameterList">
+                <Parameter name="x values" type="Array(double)" value="{0.0,43200000.0}"/>
+                <Parameter name="y values" type="Array(double)" value="{3e-06,0.0}"/>
+                <Parameter name="forms" type="Array(string)" value="{constant}"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
       <ParameterList name="mol_frac_gas" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="molar fraction gas"/>
         <Parameter name="molar fraction key" type="string" value="mol_frac_gas"/>
@@ -221,11 +237,11 @@
       </ParameterList>
       <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>
-        <Parameter name="ponded depth bar" type="bool" value="true"/>
-        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
       </ParameterList>
       <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>
+        <Parameter name="ponded depth bar" type="bool" value="true"/>
+        <Parameter name="height key" type="string" value="ponded_depth_bar"/>
       </ParameterList>
       <ParameterList name="water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="richards water content"/>
