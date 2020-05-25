@@ -51,8 +51,8 @@
 - type: region.plane
   name: west face
   items:
-    - 'point':  [0.5, 0.5,  10.0]
-    - 'normal': [0.0, 0.0,   1.0]
+    - 'point':  [0.0, 0.0, 0.0]
+    - 'normal': [-1.0, 0.0, 0.0]
 
 
 # Process Kernel

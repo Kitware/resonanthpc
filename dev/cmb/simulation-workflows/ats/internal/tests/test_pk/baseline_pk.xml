@@ -60,7 +60,7 @@
       <ParameterList name="boundary conditions" type="ParameterList">
         <ParameterList name="pressure" type="ParameterList">
           <ParameterList name="bottom" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="${BC_REGIONS}"/>
+            <Parameter name="regions" type="Array(string)" value="{bottom face}"/>
             <ParameterList name="boundary pressure" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="140000.0"/>

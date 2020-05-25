@@ -34,6 +34,7 @@ def map_richards_steady_state(att):
         r"${NAME}": att.name(),
         r"${IC_REGION}": att.findComponent('initial condition').value().name(),
         r"${WRE_REGION}": att.findComponent('water retention evaluator').value().name(),
+        r"${BC_REGIONS}": r"{" + ", ".join(value_list) + r"}",
     }
     return mapping
 
