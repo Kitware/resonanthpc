@@ -66,14 +66,14 @@ if __name__ == '__main__':
 
 
     ######## Extra stuff to output amanzi XML
-    import sys
-    sys.path.append("../simulation-workflows/ats/internal/")
-    from writer import ats_writer
-    xml_file = args.output_filepath.replace(".smtk", ".xml")
-    writer = ats_writer.ATSWriter(att_resource)
-    writer.setup_xml_root()
-    xml_doc = writer.generate_xml()
-    xml_string = writer.get_xml_doc(pretty=True)
-    with open(xml_file, "w") as f:
-        f.write(xml_string)
-    print('Wrote', xml_file)
+    # import sys
+    # sys.path.append("../simulation-workflows/ats/internal/")
+    # from writer import ats_writer
+    # xml_file = args.output_filepath.replace(".smtk", ".xml")
+    # writer = ats_writer.ATSWriter(att_resource)
+    # writer.setup_xml_root()
+    # xml_doc = writer.generate_xml()
+    # xml_string = writer.get_xml_doc(pretty=True)
+    # with open(xml_file, "w") as f:
+    #     f.write(xml_string)
+    # print('Wrote', xml_file)

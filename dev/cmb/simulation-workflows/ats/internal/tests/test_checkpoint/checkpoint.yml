@@ -1,5 +1,6 @@
 # checkpoint
 - type: checkpoint driver
+  action: edit
   items:
     - 'file name base': checkpoint
     - 'file name digits': 5
