@@ -10,22 +10,21 @@ a submodule at `thirdparty/pyyaml`, and its path is included by default when
 the `build_attribues.py` script is run.
 
 Example files are include to generate ATS demos 01 and 04. From the
-`resonantrpc/dev/cmb/utilities` folder, . To generate demo01 attributes:
+`resonantrpc/dev/cmb/utilities` folder, . To generate demo attributes:
 
-    # cd .../resonantrpc/dev/cmb/utilities
-    .../pvpython build_attributes.py \
-      ../simulation-workflows/ats/ats.sbt  \
-      demo01.yml \
-      -o attributes.demo01.smtk
+```bash
+alias pysmtk="/Applications/modelbuilder.app/Contents/bin/pvpython"
+cd dev/cmb/utilities
 
-To generate demo04 attributes,
+pysmtk build_attributes.py ../simulation-workflows/ats/ats.sbt \
+  ../simulation-workflows/ats/internal/tests/test_demos/demo.01.yml \
+  -o att.demo.01.smtk
 
-    # cd .../resonantrpc/dev/cmb/utilities
-    .../pvpython build_attributes.py \
-      ../simulation-workflows/ats/ats.sbt  \
-      demo04.yml \
-      -m ../simulation-workflows/ats/internal/tests/data/model.open-book-2D.smtk \
-      -o attributes.demo04.smtk
+pysmtk build_attributes.py ../simulation-workflows/ats/ats.sbt \
+  ../simulation-workflows/ats/internal/tests/test_demos/demo.04.yml \
+  -m ../simulation-workflows/ats/internal/tests/test_demos/att.demo.04.mesh.smtk \
+  -o att.demo.04.smtk
+```
 
 Note that the demo04 case includes the open-book model resource as a script
 argument.
