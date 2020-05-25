@@ -8,10 +8,9 @@ from tests.base import BaseTestCase
 
 class MeshRegionsTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.mesh_regions.smtk'
-    # MODEL_RESOURCE_FILENAME = 'model.concave.smtk'
-    BASLINE_XML_FILENAME = 'baseline_mesh_regions.xml'
+    BASELINE_XML_FILENAME = 'baseline_mesh_regions.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'mesh_regions.yml'
 
     def test_mesh_regions(self):
         # model_path = os.path.join(self.SOURCE_DIR, os.pardir, 'data', self.MODEL_RESOURCE_FILENAME)

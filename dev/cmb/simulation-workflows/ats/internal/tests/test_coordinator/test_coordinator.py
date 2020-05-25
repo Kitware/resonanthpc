@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class CoordinatorTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.coordinator.smtk'
-    BASLINE_XML_FILENAME = 'baseline_coordinator.xml'
+    BASELINE_XML_FILENAME = 'baseline_coordinator.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'coordinator.yml'
 
     def test_coordinator(self):
         coordinator_writer.CoordinatorWriter().write(self.writer.xml_root)

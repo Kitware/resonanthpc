@@ -1,0 +1,46 @@
+- type: region.plane
+  name: bottom face
+  items:
+    - 'point':  [0.5, 0.5,  0.0]
+    - 'normal': [0.0, 0.0, -1.0]
+
+- type: region.plane
+  name: east face
+  items:
+    - 'point':  [1.0, 1.0, 0.0]
+    - 'normal': [1.0, 0.0, 0.0]
+
+
+
+
+# Observation
+- type: observation-base
+  name: observation-base-0
+  items:
+    - 'variable': pressure
+    - 'observation output filename': fooooooo
+    - 'delimiter': ' '
+    - region: east face
+    - name: 'direction normalized flux'
+      enable: true
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 10800.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+
+# Observation
+- type: observation-base
+  name: observation-base-1
+  items:
+    - 'variable': pressure
+    - 'observation output filename': dfasfsaf
+    - 'delimiter': ' '
+    - region: east face
+    - 'location name': 'node'

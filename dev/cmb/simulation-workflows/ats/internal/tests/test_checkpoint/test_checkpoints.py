@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class CheckpointTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.checkpoint.smtk'
-    BASLINE_XML_FILENAME = 'baseline_checkpoint.xml'
+    BASELINE_XML_FILENAME = 'baseline_checkpoint.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'checkpoint.yml'
 
     def test_checkpoint(self):
         checkpoint_writer.CheckpointWriter().write(self.writer.xml_root)

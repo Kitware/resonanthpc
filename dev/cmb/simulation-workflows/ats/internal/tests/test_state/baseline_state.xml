@@ -70,7 +70,7 @@
       </ParameterList>
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos"/>
-        <Parameter name="EOS basis" type="string" value="both"/>
+        <Parameter name="EOS basis" type="string" value="molar"/>
         <Parameter name="molar density key" type="string" value="surface-source_molar_density"/>
         <Parameter name="mass density key" type="string" value="mass_density_liquid"/>
         <ParameterList name="EOS parameters" type="ParameterList">
@@ -83,7 +83,7 @@
       </ParameterList>
       <ParameterList name="molar_density_gas" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos"/>
-        <Parameter name="EOS basis" type="string" value="molar"/>
+        <Parameter name="EOS basis" type="string" value="both"/>
         <Parameter name="molar density key" type="string" value="molar_density_gas"/>
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="vapor in gas"/>

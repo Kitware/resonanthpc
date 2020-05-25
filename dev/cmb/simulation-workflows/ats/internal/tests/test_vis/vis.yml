@@ -1,0 +1,23 @@
+# Mesh
+- type: mesh.generate
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 1.0
+            - name: Stop Time
+              enable: true
+              value: -1.0

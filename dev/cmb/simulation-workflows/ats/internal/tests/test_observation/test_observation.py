@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class ObservationEventTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.observation.smtk'
-    BASLINE_XML_FILENAME = 'baseline_observation.xml'
+    BASELINE_XML_FILENAME = 'baseline_observation.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = "observation.yml"
 
     def test_observation_event(self):
         observation_writer.ObservationWriter().write(self.writer.xml_root)

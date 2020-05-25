@@ -1,4 +1,5 @@
 import os
+import sys
 import unittest
 
 import smtk
@@ -10,6 +11,22 @@ import smtk.session.vtk
 
 from writer import ats_writer
 
+source_path = os.path.abspath(os.path.dirname(__file__))
+
+TEMPLATE_FILEPATH = os.path.join(source_path, os.pardir, os.pardir, 'ats.sbt')
+
+
+path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, 'utilities')
+utilities_module_path = os.path.normpath(path)
+sys.path.insert(0, utilities_module_path)
+from utilities.attribute_builder import AttributeBuilder
+from utilities.resource_io import ResourceIO
+
+path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, 'thirdparty', 'pyyaml', 'lib3')
+yml_module_path = os.path.normpath(path)
+sys.path.insert(0, yml_module_path)
+import yaml
+
 
 OPERATION_SUCCEEDED = int(smtk.operation.Operation.SUCCEEDED)  # 3
 
@@ -17,50 +34,50 @@ OPERATION_SUCCEEDED = int(smtk.operation.Operation.SUCCEEDED)  # 3
 class BaseTestCase(unittest.TestCase):
     """A Base test case class to handle SMTK manager stuff."""
 
+    def _load_yaml_resource(self,):
+        yml_path = os.path.join(self.SOURCE_DIR, self.YAML_RESOURCE)
+        with open(yml_path) as fp:
+            content = fp.read()
+            spec = yaml.safe_load(content)
+        assert spec is not None
+
+        # Initialize ResourceIO and load resources
+        self.model_resource = None
+        self.res_io = ResourceIO()
+        if hasattr(self, "MODEL_RESOURCE_FILENAME"):
+            model_path = os.path.join(self.SOURCE_DIR, self.MODEL_RESOURCE_FILENAME)
+            print('Loading model resource file:', model_path)
+            self.model_resource = self.res_io.read_resource(model_path)
+            assert self.model_resource is not None, 'failed to load model resource from file {}'.format(model_path)
+        self.att_resource = self.res_io.import_resource(TEMPLATE_FILEPATH)
+        assert self.att_resource is not None, 'failed to import attribute template from {}'.format(TEMPLATE_FILEPATH)
+
+        # Associate the model resource
+        if self.model_resource is not None:
+            self.att_resource.associate(self.model_resource)
+
+        # Initialize builder and populate the attributes
+        self.builder = AttributeBuilder()
+        self.builder.build_attributes(self.att_resource, spec, model_resource=self.model_resource)
+        return
+
     def setUp(self):
         self.att_resource = None
         self.model_resource = None
 
-        # Initialize smtk managers
-        self.res_manager = smtk.resource.Manager.create()
-        self.op_manager = smtk.operation.Manager.create()
-
-        smtk.attribute.Registrar.registerTo(self.res_manager)
-        smtk.attribute.Registrar.registerTo(self.op_manager)
-
-        smtk.session.vtk.Registrar.registerTo(self.res_manager)
-        smtk.session.vtk.Registrar.registerTo(self.op_manager)
-
-        smtk.operation.Registrar.registerTo(self.op_manager)
-        self.op_manager.registerResourceManager(self.res_manager)
-
-        if hasattr(self, "MODEL_RESOURCE_FILENAME"):
-            model_path = os.path.join(self.SOURCE_DIR, self.MODEL_RESOURCE_FILENAME)
-            self.model_resource = self._read_resource(model_path)
-
-        # Load resource files
-        atts_path = os.path.join(self.SOURCE_DIR, self.ATT_RESOURCE_FILENAME)
-        self.att_resource = self._read_resource(atts_path)
+        self._load_yaml_resource()
 
         # Initialize writer
         self.writer = ats_writer.ATSWriter(self.att_resource)
         self.writer.setup_xml_root()
 
     def tearDown(self):
-        self.res_manager = None
-        self.op_manager = None
         self.att_resource = None
         self.model_resource = None
-
-    def _read_resource(self, path):
-        read_op = self.op_manager.createOperation('smtk::operation::ReadResource')
-        read_op.parameters().find('filename').setValue(path)
-        read_result = read_op.operate()
-        read_outcome = read_result.findInt('outcome').value(0)
-        self.assertEqual(read_outcome, OPERATION_SUCCEEDED)
-        resource = read_result.find('resource').value()
-        self.assertIsNotNone(resource)
-        return resource
+        if hasattr(self, 'res_io'):
+            del self.res_io
+        if hasattr(self, 'builder'):
+            del self.builder
 
     def _read_baseline(self, baseline_path):
         """A helper in case we want to change how we read the XML."""
@@ -70,7 +87,7 @@ class BaseTestCase(unittest.TestCase):
 
     def _compare_xml_content(self, xml_string, dump=False):
         """A helper in case we want to get fancier in how we compare the XML."""
-        baseline_path = os.path.join(self.SOURCE_DIR, self.BASLINE_XML_FILENAME)
+        baseline_path = os.path.join(self.SOURCE_DIR, self.BASELINE_XML_FILENAME)
         baseline_string = self._read_baseline(baseline_path)
         if dump:
             with open(os.path.join(self.SOURCE_DIR, "foo.xml"), "w") as f:

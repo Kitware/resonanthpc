@@ -65,7 +65,7 @@
     - 'water retention evaluator': computational domain
 
 
-    # Coordinator (notice that   ACTION = EDIT)
+# Coordinator (notice that   ACTION = EDIT)
 - action: edit
   type: cycle driver
   items:

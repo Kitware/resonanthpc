@@ -1,0 +1,14 @@
+# checkpoint
+- type: checkpoint driver
+  items:
+    - 'file name base': checkpoint
+    - 'file name digits': 5
+    - name: 'checkpoint times'
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 10800.0
+            - name: Stop Time
+              enable: true
+              value: -1.0

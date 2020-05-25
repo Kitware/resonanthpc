@@ -1,156 +1,33 @@
 ---
-# build_attributes.py input for demo04
+# build_attributes.py input for demo01
 
 # Mesh
-- type: mesh.resource
+- type: mesh.generate
   name: domain
   items:
-    - resource: model
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
 
 # Region
 - type: region.box
   name: computational domain
   items:
     - 'low coordinate': [0.0, 0.0, 0.0]
-    - 'high coordinate': [10.0, 1.0, 10.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
 
-- type: region.plane
-  name: east face
-  items:
-    - 'point':  [10.0, 1.0, 0.0]
-    - 'normal': [1.0,  0.0, 0.0]
 
-- type: region.plane
-  name: west face
-  items:
-    - 'point':  [ 0.0, 0.0, 0.0]
-    - 'normal': [-1.0, 0.0, 1.0]
-
-- type: region.plane
-  name: north face
-  items:
-    - 'point':  [10.0, 1.0, 0.0]
-    - 'normal': [ 0.0, 1.0, 0.0]
-
-- type: region.plane
-  name: south face
-  items:
-    - 'point':  [0.0,  0.0, 0.0]
-    - 'normal': [0.0, -1.0, 0.0]
-
-- type: region.plane
-  name: bottom face
-  items:
-    - 'point':  [0.0, 0.0,  0.0]
-    - 'normal': [0.0, 0.0, -1.0]
-
-- type: region.labeled.surface
-  name: surface_east
-  associate:
-    - face: 6
-
-- type: region.labeled.surface
-  name: surface_west
-  associate:
-    - face: 7
-
-- type: region.box.2d
+- type: region.box
   name: surface domain
   items:
-    - 'low coordinate':  [ 0.0, 0.0]
-    - 'high coordinate': [10.0, 1.0]
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
 
-- type: region.plane.2d
-  name: north edge
-  items:
-    - 'point': [10.0, 1.0]
-    - 'normal': [0.0, 1.0]
 
-- type: region.plane.2d
-  name: south edge
-  items:
-    - 'point':  [0.0,  1.0]
-    - 'normal': [0.0, -1.0]
 
-- type: region.plane.2d
-  name: east edge
-  items:
-    - 'point': [10.0, 1.0]
-    - 'normal': [1.0, 0.0]
 
-- type: region.plane.2d
-  name: west edge
-  items:
-    - 'point':  [ 0.0, 0.0]
-    - 'normal': [-1.0, 0.0]
 
-# Mesh (surface)
-- type: mesh.surface
-  name: surface
-  associate:
-    - attribute: surface_east
-    - attribute: surface_west
 
-# Process Kernel
-- type: pk-richards-flow
-  name: flow
-  items:
-    - 'initial condition': computational domain
-    - 'water retention evaluator': computational domain
-
-- type: pk-overland-flow-pressure-basis
-  name: overland flow
-
-- type: pk-coupled-water
-  name: surface-subsurface coupler
-  associate:
-    - attribute: flow
-    - attribute: overland flow
-
-# Coordinator (action = edit)
-- action: edit
-  type: cycle driver
-  items:
-    - name: end-spec
-      children:
-      - 'end time': 10.0
-      - 'end time units': d
-    - 'PK tree': surface-subsurface coupler
-
-# Visualization
-- type: visualization driver
-  items:
-    - 'domain': domain
-    - 'file name base': visdump
-    - name: 'visualization times'
-      enable: true
-      items:
-        - name: times start period stop
-          enable: true
-          items:
-            - 'Time Period': 10800.0
-            - name: Stop Time
-              enable: true
-              value: -1.0
-
-- type: visualization driver
-  items:
-    - 'domain': surface
-    - 'file name base': visdump_surface
-    - name: 'visualization times'
-      enable: true
-      items:
-        - name: times start period stop
-          enable: true
-          items:
-            - 'Time Period': 10800.0
-            - name: Stop Time
-              enable: true
-              value: -1.0
-
-# Checkpoint (not used)
-
-# Observation (not used)
 
 # State
 # State field evaluators
@@ -197,7 +74,7 @@
 - type: eos-constant
   name: surface-source_molar_density
   items:
-    - 'EOS basis': both
+    - 'EOS basis': molar
     - 'molar density key': surface-source_molar_density
     - 'mass density key': mass_density_liquid
     - key: density [kg/m^3]

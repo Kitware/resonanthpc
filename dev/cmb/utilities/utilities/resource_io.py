@@ -31,6 +31,12 @@ class ResourceIO:
         smtk.operation.Registrar.registerTo(self.op_manager)
         self.op_manager.registerResourceManager(self.res_manager)
 
+    def __del__(self):
+        self.att_resource = None
+        self.op_manager = None
+        self.res_manager = None
+        self.spec = None
+
     def import_resource(self, path):
         """Imports native file into new SMTK resource.
 

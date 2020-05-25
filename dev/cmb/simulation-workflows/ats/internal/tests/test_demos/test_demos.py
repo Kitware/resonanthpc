@@ -7,9 +7,9 @@ from tests.base import BaseTestCase
 
 class Demo01Test(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.demo.01.smtk'
-    BASLINE_XML_FILENAME = 'baseline_demo_01.xml'
+    BASELINE_XML_FILENAME = 'baseline_demo_01.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'demo.01.yml'
 
     def test_demo(self):
         xml_doc = self.writer.generate_xml()
@@ -19,10 +19,10 @@ class Demo01Test(BaseTestCase):
 
 class Demo04Test(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.demo.04.smtk'
     MODEL_RESOURCE_FILENAME = 'att.demo.04.mesh.smtk'
-    BASLINE_XML_FILENAME = 'baseline_demo_04.xml'
+    BASELINE_XML_FILENAME = 'baseline_demo_04.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'demo.04.yml'
 
     def test_demo(self):
 

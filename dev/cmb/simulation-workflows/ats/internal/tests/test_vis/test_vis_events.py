@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class VisualizationEventTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.vis.smtk'
-    BASLINE_XML_FILENAME = 'baseline_vis.xml'
+    BASELINE_XML_FILENAME = 'baseline_vis.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'vis.yml'
 
     def test_vis_event(self):
         vis_writer.VisualizationWriter().write(self.writer.xml_root)
