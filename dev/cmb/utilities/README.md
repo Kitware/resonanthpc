@@ -34,3 +34,6 @@ The yml file format is a work in progress, but is essentially a list of
 dictionary objects, with each object specifying one attribute to be created
 and/or edited. Check the top of `utilites/attribute_builder.py` for a few
 schema notes.
+
+
+For instanced attributes, be sure to add `action: edit` to the YAML item.
