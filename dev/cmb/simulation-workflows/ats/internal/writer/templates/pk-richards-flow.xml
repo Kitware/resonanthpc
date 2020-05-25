@@ -38,8 +38,8 @@
         <Parameter name="minimum rel perm cutoff" type="double" value="0.0" />
         <Parameter name="use surface rel perm" type="bool" value="true" />
         <ParameterList name="WRM parameters" type="ParameterList">
-          <ParameterList name="computation domain" type="ParameterList">
-            <Parameter name="region" type="string" value="${WR_REGION}" />
+          <ParameterList name="${WRE_REGION}" type="ParameterList">
+            <Parameter name="region" type="string" value="${WRE_REGION}" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
             <Parameter name="van Genuchten alpha" type="double" value="0.000545" />
             <Parameter name="van Genuchten m" type="double" value="0.19" />

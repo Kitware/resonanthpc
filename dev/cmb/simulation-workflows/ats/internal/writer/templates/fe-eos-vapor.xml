@@ -5,7 +5,7 @@
   <ParameterList name="EOS parameters" type="ParameterList">
     <Parameter name="EOS type" type="string" value="${EOS_TYPE}" />
     <ParameterList name="gas EOS parameters" type="ParameterList">
-      <Parameter name="EOS type" type="string" value="${EOS_TYPE}" />
+      <Parameter name="EOS type" type="string" value="ideal gas" />
     </ParameterList>
   </ParameterList>
   <ParameterList name="verbose object" type="ParameterList">

@@ -104,7 +104,7 @@ class RegionWriter(BaseWriter):
                 # self._new_param(type_list_elem, 'label', 'string', str(pedigree_id))
 
                 # For now, use the model_entity name
-                self._new_param(type_list_elem, 'label', 'string', model_entity.name())
+                self._new_param(type_list_elem, 'label', 'string', model_entity.name().replace("Unnamed set ID: ", ""))
                 continue
 
             # Get list of known children for given attribute

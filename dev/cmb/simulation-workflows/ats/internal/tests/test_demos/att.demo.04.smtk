@@ -1090,7 +1090,7 @@
       "Items": [
         {
           "Discrete": true,
-          "DiscreteIndex": 0,
+          "DiscreteIndex": 1,
           "Name": "EOS basis"
         },
         {

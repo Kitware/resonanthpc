@@ -37,6 +37,33 @@ def map_independent_variable(att):
     return mapping
 
 
+def map_independent_variable_function(att):
+    # TODO: the domain section can also be "rest domian" or "domain rain"
+
+    vals = att.find("x-values")
+    x_value_list = [vals.value(i) for i in range(vals.numberOfValues())]
+    x_value_list = [str(x) for x in x_value_list]
+    x_values = r"{" + ','.join(x_value_list) + r"}"
+
+    vals = att.find("y-values")
+    y_value_list = [vals.value(i) for i in range(vals.numberOfValues())]
+    y_value_list = [str(x) for x in y_value_list]
+    y_values = r"{" + ','.join(y_value_list) + r"}"
+
+    mapping = {
+        r"${NAME}": att.name(),
+        r"${CONSTANT_IN_TIME}": 'true' if  att.find("constant in time").isEnabled() else 'false',
+        r"${REGION}": att.findComponent('region').value().name(),
+        # TODO: forcing these for now.
+        r"${COMPONENT_NAME}": "components",
+        r"${COMPONENT_TYPE}": "Array(string)",
+        r"${COMPONENTS}": "{" + str(att.find("components").value()) + "}",
+        r"${X_VALUES}": x_values,
+        r"${Y_VALUES}": y_values,
+    }
+    return mapping
+
+
 def map_eos(att):
     mapping = {
         r"${NAME}": att.name(),
@@ -101,6 +128,7 @@ class StateWriter(BaseWriter):
 
         smart_templates = {
             "independent variable": ("fe-independent-variable.xml", map_independent_variable),
+            "independent variable - function": ("fe-independent-variable-function.xml", map_independent_variable_function),
             "eos": ("fe-eos.xml", map_eos),
             "eos-constant": ("fe-eos-constant.xml", map_eos_constant),
             "eos-vapor": ("fe-eos-vapor.xml", map_eos_vapor),
