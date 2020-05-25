@@ -7,6 +7,12 @@
     <AttDef Type="region.physical" BaseType="region" Abstract="true" Version="0"></AttDef>
 
     <AttDef Type="region.all" Label="region: all" BaseType="region.physical"></AttDef>
+    <AttDef Type="region.box.2d" Label="region: box 2D" BaseType="region.physical">
+      <ItemDefinitions>
+        <Double Name="low coordinate" NumberOfRequiredValues="2"></Double>
+        <Double Name="high coordinate" NumberOfRequiredValues="2"></Double>
+      </ItemDefinitions>
+    </AttDef>
     <AttDef Type="region.box" Label="region: box" BaseType="region.physical">
       <ItemDefinitions>
         <Double Name="low coordinate" NumberOfRequiredValues="3"></Double>
@@ -17,6 +23,12 @@
       <ItemDefinitions>
         <Double Name="point" NumberOfRequiredValues="3"></Double>
         <Double Name="normal" NumberOfRequiredValues="3"></Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="region.plane.2d" Label="region: plane 2D" BaseType="region.physical">
+      <ItemDefinitions>
+        <Double Name="point" NumberOfRequiredValues="2"></Double>
+        <Double Name="normal" NumberOfRequiredValues="2"></Double>
       </ItemDefinitions>
     </AttDef>
 

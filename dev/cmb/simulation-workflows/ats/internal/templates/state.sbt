@@ -34,12 +34,62 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
           </Accepts>
         </Component>
-        <!-- TODO: also need region components. one of: cell, face, boundary_face (can have just one or all three) -->
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="independent variable - function" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
+
+        <Double Name="x-values" Extensible="true">
+        </Double>
+        <Double Name="y-values" Extensible="true">
+        </Double>
+
+        <String Name="components">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="cell">cell</Value>
+            <Value Enum="boundary_face">boundary_face</Value>
+            <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+          </DiscreteInfo>
+        </String>
+        <Component Name="region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
       </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="eos" BaseType="field-evaluator-base" Version="0">
-      <!-- TODO add stuff -->
+      <ItemDefinitions>
+        <String Name="EOS basis">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="both">both</Value>
+            <Value Enum="molar">molar</Value>
+          </DiscreteInfo>
+        </String>
+        <String Name="molar density key">
+          <DefaultValue>molar_density_liquid</DefaultValue>
+        </String>
+        <String Name="mass density key">
+          <DefaultValue>mass_density_liquid</DefaultValue>
+        </String>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="eos-constant" BaseType="eos" Version="0">
+      <ItemDefinitions>
+        <String Name="key">
+          <DefaultValue>density [kg/m^3]</DefaultValue>
+        </String>
+        <Double Name="value">
+          <DefaultValue>1000.0</DefaultValue>
+        </Double>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="eos-vapor" BaseType="eos" Version="0">
     </AttDef>
 
     <AttDef Type="molar fraction gas" BaseType="field-evaluator-base" Version="0">
@@ -52,6 +102,16 @@
     </AttDef>
 
     <AttDef Type="ponded depth bar" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
+    <AttDef Type="compressible porosity" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Component Name="region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+      </ItemDefinitions>
     </AttDef>
 
 

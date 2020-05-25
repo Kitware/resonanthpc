@@ -1,0 +1,555 @@
+{
+  "id": "d56a459e-3082-4f2f-9cad-0b3998339486",
+  "links": null,
+  "modelFiles": [
+    "open-book-2D.exo"
+  ],
+  "models": {
+    "10c9493f-3059-4af9-97f8-83bdf8c6502e": {
+      "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "0fe52d53-2ffd-4fe8-be28-00cadfc559d6": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "10c9493f-3059-4af9-97f8-83bdf8c6502e": {
+        "a": {
+          "b": [
+            [
+              8
+            ]
+          ],
+          "i": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 4104,
+        "r": [
+          "0fe52d53-2ffd-4fe8-be28-00cadfc559d6",
+          "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5",
+          "29269c69-4701-4dd1-8dec-9aaee832b6ad",
+          "e89ebdcf-683f-4406-a8c3-2f840670a37d",
+          "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e",
+          "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4",
+          "1e466974-5473-4dd7-9026-d351c5bc5e7f",
+          "becdc949-422a-4773-b23e-b9cd6511b75f",
+          "50ad2620-4639-4136-9d49-6a674ccd2a7a"
+        ]
+      },
+      "1e466974-5473-4dd7-9026-d351c5bc5e7f": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "29269c69-4701-4dd1-8dec-9aaee832b6ad": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "becdc949-422a-4773-b23e-b9cd6511b75f": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      },
+      "e89ebdcf-683f-4406-a8c3-2f840670a37d": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e"
+        ]
+      }
+    }
+  },
+  "name": "open-book-2D",
+  "preservedUUIDs": [
+    "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+    "0fe52d53-2ffd-4fe8-be28-00cadfc559d6",
+    "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5",
+    "29269c69-4701-4dd1-8dec-9aaee832b6ad",
+    "e89ebdcf-683f-4406-a8c3-2f840670a37d",
+    "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e",
+    "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4",
+    "1e466974-5473-4dd7-9026-d351c5bc5e7f",
+    "becdc949-422a-4773-b23e-b9cd6511b75f"
+  ],
+  "properties": {
+    "unordered_map<uuid, double>": {},
+    "unordered_map<uuid, long>": {},
+    "unordered_map<uuid, string>": {},
+    "unordered_map<uuid, uuid>": {},
+    "unordered_map<uuid, vector<double>>": {},
+    "unordered_map<uuid, vector<long>>": {
+      "_geomstyle": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0
+          ]
+        ]
+      ],
+      "cell_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "embedding dimension": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            3
+          ]
+        ]
+      ],
+      "file order": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            -1
+          ]
+        ]
+      ],
+      "group_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "instance_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0
+          ]
+        ]
+      ],
+      "invalid_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0
+          ]
+        ]
+      ],
+      "model_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0
+          ]
+        ]
+      ],
+      "pedigree id": [
+        [
+          "becdc949-422a-4773-b23e-b9cd6511b75f",
+          [
+            7
+          ]
+        ],
+        [
+          "1e466974-5473-4dd7-9026-d351c5bc5e7f",
+          [
+            6
+          ]
+        ],
+        [
+          "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e",
+          [
+            4
+          ]
+        ],
+        [
+          "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5",
+          [
+            1
+          ]
+        ],
+        [
+          "0fe52d53-2ffd-4fe8-be28-00cadfc559d6",
+          [
+            7
+          ]
+        ],
+        [
+          "29269c69-4701-4dd1-8dec-9aaee832b6ad",
+          [
+            2
+          ]
+        ],
+        [
+          "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4",
+          [
+            5
+          ]
+        ],
+        [
+          "e89ebdcf-683f-4406-a8c3-2f840670a37d",
+          [
+            3
+          ]
+        ]
+      ],
+      "shell_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "use_counters": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "unordered_map<uuid, vector<string>>": {
+      "_simple type": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            "file"
+          ]
+        ],
+        [
+          "becdc949-422a-4773-b23e-b9cd6511b75f",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "1e466974-5473-4dd7-9026-d351c5bc5e7f",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "0fe52d53-2ffd-4fe8-be28-00cadfc559d6",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "29269c69-4701-4dd1-8dec-9aaee832b6ad",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "e89ebdcf-683f-4406-a8c3-2f840670a37d",
+          [
+            "side set"
+          ]
+        ]
+      ],
+      "name": [
+        [
+          "becdc949-422a-4773-b23e-b9cd6511b75f",
+          [
+            "Unnamed set ID: 7"
+          ]
+        ],
+        [
+          "1e466974-5473-4dd7-9026-d351c5bc5e7f",
+          [
+            "Unnamed set ID: 6"
+          ]
+        ],
+        [
+          "2eaffa6f-fca7-478c-88a8-5c3d8d7d935e",
+          [
+            "Unnamed set ID: 4"
+          ]
+        ],
+        [
+          "2f3ffe53-4cc0-4454-83cc-1f599a93f8f4",
+          [
+            "Unnamed set ID: 5"
+          ]
+        ],
+        [
+          "e89ebdcf-683f-4406-a8c3-2f840670a37d",
+          [
+            "Unnamed set ID: 3"
+          ]
+        ],
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            "open-book-2D"
+          ]
+        ],
+        [
+          "05e1a94e-f077-40a8-9f8b-f55cad8b4ea5",
+          [
+            "Unnamed set ID: 1"
+          ]
+        ],
+        [
+          "0fe52d53-2ffd-4fe8-be28-00cadfc559d6",
+          [
+            "Unnamed block ID: 7"
+          ]
+        ],
+        [
+          "29269c69-4701-4dd1-8dec-9aaee832b6ad",
+          [
+            "Unnamed set ID: 2"
+          ]
+        ]
+      ],
+      "type": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            "exodus"
+          ]
+        ]
+      ],
+      "url": [
+        [
+          "10c9493f-3059-4af9-97f8-83bdf8c6502e",
+          [
+            "/home/john/projects/resonant-hpc/git/resonantrpc/dev/cmb/simulation-workflows/ats/internal/tests/data/open-book-2D.exo"
+          ]
+        ]
+      ]
+    }
+  },
+  "type": "smtk::session::vtk::Resource",
+  "version": "3.1"
+}

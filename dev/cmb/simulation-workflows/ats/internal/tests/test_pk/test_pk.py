@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class PKTest(BaseTestCase):
 
-    ATT_RESOURCE_FILENAME = 'att.pk.smtk'
-    BASLINE_XML_FILENAME = 'baseline_pk.xml'
+    BASELINE_XML_FILENAME = 'baseline_pk.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'pk.yml'
 
     def test_pk(self):
         pk_writer.PKWriter().write(self.writer.xml_root)

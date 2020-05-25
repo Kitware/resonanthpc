@@ -25,5 +25,27 @@
 
       </ItemDefinitions>
     </AttDef>
+
+
+
+
+    <AttDef Type="pk-richards-flow" Label="Richards Flow PK" BaseType="pk-physical-bdf" Version="0">
+      <ItemDefinitions>
+        <Component Name="initial condition">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+
+        <Component Name="water retention evaluator">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+
+      </ItemDefinitions>
+    </AttDef>
+
+
   </Definitions>
 </SMTK_AttributeResource>

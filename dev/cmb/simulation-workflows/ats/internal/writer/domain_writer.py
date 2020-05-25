@@ -56,7 +56,7 @@ class DomainWriter(BaseWriter):
         # possible children_params parameters
         children_params = {
             'mesh.generate': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
-            'mesh.resource': [],
+            # 'mesh.resource': [],
             'mesh.surface': ['export mesh to file', ],
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
             # TODO: column mesh
@@ -84,22 +84,23 @@ class DomainWriter(BaseWriter):
                 raise RuntimeError('Model file not found for ResourceItem {}'.format(item.name()))
             # For now, just write the base filename
             filename = os.path.basename(path)
-            self._new_param(mesh_elem, 'file', 'string', filename)
+            file_params_elem = self._new_list(mesh_elem, "read mesh file parameters")
+            self._new_param(file_params_elem, 'file', 'string', filename)
             # Todo Extend to include MSTK mesh files
-            self._new_param(mesh_elem, 'format', 'string', 'Exodus II')
+            self._new_param(file_params_elem, 'format', 'string', 'Exodus II')
+        else:
+            #  Children params
+            gen_params_list_name = '{} parameters'.format(mesh_type_string)
+            gen_params_list = self._new_list(mesh_elem, gen_params_list_name)
 
-        #  Children params
-        gen_params_list_name = '{} parameters'.format(mesh_type_string)
-        gen_params_list = self._new_list(mesh_elem, gen_params_list_name)
+            # Association params
+            assoc_params_list = assoc_params.get(mesh_type)
+            if assoc_params_list:
+                self._render_associations(gen_params_list, mesh_att, assoc_params_list)
 
-        # Association params
-        assoc_params_list = assoc_params.get(mesh_type)
-        if assoc_params_list:
-            self._render_associations(gen_params_list, mesh_att, assoc_params_list)
-
-        # Type-specific mesh parameters
-        known_children_params = children_params.get(mesh_type, [])
-        self._render_items(gen_params_list, mesh_att, known_children_params)
+            # Type-specific mesh parameters
+            known_children_params = children_params.get(mesh_type, [])
+            self._render_items(gen_params_list, mesh_att, known_children_params)
 
         # Common mesh parameters
         self._render_items(mesh_elem, mesh_att, main_param_names)

@@ -1,0 +1,38 @@
+# Mesh
+- type: mesh.generate
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+
+# Region
+- type: region.box
+  name: computational domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
+
+- type: region.plane
+  name: bottom face
+  items:
+    - 'point':  [0.5, 0.5,  0.0]
+    - 'normal': [0.0, 0.0, -1.0]
+
+# Process Kernel
+- type: pk-richards
+  name: Richards
+  associate:
+    - attribute: bottom face
+  items:
+    - 'initial condition': computational domain
+    - 'water retention evaluator': computational domain
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 1.0
+    - 'PK tree': Richards

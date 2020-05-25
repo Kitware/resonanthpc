@@ -42,7 +42,9 @@ class RegionWriter(BaseWriter):
         # possible children parameters
         children = {
             'region.plane': ['point', 'normal',],
+            'region.plane.2d': ['point', 'normal',],
             'region.box': ['low coordinate', 'high coordinate',],
+            'region.box.2d': ['low coordinate', 'high coordinate',],
             'region.labeled.surface': ['label', 'file', 'entity',],
             'region.color-function': ['file', 'value',],
             'region.point': ['point',],
@@ -67,7 +69,8 @@ class RegionWriter(BaseWriter):
             region_type = region_att.type()
             param_name = region_type_params.get(region_type)
             if param_name is None:
-                param_name = region_type.replace('.', ': ')
+                param_name = region_type.replace(".2d", "")
+                param_name = param_name.replace('.', ': ')
             type_list_elem = self._new_list(name_list_elem, param_name)
 
             # surface.labeled is special case
@@ -101,7 +104,7 @@ class RegionWriter(BaseWriter):
                 # self._new_param(type_list_elem, 'label', 'string', str(pedigree_id))
 
                 # For now, use the model_entity name
-                self._new_param(type_list_elem, 'label', 'string', model_entity.name())
+                self._new_param(type_list_elem, 'label', 'string', model_entity.name().replace("Unnamed set ID: ", ""))
                 continue
 
             # Get list of known children for given attribute

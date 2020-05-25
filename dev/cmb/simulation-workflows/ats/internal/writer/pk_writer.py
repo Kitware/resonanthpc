@@ -32,9 +32,40 @@ def map_richards_steady_state(att):
 
     mapping = {
         r"${NAME}": att.name(),
-        r"${BC_REGIONS}": r"{" + ", ".join(value_list) + r"}",
         r"${IC_REGION}": att.findComponent('initial condition').value().name(),
         r"${WRE_REGION}": att.findComponent('water retention evaluator').value().name(),
+        r"${BC_REGIONS}": r"{" + ", ".join(value_list) + r"}",
+    }
+    return mapping
+
+
+def map_richards_flow(att):
+    mapping = {
+        r"${NAME}": att.name(),
+        r"${IC_REGION}": att.findComponent('initial condition').value().name(),
+        r"${WRE_REGION}": att.findComponent('water retention evaluator').value().name(),
+    }
+    return mapping
+
+
+def map_overland_flow_pressure_basis(att):
+    mapping = {
+        r"${NAME}": att.name(),
+    }
+    return mapping
+
+
+def map_coupled_water(att):
+    assocs = att.associations()
+    value_list = list()
+    for i in range(assocs.numberOfValues()):
+        if assocs.isSet(i):
+            value_att = assocs.value(i)
+            value_list.append(value_att.name())
+
+    mapping = {
+        r"${NAME}": att.name(),
+        r"${COUPLED_PKS}": r"{" + ", ".join(value_list) + r"}",
     }
     return mapping
 
@@ -51,7 +82,10 @@ class PKWriter(BaseWriter):
         pks_elem = self._new_list(xml_root, 'PKs')
 
         smart_templates = {
-            "pk-richards" : ("pk-richards-steady-state.xml", map_richards_steady_state)
+            "pk-richards": ("pk-richards-steady-state.xml", map_richards_steady_state),
+            "pk-richards-flow": ("pk-richards-flow.xml", map_richards_flow),
+            "pk-overland-flow-pressure-basis": ("pk-overland-flow-pressure-basis.xml", map_overland_flow_pressure_basis),
+            "pk-coupled-water": ("pk-coupled-water.xml", map_coupled_water),
         }
 
         pk_atts = shared.sim_atts.findAttributes('pk-base')

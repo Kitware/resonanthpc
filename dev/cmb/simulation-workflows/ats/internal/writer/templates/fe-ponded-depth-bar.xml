@@ -1,3 +1,5 @@
 <ParameterList name="${NAME}" type="ParameterList">
   <Parameter name="field evaluator type" type="string" value="ponded depth" />
+  <Parameter name="ponded depth bar" type="bool" value="true" />
+  <Parameter name="height key" type="string" value="ponded_depth_bar" />
 </ParameterList>
