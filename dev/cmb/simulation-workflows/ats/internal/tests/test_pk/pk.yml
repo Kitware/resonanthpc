@@ -28,3 +28,23 @@
   items:
     - 'initial condition': computational domain
     - 'water retention evaluator': computational domain
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 1.0
+    - 'PK tree': Richards
+
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'max time step'
+          value: 1000

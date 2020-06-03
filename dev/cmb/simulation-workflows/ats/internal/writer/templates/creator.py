@@ -24,6 +24,8 @@ def append_template(parent, fname, mapping=None):
         content = content.replace(key, value)
     # Create XML objects of it.
     nodes = parseString(content).childNodes
-    for node in nodes:
-        parent.appendChild(node)
-    return True
+    if len(nodes) != 1:
+        raise AssertionError("This has too many nodes, can't do that.")
+    node = nodes[0]
+    parent.appendChild(node)
+    return node # Return the node so that we can add the time integrator to PK

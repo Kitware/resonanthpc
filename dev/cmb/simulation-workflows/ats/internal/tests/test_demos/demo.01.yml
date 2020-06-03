@@ -75,6 +75,38 @@
     - 'PK tree': pk-richards-0
 
 
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 51
+        - name: 'diverged tolerance'
+          value: 1000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-13
+        - name: 'backtrack monitor'
+          value: 'monitor residual'
+          # <Parameter name="max error growth factor" type="double" value="1000.0" />
+          # <Parameter name="modify correction" type="bool" value="true" />
+
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'min time step'
+          value: 1.0
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'time step reduction factor'
+          value: 0.75
+        - name: 'time step increase factor'
+          value: 1.25
+        - name: 'min time step'
+          value: 1.0
+
+
 # Visualization
 - type: visualization driver
   items:
