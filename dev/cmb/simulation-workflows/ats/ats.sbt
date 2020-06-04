@@ -13,8 +13,8 @@
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
-    <!-- <File>internal/templates/preconditioner.sbt</File>
-    <File>internal/templates/time-integrator.sbt</File> -->
+    <!-- <File>internal/templates/preconditioner.sbt</File> -->
+    <File>internal/templates/time-integrator.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
@@ -42,7 +42,7 @@
     </View>
     <View Type="Attribute" Title="Mesh Attributes">
       <AttributeTypes>
-        <Att Type="mesh"/>
+        <Att Type="mesh-base"/>
       </AttributeTypes>
     </View>
 
@@ -61,8 +61,8 @@
     <View Type="Group" Title="Process Kernel Info" Style="Tabbed" TabPosition="North">
       <Views>
         <View Title="Process Kernel"/>
-        <!-- <View Title="Preconditioners"/>
-        <View Title="Time Integrators"/> -->
+        <!-- <View Title="Preconditioners"/> -->
+        <View Title="Time Integrator"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Process Kernel">
@@ -74,12 +74,13 @@
       <AttributeTypes>
         <Att Type="preconditioner-base"/>
       </AttributeTypes>
-    </View>
-    <View Type="Attribute" Title="Time Integrators">
-      <AttributeTypes>
-        <Att Type="time-integrator-base"/>
-      </AttributeTypes>
     </View> -->
+    <View Type="Instanced" Title="Time Integrator">
+      <InstancedAttributes>
+        <!-- TODO: eventaully there can be more than one -->
+        <Att Type="time integrator" Name="time integrator"/>
+      </InstancedAttributes>
+    </View>
 
 
 

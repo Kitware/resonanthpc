@@ -14,7 +14,7 @@
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="second">s</Value>
             <Value Enum="day">d</Value>
-            <Value Enum="year">yr</Value>
+            <Value Enum="year">y</Value>
           </DiscreteInfo>
         </String>
         <!-- end timing choices -->
@@ -30,7 +30,7 @@
               <DiscreteInfo DefaultIndex="0">
                 <Value Enum="second">s</Value>
                 <Value Enum="day">d</Value>
-                <Value Enum="year">yr</Value>
+                <Value Enum="year">y</Value>
               </DiscreteInfo>
             </String>
             <Int Name="end cycle"></Int>

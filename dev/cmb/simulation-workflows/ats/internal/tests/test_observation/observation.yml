@@ -1,10 +1,10 @@
-- type: region.plane
+- type: region.plane.3d
   name: bottom face
   items:
     - 'point':  [0.5, 0.5,  0.0]
     - 'normal': [0.0, 0.0, -1.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: east face
   items:
     - 'point':  [1.0, 1.0, 0.0]
