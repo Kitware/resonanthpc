@@ -103,9 +103,9 @@
 
 - type: pk-coupled-water
   name: surface-subsurface coupler
-  associate:
-    - attribute: flow
-    - attribute: overland flow
+  items:
+    - 'surface pk': overland flow
+    - 'subsurface pk': flow
 
 # Coordinator (action = edit)
 - action: edit

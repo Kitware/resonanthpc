@@ -1,7 +1,7 @@
 <ParameterList name="${NAME}" type="ParameterList">
   <Parameter name="PK type" type="string" value="coupled water" />
   <!-- NOTE: assuming order for `PKs order` matters! -->
-  <Parameter name="PKs order" type="Array(string)" value="${COUPLED_PKS}" />
+  <Parameter name="PKs order" type="Array(string)" value="{${SUBSURFACE_PK}, ${SURFACE_PK}}" />
   <ParameterList name="water delegate" type="ParameterList">
     <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true" />
     <Parameter name="damp and cap the water spurt" type="bool" value="true" />

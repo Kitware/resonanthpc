@@ -73,16 +73,10 @@ def map_overland_flow_pressure_basis_3(att):
 
 
 def map_coupled_water(att):
-    assocs = att.associations()
-    value_list = list()
-    for i in range(assocs.numberOfValues()):
-        if assocs.isSet(i):
-            value_att = assocs.value(i)
-            value_list.append(value_att.name())
-
     mapping = {
         r"${NAME}": att.name(),
-        r"${COUPLED_PKS}": r"{" + ", ".join(value_list) + r"}",
+        r"${SUBSURFACE_PK}": att.find("subsurface pk").value().name(),
+        r"${SURFACE_PK}": att.find("surface pk").value().name(),
     }
     return mapping
 

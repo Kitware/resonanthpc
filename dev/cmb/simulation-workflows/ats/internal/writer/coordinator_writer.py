@@ -74,13 +74,13 @@ class CoordinatorWriter(BaseWriter):
 
         # if the PK is a coupler, we have to included the coupled PKs in the tree
         if pk_type == "pk-coupled-water":
-            assocs = pk_att.associations()
-            for i in range(assocs.numberOfValues()):
-                if assocs.isSet(i):
-                    nested = assocs.value(i)
-                    nested_name = nested.name()
-                    nested_type = nested.type()
-                    nested_elem = self._new_list(pk_elem, nested_name)
-                    self._new_param(nested_elem, "PK type", "string", PK_MAPPING[nested_type])
+            subsurf_name = pk_att.find("subsurface pk").value().name()
+            subsurf_type = pk_att.find("subsurface pk").value().type()
+            nested_elem = self._new_list(pk_elem, subsurf_name)
+            self._new_param(nested_elem, "PK type", "string", PK_MAPPING[subsurf_type])
+            surf_name = pk_att.find("surface pk").value().name()
+            surf_type = pk_att.find("surface pk").value().type()
+            nested_elem = self._new_list(pk_elem, surf_name)
+            self._new_param(nested_elem, "PK type", "string", PK_MAPPING[surf_type])
 
         return
