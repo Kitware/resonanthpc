@@ -92,7 +92,7 @@
     - attribute: surface_west
 
 # Process Kernel
-- type: pk-richards-flow
+- type: pk-richards-flow-4
   name: flow
   items:
     - 'initial condition': computational domain

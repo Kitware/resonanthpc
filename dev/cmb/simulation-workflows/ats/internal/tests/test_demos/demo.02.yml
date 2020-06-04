@@ -1,0 +1,190 @@
+---
+# build_attributes.py input for demo02: richards-infiltration
+
+# Mesh
+- type: mesh.generate
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+    # TODO: include mesh blocks???????
+
+# Region
+- type: region.box
+  name: computational domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
+
+- type: region.plane
+  name: bottom face
+  items:
+    - 'point':  [0.5, 0.5,  0.0]
+    - 'normal': [0.0, 0.0, -1.0]
+
+- type: region.plane
+  name: east face
+  items:
+    - 'point':  [1.0, 1.0, 0.0]
+    - 'normal': [1.0, 0.0, 0.0]
+
+- type: region.plane
+  name: north face
+  items:
+    - 'point':  [1.0, 1.0, 0.0]
+    - 'normal': [0.0, 1.0, 0.0]
+
+- type: region.plane
+  name: south face
+  items:
+    - 'point':  [0.0,  0.0, 0.0]
+    - 'normal': [0.0, -1.0, 0.0]
+
+
+- type: region.plane
+  name: surface
+  items:
+    - 'point':  [0.5, 0.5, 10.0]
+    - 'normal': [0.0, 0.0, 1.0]
+
+
+- type: region.plane
+  name: west face
+  items:
+    - 'point':  [0.0, 0.0, 0.0]
+    - 'normal': [-1.0, 0.0, 0.0]
+
+
+# Process Kernel
+- type: pk-richards-flow-2
+  name: Richards
+  associate:
+    - attribute: surface
+  items:
+    - 'initial condition': computational domain
+    - 'water retention evaluator': computational domain
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 1.0
+        - 'end time units': 'y'
+    - 'PK tree': Richards
+
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 100000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 0.0001
+        - name: 'backtrack monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'backtrack max steps'
+          value: 5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'time step increase factor'
+          value: 1.25
+
+
+# Checkpoint - not doing
+
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 3155760.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]
+
+
+# State field evaluators
+- type: richards water content
+  name: water_content
+
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: eos
+  name: molar_density_liquid
+  items:
+    - 'EOS basis': both
+    - 'molar density key': molar_density_liquid
+    - 'mass density key': mass_density_liquid
+
+- type: viscosity
+  name: viscosity_liquid
+
+- type: eos-vapor
+  name: molar_density_gas
+  items:
+    - 'EOS basis': molar
+    - 'molar density key': molar_density_gas
+    - 'mass density key': mass_density_gas
+
+- type: molar fraction gas
+  name: mol_frac_gas
+
+- type: independent variable
+  name: porosity
+  items:
+    - value: 0.25
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: permeability
+  items:
+    - value: 2.5e-12
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: temperature
+  items:
+    - value: 273.65
+    - components: cell,boundary_face
+    - region: computational domain
+
+- type: effective_pressure
+  name: effective_pressure

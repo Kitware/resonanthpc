@@ -22,7 +22,7 @@ from .base_writer import BaseWriter
 from .templates.creator import append_template
 
 
-def map_richards_steady_state(att):
+def map_richards_steady_state_and_2(att):
     bc_assocs = att.associations()
     value_list = list()
     for i in range(bc_assocs.numberOfValues()):
@@ -39,7 +39,7 @@ def map_richards_steady_state(att):
     return mapping
 
 
-def map_richards_flow(att):
+def map_richards_flow_4(att):
     mapping = {
         r"${NAME}": att.name(),
         r"${IC_REGION}": att.findComponent('initial condition').value().name(),
@@ -134,8 +134,9 @@ class PKWriter(BaseWriter):
         pks_elem = self._new_list(xml_root, 'PKs')
 
         smart_templates = {
-            "pk-richards": ("pk-richards-steady-state.xml", map_richards_steady_state),
-            "pk-richards-flow": ("pk-richards-flow.xml", map_richards_flow),
+            "pk-richards": ("pk-richards-steady-state.xml", map_richards_steady_state_and_2),
+            "pk-richards-flow-2": ("pk-richards-flow-2.xml", map_richards_steady_state_and_2),
+            "pk-richards-flow-4": ("pk-richards-flow-4.xml", map_richards_flow_4),
             "pk-overland-flow-pressure-basis": ("pk-overland-flow-pressure-basis.xml", map_overland_flow_pressure_basis),
             "pk-coupled-water": ("pk-coupled-water.xml", map_coupled_water),
         }
