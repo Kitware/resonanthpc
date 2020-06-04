@@ -35,4 +35,5 @@
     - name: end-spec
       children:
         - 'end time': 1.0
+        - 'end time units': 'y'
     - 'PK tree': Richards
