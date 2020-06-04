@@ -2,7 +2,7 @@
 # build_attributes.py input for demo01
 
 # Mesh
-- type: mesh.generate
+- type: mesh.generate.3d
   name: domain
   items:
     - 'domain low coordinate': [0.0, 0.0, 0.0]

@@ -31,7 +31,27 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh">
+    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh" Abstract="true">
+    </AttDef>
+
+    <AttDef Type="mesh.generate.2d" Label="Generate Mesh 2D" BaseType="mesh.generate" BaseName="GeneratedMesh">
+      <ItemDefinitions>
+        <Double Name="domain low coordinate" NumberOfRequiredValues="2">
+          <DefaultValue>0.0</DefaultValue>
+        </Double>
+        <Double Name="domain high coordinate" NumberOfRequiredValues="2">
+          <DefaultValue>1.0</DefaultValue>
+        </Double>
+        <Int Name="number of cells" NumberOfRequiredValues="2">
+          <DefaultValue>1</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">1</Min>
+          </RangeInfo>
+        </Int>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="mesh.generate.3d" Label="Generate Mesh 3D" BaseType="mesh.generate" BaseName="GeneratedMesh">
       <ItemDefinitions>
         <Double Name="domain low coordinate" NumberOfRequiredValues="3">
           <DefaultValue>0.0</DefaultValue>

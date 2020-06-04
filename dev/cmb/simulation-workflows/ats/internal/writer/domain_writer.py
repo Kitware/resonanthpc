@@ -43,7 +43,8 @@ class DomainWriter(BaseWriter):
         """"""
         # Lookup table for mesh type to xml attribute
         mesh_type_params = {
-            'mesh.generate': 'generate mesh',
+            'mesh.generate.2d': 'generate mesh',
+            'mesh.generate.3d': 'generate mesh',
             'mesh.resource': 'read mesh file',
             'mesh.surface': 'surface',
             'mesh.aliased': 'aliased',
@@ -56,7 +57,8 @@ class DomainWriter(BaseWriter):
 
         # possible children_params parameters
         children_params = {
-            'mesh.generate': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
+            'mesh.generate.2d': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
+            'mesh.generate.3d': ['domain low coordinate', 'domain high coordinate', 'number of cells'],
             # 'mesh.resource': [],
             'mesh.surface': ['export mesh to file', ],
             'subgrid': ['subgrid region name', 'entity kind', 'parent domain', 'flyweight mesh'],
