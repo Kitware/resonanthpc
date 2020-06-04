@@ -9,11 +9,11 @@
           </Accepts>
         </Component>
 
-        <File Name="file name base" ShouldExist="false">
+        <String Name="file name base">
           <!-- TODO: file name "visdump_DOMAIN_data" -->
           <!-- CAN we dynamically set this based on the domain? -->
           <DefaultValue>visdump_DOMAIN_data</DefaultValue>
-        </File>
+        </String>
 
         <Void Name="dynamic mesh" Label="dynamic mesh" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>Write mesh data for every visualization dump; this facilitates visualizing deforming meshes.</BriefDescription>

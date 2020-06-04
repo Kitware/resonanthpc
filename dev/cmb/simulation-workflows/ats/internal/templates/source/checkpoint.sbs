@@ -3,9 +3,9 @@
   <Definitions>
     <AttDef Type="checkpoint driver" BaseType="" Version="0">
       <ItemDefinitions>
-        <File Name="file name base" ShouldExist="false">
+        <String Name="file name base">
           <DefaultValue>checkpoint</DefaultValue>
-        </File>
+        </String>
         <Int Name="file name digits">
           <RangeInfo>
             <Min Inclusive="true">0</Min>
