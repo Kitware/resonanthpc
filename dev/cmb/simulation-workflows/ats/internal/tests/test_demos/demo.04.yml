@@ -8,37 +8,37 @@
     - resource: model
 
 # Region
-- type: region.box
+- type: region.box.3d
   name: computational domain
   items:
     - 'low coordinate': [0.0, 0.0, 0.0]
     - 'high coordinate': [10.0, 1.0, 10.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: east face
   items:
     - 'point':  [10.0, 1.0, 0.0]
     - 'normal': [1.0,  0.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: west face
   items:
     - 'point':  [ 0.0, 0.0, 0.0]
     - 'normal': [-1.0, 0.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: north face
   items:
     - 'point':  [10.0, 1.0, 0.0]
     - 'normal': [ 0.0, 1.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: south face
   items:
     - 'point':  [0.0,  0.0, 0.0]
     - 'normal': [0.0, -1.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: bottom face
   items:
     - 'point':  [0.0, 0.0,  0.0]
@@ -92,13 +92,13 @@
     - attribute: surface_west
 
 # Process Kernel
-- type: pk-richards-flow
+- type: pk-richards-flow-4
   name: flow
   items:
     - 'initial condition': computational domain
     - 'water retention evaluator': computational domain
 
-- type: pk-overland-flow-pressure-basis
+- type: pk-overland-flow-pressure-basis-4
   name: overland flow
 
 - type: pk-coupled-water
@@ -116,6 +116,35 @@
       - 'end time': 10.0
       - 'end time units': d
     - 'PK tree': surface-subsurface coupler
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 1000000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 0.0001
+        - name: 'backtrack monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'backtrack max steps'
+          value: 5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'max time step'
+          value: 10000000.0
+        - name: 'time step increase factor'
+          value: 2.0
+
 
 # Visualization
 - type: visualization driver

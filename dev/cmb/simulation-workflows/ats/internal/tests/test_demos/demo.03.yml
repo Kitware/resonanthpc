@@ -1,0 +1,182 @@
+# Mesh
+- type: mesh.generate.2d
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0]
+    - 'domain high coordinate': [1000.0, 1.0]
+    - 'number of cells': [10, 1]
+
+# Mesh
+- type: mesh.aliased
+  name: surface
+  items:
+    - 'alias': 'domain'
+
+# Region
+- type: region.box.2d
+  name: surface domain
+  items:
+    - 'low coordinate': [0.0, 0.0]
+    - 'high coordinate': [1000.0, 1.0]
+
+- type: region.plane.2d
+  name: left side
+  items:
+    - 'point':  [0.0,  0.0]
+    - 'normal': [-1.0, 0.0]
+
+- type: region.plane.2d
+  name: right side
+  items:
+    - 'point':  [1000.0, 1.0]
+    - 'normal': [1.0, 0.0]
+
+
+- type: pk-overland-flow-pressure-basis-3
+  name: overland flow
+  items:
+    - 'initial condition': surface domain
+    - 'elevation evaluator': surface domain
+  associate:
+    - attribute: surface domain
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 10800.0
+        - 'end time units': 's'
+    - 'PK tree': overland flow
+
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 100000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 1
+        - name: 'backtrack monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'backtrack max steps'
+          value: 5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'time step increase factor'
+          value: 1.25
+
+
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 600.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+- type: visualization driver
+  items:
+    - 'domain': surface
+    - 'file name base': visdump_surface
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 600.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+
+# Observations - ignoring
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]
+
+
+# State field evaluators
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: ponded depth bar
+  name: surface-ponded_depth_bar
+
+- type: independent variable - function
+  name: surface-mass_source
+  items:
+    - x-values: [0, 3600.0]
+    - y-values: [3.0e-6, 0.0]
+    - components: cell
+    - region: surface domain
+
+- type: eos-constant
+  name: surface-source_molar_density
+  items:
+    - 'EOS basis': molar
+    - 'molar density key': surface-source_molar_density
+    - 'mass density key': mass_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: eos-constant
+  name: surface-molar_density_liquid
+  items:
+    - 'EOS basis': both
+    - 'molar density key': surface-molar_density_liquid
+    - 'mass density key': surface-mass_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: independent variable
+  name: surface-manning_coefficient
+  items:
+    - value: 3.6e-3
+    - components: cell
+    - region: surface domain
+
+- type: effective_pressure
+  name: surface-effective_pressure
+
+- type: independent variable
+  name: surface-temperature
+  items:
+    - value: 274.65
+    - components: cell,boundary_face
+    - region: surface domain

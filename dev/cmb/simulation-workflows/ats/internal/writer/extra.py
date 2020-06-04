@@ -2,8 +2,10 @@
 
 PK_MAPPING = {
     "pk-richards": "richards steady state",
-    "pk-richards-flow": "richards flow",
-    "pk-overland-flow-pressure-basis": "overland flow, pressure basis",
+    "pk-richards-flow-2": "richards flow",
+    "pk-richards-flow-4": "richards flow",
+    "pk-overland-flow-pressure-basis-3": "overland flow, pressure basis",
+    "pk-overland-flow-pressure-basis-4": "overland flow, pressure basis",
     "pk-coupled-water": "coupled water",
 
 }

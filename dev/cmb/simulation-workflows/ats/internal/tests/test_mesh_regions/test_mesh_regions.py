@@ -22,5 +22,17 @@ class MeshRegionsTest(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
+class MeshAliasedTest(BaseTestCase):
+
+    BASELINE_XML_FILENAME = 'baseline_mesh_aliased.xml'
+    SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = 'mesh_aliased.yml'
+
+    def test_mesh_alias(self):
+        domain_writer.DomainWriter().write(self.writer.xml_root)
+        xml_string = self.writer.get_xml_doc(pretty=True)
+        self._compare_xml_content(xml_string)
+
+
 if __name__ == '__main__':
     unittest.main()
