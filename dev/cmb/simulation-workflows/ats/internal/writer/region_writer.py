@@ -41,13 +41,14 @@ class RegionWriter(BaseWriter):
 
         # possible children parameters
         children = {
-            'region.plane': ['point', 'normal',],
+            'region.plane.3d': ['point', 'normal',],
             'region.plane.2d': ['point', 'normal',],
-            'region.box': ['low coordinate', 'high coordinate',],
+            'region.box.3d': ['low coordinate', 'high coordinate',],
             'region.box.2d': ['low coordinate', 'high coordinate',],
             'region.labeled.surface': ['label', 'file', 'entity',],
             'region.color-function': ['file', 'value',],
-            'region.point': ['point',],
+            'region.point.3d': ['point',],
+            'region.point.2d': ['point',],
             'region.logical': ['operation',],
             # TODO: there's more to fill in here!
         }
@@ -70,6 +71,7 @@ class RegionWriter(BaseWriter):
             param_name = region_type_params.get(region_type)
             if param_name is None:
                 param_name = region_type.replace(".2d", "")
+                param_name = param_name.replace(".3d", "")
                 param_name = param_name.replace('.', ': ')
             type_list_elem = self._new_list(name_list_elem, param_name)
 

@@ -5,30 +5,35 @@
     <!-- Region subdomains -->
     <AttDef Type="region" Label="Region" Abstract="true" Version="0"></AttDef>
     <AttDef Type="region.physical" BaseType="region" Abstract="true" Version="0"></AttDef>
-
     <AttDef Type="region.all" Label="region: all" BaseType="region.physical"></AttDef>
-    <AttDef Type="region.box.2d" Label="region: box 2D" BaseType="region.physical">
+
+    <!-- BOX -->
+    <AttDef Type="region.box" Label="region: box" BaseType="region.physical" Abstract="true"/>
+    <AttDef Type="region.box.2d" Label="region: box 2D" BaseType="region.box">
       <ItemDefinitions>
         <Double Name="low coordinate" NumberOfRequiredValues="2"></Double>
         <Double Name="high coordinate" NumberOfRequiredValues="2"></Double>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region.box" Label="region: box" BaseType="region.physical">
+    <AttDef Type="region.box.3d" Label="region: box 3D" BaseType="region.box">
       <ItemDefinitions>
         <Double Name="low coordinate" NumberOfRequiredValues="3"></Double>
         <Double Name="high coordinate" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
-    <AttDef Type="region.plane" Label="region: plane" BaseType="region.physical">
-      <ItemDefinitions>
-        <Double Name="point" NumberOfRequiredValues="3"></Double>
-        <Double Name="normal" NumberOfRequiredValues="3"></Double>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region.plane.2d" Label="region: plane 2D" BaseType="region.physical">
+
+    <!-- PLANE -->
+    <AttDef Type="region.plane" Label="region: plane" BaseType="region.physical" Abstract="true"/>
+    <AttDef Type="region.plane.2d" Label="region: plane 2D" BaseType="region.plane">
       <ItemDefinitions>
         <Double Name="point" NumberOfRequiredValues="2"></Double>
         <Double Name="normal" NumberOfRequiredValues="2"></Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="region.plane.3d" Label="region: plane 3D" BaseType="region.plane">
+      <ItemDefinitions>
+        <Double Name="point" NumberOfRequiredValues="3"></Double>
+        <Double Name="normal" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
 
@@ -62,15 +67,23 @@
       </AssociationsDef>
     </AttDef>
 
+    <!-- POINT -->
+    <AttDef Type="region.point" Label="region: point" BaseType="region.physical" Abstract="true"/>
+    <AttDef Type="region.point.2d" Label="region: point 2D" BaseType="region.point">
+      <ItemDefinitions>
+        <Double Name="point" NumberOfRequiredValues="2"></Double>
+      </ItemDefinitions>
+    </AttDef>
+    <AttDef Type="region.point.3d" Label="region: point 3D" BaseType="region.point">
+      <ItemDefinitions>
+        <Double Name="point" NumberOfRequiredValues="3"></Double>
+      </ItemDefinitions>
+    </AttDef>
+
     <AttDef Type="region.color-function" Label="region: color function" BaseType="region.physical">
       <ItemDefinitions>
         <File Name="file" ShouldExist="true"></File>
         <Int Name="value"></Int>
-      </ItemDefinitions>
-    </AttDef>
-    <AttDef Type="region.point" Label="region: point" BaseType="region.physical">
-      <ItemDefinitions>
-        <Double Name="point" NumberOfRequiredValues="3"></Double>
       </ItemDefinitions>
     </AttDef>
     <AttDef Type="region.logical" Label="region: logical" BaseType="region">

@@ -20,16 +20,16 @@
     </ParameterList>
   </ParameterList>
   <ParameterList name="regions" type="ParameterList">
-    <ParameterList name="computational domain" type="ParameterList">
-      <ParameterList name="region: box" type="ParameterList">
-        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
-        <Parameter name="high coordinate" type="Array(double)" value="{10.0,1.0,10.0}"/>
-      </ParameterList>
-    </ParameterList>
     <ParameterList name="surface domain" type="ParameterList">
       <ParameterList name="region: box" type="ParameterList">
         <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0}"/>
         <Parameter name="high coordinate" type="Array(double)" value="{10.0,1.0}"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="computational domain" type="ParameterList">
+      <ParameterList name="region: box" type="ParameterList">
+        <Parameter name="low coordinate" type="Array(double)" value="{0.0,0.0,0.0}"/>
+        <Parameter name="high coordinate" type="Array(double)" value="{10.0,1.0,10.0}"/>
       </ParameterList>
     </ParameterList>
     <ParameterList name="surface_east" type="ParameterList">
@@ -46,6 +46,30 @@
         <Parameter name="format" type="string" value="Exodus II"/>
         <Parameter name="entity" type="string" value="face"/>
         <Parameter name="label" type="string" value="7"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="east edge" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{10.0,1.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{1.0,0.0}"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="north edge" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{10.0,1.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,1.0}"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="south edge" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{0.0,-1.0}"/>
+      </ParameterList>
+    </ParameterList>
+    <ParameterList name="west edge" type="ParameterList">
+      <ParameterList name="region: plane" type="ParameterList">
+        <Parameter name="point" type="Array(double)" value="{0.0,0.0}"/>
+        <Parameter name="normal" type="Array(double)" value="{-1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
     <ParameterList name="bottom face" type="ParameterList">
@@ -76,30 +100,6 @@
       <ParameterList name="region: plane" type="ParameterList">
         <Parameter name="point" type="Array(double)" value="{0.0,0.0,0.0}"/>
         <Parameter name="normal" type="Array(double)" value="{-1.0,0.0,0.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="east edge" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{10.0,1.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{1.0,0.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="north edge" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{10.0,1.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0,1.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="south edge" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0,0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{0.0,-1.0}"/>
-      </ParameterList>
-    </ParameterList>
-    <ParameterList name="west edge" type="ParameterList">
-      <ParameterList name="region: plane" type="ParameterList">
-        <Parameter name="point" type="Array(double)" value="{0.0,0.0}"/>
-        <Parameter name="normal" type="Array(double)" value="{-1.0,0.0}"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>

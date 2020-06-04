@@ -7,13 +7,13 @@
     - 'number of cells': [1, 1, 100]
 
 # Region
-- type: region.box
+- type: region.box.3d
   name: computational domain
   items:
     - 'low coordinate': [0.0, 0.0, 0.0]
     - 'high coordinate': [1.0, 1.0, 10.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: bottom face
   items:
     - 'point':  [0.5, 0.5,  0.0]

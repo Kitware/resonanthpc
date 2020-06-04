@@ -8,37 +8,37 @@
     - resource: model
 
 # Region
-- type: region.box
+- type: region.box.3d
   name: computational domain
   items:
     - 'low coordinate': [0.0, 0.0, 0.0]
     - 'high coordinate': [10.0, 1.0, 10.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: east face
   items:
     - 'point':  [10.0, 1.0, 0.0]
     - 'normal': [1.0,  0.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: west face
   items:
     - 'point':  [ 0.0, 0.0, 0.0]
     - 'normal': [-1.0, 0.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: north face
   items:
     - 'point':  [10.0, 1.0, 0.0]
     - 'normal': [ 0.0, 1.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: south face
   items:
     - 'point':  [0.0,  0.0, 0.0]
     - 'normal': [0.0, -1.0, 0.0]
 
-- type: region.plane
+- type: region.plane.3d
   name: bottom face
   items:
     - 'point':  [0.0, 0.0,  0.0]
