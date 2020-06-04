@@ -3,7 +3,32 @@
   <Definitions>
 
     <!-- Inheritence might not be right but it doesn't really matter with current templating -->
-    <AttDef Type="pk-overland-flow-pressure-basis" Label="overland flow, pressure basis" BaseType="pk-physical-bdf" Version="0">
+    <AttDef Type="pk-overland-flow-pressure-basis-4" Label="overland flow, pressure basis 4" BaseType="pk-physical-bdf" Version="0">
+    </AttDef>
+
+
+    <AttDef Type="pk-overland-flow-pressure-basis-3" Label="overland flow, pressure basis 3" BaseType="pk-physical-bdf" Version="0">
+      <AssociationsDef NumberOfRequiredValues="1" Name="slope regions">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+        </Accepts>
+      </AssociationsDef>
+      <ItemDefinitions>
+
+
+        <Component Name="initial condition">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+
+        <Component Name="elevation evaluator">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+
+      </ItemDefinitions>
     </AttDef>
 
 

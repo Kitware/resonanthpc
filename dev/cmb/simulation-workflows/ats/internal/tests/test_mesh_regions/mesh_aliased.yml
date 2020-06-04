@@ -1,10 +1,10 @@
 # Mesh
-- type: mesh.generate.3d
+- type: mesh.generate.2d
   name: domain
   items:
-    - 'domain low coordinate': [0.0, 0.0, 0.0]
-    - 'domain high coordinate': [1.0, 1.0, 10.0]
-    - 'number of cells': [1, 1, 100]
+    - 'domain low coordinate': [0.0, 0.0]
+    - 'domain high coordinate': [10.0, 1.0]
+    - 'number of cells': [10, 1]
 
 # Mesh
 - type: mesh.aliased

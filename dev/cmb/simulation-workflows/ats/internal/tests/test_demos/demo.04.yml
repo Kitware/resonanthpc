@@ -98,7 +98,7 @@
     - 'initial condition': computational domain
     - 'water retention evaluator': computational domain
 
-- type: pk-overland-flow-pressure-basis
+- type: pk-overland-flow-pressure-basis-4
   name: overland flow
 
 - type: pk-coupled-water

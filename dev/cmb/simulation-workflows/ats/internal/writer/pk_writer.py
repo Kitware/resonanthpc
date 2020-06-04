@@ -48,9 +48,26 @@ def map_richards_flow_4(att):
     return mapping
 
 
-def map_overland_flow_pressure_basis(att):
+def map_overland_flow_pressure_basis_4(att):
     mapping = {
         r"${NAME}": att.name(),
+    }
+    return mapping
+
+
+def map_overland_flow_pressure_basis_3(att):
+    bc_assocs = att.associations()
+    value_list = list()
+    for i in range(bc_assocs.numberOfValues()):
+        if bc_assocs.isSet(i):
+            value_att = bc_assocs.value(i)
+            value_list.append(value_att.name())
+
+    mapping = {
+        r"${NAME}": att.name(),
+        r"${IC_REGION}": att.findComponent('initial condition').value().name(),
+        r"${ELEV_REGION}": att.findComponent('elevation evaluator').value().name(),
+        r"${SLOPE_REGIONS}": r"{" + ", ".join(value_list) + r"}",
     }
     return mapping
 
@@ -137,7 +154,8 @@ class PKWriter(BaseWriter):
             "pk-richards": ("pk-richards-steady-state.xml", map_richards_steady_state_and_2),
             "pk-richards-flow-2": ("pk-richards-flow-2.xml", map_richards_steady_state_and_2),
             "pk-richards-flow-4": ("pk-richards-flow-4.xml", map_richards_flow_4),
-            "pk-overland-flow-pressure-basis": ("pk-overland-flow-pressure-basis.xml", map_overland_flow_pressure_basis),
+            "pk-overland-flow-pressure-basis-3": ("pk-overland-flow-pressure-basis-3.xml", map_overland_flow_pressure_basis_3),
+            "pk-overland-flow-pressure-basis-4": ("pk-overland-flow-pressure-basis-4.xml", map_overland_flow_pressure_basis_4),
             "pk-coupled-water": ("pk-coupled-water.xml", map_coupled_water),
         }
 
