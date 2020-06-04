@@ -28,7 +28,7 @@ class DomainWriter(BaseWriter):
 
     def write(self, xml_root):
         """"""
-        mesh_atts = shared.sim_atts.findAttributes('mesh')
+        mesh_atts = shared.sim_atts.findAttributes('mesh-base')
 
         # Render the mesh elements
         mesh_list_elem = self._new_list(xml_root, 'mesh')
@@ -46,6 +46,7 @@ class DomainWriter(BaseWriter):
             'mesh.generate': 'generate mesh',
             'mesh.resource': 'read mesh file',
             'mesh.surface': 'surface',
+            'mesh.aliased': 'aliased',
         }
 
         # Association parameters
@@ -88,6 +89,11 @@ class DomainWriter(BaseWriter):
             self._new_param(file_params_elem, 'file', 'string', filename)
             # Todo Extend to include MSTK mesh files
             self._new_param(file_params_elem, 'format', 'string', 'Exodus II')
+        elif mesh_type == 'mesh.aliased':
+            alias_params = self._new_list(mesh_elem, 'aliased parameters')
+            comp = mesh_att.find('alias')
+            alias_name = comp.value().name()
+            self._new_param(alias_params, 'alias', 'string', alias_name)
         else:
             #  Children params
             gen_params_list_name = '{} parameters'.format(mesh_type_string)

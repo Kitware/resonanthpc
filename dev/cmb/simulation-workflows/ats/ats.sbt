@@ -42,7 +42,7 @@
     </View>
     <View Type="Attribute" Title="Mesh Attributes">
       <AttributeTypes>
-        <Att Type="mesh"/>
+        <Att Type="mesh-base"/>
       </AttributeTypes>
     </View>
 

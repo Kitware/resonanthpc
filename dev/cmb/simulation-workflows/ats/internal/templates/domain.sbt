@@ -2,8 +2,11 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
+    <AttDef Type="mesh-base" Label="Mesh-Base" BaseType="" Abstract="true">
+    </AttDef>
+
     <!-- ATS mesh types -->
-    <AttDef Type="mesh" Label="Mesh" BaseType="" Abstract="true">
+    <AttDef Type="mesh" Label="Mesh" BaseType="mesh-base" Abstract="true">
       <ItemDefinitions>
         <Void Name="deformable mesh" Label="Deformable" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
@@ -87,6 +90,17 @@ All regions must be from the same source mesh.</BriefDescription>
 <!--         <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
           <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
         </Void> -->
+      </ItemDefinitions>
+    </AttDef>
+
+
+    <AttDef Type="mesh.aliased" Label="Aliased" BaseType="mesh-base">
+      <ItemDefinitions>
+        <Component Name="alias" Label="Alias">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']" />
+          </Accepts>
+        </Component>
       </ItemDefinitions>
     </AttDef>
 
