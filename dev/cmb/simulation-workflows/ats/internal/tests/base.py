@@ -16,16 +16,12 @@ source_path = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_FILEPATH = os.path.join(source_path, os.pardir, os.pardir, 'ats.sbt')
 
 
-path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, 'utilities')
+path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, 'smtk-tools')
 utilities_module_path = os.path.normpath(path)
 sys.path.insert(0, utilities_module_path)
-from utilities.attribute_builder import AttributeBuilder
-from utilities.resource_io import ResourceIO
-
-path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, 'thirdparty', 'pyyaml', 'lib3')
-yml_module_path = os.path.normpath(path)
-sys.path.insert(0, yml_module_path)
 import yaml
+from smtk_tools.attribute_builder import AttributeBuilder
+from smtk_tools.resource_io import ResourceIO
 
 
 OPERATION_SUCCEEDED = int(smtk.operation.Operation.SUCCEEDED)  # 3

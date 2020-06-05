@@ -4,6 +4,7 @@ import shutil
 import xml.etree.ElementInclude as EI
 import xml.etree.ElementTree as ET
 
+
 def resolve_xinclude(source_folder, source_ext, output_folder):
     """"""
     # Process all files in the source folder with the give extension
