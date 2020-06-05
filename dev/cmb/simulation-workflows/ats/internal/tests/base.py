@@ -45,7 +45,7 @@ class BaseTestCase(unittest.TestCase):
             print('Loading model resource file:', model_path)
             self.model_resource = self.res_io.read_resource(model_path)
             assert self.model_resource is not None, 'failed to load model resource from file {}'.format(model_path)
-        self.att_resource = self.res_io.import_resource(TEMPLATE_FILEPATH)
+        self.att_resource = self.res_io.read_sbt_file(TEMPLATE_FILEPATH)
         assert self.att_resource is not None, 'failed to import attribute template from {}'.format(TEMPLATE_FILEPATH)
 
         # Associate the model resource
