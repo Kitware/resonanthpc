@@ -284,8 +284,12 @@
 - type: independent variable - function
   name: surface-mass_source
   items:
-    - x-values: [0, 4.32e+7]
-    - y-values: [3.0e-6, 0.0]
+    - name: tabular-data
+      subgroups:
+        - - X: 0.0
+          - Y: 3.0e-6
+        - - X: 4.32e+7
+          - Y: 0.0
     - components: cell
     - region: surface domain
 
