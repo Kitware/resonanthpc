@@ -41,10 +41,12 @@
       <ItemDefinitions>
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
 
-        <Double Name="x-values" Extensible="true">
-        </Double>
-        <Double Name="y-values" Extensible="true">
-        </Double>
+        <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
+          <ItemDefinitions>
+            <Double Name="X" NumberOfRequiredValues="1"></Double>
+            <Double Name="Y" NumberOfRequiredValues="1"></Double>
+          </ItemDefinitions>
+        </Group>
 
         <String Name="components">
           <DiscreteInfo DefaultIndex="0">

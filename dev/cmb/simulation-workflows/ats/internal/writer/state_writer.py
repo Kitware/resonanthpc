@@ -39,14 +39,20 @@ def map_independent_variable(att):
 
 def map_independent_variable_function(att):
     # TODO: the domain section can also be "rest domian" or "domain rain"
+    group = att.find('tabular-data')
 
-    vals = att.find("x-values")
-    x_value_list = [vals.value(i) for i in range(vals.numberOfValues())]
+    def _fetch_subgroup_values(group, name):
+        values = []
+        for i in range(group.numberOfGroups()):
+            v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
+            values.append(v.value())
+        return values
+
+    x_value_list = _fetch_subgroup_values(group, "X")
     x_value_list = [str(x) for x in x_value_list]
     x_values = r"{" + ','.join(x_value_list) + r"}"
 
-    vals = att.find("y-values")
-    y_value_list = [vals.value(i) for i in range(vals.numberOfValues())]
+    y_value_list = _fetch_subgroup_values(group, "Y")
     y_value_list = [str(x) for x in y_value_list]
     y_values = r"{" + ','.join(y_value_list) + r"}"
 
