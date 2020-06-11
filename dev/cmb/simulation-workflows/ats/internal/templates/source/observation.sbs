@@ -17,6 +17,10 @@
           <DefaultValue> </DefaultValue>
         </String>
 
+        <Int Name="write interval" Optional="true">
+          <DefaultValue>0</DefaultValue>
+        </Int>
+
         <Component Name="region">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
