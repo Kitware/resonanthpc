@@ -163,23 +163,57 @@ class BaseWriter:
 
 
     def _render_io_event_specs(self, parent_elem, io_event):
-        sub_groups = {
-            'cycles start period stop': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
-            'times start period stop': ['Start Time', 'Time Period', 'Stop Time', ]#TODO:'time units'],
-            #TODO: 'times': ['times', 'time units'],
+        extensible_groups = {
+            'cycles start period stop': {
+                'array': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
+                'items': [],
+            },
+            'times start period stop': {
+                'array': ['Start Time', 'Time Period', 'Stop Time', ],
+                'items': ['units'], # NOTE: assumes all items are string
+            },
         }
+            # 'times': {
+            #     'array': ['times'],
+            #     'items': ['units'],
+            # },
         sub_items = [
             'cycles', # Int
         ]
-        # Now add the sub items
+        # add the sub items
         self._render_items(parent_elem, io_event, sub_items)
-        # Now add each array of values
-        for group_name, items in sub_groups.items():
+
+        # add each array of values
+        dbl_type_string = 'Array({})'.format('double')
+
+        def _get_array_values(group, items, idx=0):
+            string_list = [str(group.find(idx, nm).value()) for nm in items]
+            values = r"{" + ','.join(string_list) + r"}"
+            return values
+
+        for group_name in extensible_groups.keys():
             event_group = io_event.find(group_name)
             if event_group.isEnabled():
-                type_string = 'Array({})'.format('double')
-                value_list = [event_group.find(nm).value() for nm in items]
-                string_list = [str(x) for x in value_list]
-                value = r"{" + ','.join(string_list) + r"}"
-                self._new_param(parent_elem, group_name, type_string, value)
+                meta = extensible_groups[group_name]
+                item_names = meta['items']
+                array_names = meta['array']
+
+                n = event_group.numberOfGroups()
+                if n > 1:
+                    for i in range(n):
+                        name = group_name + ' {}'.format(i)
+                        values = _get_array_values(event_group, array_names, i)
+                        self._new_param(parent_elem, name, dbl_type_string, values)
+                        for item in item_names:
+                            value = str(event_group.find(i, item).value())
+                            self._new_param(parent_elem, name + ' ' + item, 'string', value)
+                else:
+                    values = _get_array_values(event_group, array_names)
+                    self._new_param(parent_elem, group_name, dbl_type_string, values)
+                    for item in item_names:
+                        value = str(event_group.find(item).value())
+                        self._new_param(parent_elem, group_name + ' ' + item, 'string', value)
+
+        # TODO: handle times group (non extensible)
+
         return

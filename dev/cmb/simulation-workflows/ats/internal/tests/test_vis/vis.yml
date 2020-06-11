@@ -6,6 +6,13 @@
     - 'domain high coordinate': [1.0, 1.0, 10.0]
     - 'number of cells': [1, 1, 100]
 
+- type: mesh.generate.3d
+  name: domain_2
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+
 # Visualization
 - type: visualization driver
   items:
@@ -21,3 +28,38 @@
             - name: Stop Time
               enable: true
               value: -1.0
+
+- type: visualization driver
+  items:
+    - 'domain': domain_2
+    - 'file name base': visdump_2
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: 'times start period stop'
+          enable: true
+          subgroups:
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 100.0
+              - name: 'Stop Time'
+                enable: true
+                value: 500.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'y'
+            - - Start Time: 0
+              - Time Period: 10.0
+              - name: 'Stop Time'
+                enable: true
+                value: 30.0
+              - units: 'y'
