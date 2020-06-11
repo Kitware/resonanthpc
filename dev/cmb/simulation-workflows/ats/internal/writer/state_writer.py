@@ -129,6 +129,7 @@ class StateWriter(BaseWriter):
             "overland pressure water content": "fe-overland-pressure-water-content.xml",
             "ponded depth": "fe-ponded-depth.xml",
             "ponded depth bar": "fe-ponded-depth-bar.xml",
+            "multiplicative evaluator": "fe-multiplicative-evaluator.xml",
         }
 
 

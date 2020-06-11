@@ -17,6 +17,9 @@
     <AttDef Type="effective_pressure" BaseType="field-evaluator-base" Version="0">
     </AttDef>
 
+    <AttDef Type="multiplicative evaluator" BaseType="field-evaluator-base" Version="0">
+    </AttDef>
+
     <AttDef Type="independent variable" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
