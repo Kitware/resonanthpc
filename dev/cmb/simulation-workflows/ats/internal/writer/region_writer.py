@@ -50,6 +50,7 @@ class RegionWriter(BaseWriter):
             'region.point.3d': ['point',],
             'region.point.2d': ['point',],
             'region.logical': ['operation',],
+            'region.boundary': ['entity',],
             # TODO: there's more to fill in here!
         }
 

@@ -1,0 +1,341 @@
+---
+# build_attributes.py input for demo04
+
+# Mesh
+- type: mesh.resource
+  name: domain
+  items:
+    - resource: model
+
+# Region
+- type: region.all
+  name: computational domain
+
+- type: region.all
+  name: surface domain
+
+- type: region.labeled.surface
+  name: surface region
+  associate:
+    - face: 2
+
+- type: region.labeled.surface
+  name: bottom
+  associate:
+    - face: 1
+
+- type: region.boundary
+  name: surface boundary
+
+
+# Mesh (surface)
+- type: mesh.surface
+  name: surface
+  associate:
+    - attribute: surface region
+
+
+
+# Process Kernels
+- type: pk-richards-flow-rc-sh
+  name: subsurface flow
+  items:
+    - 'initial condition': surface region
+    - 'water retention evaluator': computational domain
+
+- type: pk-overland-flow-pressure-basis-rc-sh
+  name: surface flow
+  associate:
+    - attribute: surface boundary
+
+- type: pk-coupled-water
+  name: Top level MPC
+  items:
+    - 'surface pk': surface flow
+    - 'subsurface pk': subsurface flow
+
+
+# Coordinator (action = edit)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+      - 'end time': 2.00e+04
+      - 'end time units': d
+    - 'PK tree': Top level MPC
+    - 'wallclock duration [hrs]': 23.0
+
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - 'limit iterations': 21
+        - 'diverged tolerance': 1.0e+5
+        - 'nonlinear tolerance': 1.0e-06
+        - 'backtrack tolerance': 1.0e-4
+        - 'backtrack monitor': 'monitor residual'
+        - 'nka lag iterations': 2
+        - 'backtrack max steps': 5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - 'max time step': 1.0e+10
+        - 'min time step': 1.04e-10
+        - 'time step increase factor': 2.0
+        - 'min iterations': 7
+        - 'time step reduction factor': 0.75
+        - 'time step increase factor': 1.25
+
+
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        # NOTE: not including `times`. writer doesn't support it and not really used?
+        - name: 'times start period stop'
+          enable: true
+          subgroups:
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 100.0
+              - name: 'Stop Time'
+                enable: true
+                value: 500.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'y'
+            - - Start Time: 0
+              - Time Period: 10.0
+              - name: 'Stop Time'
+                enable: true
+                value: 30.0
+              - units: 'y'
+
+
+- type: visualization driver
+  items:
+    - 'domain': surface
+    - 'file name base': visdump_surface
+    - name: 'visualization times'
+      enable: true
+      items:
+        # NOTE: not including `times`. writer doesn't support it and not really used?
+        - name: 'times start period stop'
+          enable: true
+          subgroups:
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 100.0
+              - name: 'Stop Time'
+                enable: true
+                value: 500.0
+              - units: 'd'
+            - - Start Time: 0
+              - Time Period: 1.0
+              - name: 'Stop Time'
+                enable: true
+                value: 5.0
+              - units: 'y'
+            - - Start Time: 0
+              - Time Period: 10.0
+              - name: 'Stop Time'
+                enable: true
+                value: 30.0
+              - units: 'y'
+
+
+# Observation
+- type: observation-base
+  name: surface outlet flux
+  items:
+    - 'variable': surface-mass_flux
+    - 'observation output filename': surface_outlet_flux.dat
+    - 'delimiter': ' '
+    - region: surface boundary
+    - name: 'direction normalized flux'
+      enable: true
+    - 'functional': 'observation data: extensive integral'
+    - 'location name': 'face'
+    - name: 'write interval'
+      enable: true
+      value: 10
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Start Cycle': 0
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+- type: observation-base
+  name: total water content
+  items:
+    - 'variable': water_content
+    - 'observation output filename': water_content.dat
+    - 'delimiter': ' '
+    - 'region': computational domain
+    - name: 'direction normalized flux'
+      enable: true
+    - 'functional': 'observation data: extensive integral'
+    - 'location name': 'cell'
+    - name: 'write interval'
+      enable: true
+      value: 10
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Start Cycle': 0
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - 'value': 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - 'value': [0.0, 0.0, -9.80665]
+
+
+# State field evaluators
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: ponded depth bar
+  name: surface-ponded_depth_bar
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: richards water content
+  name: water_content
+
+- type: multiplicative evaluator
+  name: surface-mass_source
+
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: compressible porosity
+  name: porosity
+  items:
+    - 'region': computational domain
+
+- type: effective_pressure
+  name: effective_pressure
+
+- type: effective_pressure
+  name: surface-effective_pressure
+
+- type: independent variable
+  name: surface-precipitation
+  items:
+    - 'value': 1.2929562738418728e-08
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: molar_density_liquid
+  items:
+    - 'value': 55000
+    - 'components': cell, boundary_face
+    - 'region': computational domain
+
+- type: independent variable
+  name: mass_density_liquid
+  items:
+    - 'value': 997
+    - 'components': cell
+    - 'region': computational domain
+
+- type: independent variable
+  name: viscosity_liquid
+  items:
+    - 'value': 8.9e-4
+    - 'components': cell, boundary_face
+    - 'region': computational domain
+
+- type: independent variable
+  name: surface-molar_density_liquid
+  items:
+    - 'value': 55000
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: surface-source_molar_density
+  items:
+    - 'value': 55000
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: surface-mass_density_liquid
+  items:
+    - 'value': 997
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: surface-relative_permeability
+  items:
+    - 'value': 1.0
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: surface-manning_coefficient
+  items:
+    - 'value': 1.5
+    - 'components': cell
+    - 'region': surface domain
+
+- type: independent variable
+  name: base_porosity
+  items:
+    - 'value': 0.4
+    - 'components': cell
+    - 'region': computational domain
+
+- type: independent variable
+  name: permeability
+  items:
+    - 'value': 1.0e-12
+    - 'components': cell
+    - 'region': computational domain

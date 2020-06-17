@@ -4,7 +4,7 @@
     <AttDef Type="observation-base" BaseType="" Version="0">
       <ItemDefinitions>
 
-        <File Name="observation output filename" ShouldExist="false"></File>
+        <String Name="observation output filename"></String>
 
         <String Name="variable">
           <!-- TODO: ummm? should this be a drop down? It seems like available choices could depend on PK choice. For now, the user must know what they are doing.-->

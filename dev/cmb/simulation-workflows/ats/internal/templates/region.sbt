@@ -7,6 +7,13 @@
     <AttDef Type="region.physical" BaseType="region" Abstract="true" Version="0"></AttDef>
     <AttDef Type="region.all" Label="region: all" BaseType="region.physical"></AttDef>
 
+    <AttDef Type="region.boundary" Label="region: boundary" BaseType="region.physical">
+      <String Name="entity">
+        <!-- NOTE: Unclear whether this is used or can be other things than “face”? -->
+        <DefaultValue>face</DefaultValue>
+      </String>
+    </AttDef>
+
     <!-- BOX -->
     <AttDef Type="region.box" Label="region: box" BaseType="region.physical" Abstract="true"/>
     <AttDef Type="region.box.2d" Label="region: box 2D" BaseType="region.box">
