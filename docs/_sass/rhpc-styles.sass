@@ -1,0 +1,31 @@
+/* Generic Global Styles
+ * ==================== */
+html
+  color: $text
+
+p
+  color: $text
+
+a
+  color: $primary
+
+  &:hover
+    color: darken($primary, 15%)
+
+/* Banner Area
+ * ==================== */
+
+// Homepage
+.home
+  .hero
+    &.is-primary
+      &.is-bold
+        background-image: linear-gradient(141deg, $primary 0%, #47b39d 25%, darken($primary, 10%) 100%)
+
+/* Footer
+ * ==================== */
+.footer
+  background: $gray-dark
+
+  p
+    color: $text-light
