@@ -10,12 +10,12 @@ from tests.base import BaseTestCase
 class RockCreekSpinupHomoTest(BaseTestCase):
     """
 
-    pysmtk build_attributes.py ../dev/cmb/simulation-workflows/ats/ats.sbt ../dev/cmb/simulation-workflows/ats/internal/tests/test_rock_creek/rock_creek.spinup_homo.yml -m ../dev/cmb/simulation-workflows/ats/internal/tests/test_rock_creek/att.rock_creek.mesh.smtk -o ../rock_creek.smtk
+    pysmtk build_attributes.py ../dev/cmb/simulation-workflows/ats/ats.sbt ../dev/cmb/simulation-workflows/ats/internal/tests/test_rock_creek/rock_creek.spinup.homo.yml -m ../dev/cmb/simulation-workflows/ats/internal/tests/test_rock_creek/att.rock_creek.mesh.smtk -o ../rock_creek.smtk
 
     """
 
     MODEL_RESOURCE_FILENAME = 'att.rock_creek.mesh.smtk'
-    BASELINE_XML_FILENAME = 'baseline_rock_creek_spinup_homo.xml'
+    BASELINE_XML_FILENAME = 'baseline_rock_creek_spinup.homo.xml'
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
     YAML_RESOURCE = 'rock_creek.spinup_homo.yml'
 
