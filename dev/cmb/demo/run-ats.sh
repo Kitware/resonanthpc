@@ -4,7 +4,7 @@ set -e
 # Outputs will be saved there as well in `sim_dump`
 pushd $1
 rm -rf sim_dump
-original_files=$(ls .)
+original_files=$(ls | grep -Ev '\.(smtk)$')
 mkdir sim_dump
 for entry in $original_files
 do
