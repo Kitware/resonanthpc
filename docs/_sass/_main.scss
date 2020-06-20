@@ -24,6 +24,7 @@ $hero-darken: $dark !default;
 @import 'showcase';
 @import '../node_modules/bulma-block-list/src/block-list.scss';
 @import 'rhpc-styles';
+@import 'responsiveness';
 
 .gh-sponsor {
   color: #ea4aaa;
