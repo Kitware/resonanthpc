@@ -12,6 +12,9 @@ a
   &:hover
     color: darken($primary, 15%)
 
+.button
+  border-width: 2px
+
 /* Banner Area
  * ==================== */
 
@@ -20,7 +23,48 @@ a
   .hero
     &.is-primary
       &.is-bold
+        align-items: flex-end
         background-image: linear-gradient(141deg, $primary 0%, #47b39d 25%, darken($primary, 10%) 100%)
+        box-shadow: inset 0 -450px 100px -100px rgba(0, 0, 0, .65)
+        display: flex
+        flex-direction: row
+        height: calc(100vh - 52px)
+
+        .hero-body
+          padding-bottom: 65px
+          padding-top: 65px
+          text-align: center
+
+          .hero-links
+            padding: 10px 0
+
+            .column
+              a
+                display: block
+
+/* Homepage Sections
+ * ==================== */
+
+// About Section
+.home
+  .about-blurb
+    padding: 65px 0
+
+    .container
+      & > div
+        padding: 20px 0
+
+      .blurb
+        padding: 20px 10rem
+
+      .features
+        & > .columns
+          margin: 0 !important
+
+        .feature
+          .feature-wrap
+            padding: 1.75rem 0
+
 
 /* Footer
  * ==================== */
