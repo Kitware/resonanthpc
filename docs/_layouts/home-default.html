@@ -15,7 +15,10 @@
     {% endunless %}
 
     <div class="content">
-    {% include home-about.html %}
+      {% include home-about.html %}
+      {% include home-software.html %}
+      {% include home-repos.html %}
+      {% include home-collaborators.html %}
     </div>
 
     {% unless page.hide_footer %}
