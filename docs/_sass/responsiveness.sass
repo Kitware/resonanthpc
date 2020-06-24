@@ -9,30 +9,46 @@
   /* Homepage Sections
    * ==================== */
 
-  // About Section
   .home
-    .about-blurb
-      .container
-        .blurb
-          padding: 20px 5rem
+    .content
+      & > section
+        .container
+          .blurb
+            padding: 20px 5rem
 
 // END 1024 breakpoint
 
 @media screen and (max-width: 768px)
 
+  /* Banner Area
+   * ==================== */
 
+  // Homepage
+  .home
+    .hero
+      &.is-primary
+        &.is-bold
+          box-shadow: inset 0 -768px 100px -100px rgba(0, 0, 0, .65)
+          height: auto !important
 
 // END 768 breakpoint
 
 @media screen and (max-width: 480px)
-  /* Homepage Sections
+  /* Banner Area
    * ==================== */
 
-  // About Section
+  // Homepage
   .home
-    .about-blurb
-      .container
-        .blurb
-          padding: 20px 2rem
+    .hero
+      .hero-body
+        .subtitle
+          font-size: 24px
+
+  .home
+    .content
+      & > section
+        .container
+          .blurb
+            padding: 20px 2rem
 
 // END 480 breakpoint

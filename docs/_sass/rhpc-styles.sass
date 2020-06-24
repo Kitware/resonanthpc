@@ -3,6 +3,12 @@
 html
   color: $text
 
+.content
+  margin-bottom: 0 !important
+  h2
+    font-size: 48px
+    font-weight: normal
+
 p
   color: $text
 
@@ -45,29 +51,96 @@ a
 /* Homepage Sections
  * ==================== */
 
-// About Section
 .home
-  .about-blurb
-    padding: 65px 0
+  .content
+    & > section
+      background: #fff
+      box-shadow: inset 0 20px 15px -15px rgba(0, 0, 0, .25)
+      padding: 65px 0
 
-    .container
-      & > div
-        padding: 20px 0
+      &.has-bg
+        padding: 0
 
-      .blurb
-        padding: 20px 10rem
+        .overlay
+          background: rgba(0, 0, 0, .75)
+          padding: 65px 0
 
-      .features
-        & > .columns
-          margin: 0 !important
+          .container
+            color: #fff
 
-        .feature
-          .feature-wrap
-            padding: 1.75rem 0
+            .blurb
+              h2,
+              p
+                color: #fff
+
+            .repos
+              .repo
+                background: #fff
+                border-radius: 4px
+                box-shadow: 0 0 5px rgba(0, 0, 0, .4)
+                margin: 0 15px 15px !important
+
+                h5
+                  padding-left: 25px
+
+                .column
+                  margin: 0 !important
+
+      .container
+        & > div
+          padding: 20px 0
+
+        .blurb
+          padding: 20px 10rem
+
+        .features,
+        .utilized-software
+          & > .columns
+            margin: 0 !important
+
+          .feature,
+          .software
+            .wrap
+              padding: 1.75rem 0
+
+              .ctas
+                .button
+                  span
+                    font-size: 20px
+                    margin-right: 5px
+
+        .collaborators
+          .collab-logo
+            border-bottom: 2px solid $gray-light
+            height: 124px
+            margin-bottom: 20px
+            padding: 15px 64px
+
+            img
+              height: 100%
+              max-width: 250px
+              width: auto
+
+          a
+            color: $text-dark
 
 
 /* Footer
  * ==================== */
+
+.call-to-action
+  background: $gray-light
+  padding: 4.25rem 0
+
+  .cta-text
+    font-size: 22px
+    margin: 0
+    padding: 0
+
+  .button
+    background: $text
+    color: #fff
+
 .footer
   background: $gray-dark
 
