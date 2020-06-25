@@ -8,8 +8,11 @@
 <!DOCTYPE html>
 <html>
   {% include head.html %}
-  <body>
+  <body class="page">
     {% include header.html %}
+    {% if page.breadcrumbs %}
+      {% include breadcrumbs.html %}
+    {% endif %}
     {% unless page.hide_hero %}
         {% include hero.html %}
     {% endunless %}
