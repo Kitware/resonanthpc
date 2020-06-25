@@ -8,16 +8,14 @@ subtitle: Increase scientific productivity by providing HPC capable pre-and-post
 hero_image: assets/img/hero_placeholder.png
 
 hero_links:
-  - text: Learn More
-    url: /#
   - text: View on GitHub
     icon: github
-    url: /#
+    url: https://github.com/Kitware/resonanthpc
     class: is-primary is-outlined is-inverted
 
 # About Section
 # include located in /_includes/home-about.html
-about-heading: Lorem Ipsum Heading
+about-heading: HPC-Enabled Pre- and Post-Processing with Jupyter
 about-text: ResonantHPC is designed to increase scientific productivity by providing HPC capable pre-and-post processing for easier and faster turnaround and integration with modern and next-generation simulation systems. This system will extend the standard scientific computing environment (Jupyter) so that researchers can prepare, execute, and analyze the results of remote exascale-level simulation from their workstations.
 
 about-features:
@@ -45,28 +43,28 @@ software-text: We are utilizing some opensource software that helps us add funct
 utilized-software:
   - name: ParaView
     logo: /assets/img/logos/ParaView_Logo.svg
-    github-link: /#
-    website-link: /#
+    github-link: https://gitlab.kitware.com/paraview/paraview
+    website-link: https://www.paraview.org/
   - name: Amanzi and ATS
     logo: /assets/img/logos/amanzi_ats_logo.png
-    github-link: /#
-    website-link: /#
+    github-link: https://github.com/amanzi/ats
+    website-link: https://amanzi.github.io/
   - name: CMB
     logo: /assets/img/logos/cmb_logo.png
-    github-link: /#
-    website-link: /#
+    github-link: https://gitlab.kitware.com/cmb/cmb
+    website-link: https://www.computationalmodelbuilder.org/
   - name: LaGriT
     logo: /assets/img/logos/lagrit_logo.png
-    github-link: /#
-    website-link: /#
+    github-link: https://github.com/lanl/LaGriT
+    website-link: https://lagrit.lanl.gov/
   - name: Project Jupyter
     logo: /assets/img/logos/jupyter_logo.svg
-    github-link: /#
-    website-link: /#
+    github-link: https://github.com/jupyter
+    website-link: https://jupyter.org/
   - name: SMTK
     logo: /assets/img/logos/smtk_logo_mark.png
-    github-link: /#
-    website-link: /#
+    github-link: https://gitlab.kitware.com/cmb/smtk
+    website-link: https://smtk.readthedocs.io/en/latest/
 
 # Associated Repositories Section
 # include located in /_includes/home-repos.html
@@ -77,10 +75,10 @@ repos-text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
 repos:
   - title: ResonantHPC
     description: HPC pre/post processing for easier and faster integration with modern simulation systems
-    link: /#
+    link: https://github.com/Kitware/resonanthpc
   - title: iPyParaView
     description: A widget for interactive server-side ParaView rendering.
-    link: /#
+    link: https://github.com/Kitware/ipyparaview
 
 # Associated Repositories Section
 # include located in /_includes/home-repos.html
@@ -89,10 +87,10 @@ collab-text: We are proud to collaborate with researchers from prestigious organ
 
 collaborators:
   - name: Lawrence Berkeley National Laboratory
-    link: /#
+    link: https://www.lbl.gov/
     logo: /assets/img/collaborators/berkeley_lab_logo.png
   - name: Los Alamos National Laboratory
-    link: /#
+    link: https://www.lanl.gov/
     logo: /assets/img/collaborators/los_alamos_logo.svg
   - name: Kitware, Inc.
     link: https://kitware.com
