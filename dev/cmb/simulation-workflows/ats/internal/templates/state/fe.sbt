@@ -33,7 +33,21 @@
 
     <AttDef Type="viscosity" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-
+        <String Name="viscosity key">
+          <DefaultValue>viscosity_liquid</DefaultValue>
+        </String>
+        <String Name="temperature key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>temperature</DefaultValue>
+        </String>
+        <!-- viscosity model parameters -->
+        <Group Name="viscosity model parameters">
+          <ItemDefinitions>
+            <!-- As far as I can tell, there is only one? -->
+            <String Name="viscosity relation type">
+              <DefaultValue>liquid water</DefaultValue>
+            </String>
+         </ItemDefinitions>
+        </Group>
       </ItemDefinitions>
     </AttDef>
 

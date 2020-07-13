@@ -517,9 +517,6 @@
         <ParameterList name="viscosity model parameters" type="ParameterList">
           <Parameter name="viscosity relation type" type="string" value="liquid water"/>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">

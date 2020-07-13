@@ -107,6 +107,28 @@ def map_compressible_porosity(att):
     return mapping
 
 
+###########
+
+
+def render_richards_water_content(self, fe_elem, att):
+    options = ['porosity key', 'molar density liquid key', 'saturation liquid key', 'cell volume key']
+    self._render_items(fe_elem, att, options)
+    return
+
+
+def render_viscosity(self, fe_elem, att):
+    options = ['viscosity key', 'temperature key',]
+    model_params = ['viscosity relation type',]
+    self._render_items(fe_elem, att, options)
+    # Sub group
+    model_params_elem = self._new_list(fe_elem, 'viscosity model parameters')
+    self._render_items(model_params_elem, att, model_params)
+    return
+
+
+
+
+
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
     def __init__(self):
@@ -118,9 +140,9 @@ class StateWriter(BaseWriter):
         state_elem = self._new_list(xml_root, 'state')
 
         #### handle field evaluators
-        children = {
-            'richards water content' : ['porosity key', 'molar density liquid key', 'saturation liquid key', 'cell volume key'],
-
+        renderers = {
+            'richards water content': render_richards_water_content,
+            'viscosity': render_viscosity,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
@@ -128,7 +150,6 @@ class StateWriter(BaseWriter):
         basic_templates = {
             "capillary pressure, atmospheric gas over liquid": "fe-capillary-pressure.xml",
             "effective_pressure": "fe-effective-pressure.xml",
-            "viscosity": "fe-viscosity.xml",
             "molar fraction gas": "fe-molar-fraction-gas.xml",
             "overland pressure water content": "fe-overland-pressure-water-content.xml",
             "ponded depth": "fe-ponded-depth.xml",
@@ -157,10 +178,10 @@ class StateWriter(BaseWriter):
                 mapping = func(att)
                 append_template(fe_list_elem, fname, mapping)
             # New implementation!
-            elif fe_type in children:
+            elif fe_type in renderers:
                 fe_elem = self._new_list(fe_list_elem, name)
                 self._new_param(fe_elem, 'field evaluator type', 'string', fe_type)
-                self._render_items(fe_elem, att, children[fe_type])
+                renderers[fe_type](self, fe_elem, att)
             else:
                 raise NotImplementedError('Field evaluator `{}` not implemented'.format(fe_type))
 
