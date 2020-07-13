@@ -11,16 +11,16 @@
       <ItemDefinitions>
         <!-- NOTE: all options here are set as optional because none are set in demos -->
         <String Name="porosity key" Optional="true" IsEnabledByDefault="false">
-          <DefaultValue>DOMAIN-porosity</DefaultValue>
+          <DefaultValue>porosity</DefaultValue>
         </String>
         <String Name="molar density liquid key" Optional="true" IsEnabledByDefault="false">
-          <DefaultValue>DOMAIN-molar_density_liquid</DefaultValue>
+          <DefaultValue>molar_density_liquid</DefaultValue>
         </String>
         <String Name="saturation liquid key" Optional="true" IsEnabledByDefault="false">
-          <DefaultValue>DOMAIN-saturation_liquid</DefaultValue>
+          <DefaultValue>saturation_liquid</DefaultValue>
         </String>
         <String Name="cell volume key" Optional="true" IsEnabledByDefault="false">
-          <DefaultValue>DOMAIN-cell_volume</DefaultValue>
+          <DefaultValue>cell_volume</DefaultValue>
         </String>
       </ItemDefinitions>
     </AttDef>
