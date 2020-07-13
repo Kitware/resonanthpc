@@ -14,8 +14,8 @@
 
 
 # Observation
-- type: observation-base
-  name: observation-base-0
+- type: observation
+  name: observation-0
   items:
     - 'variable': pressure
     - 'observation output filename': fooooooo
@@ -36,8 +36,8 @@
 
 
 # Observation
-- type: observation-base
-  name: observation-base-1
+- type: observation
+  name: observation-1
   items:
     - 'variable': pressure
     - 'observation output filename': dfasfsaf

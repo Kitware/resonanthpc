@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Definitions>
-    <AttDef Type="observation-base" BaseType="" Version="0">
+    <AttDef Type="observation" BaseType="" Version="0">
       <ItemDefinitions>
 
         <String Name="observation output filename"></String>
