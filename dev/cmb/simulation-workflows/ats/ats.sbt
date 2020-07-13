@@ -96,7 +96,7 @@
     </View>
     <View Type="Attribute" Title="Observation">
       <AttributeTypes>
-        <Att Type="observation-base" Name="observations"/>
+        <Att Type="observation" Name="observations"/>
       </AttributeTypes>
     </View>
 
