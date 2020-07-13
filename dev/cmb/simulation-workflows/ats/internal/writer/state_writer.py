@@ -118,12 +118,16 @@ class StateWriter(BaseWriter):
         state_elem = self._new_list(xml_root, 'state')
 
         #### handle field evaluators
-        fe_elem = self._new_list(state_elem, 'field evaluators')
+        children = {
+            'richards water content' : ['porosity key', 'molar density liquid key', 'saturation liquid key', 'cell volume key'],
+
+        }
+
+        fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
         basic_templates = {
             "capillary pressure, atmospheric gas over liquid": "fe-capillary-pressure.xml",
             "effective_pressure": "fe-effective-pressure.xml",
-            "richards water content": "fe-richards-water-content.xml",
             "viscosity": "fe-viscosity.xml",
             "molar fraction gas": "fe-molar-fraction-gas.xml",
             "overland pressure water content": "fe-overland-pressure-water-content.xml",
@@ -131,7 +135,6 @@ class StateWriter(BaseWriter):
             "ponded depth bar": "fe-ponded-depth-bar.xml",
             "multiplicative evaluator": "fe-multiplicative-evaluator.xml",
         }
-
 
         smart_templates = {
             "independent variable": ("fe-independent-variable.xml", map_independent_variable),
@@ -147,14 +150,19 @@ class StateWriter(BaseWriter):
             name = att.name()
             fe_type = att.type()
             if fe_type in basic_templates:
-                append_template(fe_elem, basic_templates[fe_type], {r"${NAME}": name})
+                append_template(fe_list_elem, basic_templates[fe_type], {r"${NAME}": name})
             elif fe_type in smart_templates:
                 # We gotta be smart
                 fname, func = smart_templates[fe_type]
                 mapping = func(att)
-                append_template(fe_elem, fname, mapping)
+                append_template(fe_list_elem, fname, mapping)
+            # New implementation!
+            elif fe_type in children:
+                fe_elem = self._new_list(fe_list_elem, name)
+                self._new_param(fe_elem, 'field evaluator type', 'string', fe_type)
+                self._render_items(fe_elem, att, children[fe_type])
             else:
-                pass # not implemented
+                raise NotImplementedError('Field evaluator `{}` not implemented'.format(fe_type))
 
 
 

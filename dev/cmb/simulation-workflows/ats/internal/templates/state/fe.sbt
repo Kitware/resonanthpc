@@ -1,23 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
   <Definitions>
-    <!-- TODO: field evaluators -->
     <AttDef Type="field-evaluator-base" BaseType="" Abstract="true" Version="0">
     </AttDef>
 
+
+    <!-- ////////////////////////////////////////////////////////////////// -->
+
     <AttDef Type="richards water content" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <!-- NOTE: all options here are set as optional because none are set in demos -->
+        <String Name="porosity key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>DOMAIN-porosity</DefaultValue>
+        </String>
+        <String Name="molar density liquid key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>DOMAIN-molar_density_liquid</DefaultValue>
+        </String>
+        <String Name="saturation liquid key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>DOMAIN-saturation_liquid</DefaultValue>
+        </String>
+        <String Name="cell volume key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>DOMAIN-cell_volume</DefaultValue>
+        </String>
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="capillary pressure, atmospheric gas over liquid" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="viscosity" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="effective_pressure" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="multiplicative evaluator" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="independent variable" BaseType="field-evaluator-base" Version="0">
@@ -95,18 +124,33 @@
     </AttDef>
 
     <AttDef Type="eos-vapor" BaseType="eos" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="molar fraction gas" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="overland pressure water content" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="ponded depth" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="ponded depth bar" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+
+      </ItemDefinitions>
     </AttDef>
 
     <AttDef Type="compressible porosity" BaseType="field-evaluator-base" Version="0">
