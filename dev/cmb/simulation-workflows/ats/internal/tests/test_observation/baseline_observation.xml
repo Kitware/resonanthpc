@@ -10,6 +10,7 @@
       <Parameter name="direction normalized flux" type="bool" value="true"/>
       <Parameter name="region" type="string" value="east face"/>
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,10800.0,-1.0}"/>
+      <Parameter name="times start period stop units" type="string" value="s"/>
     </ParameterList>
     <ParameterList name="observation-base-1" type="ParameterList">
       <Parameter name="observation output filename" type="string" value="dfasfsaf"/>

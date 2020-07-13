@@ -72,5 +72,10 @@
     </AttDef>
 
 
+
+    <AttDef Type="pk-richards-flow-rc-sh" Label="Richards Flow PK rc sh" BaseType="pk-richards-flow-4" Version="0">
+    </AttDef>
+
+
   </Definitions>
 </SMTK_AttributeResource>

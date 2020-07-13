@@ -20,5 +20,22 @@
     </AttDef>
 
 
+    <AttDef Type="pk-coupled-water-rc-sh" Label="coupled water" BaseType="pk-base" Version="0">
+      <ItemDefinitions>
+        <Component Name="surface pk">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base-2']"></Resource>
+          </Accepts>
+        </Component>
+
+        <Component Name="subsurface pk">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base-2']"></Resource>
+          </Accepts>
+        </Component>
+      </ItemDefinitions>
+    </AttDef>
+
+
   </Definitions>
 </SMTK_AttributeResource>

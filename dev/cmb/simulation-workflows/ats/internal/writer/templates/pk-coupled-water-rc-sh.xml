@@ -1,0 +1,41 @@
+<ParameterList name="${NAME}">
+  <Parameter name="PK type" type="string" value="coupled water"/>
+  <Parameter name="PKs order" type="Array(string)" value="{${SUBSURFACE_PK}, ${SURFACE_PK}}"/>
+  <ParameterList name="verbose object">
+    <Parameter name="verbosity level" type="string" value="medium"/>
+  </ParameterList>
+
+  <ParameterList name="water delegate">
+    <Parameter name="modify predictor damp and cap the water spurt" type="bool" value="true"/>
+    <Parameter name="damp and cap the water spurt" type="bool" value="true"/>
+    <Parameter name="cap over atmospheric" type="double" value="1.e-6"/>
+    <ParameterList name="verbose object">
+      <Parameter name="verbosity level" type="string" value="medium"/>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="preconditioner">
+    <Parameter name="preconditioner type" type="string" value="boomer amg"/>
+    <ParameterList name="boomer amg parameters">
+      <Parameter name="cycle applications" type="int" value="1"/>
+      <Parameter name="smoother sweeps" type="int" value="1"/>
+      <Parameter name="strong threshold" type="double" value="0.85"/>
+      <Parameter name="tolerance" type="double" value="0."/>
+      <Parameter name="verbosity" type="int" value="0"/>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="linear solver">
+    <Parameter name="iterative method" type="string" value="gmres"/>
+    <ParameterList name="verbose object">
+      <Parameter name="verbosity level" type="string" value="low"/>
+    </ParameterList>
+    <ParameterList name="gmres parameters">
+      <Parameter name="error tolerance" type="double" value="1.04e-10"/>
+      <Parameter name="maximum number of iterations" type="int" value="80"/>
+      <ParameterList name="verbose object">
+        <Parameter name="verbosity level" type="string" value="low"/>
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>

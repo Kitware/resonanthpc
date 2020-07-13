@@ -37,6 +37,7 @@ class ObservationWriter(BaseWriter):
             'location name',
             'functional',
             'direction normalized flux',
+            'write interval',
         ]
 
         obs_elem = self._new_list(xml_root, 'observations')

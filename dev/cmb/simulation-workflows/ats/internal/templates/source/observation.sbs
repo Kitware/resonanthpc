@@ -4,7 +4,7 @@
     <AttDef Type="observation-base" BaseType="" Version="0">
       <ItemDefinitions>
 
-        <File Name="observation output filename" ShouldExist="false"></File>
+        <String Name="observation output filename"></String>
 
         <String Name="variable">
           <!-- TODO: ummm? should this be a drop down? It seems like available choices could depend on PK choice. For now, the user must know what they are doing.-->
@@ -16,6 +16,10 @@
           <!-- TODO: how do we make a space character the default value? -->
           <DefaultValue> </DefaultValue>
         </String>
+
+        <Int Name="write interval" Optional="true">
+          <DefaultValue>0</DefaultValue>
+        </Int>
 
         <Component Name="region">
           <Accepts>
