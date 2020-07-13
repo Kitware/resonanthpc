@@ -1,8 +1,6 @@
-- name: Collaborators
-  link: collaborators
 - name: Demos
   link: /#
 - name: Team
-  link: /#
+  link: team
 - name: Contact Us
   link: /#
