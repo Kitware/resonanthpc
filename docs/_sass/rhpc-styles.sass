@@ -9,6 +9,10 @@ html
     font-size: 48px
     font-weight: normal
 
+  h3
+    font-size: 32px
+    font-weight: normal
+
 p
   color: $text
 
@@ -123,6 +127,83 @@ a
 
           a
             color: $text-dark
+
+/* Interior Pages
+ * ==================== */
+#breadcrumbs
+  background: $gray-light
+  font-size: 13px
+  padding: 25px 0
+
+.page
+  & > .section
+    padding: 0
+
+  .hero
+    align-items: center
+    display: flex
+    flex-direction: row
+    min-height: 300px
+    position: relative
+
+    .hero-body
+      padding: 0
+      position: relative
+      text-align: center
+      z-index: 2
+
+    .overlay
+      background: #000
+      bottom: 0
+      left: 0
+      opacity: .8
+      position: absolute
+      right: 0
+      top: 0
+      z-index: 1
+
+  /* Team Page */
+  .team-sections
+    background: $gray-light
+
+    .kw-team,
+    .external-team
+      .members
+        padding: 35px 0
+
+        .member
+          .member-wrap
+            background: #fff
+            border-radius: 3px
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
+            padding: 25px
+
+            .member-image
+              $matchValue: 60%
+              border-radius: 100px
+              height: 0
+              margin: 15px auto
+              object-fit: cover
+              overflow: hidden
+              padding-bottom: $matchValue
+              width: $matchValue
+
+            .member-text
+              h6
+                color: $gray
+                font-weight: 400
+
+              p
+                color: $gray
+                font-size: 13px
+
+    .external-team
+      .members
+        .member
+          .member-wrap
+            .member-text
+              h6
+                margin-bottom: 0
 
 
 /* Footer
