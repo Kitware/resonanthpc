@@ -6,7 +6,7 @@ layout: page
 title: Meet Our Team
 permalink: /team/
 breadcrumbs: true
-hero_image: /assets/img/meet_our_team_hero_bg.jpg
+hero_image: /assets/img/page_hero_placeholder.jpg
 
 # Kitware Team
 # included in /_layouts/page.html
