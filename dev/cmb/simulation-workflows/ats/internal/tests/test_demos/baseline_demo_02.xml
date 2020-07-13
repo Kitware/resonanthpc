@@ -309,6 +309,7 @@
       <Parameter name="file name base" type="string" value="visdump"/>
       <Parameter name="dynamic mesh" type="bool" value="false"/>
       <Parameter name="times start period stop" type="Array(double)" value="{0.0,3155760.0,-1.0}"/>
+      <Parameter name="times start period stop units" type="string" value="s"/>
     </ParameterList>
   </ParameterList>
 </ParameterList>

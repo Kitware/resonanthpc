@@ -2,7 +2,7 @@
         <!-- Should this be constrained to only ONE of the 4 items? -->
         <ItemDefinitions>
           <!-- "Should cycles start period stop" be extensible? -->
-          <Group Name="cycles start period stop" Optional="true" IsEnabledByDefault="false">
+          <Group Name="cycles start period stop" Optional="true" IsEnabledByDefault="false" Extensible="true">
             <ItemDefinitions>
               <Int Name="Start Cycle">
                 <DefaultValue>0</DefaultValue>
@@ -18,7 +18,7 @@
           </Int>
 
           <!--"Should times start period stop" be extensible? -->
-          <Group Name="times start period stop" Label="Times: start/period/stop" Optional="true" IsEnabledByDefault="false">
+          <Group Name="times start period stop" Label="Times: start/period/stop" Optional="true" IsEnabledByDefault="false" Extensible="true">
             <ItemDefinitions>
               <Double Name="Start Time">
                 <DefaultValue>0.0</DefaultValue>
@@ -27,11 +27,11 @@
               </Double>
               <Double Name="Stop Time" Optional="true" IsEnabledByDefault="false">
               </Double>
-              <String Name="time units">
+              <String Name="units">
                 <DiscreteInfo DefaultIndex="0">
                   <Value Enum="second">s</Value>
                   <Value Enum="day">d</Value>
-                  <Value Enum="year">yr</Value>
+                  <Value Enum="year">y</Value>
                 </DiscreteInfo>
               </String>
             </ItemDefinitions>
@@ -41,11 +41,11 @@
             <ItemDefinitions>
               <Double Name="times" Extensible="true">
               </Double>
-              <String Name="time units">
+              <String Name="units">
                 <DiscreteInfo DefaultIndex="0">
                   <Value Enum="second">s</Value>
                   <Value Enum="day">d</Value>
-                  <Value Enum="year">yr</Value>
+                  <Value Enum="year">y</Value>
                 </DiscreteInfo>
               </String>
             </ItemDefinitions>

@@ -31,6 +31,14 @@
       </ItemDefinitions>
     </AttDef>
 
+    <AttDef Type="pk-overland-flow-pressure-basis-rc-sh" Label="overland flow, pressure basis rc sh" BaseType="pk-physical-bdf" Version="0">
+      <AssociationsDef NumberOfRequiredValues="1" Name="BC regions">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+        </Accepts>
+      </AssociationsDef>
+    </AttDef>
+
 
   </Definitions>
 </SMTK_AttributeResource>

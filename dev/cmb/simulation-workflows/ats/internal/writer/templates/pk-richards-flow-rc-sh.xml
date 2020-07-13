@@ -1,0 +1,48 @@
+<ParameterList name="${NAME}">
+  <Parameter name="PK type" type="string" value="richards flow"/>
+  <Parameter name="primary variable key" type="string" value="pressure"/>
+  <Parameter name="initial time step" type="double" value="5.00e+00"/>
+  <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
+  <Parameter name="permeability rescaling" type="double" value="1.00e+07"/>
+
+  <Parameter name="debug faces" type="Array(int)" value="{}"/>
+  <ParameterList name="verbose object">
+    <Parameter name="verbosity level" type="string" value="medium"/>
+  </ParameterList>
+
+  <ParameterList name="diffusion">
+    <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation"/>
+  </ParameterList>
+
+  <ParameterList name="diffusion preconditioner">
+    <Parameter name="Newton correction" type="string" value="approximate Jacobian"/>
+  </ParameterList>
+
+  <ParameterList name="boundary conditions"/>
+
+  <ParameterList name="initial condition">
+    <Parameter name="initialize faces from cells" type="bool" value="true"/>
+    <ParameterList name="initialize from 1D column">
+      <Parameter name="file" type="string" value="../column_data.h5"/>
+      <Parameter name="z header" type="string" value="/z"/>
+      <Parameter name="f header" type="string" value="/pressure"/>
+      <Parameter name="coordinate orientation" type="string" value="depth"/>
+      <Parameter name="surface sideset" type="string" value="${IC_REGION}"/>
+    </ParameterList>
+  </ParameterList>
+
+  <ParameterList name="water retention evaluator">
+    <Parameter name="minimum rel perm cutoff" type="double" value="0.00e+00"/>
+    <Parameter name="use surface rel perm" type="bool" value="true"/>
+    <ParameterList name="WRM parameters">
+      <ParameterList name="computational domain">
+        <Parameter name="region" type="string" value="${WRE_REGION}"/>
+        <Parameter name="WRM Type" type="string" value="van Genuchten"/>
+        <Parameter name="van Genuchten alpha" type="double" value="1.5e-04"/>
+        <Parameter name="van Genuchten m" type="double" value=".33"/>
+        <Parameter name="van Genuchten residual saturation" type="double" value="0.1"/>
+        <Parameter name="smoothing interval width [saturation]" type="double" value="0.05"/>
+      </ParameterList>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>
