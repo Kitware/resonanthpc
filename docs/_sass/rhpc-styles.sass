@@ -183,10 +183,12 @@ a
               border-radius: 100px
               height: 0
               margin: 15px auto
-              object-fit: cover
               overflow: hidden
               padding-bottom: $matchValue
               width: $matchValue
+
+              img
+                object-fit: cover
 
             .member-text
               h6
@@ -204,6 +206,43 @@ a
             .member-text
               h6
                 margin-bottom: 0
+
+  /* Demos page */
+  .demos-list
+    &.section
+      padding-top: 0
+
+    .demos
+      .demo
+        .demo-wrap
+          border-radius: 4px
+          box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
+          overflow: hidden
+
+          .demo-image
+            align-items: center
+            display: flex
+            max-height: 350px
+            justify-content: center
+            overflow: hidden
+            width: 100%
+
+            img
+              flex-grow: 0
+              height: 100%
+              object-fit: cover
+              width: 100%
+
+          .demo-text
+            padding: 20px
+
+            .links
+              align-items: center
+              border-top: 1px solid $gray-light
+              display: flex
+              justify-content: space-between
+              margin-top: 20px
+              padding-top: 20px
 
 
 /* Footer
