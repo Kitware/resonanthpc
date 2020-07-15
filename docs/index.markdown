@@ -70,7 +70,7 @@ utilized-software:
 # include located in /_includes/home-repos.html
 repos-background: /assets/img/repos_section_bg.jpg
 repos-heading: Associated GitHub repositories
-repos-text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+repos-text: We are creating opensource software on top of the stack of tools that we are utilizing. You can find the associated repositories to the project below.
 
 repos:
   - title: ResonantHPC
@@ -79,6 +79,9 @@ repos:
   - title: iPyParaView
     description: A widget for interactive server-side ParaView rendering.
     link: https://github.com/Kitware/ipyparaview
+  - title: ipytvk-simple
+    description: An ipywidget for vtkRenderWindow for interactive server-side rendering.
+    link: https://github.com/Kitware/ipyvtk-simple
 
 # Associated Repositories Section
 # include located in /_includes/home-repos.html
