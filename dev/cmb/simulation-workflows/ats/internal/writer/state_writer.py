@@ -99,14 +99,6 @@ def map_eos_vapor(att):
     return mapping
 
 
-def map_compressible_porosity(att):
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${REGION}": att.findComponent('region').value().name(),
-    }
-    return mapping
-
-
 ###########
 
 
@@ -144,6 +136,19 @@ def render_molar_fraction_gas(self, fe_elem, att):
     return
 
 
+def render_compressible_porosity(self, fe_elem, att):
+    options = ['pressure key', 'base porosity key', 'porosity key']
+    self._render_items(fe_elem, att, options)
+    # Sub group
+    model_params = ['pore compressibility [Pa^-1]',]
+    model_params_elem = self._new_list(fe_elem, 'compressible porosity model parameters')
+    region_name = att.findComponent('region').value().name()
+    region_elem = self._new_list(model_params_elem, region_name)
+    self._new_param(region_elem, 'region', 'string', region_name)
+    self._render_items(region_elem, att, model_params)
+    pass
+
+
 
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
@@ -162,6 +167,7 @@ class StateWriter(BaseWriter):
             'capillary pressure, atmospheric gas over liquid': render_capillary_pressure,
             'effective_pressure': render_effective_pressure,
             'molar fraction gas': render_molar_fraction_gas,
+            'compressible porosity': render_compressible_porosity,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
@@ -179,7 +185,6 @@ class StateWriter(BaseWriter):
             "eos": ("fe-eos.xml", map_eos),
             "eos-constant": ("fe-eos-constant.xml", map_eos_constant),
             "eos-vapor": ("fe-eos-vapor.xml", map_eos_vapor),
-            "compressible porosity": ("fe-compressible-porosity.xml", map_compressible_porosity),
         }
 
         fe_atts = shared.sim_atts.findAttributes('field-evaluator-base')

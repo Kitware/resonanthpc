@@ -186,11 +186,27 @@
 
     <AttDef Type="compressible porosity" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-        <Component Name="region">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-          </Accepts>
-        </Component>
+        <String Name="pressure key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>pressure</DefaultValue>
+        </String>
+        <String Name="base porosity key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>base_porosity</DefaultValue>
+        </String>
+        <String Name="porosity key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>porosity</DefaultValue>
+        </String>
+        <Group Name="compressible porosity model parameters">
+          <ItemDefinitions>
+            <Component Name="region">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <Double Name="pore compressibility [Pa^-1]">
+              <DefaultValue>1.0e-9</DefaultValue>
+            </Double>
+         </ItemDefinitions>
+        </Group>
       </ItemDefinitions>
     </AttDef>
 
