@@ -26,9 +26,7 @@
     </AttDef>
 
     <AttDef Type="capillary pressure, atmospheric gas over liquid" BaseType="field-evaluator-base" Version="0">
-      <ItemDefinitions>
-
-      </ItemDefinitions>
+      <!-- Cannot find any options in docs or source -->
     </AttDef>
 
     <AttDef Type="viscosity" BaseType="field-evaluator-base" Version="0">
