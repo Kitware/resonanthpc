@@ -130,6 +130,10 @@ def render_capillary_pressure(self, fe_elem, att):
     pass
 
 
+def render_effective_pressure(self, fe_elem, att):
+    pass
+
+
 
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
@@ -146,12 +150,12 @@ class StateWriter(BaseWriter):
             'richards water content': render_richards_water_content,
             'viscosity': render_viscosity,
             'capillary pressure, atmospheric gas over liquid': render_capillary_pressure,
+            'effective_pressure': render_effective_pressure,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
         basic_templates = {
-            "effective_pressure": "fe-effective-pressure.xml",
             "molar fraction gas": "fe-molar-fraction-gas.xml",
             "overland pressure water content": "fe-overland-pressure-water-content.xml",
             "ponded depth": "fe-ponded-depth.xml",

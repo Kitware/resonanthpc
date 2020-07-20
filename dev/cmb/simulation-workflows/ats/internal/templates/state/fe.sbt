@@ -51,7 +51,9 @@
 
     <AttDef Type="effective_pressure" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-
+        <String Name="effective pressure key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>effective_pressure</DefaultValue>
+        </String>
       </ItemDefinitions>
     </AttDef>
 

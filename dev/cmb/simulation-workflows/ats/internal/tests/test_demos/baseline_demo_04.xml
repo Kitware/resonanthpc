@@ -281,15 +281,9 @@
       </ParameterList>
       <ParameterList name="effective_pressure" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="effective_pressure"/>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
       <ParameterList name="surface-effective_pressure" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="effective_pressure"/>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
       <ParameterList name="molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos"/>

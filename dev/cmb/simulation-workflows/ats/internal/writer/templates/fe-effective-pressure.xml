@@ -1,6 +1,0 @@
-<ParameterList name="${NAME}" type="ParameterList">
-  <Parameter name="field evaluator type" type="string" value="effective_pressure" />
-  <ParameterList name="verbose object" type="ParameterList">
-    <Parameter name="verbosity level" type="string" value="low" />
-  </ParameterList>
-</ParameterList>
