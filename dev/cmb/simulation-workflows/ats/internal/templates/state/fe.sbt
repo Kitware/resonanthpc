@@ -42,7 +42,9 @@
           <ItemDefinitions>
             <!-- As far as I can tell, there is only one? -->
             <String Name="viscosity relation type">
-              <DefaultValue>liquid water</DefaultValue>
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="liquid water">liquid water</Value>
+              </DiscreteInfo>
             </String>
          </ItemDefinitions>
         </Group>
@@ -145,7 +147,22 @@
 
     <AttDef Type="molar fraction gas" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-
+        <String Name="molar fraction key">
+          <DefaultValue>mol_frac_gas</DefaultValue>
+        </String>
+        <String Name="temperature key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>temperature</DefaultValue>
+        </String>
+        <Group Name="vapor pressure model parameters">
+          <ItemDefinitions>
+            <!-- As far as I can tell, there is only one? -->
+            <String Name="vapor pressure model type">
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="water vapor over water/ice">water vapor over water/ice</Value>
+              </DiscreteInfo>
+            </String>
+         </ItemDefinitions>
+        </Group>
       </ItemDefinitions>
     </AttDef>
 

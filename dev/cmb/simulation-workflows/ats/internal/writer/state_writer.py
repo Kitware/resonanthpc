@@ -118,9 +118,9 @@ def render_richards_water_content(self, fe_elem, att):
 
 def render_viscosity(self, fe_elem, att):
     options = ['viscosity key', 'temperature key',]
-    model_params = ['viscosity relation type',]
     self._render_items(fe_elem, att, options)
     # Sub group
+    model_params = ['viscosity relation type',]
     model_params_elem = self._new_list(fe_elem, 'viscosity model parameters')
     self._render_items(model_params_elem, att, model_params)
     return
@@ -132,6 +132,16 @@ def render_capillary_pressure(self, fe_elem, att):
 
 def render_effective_pressure(self, fe_elem, att):
     pass
+
+
+def render_molar_fraction_gas(self, fe_elem, att):
+    options = ['molar fraction key',]
+    self._render_items(fe_elem, att, options)
+    # Sub group
+    model_params = ['vapor pressure model type',]
+    model_params_elem = self._new_list(fe_elem, 'vapor pressure model parameters')
+    self._render_items(model_params_elem, att, model_params)
+    return
 
 
 
@@ -151,12 +161,12 @@ class StateWriter(BaseWriter):
             'viscosity': render_viscosity,
             'capillary pressure, atmospheric gas over liquid': render_capillary_pressure,
             'effective_pressure': render_effective_pressure,
+            'molar fraction gas': render_molar_fraction_gas,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
         basic_templates = {
-            "molar fraction gas": "fe-molar-fraction-gas.xml",
             "overland pressure water content": "fe-overland-pressure-water-content.xml",
             "ponded depth": "fe-ponded-depth.xml",
             "ponded depth bar": "fe-ponded-depth-bar.xml",
