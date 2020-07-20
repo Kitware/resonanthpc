@@ -146,7 +146,12 @@ def render_compressible_porosity(self, fe_elem, att):
     region_elem = self._new_list(model_params_elem, region_name)
     self._new_param(region_elem, 'region', 'string', region_name)
     self._render_items(region_elem, att, model_params)
-    pass
+    return
+
+
+def render_overland_pressure_water_content(self, fe_elem, att):
+    options = ['molar mass', 'allow negative water content', 'water content rollover', 'pressure key', 'cell volume key']
+    self._render_items(fe_elem, att, options)
 
 
 
@@ -168,12 +173,12 @@ class StateWriter(BaseWriter):
             'effective_pressure': render_effective_pressure,
             'molar fraction gas': render_molar_fraction_gas,
             'compressible porosity': render_compressible_porosity,
+            'overland pressure water content': render_overland_pressure_water_content,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
         basic_templates = {
-            "overland pressure water content": "fe-overland-pressure-water-content.xml",
             "ponded depth": "fe-ponded-depth.xml",
             "ponded depth bar": "fe-ponded-depth-bar.xml",
             "multiplicative evaluator": "fe-multiplicative-evaluator.xml",

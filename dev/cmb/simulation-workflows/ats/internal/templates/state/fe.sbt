@@ -168,7 +168,21 @@
 
     <AttDef Type="overland pressure water content" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-
+        <Double Name="molar mass" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>0.0180153</DefaultValue>
+        </Double>
+        <!-- TODO: can we make this optional??? -->
+        <!-- <Void Name="allow negative water content" Optional="true" IsEnabledByDefault="false">
+        </Void> -->
+        <Double Name="water content rollover" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>0.0</DefaultValue>
+        </Double>
+        <String Name="pressure key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>pressure</DefaultValue>
+        </String>
+        <String Name="cell volume key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>cell_volume</DefaultValue>
+        </String>
       </ItemDefinitions>
     </AttDef>
 
