@@ -22,7 +22,8 @@ title: Resonant HPC
 tagline: Neat tagline here
 description: >
   HPC-Enabled Pre- and Post-Processing with Jupyter
-url: "https://kitware.github.io/resonanthpc/"
+url: "https://kitware.github.io"
+baseurl: /resonanthpc
 permalink: pretty
 favicon: /favicon.ico
 
