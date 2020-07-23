@@ -9,7 +9,7 @@
       {% for collaborator in page.collaborators %}
         <div class="collaborator column has-text-centered is-one-third">
           <div class="collab-logo">
-            <img src="{{ collaborator.logo }}" alt="{{ collaborator.name }}">
+            <img src="{{ collaborator.logo | prepend: site.baseurl }}" alt="{{ collaborator.name }}">
           </div>
           <div class="collab-description">
             <h5 class="name">{{ collaborator.name }}</h5>

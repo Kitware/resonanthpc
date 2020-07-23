@@ -1,4 +1,4 @@
-<section class="associated-repos has-bg"{% if page.repos-background %} style="background: url('{{ page.repos-background }}'); background-size: cover;"{% endif %}>
+<section class="associated-repos has-bg"{% if page.repos-background %} style="background: url('{{ page.repos-background | prepend: site.baseurl }}'); background-size: cover;"{% endif %}>
   <div class="overlay">
     <div class="container">
       <div class="blurb has-text-centered">
