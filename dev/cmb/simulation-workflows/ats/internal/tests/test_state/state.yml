@@ -1,0 +1,171 @@
+---
+# build_attributes.py input for demo01
+
+# Mesh
+- type: mesh.generate.3d
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+
+# Region
+- type: region.box.3d
+  name: computational domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
+
+
+- type: region.box.3d
+  name: surface domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
+
+
+
+
+
+
+
+# State
+# State field evaluators
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: compressible porosity
+  name: porosity
+  items:
+    - region: computational domain
+
+- type: effective_pressure
+  name: effective_pressure
+
+- type: effective_pressure
+  name: surface-effective_pressure
+
+- type: eos-constant
+  name: molar_density_liquid
+  items:
+    - 'EOS basis': both
+    - 'molar density key': molar_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: eos-constant
+  name: surface-mass_density_liquid
+  items:
+    - 'EOS basis': both
+    - 'molar density key': surface-molar_density_liquid
+    - 'mass density key': surface-mass_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: eos-constant
+  name: surface-molar_density_liquid
+  items:
+    - 'EOS basis': both
+    - 'molar density key': surface-molar_density_liquid
+    - 'mass density key': surface-mass_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: eos-constant
+  name: surface-source_molar_density
+  items:
+    - 'EOS basis': molar
+    - 'molar density key': surface-source_molar_density
+    - 'mass density key': mass_density_liquid
+    - key: density [kg/m^3]
+    - value: 1000
+
+- type: eos-vapor
+  name: molar_density_gas
+  items:
+    - 'EOS basis': both
+    - 'molar density key': molar_density_gas
+    - 'mass density key': mass_density_gas
+
+- type: independent variable
+  name: base_porosity
+  items:
+    - value: 0.25
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: permeability
+  items:
+    - value: 2.5e-12
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: surface-manning_coefficient
+  items:
+    - value: 0.15
+    - components: cell
+    - region: surface domain
+
+- type: independent variable
+  name: surface-relative_permeability
+  items:
+    - value: 1.0
+    - components: cell
+    - region: surface domain
+
+- type: independent variable
+  name: surface-temperature
+  items:
+    - value: 274.65
+    - components: cell
+    - region: surface domain
+
+- type: independent variable
+  name: temperature
+  items:
+    - value: 274.65
+    - components: cell,boundary_face
+    - region: computational domain
+
+- type: independent variable - function
+  name: surface-mass_source
+  items:
+    - name: tabular-data
+      subgroups:
+        - - X: 0.0
+          - Y: 3.0e-6
+        - - X: 4.32e+7
+          - Y: 0.0
+    - components: cell
+    - region: surface domain
+
+- type: molar fraction gas
+  name: mol_frac_gas
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: ponded depth bar
+  name: surface-ponded_depth_bar
+
+- type: richards water content
+  name: water_content
+
+- type: viscosity
+  name: viscosity_liquid
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]

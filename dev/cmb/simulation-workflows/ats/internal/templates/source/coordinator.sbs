@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Definitions>
+    <AttDef Type="cycle driver" BaseType="" Version="0">
+      <ItemDefinitions>
+        <!-- domain timing -->
+        <Double Name="start time">
+          <DefaultValue>0.0</DefaultValue>
+          <RangeInfo>
+            <Min Inclusive="true">0.0</Min>
+          </RangeInfo>
+        </Double>
+        <String Name="start time units">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="second">s</Value>
+            <Value Enum="day">d</Value>
+            <Value Enum="year">y</Value>
+          </DiscreteInfo>
+        </String>
+        <!-- end timing choices -->
+        <!-- TODO: should we use an end cycle?: "commonly used to ensure that, in the case of a time step crash, we do not continue on forever spewing output." -->
+        <String Name="end-spec" Label="end">
+          <ChildrenDefinitions>
+            <Double Name="end time">
+              <RangeInfo>
+                <Min Inclusive="true">0.0</Min>
+              </RangeInfo>
+            </Double>
+            <String Name="end time units">
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="second">s</Value>
+                <Value Enum="day">d</Value>
+                <Value Enum="year">y</Value>
+              </DiscreteInfo>
+            </String>
+            <Int Name="end cycle"></Int>
+          </ChildrenDefinitions>
+          <DiscreteInfo DefaultIndex="0">
+            <Structure>
+              <Value>time</Value>
+              <Items>
+                <Item>end time</Item>
+                <Item>end time units</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value>cycle</Value>
+              <Items>
+                <Item>end cycle</Item>
+              </Items>
+            </Structure>
+          </DiscreteInfo>
+        </String>
+        <!-- end of end timing section-->
+        <File Name="restart from checkpoint file" Optional="true" IsEnabledByDefault="false" ShouldExist="true"></File>
+        <Double Name="wallclock duration [hrs]" Optional="true" IsEnabledByDefault="false">
+          <RangeInfo>
+            <Min Inclusive="false">0.0</Min>
+          </RangeInfo>
+        </Double>
+
+        <Group Name="required times" Optional="true" IsEnabledByDefault="false">
+          <xi:include href="templates/source/io-event.xml" />
+        </Group>
+
+        <!-- PK tree (list of length one??) -->
+        <Component Name="PK tree">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base']"></Resource>
+          </Accepts>
+        </Component>
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+</SMTK_AttributeResource>

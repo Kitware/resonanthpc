@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Definitions>
+    <AttDef Type="visualization driver" BaseType="" Version="0">
+      <ItemDefinitions>
+        <Component Name="domain">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']"></Resource>
+          </Accepts>
+        </Component>
+
+        <String Name="file name base">
+          <!-- TODO: file name "visdump_DOMAIN_data" -->
+          <!-- CAN we dynamically set this based on the domain? -->
+          <DefaultValue>visdump_DOMAIN_data</DefaultValue>
+        </String>
+
+        <Void Name="dynamic mesh" Label="dynamic mesh" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>Write mesh data for every visualization dump; this facilitates visualizing deforming meshes.</BriefDescription>
+        </Void>
+
+        <!-- NOTE: not used??? why here if also in IOEvent spec? -->
+        <!-- NOTE: the year definition here is differnet than coordinator -->
+        <!-- <String Name="time units">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="second">s</Value>
+            <Value Enum="day">d</Value>
+            <Value Enum="year">yr 365</Value>
+          </DiscreteInfo>
+        </String> -->
+
+        <Group Name="visualization times">
+          <xi:include href="templates/source/io-event.xml" />
+        </Group>
+
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+</SMTK_AttributeResource>

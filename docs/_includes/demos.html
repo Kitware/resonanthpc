@@ -1,0 +1,33 @@
+<section class="demos-list section">
+  <div class="container">
+    <div class="demos columns is-variable is-multiline is-6">
+      {% for demo in page.demos %}
+        <div class="demo column is-half">
+          <div class="demo-wrap">
+            {% if demo.image %}
+            <div class="demo-image">
+              <img src="{{ demo.image }}" alt="{{ demo.name }}">
+            </div>
+            {% endif %}
+            <div class="demo-text">
+              <h5>{{ demo.name }}</h5>
+              {{ demo.description }}
+              <div class="links">
+                {% if demo.git_link %}
+                  <a href="{{ demo.git_link }}" class="button">
+                    <span class="mdi mdi-github"></span>
+                    View on GitHub
+                  </a>
+                  <a href="{{ demo.share_link }}">
+                    <span class="mdi mdi-share-variant"></span>
+                    Share link
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

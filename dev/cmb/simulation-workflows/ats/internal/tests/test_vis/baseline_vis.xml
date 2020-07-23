@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<ParameterList name="Main" type="ParameterList">
+  <ParameterList name="visualization" type="ParameterList">
+    <ParameterList name="domain" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump"/>
+      <Parameter name="dynamic mesh" type="bool" value="false"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,1.0,-1.0}"/>
+      <Parameter name="times start period stop units" type="string" value="s"/>
+    </ParameterList>
+    <ParameterList name="domain_2" type="ParameterList">
+      <Parameter name="file name base" type="string" value="visdump_2"/>
+      <Parameter name="dynamic mesh" type="bool" value="false"/>
+      <Parameter name="times start period stop 0" type="Array(double)" value="{0.0,1.0,5.0}"/>
+      <Parameter name="times start period stop 0 units" type="string" value="d"/>
+      <Parameter name="times start period stop 1" type="Array(double)" value="{0.0,100.0,500.0}"/>
+      <Parameter name="times start period stop 1 units" type="string" value="d"/>
+      <Parameter name="times start period stop 2" type="Array(double)" value="{0.0,1.0,5.0}"/>
+      <Parameter name="times start period stop 2 units" type="string" value="y"/>
+      <Parameter name="times start period stop 3" type="Array(double)" value="{0.0,10.0,30.0}"/>
+      <Parameter name="times start period stop 3 units" type="string" value="y"/>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Definitions>
+    <AttDef Type="observation" BaseType="" Version="0">
+      <ItemDefinitions>
+
+        <String Name="observation output filename"></String>
+
+        <String Name="variable">
+          <!-- TODO: ummm? should this be a drop down? It seems like available choices could depend on PK choice. For now, the user must know what they are doing.-->
+          <BriefDescription>any ATS variable used by any PK, e.g. “pressure” or “surface-water_content”</BriefDescription>
+        </String>
+
+        <!-- NOTE: not documented, but in the example -->
+        <String Name="delimiter">
+          <!-- TODO: how do we make a space character the default value? -->
+          <DefaultValue> </DefaultValue>
+        </String>
+
+        <Int Name="write interval" Optional="true">
+          <DefaultValue>0</DefaultValue>
+        </Int>
+
+        <Component Name="region">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+          </Accepts>
+        </Component>
+
+        <String Name="location name">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="cell">cell</Value>
+            <Value Enum="face">face</Value>
+            <Value Enum="node">node</Value>
+          </DiscreteInfo>
+          <BriefDescription>the mesh location of the thing to be measured, i.e. “cell”, “face”, or “node”</BriefDescription>
+        </String>
+
+        <String Name="functional">
+          <DiscreteInfo DefaultIndex="0">
+            <Value Enum="observation data: point">observation data: point</Value>
+            <Value Enum="observation data: average">observation data: average</Value>
+            <Value Enum="observation data: extensive integral">observation data: extensive integral</Value>
+            <Value Enum="observation data: minimum">observation data: minimum</Value>
+            <Value Enum="observation data: maximum">observation data: maximum</Value>
+          </DiscreteInfo>
+          <BriefDescription>the type of function to apply to the variable on the region</BriefDescription>
+        </String>
+
+        <Void Name="direction normalized flux" Label="direction normalized flux" Optional="true" IsEnabledByDefault="false">
+          <BriefDescription>For flux observations, dots the face-normal flux with a vector to ensure fluxes are integrated pointing the same direction.</BriefDescription>
+        </Void>
+        <Double Name="direction normalized flux direction" NumberOfRequiredValues="3" Optional="true" IsEnabledByDefault="false"></Double>
+
+        <Group Name="observation times">
+          <xi:include href="templates/source/io-event.xml" />
+        </Group>
+
+
+      </ItemDefinitions>
+    </AttDef>
+  </Definitions>
+</SMTK_AttributeResource>

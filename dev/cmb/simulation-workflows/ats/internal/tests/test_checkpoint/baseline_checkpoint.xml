@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<ParameterList name="Main" type="ParameterList">
+  <ParameterList name="checkpoint" type="ParameterList">
+    <Parameter name="file name base" type="string" value="checkpoint"/>
+    <Parameter name="file name digits" type="int" value="5"/>
+    <Parameter name="times start period stop" type="Array(double)" value="{0.0,10800.0,-1.0}"/>
+    <Parameter name="times start period stop units" type="string" value="s"/>
+  </ParameterList>
+</ParameterList>

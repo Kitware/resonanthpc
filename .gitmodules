@@ -1,0 +1,3 @@
+[submodule "smtk-tools"]
+	path = smtk-tools
+	url = https://gitlab.kitware.com/john.tourtellott/smtk-tools.git

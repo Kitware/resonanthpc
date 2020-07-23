@@ -1,0 +1,53 @@
+        <!-- Contents of IOEvent -->
+        <!-- Should this be constrained to only ONE of the 4 items? -->
+        <ItemDefinitions>
+          <!-- "Should cycles start period stop" be extensible? -->
+          <Group Name="cycles start period stop" Optional="true" IsEnabledByDefault="false" Extensible="true">
+            <ItemDefinitions>
+              <Int Name="Start Cycle">
+                <DefaultValue>0</DefaultValue>
+              </Int>
+              <Int Name="Cycle Period">
+              </Int>
+              <Int Name="Stop Cycle" Optional="true" IsEnabledByDefault="false">
+              </Int>
+            </ItemDefinitions>
+          </Group>
+
+          <Int Name="cycles" Extensible="true" Optional="true" IsEnabledByDefault="false">
+          </Int>
+
+          <!--"Should times start period stop" be extensible? -->
+          <Group Name="times start period stop" Label="Times: start/period/stop" Optional="true" IsEnabledByDefault="false" Extensible="true">
+            <ItemDefinitions>
+              <Double Name="Start Time">
+                <DefaultValue>0.0</DefaultValue>
+              </Double>
+              <Double Name="Time Period">
+              </Double>
+              <Double Name="Stop Time" Optional="true" IsEnabledByDefault="false">
+              </Double>
+              <String Name="units">
+                <DiscreteInfo DefaultIndex="0">
+                  <Value Enum="second">s</Value>
+                  <Value Enum="day">d</Value>
+                  <Value Enum="year">y</Value>
+                </DiscreteInfo>
+              </String>
+            </ItemDefinitions>
+          </Group>
+
+          <Group Name="times" Label="Times: explicit" Optional="true" IsEnabledByDefault="false">
+            <ItemDefinitions>
+              <Double Name="times" Extensible="true">
+              </Double>
+              <String Name="units">
+                <DiscreteInfo DefaultIndex="0">
+                  <Value Enum="second">s</Value>
+                  <Value Enum="day">d</Value>
+                  <Value Enum="year">y</Value>
+                </DiscreteInfo>
+              </String>
+            </ItemDefinitions>
+          </Group>
+        </ItemDefinitions>

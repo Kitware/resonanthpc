@@ -1,0 +1,177 @@
+---
+# build_attributes.py input for demo01
+
+# Mesh
+- type: mesh.generate.3d
+  name: domain
+  items:
+    - 'domain low coordinate': [0.0, 0.0, 0.0]
+    - 'domain high coordinate': [1.0, 1.0, 10.0]
+    - 'number of cells': [1, 1, 100]
+
+# Region
+- type: region.box.3d
+  name: computational domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [1.0, 1.0, 10.0]
+
+- type: region.plane.3d
+  name: bottom face
+  items:
+    - 'point':  [0.5, 0.5,  0.0]
+    - 'normal': [0.0, 0.0, -1.0]
+
+- type: region.plane.3d
+  name: east face
+  items:
+    - 'point':  [1.0, 1.0, 0.0]
+    - 'normal': [1.0, 0.0, 0.0]
+
+- type: region.plane.3d
+  name: north face
+  items:
+    - 'point':  [1.0, 1.0, 0.0]
+    - 'normal': [0.0, 1.0, 0.0]
+
+- type: region.plane.3d
+  name: south face
+  items:
+    - 'point':  [0.0,  0.0, 0.0]
+    - 'normal': [0.0, -1.0, 0.0]
+
+
+- type: region.plane.3d
+  name: surface
+  items:
+    - 'point':  [0.5, 0.5, 10.0]
+    - 'normal': [0.0, 0.0, 1.0]
+
+
+- type: region.plane.3d
+  name: west face
+  items:
+    - 'point':  [0.0, 0.0, 0.0]
+    - 'normal': [-1.0, 0.0, 0.0]
+
+
+# Process Kernel
+- type: pk-richards
+  name: pk-richards-0
+  associate:
+    - attribute: bottom face
+  items:
+    - 'initial condition': computational domain
+    - 'water retention evaluator': computational domain
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 1.0
+    - 'PK tree': pk-richards-0
+
+
+# Time integrator
+- action: edit
+  type: time integrator
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 51
+        - name: 'diverged tolerance'
+          value: 1000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-13
+        - name: 'backtrack monitor'
+          value: 'monitor residual'
+          # <Parameter name="max error growth factor" type="double" value="1000.0" />
+          # <Parameter name="modify correction" type="bool" value="true" />
+
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'min time step'
+          value: 1.0
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'time step reduction factor'
+          value: 0.75
+        - name: 'time step increase factor'
+          value: 1.25
+        - name: 'min time step'
+          value: 1.0
+
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 1.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+# Checkpoint (not used)
+
+# Observation (not used)
+
+# State
+#   state field evaluators
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: effective_pressure
+  name: effective_pressure
+
+- type: eos
+  name: molar_density_liquid
+
+- type: independent variable
+  name: permeability
+  items:
+    - value: 2.5e-12
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: porosity
+  items:
+    - value: 0.25
+    - components: cell
+    - region: computational domain
+
+- type: independent variable
+  name: temperature
+  items:
+    - value: 273.65
+    - components: cell,boundary_face
+    - region: computational domain
+
+- type: richards water content
+  name: water_content
+
+- type: viscosity
+  name: viscosity_liquid
+
+#   state initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]

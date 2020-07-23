@@ -1,0 +1,3 @@
+<ParameterList name="${NAME}" type="ParameterList">
+  <Parameter name="field evaluator type" type="string" value="richards water content" />
+</ParameterList>

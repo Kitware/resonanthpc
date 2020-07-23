@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<ParameterList name="Main" type="ParameterList">
+  <ParameterList name="observations" type="ParameterList">
+    <ParameterList name="observation-0" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="fooooooo"/>
+      <Parameter name="variable" type="string" value="pressure"/>
+      <Parameter name="delimiter" type="string" value=" "/>
+      <Parameter name="location name" type="string" value="cell"/>
+      <Parameter name="functional" type="string" value="observation data: point"/>
+      <Parameter name="direction normalized flux" type="bool" value="true"/>
+      <Parameter name="region" type="string" value="east face"/>
+      <Parameter name="times start period stop" type="Array(double)" value="{0.0,10800.0,-1.0}"/>
+      <Parameter name="times start period stop units" type="string" value="s"/>
+    </ParameterList>
+    <ParameterList name="observation-1" type="ParameterList">
+      <Parameter name="observation output filename" type="string" value="dfasfsaf"/>
+      <Parameter name="variable" type="string" value="pressure"/>
+      <Parameter name="delimiter" type="string" value=" "/>
+      <Parameter name="location name" type="string" value="node"/>
+      <Parameter name="functional" type="string" value="observation data: point"/>
+      <Parameter name="direction normalized flux" type="bool" value="false"/>
+      <Parameter name="region" type="string" value="east face"/>
+    </ParameterList>
+  </ParameterList>
+</ParameterList>
