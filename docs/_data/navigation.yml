@@ -1,0 +1,6 @@
+# - name: Demos
+#   link: /demos
+- name: Team
+  link: /team
+- name: Contact Us
+  link: mailto:kitware@kitware.com

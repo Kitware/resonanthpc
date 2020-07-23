@@ -1,0 +1,27 @@
+<section class="hero {% if page.hero_height %} {{ page.hero_height }} {% else %} is-medium {% endif %} is-bold is-primary" {% if page.hero_image %} style="background: url('{{ page.hero_image }}') no-repeat center center; background-size: cover;" {% endif %}>
+    <div class="hero-body {% if page.hero_darken %} hero-darken {% endif %}">
+        <div class="container">
+            {% if page.layout != 'home' %}
+              <h1 class="title is-2">{{ page.title }}</h1>
+            {% endif %}
+            <p class="subtitle is-3">{{ page.subtitle }}</p>
+            {% if page.hero_links %}
+              <div class="hero-links columns is-centered">
+                {% for link in page.hero_links %}
+                  <div class="column is-3-desktop is-half-tablet">
+                    <a href="{{ link.url | prepend: site.baseurl }}" class="button is-medium {{ link.class }}">
+                      {% if link.icon %}
+                        <span class="mdi mdi-{{ link.icon }}"></span>
+                      {% endif %}
+                      {{ link.text }}
+                    </a>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if page.hero_image %}
+      <div class="overlay"></div>
+    {% endif %}
+</section>
