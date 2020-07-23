@@ -6,7 +6,7 @@
           <div class="demo-wrap">
             {% if demo.image %}
             <div class="demo-image">
-              <img src="{{ demo.image }}" alt="{{ demo.name }}">
+              <img src="{{ demo.image | prepend: site.baseurl }}" alt="{{ demo.name }}">
             </div>
             {% endif %}
             <div class="demo-text">
