@@ -99,72 +99,55 @@ def map_eos_vapor(att):
     return mapping
 
 
-###########
-
-
-def render_richards_water_content(self, fe_elem, att):
-    options = ['porosity key', 'molar density liquid key', 'saturation liquid key', 'cell volume key']
-    self._render_items(fe_elem, att, options)
-    return
-
-
-def render_viscosity(self, fe_elem, att):
-    options = ['viscosity key', 'temperature key',]
-    self._render_items(fe_elem, att, options)
-    # Sub group
-    model_params = ['viscosity relation type',]
-    model_params_elem = self._new_list(fe_elem, 'viscosity model parameters')
-    self._render_items(model_params_elem, att, model_params)
-    return
-
-
-def render_capillary_pressure(self, fe_elem, att):
-    pass
-
-
-def render_effective_pressure(self, fe_elem, att):
-    pass
-
-
-def render_molar_fraction_gas(self, fe_elem, att):
-    options = ['molar fraction key',]
-    self._render_items(fe_elem, att, options)
-    # Sub group
-    model_params = ['vapor pressure model type',]
-    model_params_elem = self._new_list(fe_elem, 'vapor pressure model parameters')
-    self._render_items(model_params_elem, att, model_params)
-    return
-
-
-def render_compressible_porosity(self, fe_elem, att):
-    options = ['pressure key', 'base porosity key', 'porosity key']
-    self._render_items(fe_elem, att, options)
-    # Sub group
-    model_params = ['pore compressibility [Pa^-1]',]
-    model_params_elem = self._new_list(fe_elem, 'compressible porosity model parameters')
-    region_name = att.findComponent('region').value().name()
-    region_elem = self._new_list(model_params_elem, region_name)
-    self._new_param(region_elem, 'region', 'string', region_name)
-    self._render_items(region_elem, att, model_params)
-    return
-
-
-def render_overland_pressure_water_content(self, fe_elem, att):
-    options = ['molar mass', 'allow negative water content', 'water content rollover', 'pressure key', 'cell volume key']
-    self._render_items(fe_elem, att, options)
-
-
-def render_ponded_depth(self, fe_elem, att):
-    options = ['ponded depth bar', 'height key']
-    self._render_items(fe_elem, att, options)
-    return
-
-
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
     def __init__(self):
         super(StateWriter, self).__init__()
 
+    def render_richards_water_content(self, fe_elem, att):
+        options = ['porosity key', 'molar density liquid key', 'saturation liquid key', 'cell volume key']
+        self._render_items(fe_elem, att, options)
+
+    def render_viscosity(self, fe_elem, att):
+        options = ['viscosity key', 'temperature key',]
+        self._render_items(fe_elem, att, options)
+        # Sub group
+        model_params = ['viscosity relation type',]
+        model_params_elem = self._new_list(fe_elem, 'viscosity model parameters')
+        self._render_items(model_params_elem, att, model_params)
+
+    def render_capillary_pressure(self, fe_elem, att):
+        pass
+
+    def render_effective_pressure(self, fe_elem, att):
+        pass
+
+    def render_molar_fraction_gas(self, fe_elem, att):
+        options = ['molar fraction key',]
+        self._render_items(fe_elem, att, options)
+        # Sub group
+        model_params = ['vapor pressure model type',]
+        model_params_elem = self._new_list(fe_elem, 'vapor pressure model parameters')
+        self._render_items(model_params_elem, att, model_params)
+
+    def render_compressible_porosity(self, fe_elem, att):
+        options = ['pressure key', 'base porosity key', 'porosity key']
+        self._render_items(fe_elem, att, options)
+        # Sub group
+        model_params = ['pore compressibility [Pa^-1]',]
+        model_params_elem = self._new_list(fe_elem, 'compressible porosity model parameters')
+        region_name = att.findComponent('region').value().name()
+        region_elem = self._new_list(model_params_elem, region_name)
+        self._new_param(region_elem, 'region', 'string', region_name)
+        self._render_items(region_elem, att, model_params)
+
+    def render_overland_pressure_water_content(self, fe_elem, att):
+        options = ['molar mass', 'allow negative water content', 'water content rollover', 'pressure key', 'cell volume key']
+        self._render_items(fe_elem, att, options)
+
+    def render_ponded_depth(self, fe_elem, att):
+        options = ['ponded depth bar', 'height key']
+        self._render_items(fe_elem, att, options)
 
     def write(self, xml_root):
         """Perform the XML write out."""
@@ -172,14 +155,14 @@ class StateWriter(BaseWriter):
 
         #### handle field evaluators
         renderers = {
-            'richards water content': render_richards_water_content,
-            'viscosity': render_viscosity,
-            'capillary pressure, atmospheric gas over liquid': render_capillary_pressure,
-            'effective_pressure': render_effective_pressure,
-            'molar fraction gas': render_molar_fraction_gas,
-            'compressible porosity': render_compressible_porosity,
-            'overland pressure water content': render_overland_pressure_water_content,
-            'ponded depth': render_ponded_depth,
+            'richards water content': self.render_richards_water_content,
+            'viscosity': self.render_viscosity,
+            'capillary pressure, atmospheric gas over liquid': self.render_capillary_pressure,
+            'effective_pressure': self.render_effective_pressure,
+            'molar fraction gas': self.render_molar_fraction_gas,
+            'compressible porosity': self.render_compressible_porosity,
+            'overland pressure water content': self.render_overland_pressure_water_content,
+            'ponded depth': self.render_ponded_depth,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
@@ -211,7 +194,7 @@ class StateWriter(BaseWriter):
             elif fe_type in renderers:
                 fe_elem = self._new_list(fe_list_elem, name)
                 self._new_param(fe_elem, 'field evaluator type', 'string', fe_type)
-                renderers[fe_type](self, fe_elem, att)
+                renderers[fe_type](fe_elem, att)
             else:
                 raise NotImplementedError('Field evaluator `{}` not implemented'.format(fe_type))
 
