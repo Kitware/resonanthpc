@@ -302,8 +302,15 @@
 - type: ponded depth
   name: surface-ponded_depth
 
-- type: ponded depth bar
+- type: ponded depth
   name: surface-ponded_depth_bar
+  items:
+    - name: ponded depth bar
+      enabled: true
+      value: true
+    - name: height key
+      enabled: true
+      value: ponded_depth_bar
 
 - type: richards water content
   name: water_content

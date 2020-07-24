@@ -154,6 +154,11 @@ def render_overland_pressure_water_content(self, fe_elem, att):
     self._render_items(fe_elem, att, options)
 
 
+def render_ponded_depth(self, fe_elem, att):
+    options = ['ponded depth bar', 'height key']
+    self._render_items(fe_elem, att, options)
+    return
+
 
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
@@ -174,13 +179,12 @@ class StateWriter(BaseWriter):
             'molar fraction gas': render_molar_fraction_gas,
             'compressible porosity': render_compressible_porosity,
             'overland pressure water content': render_overland_pressure_water_content,
+            'ponded depth': render_ponded_depth,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
         basic_templates = {
-            "ponded depth": "fe-ponded-depth.xml",
-            "ponded depth bar": "fe-ponded-depth-bar.xml",
             "multiplicative evaluator": "fe-multiplicative-evaluator.xml",
         }
 

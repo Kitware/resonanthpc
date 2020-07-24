@@ -493,6 +493,7 @@
       </ParameterList>
       <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>
+        <Parameter name="ponded depth bar" type="bool" value="false"/>
       </ParameterList>
       <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>

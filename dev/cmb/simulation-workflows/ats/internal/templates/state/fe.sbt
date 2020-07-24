@@ -188,13 +188,10 @@
 
     <AttDef Type="ponded depth" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-
-      </ItemDefinitions>
-    </AttDef>
-
-    <AttDef Type="ponded depth bar" BaseType="field-evaluator-base" Version="0">
-      <ItemDefinitions>
-
+        <Void Name="ponded depth bar" Optional="true" IsEnabledByDefault="false"></Void>
+        <String Name="height key" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>ponded_depth_bar</DefaultValue>
+        </String>
       </ItemDefinitions>
     </AttDef>
 
