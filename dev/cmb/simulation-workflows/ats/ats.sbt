@@ -42,7 +42,7 @@
     </View>
     <View Type="Attribute" Title="Mesh Attributes">
       <AttributeTypes>
-        <Att Type="mesh-base"/>
+        <Att Type="mesh.base"/>
       </AttributeTypes>
     </View>
 
@@ -96,7 +96,7 @@
     </View>
     <View Type="Attribute" Title="Observation">
       <AttributeTypes>
-        <Att Type="observation-base" Name="observations"/>
+        <Att Type="observation" Name="observations"/>
       </AttributeTypes>
     </View>
 

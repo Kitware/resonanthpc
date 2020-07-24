@@ -28,7 +28,7 @@ class DomainWriter(BaseWriter):
 
     def write(self, xml_root):
         """"""
-        mesh_atts = shared.sim_atts.findAttributes('mesh-base')
+        mesh_atts = shared.sim_atts.findAttributes('mesh.base')
 
         # Render the mesh elements
         mesh_list_elem = self._new_list(xml_root, 'mesh')

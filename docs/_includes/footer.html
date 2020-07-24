@@ -1,0 +1,40 @@
+{% if page.layout == 'home' %}
+<div class="call-to-action">
+  <div class="container">
+    <div class="columns">
+      <div class="cta-text column">
+        Our team of developers come from a wide range of backgrounds and experience from within Kitware, Inc. and we are proud to partner with researchers from LANL and LBNL.
+      </div>
+      <div class="column is-one-fifth has-text-right">
+        <a href="{{ site.baseurl }}/team" class="button is-medium">Meet Our Team</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<footer class="footer">
+    <div class="container">
+
+        {% if site.footer_menu %}
+        <div class="columns is-multiline">
+            {% for item in site.data[site.footer_menu] %}
+            <div class="column has-text-centered">
+                <div>
+                    <a href="{{ item.link | prepend: site.baseurl }}" class="link">{{ item.name }}</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="columns content is-small">
+          <div class="column has-text-centered-mobile">
+            <p>Copyright &copy; Kitware, Inc. All rights reserved.</p>
+          </div>
+          <div class="column has-text-right has-text-centered-mobile">
+            <p>This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Acquisition and Assistance, under Award Number DE-SC0020504</p>
+          </div>
+        </div>
+    </div>
+</footer>

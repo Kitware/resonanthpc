@@ -21,6 +21,11 @@ ResonantHPC will:
   scripting access to its functionality.
 
 
+## Acknowledgment
+
+This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Acquisition and Assistance, under Award Number DE-SC0020504
+
+
 ## Project Team
 
 - [Aashish Chaudhary](https://github.com/aashish24) - Kitware, Inc.

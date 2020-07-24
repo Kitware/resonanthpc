@@ -1,0 +1,268 @@
+/* Generic Global Styles
+ * ==================== */
+html
+  color: $text
+
+.content
+  margin-bottom: 0 !important
+  h2
+    font-size: 48px
+    font-weight: normal
+
+  h3
+    font-size: 32px
+    font-weight: normal
+
+p
+  color: $text
+
+a
+  color: $primary
+
+  &:hover
+    color: darken($primary, 15%)
+
+.button
+  border-width: 2px
+
+/* Banner Area
+ * ==================== */
+
+// Homepage
+.home
+  .hero
+    &.is-primary
+      &.is-bold
+        align-items: flex-end
+        background-image: linear-gradient(141deg, $primary 0%, #47b39d 25%, darken($primary, 10%) 100%)
+        box-shadow: inset 0 -450px 100px -100px rgba(0, 0, 0, .65)
+        display: flex
+        flex-direction: row
+        height: calc(100vh - 52px)
+
+        .hero-body
+          padding-bottom: 65px
+          padding-top: 65px
+          text-align: center
+
+          .hero-links
+            padding: 10px 0
+
+            .column
+              a
+                display: block
+
+/* Homepage Sections
+ * ==================== */
+
+.home
+  .content
+    & > section
+      background: #fff
+      box-shadow: inset 0 20px 15px -15px rgba(0, 0, 0, .25)
+      padding: 65px 0
+
+      &.has-bg
+        padding: 0
+
+        .overlay
+          background: rgba(0, 0, 0, .75)
+          padding: 65px 0
+
+          .container
+            color: #fff
+
+            .blurb
+              h2,
+              p
+                color: #fff
+
+            .repos
+              .repo
+                background: #fff
+                border-radius: 4px
+                box-shadow: 0 0 5px rgba(0, 0, 0, .4)
+                margin: 0 15px 15px !important
+
+                h5
+                  padding-left: 25px
+
+                .column
+                  margin: 0 !important
+
+      .container
+        & > div
+          padding: 20px 0
+
+        .blurb
+          padding: 20px 10rem
+
+        .features,
+        .utilized-software
+          & > .columns
+            margin: 0 !important
+
+          .feature,
+          .software
+            .wrap
+              padding: 1.75rem 0
+
+              .ctas
+                .button
+                  span
+                    font-size: 20px
+                    margin-right: 5px
+
+        .collaborators
+          .collab-logo
+            border-bottom: 2px solid $gray-light
+            height: 124px
+            margin-bottom: 20px
+            padding: 15px 64px
+
+            img
+              height: 100%
+              max-width: 250px
+              width: auto
+
+          a
+            color: $text-dark
+
+/* Interior Pages
+ * ==================== */
+#breadcrumbs
+  background: $gray-light
+  font-size: 13px
+  padding: 25px 0
+
+.page
+  & > .section
+    padding: 0
+
+  .hero
+    align-items: center
+    display: flex
+    flex-direction: row
+    min-height: 300px
+    position: relative
+
+    .hero-body
+      padding: 0
+      position: relative
+      text-align: center
+      z-index: 2
+
+    .overlay
+      background: #000
+      bottom: 0
+      left: 0
+      opacity: .8
+      position: absolute
+      right: 0
+      top: 0
+      z-index: 1
+
+  /* Team Page */
+  .team-sections
+    background: $gray-light
+
+    .kw-team,
+    .external-team
+      .members
+        padding: 35px 0
+
+        .member
+          .member-wrap
+            background: #fff
+            border-radius: 3px
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
+            padding: 25px
+
+            .member-image
+              $matchValue: 60%
+              border-radius: 100px
+              height: 0
+              margin: 15px auto
+              overflow: hidden
+              padding-bottom: $matchValue
+              width: $matchValue
+
+              img
+                object-fit: cover
+
+            .member-text
+              h6
+                color: $gray
+                font-weight: 400
+
+              p
+                color: $gray
+                font-size: 13px
+
+    .external-team
+      .members
+        .member
+          .member-wrap
+            .member-text
+              h6
+                margin-bottom: 0
+
+  /* Demos page */
+  .demos-list
+    &.section
+      padding-top: 0
+
+    .demos
+      .demo
+        .demo-wrap
+          border-radius: 4px
+          box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
+          overflow: hidden
+
+          .demo-image
+            align-items: center
+            display: flex
+            max-height: 350px
+            justify-content: center
+            overflow: hidden
+            width: 100%
+
+            img
+              flex-grow: 0
+              height: 100%
+              object-fit: cover
+              width: 100%
+
+          .demo-text
+            padding: 20px
+
+            .links
+              align-items: center
+              border-top: 1px solid $gray-light
+              display: flex
+              justify-content: space-between
+              margin-top: 20px
+              padding-top: 20px
+
+
+/* Footer
+ * ==================== */
+
+.call-to-action
+  background: $gray-light
+  padding: 4.25rem 0
+
+  .cta-text
+    font-size: 22px
+    margin: 0
+    padding: 0
+
+  .button
+    background: $text
+    color: #fff
+
+.footer
+  background: $gray-dark
+
+  p
+    color: $text-light

@@ -1,0 +1,37 @@
+<section class="utilized-software">
+  <div class="container">
+    <div class="blurb has-text-centered">
+      <h2>{{ page.software-heading }}</h2>
+      <p>{{ page.software-text }}</p>
+    </div>
+    {% if page.utilized-software %}
+    <div class="utilized-software">
+      <div class="columns is-multiline">
+        {% for software in page.utilized-software %}
+          <div class="software column is-one-third-desktop is-half-tablet">
+            <div class="wrap columns">
+              <div class="feature-icon column has-text-centered is-one-fifth">
+                <img src="{{ software.logo | prepend: site.baseurl }}">
+              </div>
+              <div class="text column has-text-centered-mobile">
+                <h4>{{ software.name }}</h4>
+                <div class="ctas">
+                  {% if software.github-link %}
+                    <a href="{{ software.github-link }}" class="button is-primary is-outlined">
+                      <span class="mdi mdi-github"></span>
+                      GitHub
+                    </a>
+                  {% endif %}
+                  {% if software.website-link %}
+                    <a href="{{ software.website-link }}" class="button is-primary">Website</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>

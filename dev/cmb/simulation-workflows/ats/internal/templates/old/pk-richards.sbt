@@ -5,7 +5,7 @@
       <ItemDefinitions>
         <Component Name="domain" Optional="true" IsEnabledByDefault="false">
           <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh-base']"></Resource>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']"></Resource>
           </Accepts>
         </Component>
         <!-- TODO: - priority - boundary conditions (subsurface-flow-bc-spec) -->

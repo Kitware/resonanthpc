@@ -1,0 +1,70 @@
+<section class="team-sections">
+  {% if page.kw-members %}
+    <section class="kw-team section">
+      <div class="container">
+        <div class="blurb has-text-centered">
+          <h2>{{ page.kwteam-heading }}</h2>
+          {{ page.kwteam-description }}
+        </div>
+        <div class="members columns is-centered">
+          {% for member in page.kw-members %}
+            <div class="member column is-one-quarter">
+              <div class="member-wrap">
+                {% if member.image %}
+                <div class="member-image">
+                  <img src="{{ member.image | prepend: site.baseurl }}" alt="{{ member.name }}">
+                </div>
+                {% endif %}
+                <div class="member-text has-text-centered">
+                  <h5>{{ member.name }}</h5>
+                  <h6>{{ member.title}}</h6>
+                  {% if member.bio_link %}
+                    <a href="{{ member.bio_link }}">
+                      <span class="mdi mdi-account"></span>
+                      Visit Bio Page
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if page.external-team %}
+    <section class="external-team section">
+      <div class="container">
+        <div class="blurb has-text-centered">
+          <h2>{{ page.team-heading }}</h2>
+          {{ page.team-description }}
+        </div>
+        <div class="members columns is-centered">
+          {% for member in page.external-team %}
+            <div class="member column is-one-quarter">
+              <div class="member-wrap">
+                {% if member.image %}
+                <div class="member-image">
+                  <img src="{{ member.image | prepend: site.baseurl }}" alt="{{ member.name }}">
+                </div>
+                {% endif %}
+                <div class="member-text has-text-centered">
+                  <h5>{{ member.name }}</h5>
+                  <h6>{{ member.title}}</h6>
+                  <p>{{ member.organization }}</p>
+                  {% if member.bio_link %}
+                    <a href="{{ member.bio_link }}">
+                      <span class="mdi mdi-account"></span>
+                      Visit Bio Page
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+</section>

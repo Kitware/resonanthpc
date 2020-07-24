@@ -1,0 +1,27 @@
+<section class="associated-repos has-bg"{% if page.repos-background %} style="background: url('{{ page.repos-background | prepend: site.baseurl }}'); background-size: cover;"{% endif %}>
+  <div class="overlay">
+    <div class="container">
+      <div class="blurb has-text-centered">
+        <h2>{{ page.repos-heading }}</h2>
+        <p>{{ page.repos-text }}</p>
+      </div>
+      {% if page.repos %}
+      <div class="repos">
+        {% for repo in page.repos %}
+          <div class="repo columns is-vcentered">
+            <h5 class="column is-one-fifth">{{ repo.title }}</h5>
+            <p class="column is-three-fifths-desktop is-half-tablet">{{ repo.description }}</p>
+            <span class="column has-text-right">
+              <a href="{{ repo.link }}" class="button is-primary">
+                <span class="icon">
+                  <span class="mdi mdi-github"></span>
+                </span>
+                <span>View on GitHub</span></a>
+            </span>
+          </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
