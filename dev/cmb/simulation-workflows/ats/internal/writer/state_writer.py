@@ -12,7 +12,6 @@
 
 import os
 print('loading', os.path.basename(__file__))
-from xml.dom import minidom
 
 import smtk
 import smtk.attribute
@@ -26,7 +25,7 @@ def map_independent_variable(att):
     # TODO: the domain section can also be "rest domian" or "domain rain"
     mapping = {
         r"${NAME}": att.name(),
-        r"${CONSTANT_IN_TIME}": 'true' if  att.find("constant in time").isEnabled() else 'false',
+        r"${CONSTANT_IN_TIME}": 'true' if att.find("constant in time").isEnabled() else 'false',
         r"${REGION}": att.findComponent('region').value().name(),
         # TODO: forcing these for now.
         r"${COMPONENT_NAME}": "components",
@@ -58,7 +57,7 @@ def map_independent_variable_function(att):
 
     mapping = {
         r"${NAME}": att.name(),
-        r"${CONSTANT_IN_TIME}": 'true' if  att.find("constant in time").isEnabled() else 'false',
+        r"${CONSTANT_IN_TIME}": 'true' if att.find("constant in time").isEnabled() else 'false',
         r"${REGION}": att.findComponent('region').value().name(),
         # TODO: forcing these for now.
         r"${COMPONENT_NAME}": "components",
