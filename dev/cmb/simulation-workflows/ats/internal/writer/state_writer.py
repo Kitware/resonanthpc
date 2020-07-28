@@ -69,35 +69,6 @@ def map_independent_variable_function(att):
     return mapping
 
 
-def map_eos(att):
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${EOS_BASIS}": str(att.find("EOS basis").value()),
-        r"${MOLAR_DENSITY_KEY}": str(att.find("molar density key").value()),
-        r"${MASS_DENSITY_KEY}": str(att.find("mass density key").value()),
-        r"${EOS_TYPE}": "liquid water",
-    }
-    return mapping
-
-
-def map_eos_constant(att):
-    mapping = map_eos(att)
-    mapping.update({
-        r"${EOS_TYPE}": "constant",
-        r"${KEY}": str(att.find("key").value()),
-        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value()),
-    })
-    return mapping
-
-
-def map_eos_vapor(att):
-    mapping = map_eos(att)
-    mapping.update({
-        r"${EOS_TYPE}": "vapor in gas",
-    })
-    return mapping
-
-
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
     def __init__(self):
