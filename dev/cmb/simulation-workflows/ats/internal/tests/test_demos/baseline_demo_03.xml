@@ -172,9 +172,6 @@
           <Parameter name="EOS type" type="string" value="constant"/>
           <Parameter name="density [kg/m^3]" type="double" value="1.000000e+03"/>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
       <ParameterList name="surface-source_molar_density" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos"/>
@@ -184,9 +181,6 @@
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="constant"/>
           <Parameter name="density [kg/m^3]" type="double" value="1.000000e+03"/>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="surface-manning_coefficient" type="ParameterList">

@@ -148,6 +148,22 @@ class StateWriter(BaseWriter):
         options = ['ponded depth bar', 'height key']
         self._render_items(fe_elem, att, options)
 
+    def render_eos(self, fe_elem, att):
+        options = ['EOS basis', 'molar density key', 'mass density key']
+        self._render_items(fe_elem, att, options)
+        # Now handle `EOS parameters` parameter list
+        params = att.find('EOS type')
+        eos_type = params.value()
+        params_elem = self._new_list(fe_elem, 'EOS parameters')
+        self._new_param(params_elem, 'EOS type', 'string', eos_type)
+        if eos_type == 'constant':
+            key = str(params.find('key').value())
+            value = FLOAT_FORMAT.format(params.find('value').value())
+            self._new_param(params_elem, key, 'double', value)
+        elif eos_type == 'vapor in gas':
+            gas_elem = self._new_list(params_elem, 'gas EOS parameters')
+            self._new_param(gas_elem, 'EOS type', 'string', 'ideal gas')
+
     def write(self, xml_root):
         """Perform the XML write out."""
         state_elem = self._new_list(xml_root, 'state')
@@ -162,6 +178,7 @@ class StateWriter(BaseWriter):
             'compressible porosity': self.render_compressible_porosity,
             'overland pressure water content': self.render_overland_pressure_water_content,
             'ponded depth': self.render_ponded_depth,
+            'eos': self.render_eos,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
@@ -173,9 +190,6 @@ class StateWriter(BaseWriter):
         smart_templates = {
             "independent variable": ("fe-independent-variable.xml", map_independent_variable),
             "independent variable - function": ("fe-independent-variable-function.xml", map_independent_variable_function),
-            "eos": ("fe-eos.xml", map_eos),
-            "eos-constant": ("fe-eos-constant.xml", map_eos_constant),
-            "eos-vapor": ("fe-eos-vapor.xml", map_eos_vapor),
         }
 
         fe_atts = shared.sim_atts.findAttributes('field-evaluator-base')

@@ -125,23 +125,37 @@
         <String Name="mass density key">
           <DefaultValue>mass_density_liquid</DefaultValue>
         </String>
-      </ItemDefinitions>
-    </AttDef>
 
-    <AttDef Type="eos-constant" BaseType="eos" Version="0">
-      <ItemDefinitions>
-        <String Name="key">
-          <DefaultValue>density [kg/m^3]</DefaultValue>
+        <String Name="EOS type">
+          <ChildrenDefinitions>
+            <!-- Constant -->
+            <String Name="key">
+              <DefaultValue>density [kg/m^3]</DefaultValue>
+            </String>
+            <Double Name="value">
+              <DefaultValue>1000.0</DefaultValue>
+            </Double>
+          </ChildrenDefinitions>
+          <DiscreteInfo DefaultIndex="0">
+            <Structure>
+              <Value>liquid water</Value>
+              <!-- TODO: should this one have options? demos do not. -->
+            </Structure>
+            <Structure>
+              <Value>constant</Value>
+              <Items>
+                <Item>key</Item>
+                <Item>value</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value>vapor in gas</Value>
+              <Items>
+                <Item></Item>
+              </Items>
+            </Structure>
+          </DiscreteInfo>
         </String>
-        <Double Name="value">
-          <DefaultValue>1000.0</DefaultValue>
-        </Double>
-      </ItemDefinitions>
-    </AttDef>
-
-    <AttDef Type="eos-vapor" BaseType="eos" Version="0">
-      <ItemDefinitions>
-
       </ItemDefinitions>
     </AttDef>
 

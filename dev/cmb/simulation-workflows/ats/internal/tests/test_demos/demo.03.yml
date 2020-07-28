@@ -157,23 +157,29 @@
     - components: cell
     - region: surface domain
 
-- type: eos-constant
+- type: eos
   name: surface-source_molar_density
   items:
     - 'EOS basis': molar
     - 'molar density key': surface-source_molar_density
     - 'mass density key': mass_density_liquid
-    - key: density [kg/m^3]
-    - value: 1000
+    - name: EOS type
+      value: constant
+      children:
+        - key: density [kg/m^3]
+        - value: 1000
 
-- type: eos-constant
+- type: eos
   name: surface-molar_density_liquid
   items:
     - 'EOS basis': both
     - 'molar density key': surface-molar_density_liquid
     - 'mass density key': surface-mass_density_liquid
-    - key: density [kg/m^3]
-    - value: 1000
+    - name: EOS type
+      value: constant
+      children:
+        - key: density [kg/m^3]
+        - value: 1000
 
 - type: independent variable
   name: surface-manning_coefficient
