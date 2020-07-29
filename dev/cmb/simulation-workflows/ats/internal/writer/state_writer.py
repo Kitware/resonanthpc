@@ -21,54 +21,6 @@ from .base_writer import BaseWriter, FLOAT_FORMAT
 from .templates.creator import append_template
 
 
-def map_independent_variable(att):
-    # TODO: the domain section can also be "rest domian" or "domain rain"
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${CONSTANT_IN_TIME}": 'true' if att.find("constant in time").isEnabled() else 'false',
-        r"${REGION}": att.findComponent('region').value().name(),
-        # TODO: forcing these for now.
-        r"${COMPONENT_NAME}": "components",
-        r"${COMPONENT_TYPE}": "Array(string)",
-        r"${COMPONENTS}": "{" + str(att.find("components").value()) + "}",
-        r"${VALUE}": FLOAT_FORMAT.format(att.find("value").value()),
-    }
-    return mapping
-
-
-def map_independent_variable_function(att):
-    # TODO: the domain section can also be "rest domian" or "domain rain"
-    group = att.find('tabular-data')
-
-    def _fetch_subgroup_values(group, name):
-        values = []
-        for i in range(group.numberOfGroups()):
-            v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
-            values.append(v.value())
-        return values
-
-    x_value_list = _fetch_subgroup_values(group, "X")
-    x_value_list = [str(x) for x in x_value_list]
-    x_values = r"{" + ','.join(x_value_list) + r"}"
-
-    y_value_list = _fetch_subgroup_values(group, "Y")
-    y_value_list = [str(x) for x in y_value_list]
-    y_values = r"{" + ','.join(y_value_list) + r"}"
-
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${CONSTANT_IN_TIME}": 'true' if att.find("constant in time").isEnabled() else 'false',
-        r"${REGION}": att.findComponent('region').value().name(),
-        # TODO: forcing these for now.
-        r"${COMPONENT_NAME}": "components",
-        r"${COMPONENT_TYPE}": "Array(string)",
-        r"${COMPONENTS}": "{" + str(att.find("components").value()) + "}",
-        r"${X_VALUES}": x_values,
-        r"${Y_VALUES}": y_values,
-    }
-    return mapping
-
-
 class StateWriter(BaseWriter):
     """Writer for ATS state output lists."""
     def __init__(self):
@@ -135,6 +87,49 @@ class StateWriter(BaseWriter):
             gas_elem = self._new_list(params_elem, 'gas EOS parameters')
             self._new_param(gas_elem, 'EOS type', 'string', 'ideal gas')
 
+    def render_independent_variable(self, fe_elem, att):
+        options = ['constant in time',]
+        self._render_items(fe_elem, att, options)
+        function_elem = self._new_list(fe_elem, 'function')
+        domain_elem = self._new_list(function_elem, 'domain')
+        # add region
+        region = att.findComponent('region').value().name()
+        self._new_param(domain_elem, 'region', 'string', region)
+        # add components
+        components = "{" + str(att.find('components').value()) + "}"
+        self._new_param(domain_elem, 'components', 'Array(string)', components)
+        # Function list
+        function_sub_elem = self._new_list(domain_elem, 'function')
+        params = att.find('variable type')
+        func_type = params.value()
+        if func_type == 'constant':
+            constant_elem = self._new_list(function_sub_elem, 'function-constant')
+            self._render_items(constant_elem, params, ['value',])
+        elif func_type == 'function':
+            tabular_elem = self._new_list(function_sub_elem, 'function-tabular')
+
+            group = att.find('tabular-data')
+
+            def _fetch_subgroup_values(group, name):
+                values = []
+                for i in range(group.numberOfGroups()):
+                    v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
+                    values.append(v.value())
+                return values
+
+            x_value_list = _fetch_subgroup_values(group, "X")
+            x_value_list = [str(x) for x in x_value_list]
+            x_values = r"{" + ','.join(x_value_list) + r"}"
+
+            y_value_list = _fetch_subgroup_values(group, "Y")
+            y_value_list = [str(x) for x in y_value_list]
+            y_values = r"{" + ','.join(y_value_list) + r"}"
+
+            self._new_param(tabular_elem, 'x values', 'Array(double)', x_values)
+            self._new_param(tabular_elem, 'y values', 'Array(double)', y_values)
+
+            self._new_param(tabular_elem, 'forms', 'Array(string)', r'{constant}')
+
     def write(self, xml_root):
         """Perform the XML write out."""
         state_elem = self._new_list(xml_root, 'state')
@@ -150,6 +145,7 @@ class StateWriter(BaseWriter):
             'overland pressure water content': self.render_overland_pressure_water_content,
             'ponded depth': self.render_ponded_depth,
             'eos': self.render_eos,
+            'independent variable': self.render_independent_variable,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
@@ -158,22 +154,12 @@ class StateWriter(BaseWriter):
             "multiplicative evaluator": "fe-multiplicative-evaluator.xml",
         }
 
-        smart_templates = {
-            "independent variable": ("fe-independent-variable.xml", map_independent_variable),
-            "independent variable - function": ("fe-independent-variable-function.xml", map_independent_variable_function),
-        }
-
         fe_atts = shared.sim_atts.findAttributes('field-evaluator-base')
         for att in fe_atts:
             name = att.name()
             fe_type = att.type()
             if fe_type in basic_templates:
                 append_template(fe_list_elem, basic_templates[fe_type], {r"${NAME}": name})
-            elif fe_type in smart_templates:
-                # We gotta be smart
-                fname, func = smart_templates[fe_type]
-                mapping = func(att)
-                append_template(fe_list_elem, fname, mapping)
             # New implementation!
             elif fe_type in renderers:
                 fe_elem = self._new_list(fe_list_elem, name)
@@ -181,8 +167,6 @@ class StateWriter(BaseWriter):
                 renderers[fe_type](fe_elem, att)
             else:
                 raise NotImplementedError('Field evaluator `{}` not implemented'.format(fe_type))
-
-
 
         #### handle the initial conditions
         ic_elem = self._new_list(state_elem, 'initial conditions')

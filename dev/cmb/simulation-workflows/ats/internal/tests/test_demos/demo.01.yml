@@ -141,23 +141,32 @@
 - type: independent variable
   name: permeability
   items:
-    - value: 2.5e-12
     - components: cell
     - region: computational domain
+    - name: variable type
+      value: constant
+      children:
+        - value: 2.5e-12
 
 - type: independent variable
   name: porosity
   items:
-    - value: 0.25
     - components: cell
     - region: computational domain
+    - name: variable type
+      value: constant
+      children:
+        - value: 0.25
 
 - type: independent variable
   name: temperature
   items:
-    - value: 273.65
     - components: cell,boundary_face
     - region: computational domain
+    - name: variable type
+      value: constant
+      children:
+        - value: 273.65
 
 - type: richards water content
   name: water_content

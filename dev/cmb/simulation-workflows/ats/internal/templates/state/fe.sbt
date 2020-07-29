@@ -68,8 +68,6 @@
     <AttDef Type="independent variable" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
-        <!-- name is the name of the attribute in the list -->
-        <Double Name="value"></Double>
         <String Name="components">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="cell">cell</Value>
@@ -82,32 +80,31 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
           </Accepts>
         </Component>
-      </ItemDefinitions>
-    </AttDef>
-
-    <AttDef Type="independent variable - function" BaseType="field-evaluator-base" Version="0">
-      <ItemDefinitions>
-        <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
-
-        <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
-          <ItemDefinitions>
-            <Double Name="X" NumberOfRequiredValues="1"></Double>
-            <Double Name="Y" NumberOfRequiredValues="1"></Double>
-          </ItemDefinitions>
-        </Group>
-
-        <String Name="components">
+        <String Name="variable type">
+          <ChildrenDefinitions>
+            <Double Name="value"></Double>
+            <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
+              <ItemDefinitions>
+                <Double Name="X" NumberOfRequiredValues="1"></Double>
+                <Double Name="Y" NumberOfRequiredValues="1"></Double>
+              </ItemDefinitions>
+            </Group>
+          </ChildrenDefinitions>
           <DiscreteInfo DefaultIndex="0">
-            <Value Enum="cell">cell</Value>
-            <Value Enum="boundary_face">boundary_face</Value>
-            <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+            <Structure>
+              <Value>constant</Value>
+              <Items>
+                <Item>value</Item>
+              </Items>
+            </Structure>
+            <Structure>
+              <Value>function</Value>
+              <Items>
+                <Item>tabular-data</Item>
+              </Items>
+            </Structure>
           </DiscreteInfo>
         </String>
-        <Component Name="region">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-          </Accepts>
-        </Component>
       </ItemDefinitions>
     </AttDef>
 

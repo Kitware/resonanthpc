@@ -145,17 +145,20 @@
       enabled: true
       value: ponded_depth_bar
 
-- type: independent variable - function
+- type: independent variable
   name: surface-mass_source
   items:
-    - name: tabular-data
-      subgroups:
-        - - X: 0.0
-          - Y: 3.0e-6
-        - - X: 3600.0
-          - Y: 0.0
     - components: cell
     - region: surface domain
+    - name: variable type
+      value: function
+      children:
+        - name: tabular-data
+          subgroups:
+            - - X: 0.0
+              - Y: 3.0e-6
+            - - X: 3600.0
+              - Y: 0.0
 
 - type: eos
   name: surface-source_molar_density
@@ -184,9 +187,12 @@
 - type: independent variable
   name: surface-manning_coefficient
   items:
-    - value: 3.6e-3
     - components: cell
     - region: surface domain
+    - name: variable type
+      value: constant
+      children:
+        - value: 3.6e-3
 
 - type: effective_pressure
   name: surface-effective_pressure
@@ -194,6 +200,9 @@
 - type: independent variable
   name: surface-temperature
   items:
-    - value: 274.65
     - components: cell,boundary_face
     - region: surface domain
+    - name: variable type
+      value: constant
+      children:
+        - value: 274.65
