@@ -109,7 +109,7 @@
     </View>
     <View Type="Attribute" Title="field evaluators">
       <AttributeTypes>
-        <Att Type="field-evaluator-base" Name="field evaluators"/>
+        <Att Type="field-evaluator" Name="field evaluators"/>
       </AttributeTypes>
     </View>
     <View Type="Attribute" Title="initial conditions">

@@ -1,4 +1,0 @@
-<ParameterList name="surface-mass_source">
-  <Parameter name="field evaluator type" type="string" value="multiplicative evaluator" />
-  <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-precipitation, surface-molar_density_liquid}" />
-</ParameterList>
