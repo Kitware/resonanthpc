@@ -12,10 +12,6 @@
 
 import os
 print('loading', os.path.basename(__file__))
-from xml.dom import minidom
-
-import smtk
-import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
@@ -34,7 +30,8 @@ class DomainWriter(BaseWriter):
         mesh_list_elem = self._new_list(xml_root, 'mesh')
         domains = 0
         for mesh_att in mesh_atts:
-            if mesh_att.name() == "domain": domains += 1
+            if mesh_att.name() == "domain":
+                domains += 1
             self._write_mesh_elem(mesh_list_elem, mesh_att)
         if domains != 1:
             raise RuntimeError("You must have one and only one mesh called `domain`.")
@@ -81,10 +78,10 @@ class DomainWriter(BaseWriter):
             resource_item = mesh_att.find('resource')
             resource = resource_item.value()
             if resource is None:
-                raise RuntimeError('Model not loaded for ResourceItem {}'.format(item.name()))
+                raise RuntimeError('Model not loaded for ResourceItem {}'.format(resource_item.name()))
             path = self._get_native_model_path(resource)
             if path is None:
-                raise RuntimeError('Model file not found for ResourceItem {}'.format(item.name()))
+                raise RuntimeError('Model file not found for ResourceItem {}'.format(resource_item.name()))
             # For now, just write the base filename
             filename = os.path.basename(path)
             file_params_elem = self._new_list(mesh_elem, "read mesh file parameters")

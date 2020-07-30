@@ -12,10 +12,6 @@
 
 import os
 print('loading', os.path.basename(__file__))
-from xml.dom import minidom
-
-import smtk
-import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
@@ -180,7 +176,7 @@ class PKWriter(BaseWriter):
 
         pk_atts = shared.sim_atts.findAttributes('pk-base')
         for att in pk_atts:
-            name = att.name()
+            # name = att.name()
             pk_type = att.type()
 
             if pk_type not in smart_templates:

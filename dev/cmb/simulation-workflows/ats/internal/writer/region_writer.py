@@ -12,10 +12,6 @@
 
 import os
 print('loading', os.path.basename(__file__))
-from xml.dom import minidom
-
-import smtk
-import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
@@ -81,15 +77,15 @@ class RegionWriter(BaseWriter):
                 assoc_item = region_att.associations()
                 model_entity = assoc_item.value()
                 if model_entity is None:
-                    raise RuntimeError('No model entity found for region attribute ()'.format(region_att.name()))
+                    raise RuntimeError('No model entity found for region attribute ({})'.format(region_att.name()))
                 resource = model_entity.resource()
                 if resource is None:
-                    raise RuntimeError('Model not loaded for ResourceItem {}'.format(item.name()))
+                    raise RuntimeError('Model not loaded for ResourceItem {}'.format(model_entity.name()))
 
                 # Write "file" and "format"
                 path = self._get_native_model_path(resource)
                 if path is None:
-                    raise RuntimeError('Model file not found for ResourceItem {}'.format(item.name()))
+                    raise RuntimeError('Model file not found for ResourceItem {}'.format(model_entity.name()))
                 # For now, just write the base filename
                 filename = os.path.basename(path)
                 self._new_param(type_list_elem, 'file', 'string', filename)
