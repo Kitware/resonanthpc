@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
   <Definitions>
-    <AttDef Type="field-evaluator-base" BaseType="" Abstract="true" Version="0">
+    <AttDef Type="field-evaluator" BaseType="" Abstract="true" Version="0">
     </AttDef>
 
+    <AttDef Type="field-evaluator-base" BaseType="field-evaluator" Abstract="true" Version="0">
+    </AttDef>
+
+    <AttDef Type="field-evaluator-linker-base" BaseType="field-evaluator" Abstract="true" Version="0">
+      <!-- For linking multiple field evaluators together -->
+    </AttDef>
+
+    <!-- ////////////////////////////////////////////////////////////////// -->
+
+    <AttDef Type="multiplicative evaluator" BaseType="field-evaluator-linker-base" Version="0">
+      <AssociationsDef Name="evaluator dependencies" Extensible="true" NumberOfRequiredValues="1">
+        <Accepts>
+          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='field-evaluator-base']"></Resource>
+        </Accepts>
+      </AssociationsDef>
+      <ItemDefinitions>
+        <!-- NOTE: all options here are set as optional because none are set in demos -->
+        <Double Name="coefficient" Optional="true" IsEnabledByDefault="false">
+          <DefaultValue>1.0</DefaultValue>
+        </Double>
+        <Void Name="enforce positivity" Optional="true" IsEnabledByDefault="false"></Void>
+      </ItemDefinitions>
+    </AttDef>
 
     <!-- ////////////////////////////////////////////////////////////////// -->
 
@@ -56,12 +79,6 @@
         <String Name="effective pressure key" Optional="true" IsEnabledByDefault="false">
           <DefaultValue>effective_pressure</DefaultValue>
         </String>
-      </ItemDefinitions>
-    </AttDef>
-
-    <AttDef Type="multiplicative evaluator" BaseType="field-evaluator-base" Version="0">
-      <ItemDefinitions>
-
       </ItemDefinitions>
     </AttDef>
 

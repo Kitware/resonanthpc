@@ -18,7 +18,6 @@ import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter, FLOAT_FORMAT
-from .templates.creator import append_template
 
 
 class StateWriter(BaseWriter):
@@ -130,6 +129,18 @@ class StateWriter(BaseWriter):
 
             self._new_param(tabular_elem, 'forms', 'Array(string)', r'{constant}')
 
+    def render_multiplicative_evaluator(self, fe_elem, att):
+        options = ['coefficient', 'enforce positivity']
+        self._render_items(fe_elem, att, options)
+        assocs = att.associations()
+        value_list = list()
+        for i in range(assocs.numberOfValues()):
+            if assocs.isSet(i):
+                value_att = assocs.value(i)
+                value_list.append(value_att.name())
+        linked_fes = r"{" + ", ".join(value_list) + r"}"
+        self._new_param(fe_elem, 'evaluator dependencies', 'Array(string)', linked_fes)
+
     def write(self, xml_root):
         """Perform the XML write out."""
         state_elem = self._new_list(xml_root, 'state')
@@ -146,22 +157,16 @@ class StateWriter(BaseWriter):
             'ponded depth': self.render_ponded_depth,
             'eos': self.render_eos,
             'independent variable': self.render_independent_variable,
+            'multiplicative evaluator': self.render_multiplicative_evaluator,
         }
 
         fe_list_elem = self._new_list(state_elem, 'field evaluators')
 
-        basic_templates = {
-            "multiplicative evaluator": "fe-multiplicative-evaluator.xml",
-        }
-
-        fe_atts = shared.sim_atts.findAttributes('field-evaluator-base')
+        fe_atts = shared.sim_atts.findAttributes('field-evaluator')
         for att in fe_atts:
             name = att.name()
             fe_type = att.type()
-            if fe_type in basic_templates:
-                append_template(fe_list_elem, basic_templates[fe_type], {r"${NAME}": name})
-            # New implementation!
-            elif fe_type in renderers:
+            if fe_type in renderers:
                 fe_elem = self._new_list(fe_list_elem, name)
                 self._new_param(fe_elem, 'field evaluator type', 'string', fe_type)
                 renderers[fe_type](fe_elem, att)

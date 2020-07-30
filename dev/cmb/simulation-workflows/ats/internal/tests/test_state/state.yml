@@ -222,6 +222,24 @@
 - type: viscosity
   name: viscosity_liquid
 
+- type: independent variable
+  name: surface-precipitation
+  items:
+    - components: cell
+    - region: surface domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: variable type
+      value: constant
+      children:
+        - value: 1.292956e-08
+
+- type: multiplicative evaluator
+  name: surface-mass_source_2
+  associate:
+    - attribute: [surface-precipitation, surface-molar_density_liquid]
+
 # State initial conditions
 - type: ic-const-scalar
   name: atmospheric_pressure
