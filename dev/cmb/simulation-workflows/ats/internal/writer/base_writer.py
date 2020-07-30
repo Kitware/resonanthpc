@@ -13,7 +13,8 @@
 """Common base class for writers"""
 
 import os
-print('loading', os.path.basename(__file__))
+
+print("loading", os.path.basename(__file__))
 from xml.dom import minidom
 
 import smtk
@@ -23,11 +24,11 @@ import smtk.model
 from .shared_data import instance as shared
 
 TypeStringMap = {
-    smtk.attribute.Item.DoubleType: 'double',
-    smtk.attribute.Item.IntType: 'int',
-    smtk.attribute.Item.StringType: 'string',
-    smtk.attribute.Item.VoidType: 'bool',
-    smtk.attribute.Item.FileType: 'string',
+    smtk.attribute.Item.DoubleType: "double",
+    smtk.attribute.Item.IntType: "int",
+    smtk.attribute.Item.StringType: "string",
+    smtk.attribute.Item.VoidType: "bool",
+    smtk.attribute.Item.FileType: "string",
 }
 
 FLOAT_FORMAT = r"{:e}"
@@ -54,34 +55,38 @@ class BaseWriter:
         # Unfortunately, this logic is all part of SMTK lore.
         uuids = model_res.entitiesMatchingFlags(smtk.model.MODEL_ENTITY, True)
         if not uuids:
-            raise RuntimeError('No model entities in model resource')
+            raise RuntimeError("No model entities in model resource")
 
         model_uuid = uuids.pop()
-        if not model_res.hasStringProperty(model_uuid, 'url'):
-            raise RuntimeError('Model resource missing \"url\" property')
-        prop_list = model_res.stringProperty(model_uuid, 'url')
+        if not model_res.hasStringProperty(model_uuid, "url"):
+            raise RuntimeError('Model resource missing "url" property')
+        prop_list = model_res.stringProperty(model_uuid, "url")
         return prop_list[0]
 
-    def _new_list(self, parent, list_name, list_type='ParameterList'):
+    def _new_list(self, parent, list_name, list_type="ParameterList"):
         """Appends ParameterList element to parent
 
         If list_type is None, then that xml attribute is omitted
         """
-        new_list = shared.xml_doc.createElement('ParameterList')
-        new_list.setAttribute('name', list_name)
+        new_list = shared.xml_doc.createElement("ParameterList")
+        new_list.setAttribute("name", list_name)
         if list_type is not None:
-            new_list.setAttribute('type', list_type)
+            new_list.setAttribute("type", list_type)
         parent.appendChild(new_list)
         return new_list
 
     def _new_param(self, list_elem, param_name, param_type, param_value):
         """Appends Parameter element to list_elem"""
         if not isinstance(param_value, str):
-            raise TypeError("trying to insert and invalid value for: ({}: {})".format(param_name, param_value))
-        new_param = shared.xml_doc.createElement('Parameter')
-        new_param.setAttribute('name', param_name)
-        new_param.setAttribute('type', param_type)
-        new_param.setAttribute('value', param_value)
+            raise TypeError(
+                "trying to insert and invalid value for: ({}: {})".format(
+                    param_name, param_value
+                )
+            )
+        new_param = shared.xml_doc.createElement("Parameter")
+        new_param.setAttribute("name", param_name)
+        new_param.setAttribute("type", param_type)
+        new_param.setAttribute("value", param_value)
         list_elem.appendChild(new_param)
         return new_param
 
@@ -89,12 +94,20 @@ class BaseWriter:
         """Generates Parameter element for attribute associations."""
         ref_item = att.associations()
         if ref_item is None:
-            print('Warning: expected attribute \"{}\" to have associations'.format(att.name()))
+            print(
+                'Warning: expected attribute "{}" to have associations'.format(
+                    att.name()
+                )
+            )
             return
 
         n = ref_item.numberOfValues()
         if n == 0:
-            print('Warning: expected attribute \"{}\" to have associations'.format(att.name()))
+            print(
+                'Warning: expected attribute "{}" to have associations'.format(
+                    att.name()
+                )
+            )
             return
 
         if isinstance(elem_name_or_list, (list, tuple)) and len(elem_name_or_list) > 1:
@@ -112,17 +125,21 @@ class BaseWriter:
                 value_list.append(value_att.name())
 
         if len(value_list) == 0:
-            print('Warning: expected attribute \"{}\" to have associations'.format(att.name()))
+            print(
+                'Warning: expected attribute "{}" to have associations'.format(
+                    att.name()
+                )
+            )
             return
 
         if len(value_list) == 1:
-            self._new_param(parent_elem, elem_name, 'string', value_list[0])
+            self._new_param(parent_elem, elem_name, "string", value_list[0])
             return
 
         # (else) n > 1
-        value_string = ','.join(value_list)
-        array_string = '{{{}}}'.format(value_string)
-        self._new_param(parent_elem, array_name, 'Array(string)', array_string)
+        value_string = ",".join(value_list)
+        array_string = "{{{}}}".format(value_string)
+        self._new_param(parent_elem, array_name, "Array(string)", array_string)
 
     def _render_items(self, parent_elem, att, param_names):
         """Generates Parameter elements for items specified by param_names"""
@@ -141,78 +158,83 @@ class BaseWriter:
             type_string = TypeStringMap.get(item.type())
             value = None
             if item.type() == smtk.attribute.Item.VoidType:
-                value = 'true' if item.isEnabled() else 'false'
-            elif hasattr(item, 'numberOfValues') and item.numberOfValues() > 1:
-                type_string = 'Array({})'.format(type_string)
+                value = "true" if item.isEnabled() else "false"
+            elif hasattr(item, "numberOfValues") and item.numberOfValues() > 1:
+                type_string = "Array({})".format(type_string)
                 value_list = list()
                 for i in range(item.numberOfValues()):
                     value_list.append(item.value(i))
                 string_list = [str(x) for x in value_list]
-                value = r"{" + ','.join(string_list) + r"}"
-            elif hasattr(item, 'value'):
+                value = r"{" + ",".join(string_list) + r"}"
+            elif hasattr(item, "value"):
                 value = str(item.value())
                 if isinstance(value, float):
                     value = FLOAT_FORMAT.format(value)
                 else:
                     value = str(value)
             else:
-                raise NotImplementedError("({}) for ({}) is not handled".format(item.type(), param_name))
+                raise NotImplementedError(
+                    "({}) for ({}) is not handled".format(item.type(), param_name)
+                )
 
             self._new_param(parent_elem, param_name, type_string, value)
         return
 
-
     def _render_io_event_specs(self, parent_elem, io_event):
         extensible_groups = {
-            'cycles start period stop': {
-                'array': ['Start Cycle', 'Cycle Period', 'Stop Cycle',],
-                'items': [],
+            "cycles start period stop": {
+                "array": ["Start Cycle", "Cycle Period", "Stop Cycle",],
+                "items": [],
             },
-            'times start period stop': {
-                'array': ['Start Time', 'Time Period', 'Stop Time', ],
-                'items': ['units'], # NOTE: assumes all items are string
+            "times start period stop": {
+                "array": ["Start Time", "Time Period", "Stop Time",],
+                "items": ["units"],  # NOTE: assumes all items are string
             },
         }
-            # 'times': {
-            #     'array': ['times'],
-            #     'items': ['units'],
-            # },
+        # 'times': {
+        #     'array': ['times'],
+        #     'items': ['units'],
+        # },
         sub_items = [
-            'cycles', # Int
+            "cycles",  # Int
         ]
         # add the sub items
         self._render_items(parent_elem, io_event, sub_items)
 
         # add each array of values
-        dbl_type_string = 'Array({})'.format('double')
+        dbl_type_string = "Array({})".format("double")
 
         def _get_array_values(group, items, idx=0):
             string_list = [str(group.find(idx, nm).value()) for nm in items]
-            values = r"{" + ','.join(string_list) + r"}"
+            values = r"{" + ",".join(string_list) + r"}"
             return values
 
         for group_name in extensible_groups.keys():
             event_group = io_event.find(group_name)
             if event_group.isEnabled():
                 meta = extensible_groups[group_name]
-                item_names = meta['items']
-                array_names = meta['array']
+                item_names = meta["items"]
+                array_names = meta["array"]
 
                 n = event_group.numberOfGroups()
                 if n > 1:
                     for i in range(n):
-                        name = group_name + ' {}'.format(i)
+                        name = group_name + " {}".format(i)
                         values = _get_array_values(event_group, array_names, i)
                         self._new_param(parent_elem, name, dbl_type_string, values)
                         for item in item_names:
                             value = str(event_group.find(i, item).value())
-                            self._new_param(parent_elem, name + ' ' + item, 'string', value)
+                            self._new_param(
+                                parent_elem, name + " " + item, "string", value
+                            )
                 else:
                     values = _get_array_values(event_group, array_names)
                     self._new_param(parent_elem, group_name, dbl_type_string, values)
                     for item in item_names:
                         value = str(event_group.find(item).value())
-                        self._new_param(parent_elem, group_name + ' ' + item, 'string', value)
+                        self._new_param(
+                            parent_elem, group_name + " " + item, "string", value
+                        )
 
         # TODO: handle times group (non extensible)
 

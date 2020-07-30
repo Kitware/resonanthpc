@@ -8,7 +8,7 @@ from tests.base import BaseTestCase
 
 class ObservationEventTest(BaseTestCase):
 
-    BASELINE_XML_FILENAME = 'baseline_observation.xml'
+    BASELINE_XML_FILENAME = "baseline_observation.xml"
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
     YAML_RESOURCE = "observation.yml"
 
@@ -18,5 +18,5 @@ class ObservationEventTest(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
