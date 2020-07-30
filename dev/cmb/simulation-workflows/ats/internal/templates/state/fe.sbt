@@ -67,7 +67,7 @@
 
     <AttDef Type="independent variable" BaseType="field-evaluator-base" Version="0">
       <ItemDefinitions>
-        <Void Name="constant in time" Optional="true" IsEnabledByDefault="true"></Void>
+        <Void Name="constant in time" Optional="true" IsEnabledByDefault="false"></Void>
         <String Name="components">
           <DiscreteInfo DefaultIndex="0">
             <Value Enum="cell">cell</Value>

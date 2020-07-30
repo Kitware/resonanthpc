@@ -258,6 +258,9 @@
   items:
     - components: cell
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -268,6 +271,9 @@
   items:
     - components: cell
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -278,6 +284,9 @@
   items:
     - components: cell
     - region: surface domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -288,6 +297,9 @@
   items:
     - components: cell
     - region: surface domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -298,6 +310,9 @@
   items:
     - components: cell
     - region: surface domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -308,6 +323,9 @@
   items:
     - components: cell,boundary_face
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: constant
       children:
@@ -318,6 +336,9 @@
   items:
     - components: cell
     - region: surface domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
     - name: variable type
       value: function
       children:
