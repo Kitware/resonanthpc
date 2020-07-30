@@ -8,7 +8,6 @@
       <!-- _preconditioner_type_ parameters -->
     </AttDef>
 
-
     <AttDef Type="preconditioner-identity" Label="Identity" BaseType="preconditioner-base" Version="0">
       <!-- no parameters -->
     </AttDef>
@@ -16,7 +15,6 @@
     <AttDef Type="preconditioner-diagonal" Label="Diagonal" BaseType="preconditioner-base" Version="0">
       <!-- no parameters -->
     </AttDef>
-
 
     <AttDef Type="preconditioner-block-ilu" Label="Block ILU" BaseType="preconditioner-base" Version="0">
       <ItemDefinitions>
@@ -41,7 +39,6 @@
       </ItemDefinitions>
     </AttDef>
 
-
     <AttDef Type="preconditioner-boomer-amg" Label="Boomer AMG" BaseType="preconditioner-base" Version="0">
       <ItemDefinitions>
         <Double Name="tolerance">
@@ -62,8 +59,7 @@
         <Int Name="coarsen type">
           <DefaultValue>0</DefaultValue>
         </Int>
-        <Int Name="max multigrid levels" Optional="true">
-        </Int>
+        <Int Name="max multigrid levels" Optional="true"></Int>
         <Void Name="use block indices" Optional="true" IsEnabledByDefault="false"></Void>
         <Int Name="number of functions">
           <DefaultValue>1</DefaultValue>
@@ -82,7 +78,6 @@
       </ItemDefinitions>
     </AttDef>
 
-
     <AttDef Type="preconditioner-euclid" Label="Euclid" BaseType="preconditioner-base" Version="0">
       <ItemDefinitions>
         <Int Name="ilu(k) fill level">
@@ -99,15 +94,11 @@
           </DiscreteInfo>
         </String>
 
-
       </ItemDefinitions>
     </AttDef>
 
-
     <!-- TODO: ml preconditioner parameters are not listed... skipping -->
-    <AttDef Type="preconditioner-ml" Label="TODO: ML (Trilinos AMG)" BaseType="preconditioner-base" Version="0">
-    </AttDef>
-
+    <AttDef Type="preconditioner-ml" Label="TODO: ML (Trilinos AMG)" BaseType="preconditioner-base" Version="0"></AttDef>
 
   </Definitions>
 </SMTK_AttributeResource>

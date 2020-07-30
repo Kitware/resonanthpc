@@ -2,8 +2,7 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
-    <AttDef Type="mesh.base" Label="Mesh-Base" BaseType="" Abstract="true">
-    </AttDef>
+    <AttDef Type="mesh.base" Label="Mesh-Base" BaseType="" Abstract="true"></AttDef>
 
     <!-- ATS mesh types -->
     <AttDef Type="mesh" Label="Mesh" BaseType="mesh.base" Abstract="true">
@@ -12,12 +11,7 @@
           <BriefDescription>Will this mesh be deformed?</BriefDescription>
         </Void>
         <!-- TODO Is mesh partitioner required? -->
-        <!-- <String Name="partitioner" Optional="true" IsEnabledByDefault="false">
-          <DiscreteInfo DefaultIndex="0">
-            <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value>
-            <Value Enum="METIS">metis</Value>
-            <Value Enum="Zoltan">zoltan</Value>
-          </DiscreteInfo>
+        <!-- <String Name="partitioner" Optional="true" IsEnabledByDefault="false"> <DiscreteInfo DefaultIndex="0"> <Value Enum="zoltan_rcb/map view">zoltan_rcb</Value> <Value Enum="METIS">metis</Value> <Value Enum="Zoltan">zoltan</Value> </DiscreteInfo>
         </String> -->
       </ItemDefinitions>
     </AttDef>
@@ -31,8 +25,7 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh" Abstract="true">
-    </AttDef>
+    <AttDef Type="mesh.generate" Label="Generate Mesh" BaseType="mesh" BaseName="GeneratedMesh" Abstract="true"></AttDef>
 
     <AttDef Type="mesh.generate.2d" Label="Generate Mesh 2D" BaseType="mesh.generate" BaseName="GeneratedMesh">
       <ItemDefinitions>
@@ -73,7 +66,7 @@
         <!-- Should this instead be named "model" or "model-resource"? -->
         <Resource Name="resource">
           <Accepts>
-            <Resource Name="smtk::model::Resource" />
+            <Resource Name="smtk::model::Resource"/>
           </Accepts>
         </Resource>
       </ItemDefinitions>
@@ -85,11 +78,9 @@
           <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region.labeled.surface']"></Resource>
         </Accepts>
       </AssociationsDef>
-      <BriefDescription>A set of regions containing surface faces.
-All regions must be from the same source mesh.</BriefDescription>
+      <BriefDescription>A set of regions containing surface faces. All regions must be from the same source mesh.</BriefDescription>
       <ItemDefinitions>
-        <File Name="export mesh to file" Optional="true" IsEnabledByDefault="false">
-        </File>
+        <File Name="export mesh to file" Optional="true" IsEnabledByDefault="false"></File>
       </ItemDefinitions>
     </AttDef>
 
@@ -97,7 +88,7 @@ All regions must be from the same source mesh.</BriefDescription>
       <ItemDefinitions>
         <Component Name="region" Label="Region">
           <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"/>
           </Accepts>
         </Component>
         <String Name="entity kind">
@@ -107,25 +98,21 @@ All regions must be from the same source mesh.</BriefDescription>
             <Value Enum="node">node</Value>
           </DiscreteInfo>
         </String>
-<!--         <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false">
-          <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription>
-        </Void> -->
+        <!-- <Void Name="flyweight mesh" Label="flyweight mesh" Optional="true" IsEnabledByDefault="false"> <BriefDescription>NOT YET SUPPORTED. Allows a single mesh instead of one per entity.</BriefDescription> </Void> -->
       </ItemDefinitions>
     </AttDef>
-
 
     <AttDef Type="mesh.aliased" Label="Aliased" BaseType="mesh.base">
       <ItemDefinitions>
         <Component Name="alias" Label="Alias">
           <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']" />
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh']"/>
           </Accepts>
         </Component>
       </ItemDefinitions>
     </AttDef>
 
-<!--     <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh">
-    </AttDef> -->
+    <!-- <AttDef Type="mesh.column" Label="TODO column" BaseType="mesh"> </AttDef> -->
 
   </Definitions>
 </SMTK_AttributeResource>

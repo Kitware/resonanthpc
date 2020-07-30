@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
   <Definitions>
-    <AttDef Type="field-evaluator" BaseType="" Abstract="true" Version="0">
-    </AttDef>
+    <AttDef Type="field-evaluator" BaseType="" Abstract="true" Version="0"></AttDef>
 
-    <AttDef Type="field-evaluator-base" BaseType="field-evaluator" Abstract="true" Version="0">
-    </AttDef>
+    <AttDef Type="field-evaluator-base" BaseType="field-evaluator" Abstract="true" Version="0"></AttDef>
 
     <AttDef Type="field-evaluator-linker-base" BaseType="field-evaluator" Abstract="true" Version="0">
       <!-- For linking multiple field evaluators together -->
@@ -69,7 +67,7 @@
                 <Value Enum="liquid water">liquid water</Value>
               </DiscreteInfo>
             </String>
-         </ItemDefinitions>
+          </ItemDefinitions>
         </Group>
       </ItemDefinitions>
     </AttDef>
@@ -189,7 +187,7 @@
                 <Value Enum="water vapor over water/ice">water vapor over water/ice</Value>
               </DiscreteInfo>
             </String>
-         </ItemDefinitions>
+          </ItemDefinitions>
         </Group>
       </ItemDefinitions>
     </AttDef>
@@ -200,8 +198,7 @@
           <DefaultValue>0.0180153</DefaultValue>
         </Double>
         <!-- TODO: can we make this optional??? -->
-        <!-- <Void Name="allow negative water content" Optional="true" IsEnabledByDefault="false">
-        </Void> -->
+        <!-- <Void Name="allow negative water content" Optional="true" IsEnabledByDefault="false"> </Void> -->
         <Double Name="water content rollover" Optional="true" IsEnabledByDefault="false">
           <DefaultValue>0.0</DefaultValue>
         </Double>
@@ -244,11 +241,10 @@
             <Double Name="pore compressibility [Pa^-1]">
               <DefaultValue>1.0e-9</DefaultValue>
             </Double>
-         </ItemDefinitions>
+          </ItemDefinitions>
         </Group>
       </ItemDefinitions>
     </AttDef>
-
 
   </Definitions>
 </SMTK_AttributeResource>
