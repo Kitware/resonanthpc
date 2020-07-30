@@ -11,11 +11,8 @@
 # =============================================================================
 
 import os
-print('loading', os.path.basename(__file__))
-from xml.dom import minidom
 
-import smtk
-import smtk.attribute
+print("loading", os.path.basename(__file__))
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
@@ -23,6 +20,7 @@ from .base_writer import BaseWriter
 
 class RegionWriter(BaseWriter):
     """Writer for ATS region elements."""
+
     def __init__(self):
         super(RegionWriter, self).__init__()
 
@@ -30,39 +28,39 @@ class RegionWriter(BaseWriter):
         """"""
         # Define names that are not directly function of attribute type
         region_type_params = {
-            'region.labeled.surface': 'region: labeled set',
+            "region.labeled.surface": "region: labeled set",
         }
 
         # Association parameters
         assoc_params = {
-            'region.logical': 'regions',
-            'region.labeled.surface': 'label',
+            "region.logical": "regions",
+            "region.labeled.surface": "label",
         }
 
         # possible children parameters
         children = {
-            'region.plane.3d': ['point', 'normal',],
-            'region.plane.2d': ['point', 'normal',],
-            'region.box.3d': ['low coordinate', 'high coordinate',],
-            'region.box.2d': ['low coordinate', 'high coordinate',],
-            'region.labeled.surface': ['label', 'file', 'entity',],
-            'region.color-function': ['file', 'value',],
-            'region.point.3d': ['point',],
-            'region.point.2d': ['point',],
-            'region.logical': ['operation',],
-            'region.boundary': ['entity',],
+            "region.plane.3d": ["point", "normal",],
+            "region.plane.2d": ["point", "normal",],
+            "region.box.3d": ["low coordinate", "high coordinate",],
+            "region.box.2d": ["low coordinate", "high coordinate",],
+            "region.labeled.surface": ["label", "file", "entity",],
+            "region.color-function": ["file", "value",],
+            "region.point.3d": ["point",],
+            "region.point.2d": ["point",],
+            "region.logical": ["operation",],
+            "region.boundary": ["entity",],
             # TODO: there's more to fill in here!
         }
 
         labeled_region_types = {
-            'region.labeled.volume': 'cell',
-            'region.labeled.surface': 'face',
-            'region.labeled.edge': 'edge',
-            'region.labeled.vertex': 'node',
+            "region.labeled.volume": "cell",
+            "region.labeled.surface": "face",
+            "region.labeled.edge": "edge",
+            "region.labeled.vertex": "node",
         }
 
-        regions_elem = self._new_list(xml_root, 'regions')
-        region_atts = shared.sim_atts.findAttributes('region')
+        regions_elem = self._new_list(xml_root, "regions")
+        region_atts = shared.sim_atts.findAttributes("region")
         for region_att in region_atts:
             # Outermost element is ParameterList with name of region
             name_list_elem = self._new_list(regions_elem, region_att.name())
@@ -73,31 +71,43 @@ class RegionWriter(BaseWriter):
             if param_name is None:
                 param_name = region_type.replace(".2d", "")
                 param_name = param_name.replace(".3d", "")
-                param_name = param_name.replace('.', ': ')
+                param_name = param_name.replace(".", ": ")
             type_list_elem = self._new_list(name_list_elem, param_name)
 
             # surface.labeled is special case
-            if region_type.startswith('region.labeled'):
+            if region_type.startswith("region.labeled"):
                 assoc_item = region_att.associations()
                 model_entity = assoc_item.value()
                 if model_entity is None:
-                    raise RuntimeError('No model entity found for region attribute ()'.format(region_att.name()))
+                    raise RuntimeError(
+                        "No model entity found for region attribute ({})".format(
+                            region_att.name()
+                        )
+                    )
                 resource = model_entity.resource()
                 if resource is None:
-                    raise RuntimeError('Model not loaded for ResourceItem {}'.format(item.name()))
+                    raise RuntimeError(
+                        "Model not loaded for ResourceItem {}".format(
+                            model_entity.name()
+                        )
+                    )
 
                 # Write "file" and "format"
                 path = self._get_native_model_path(resource)
                 if path is None:
-                    raise RuntimeError('Model file not found for ResourceItem {}'.format(item.name()))
+                    raise RuntimeError(
+                        "Model file not found for ResourceItem {}".format(
+                            model_entity.name()
+                        )
+                    )
                 # For now, just write the base filename
                 filename = os.path.basename(path)
-                self._new_param(type_list_elem, 'file', 'string', filename)
+                self._new_param(type_list_elem, "file", "string", filename)
                 # Todo Extend to include MSTK mesh files
-                self._new_param(type_list_elem, 'format', 'string', 'Exodus II')
+                self._new_param(type_list_elem, "format", "string", "Exodus II")
 
-                entity_string = labeled_region_types.get(region_type, 'unknown')
-                self._new_param(type_list_elem, 'entity', 'string', entity_string)
+                entity_string = labeled_region_types.get(region_type, "unknown")
+                self._new_param(type_list_elem, "entity", "string", entity_string)
 
                 # Should "label" instead be the pedigree id?
                 # model_resource = smtk.model.Resource.CastTo(resource)
@@ -107,7 +117,12 @@ class RegionWriter(BaseWriter):
                 # self._new_param(type_list_elem, 'label', 'string', str(pedigree_id))
 
                 # For now, use the model_entity name
-                self._new_param(type_list_elem, 'label', 'string', model_entity.name().replace("Unnamed set ID: ", ""))
+                self._new_param(
+                    type_list_elem,
+                    "label",
+                    "string",
+                    model_entity.name().replace("Unnamed set ID: ", ""),
+                )
                 continue
 
             # Get list of known children for given attribute

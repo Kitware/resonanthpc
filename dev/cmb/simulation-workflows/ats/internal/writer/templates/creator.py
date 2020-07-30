@@ -28,4 +28,4 @@ def append_template(parent, fname, mapping=None):
         raise AssertionError("This has too many nodes, can't do that.")
     node = nodes[0]
     parent.appendChild(node)
-    return node # Return the node so that we can add the time integrator to PK
+    return node  # Return the node so that we can add the time integrator to PK

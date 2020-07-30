@@ -155,12 +155,14 @@
 - type: viscosity
   name: viscosity_liquid
 
-- type: eos-vapor
+- type: eos
   name: molar_density_gas
   items:
     - 'EOS basis': molar
     - 'molar density key': molar_density_gas
     - 'mass density key': mass_density_gas
+    - name: EOS type
+      value: vapor in gas
 
 - type: molar fraction gas
   name: mol_frac_gas
@@ -168,23 +170,41 @@
 - type: independent variable
   name: porosity
   items:
-    - value: 0.25
     - components: cell
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: variable type
+      value: constant
+      children:
+        - value: 0.25
 
 - type: independent variable
   name: permeability
   items:
-    - value: 2.5e-12
     - components: cell
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: variable type
+      value: constant
+      children:
+        - value: 2.5e-12
 
 - type: independent variable
   name: temperature
   items:
-    - value: 273.65
     - components: cell,boundary_face
     - region: computational domain
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: variable type
+      value: constant
+      children:
+        - value: 273.65
 
 - type: effective_pressure
   name: effective_pressure

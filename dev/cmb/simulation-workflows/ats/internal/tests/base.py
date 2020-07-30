@@ -13,10 +13,19 @@ from writer import ats_writer
 
 source_path = os.path.abspath(os.path.dirname(__file__))
 
-TEMPLATE_FILEPATH = os.path.join(source_path, os.pardir, os.pardir, 'ats.sbt')
+TEMPLATE_FILEPATH = os.path.join(source_path, os.pardir, os.pardir, "ats.sbt")
 
 
-path = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, 'smtk-tools')
+path = os.path.join(
+    source_path,
+    os.pardir,
+    os.pardir,
+    os.pardir,
+    os.pardir,
+    os.pardir,
+    os.pardir,
+    "smtk-tools",
+)
 utilities_module_path = os.path.normpath(path)
 sys.path.insert(0, utilities_module_path)
 import yaml
@@ -42,11 +51,15 @@ class BaseTestCase(unittest.TestCase):
         self.res_io = ResourceIO()
         if hasattr(self, "MODEL_RESOURCE_FILENAME"):
             model_path = os.path.join(self.SOURCE_DIR, self.MODEL_RESOURCE_FILENAME)
-            print('Loading model resource file:', model_path)
+            print("Loading model resource file:", model_path)
             self.model_resource = self.res_io.read_resource(model_path)
-            assert self.model_resource is not None, 'failed to load model resource from file {}'.format(model_path)
+            assert (
+                self.model_resource is not None
+            ), "failed to load model resource from file {}".format(model_path)
         self.att_resource = self.res_io.read_sbt_file(TEMPLATE_FILEPATH)
-        assert self.att_resource is not None, 'failed to import attribute template from {}'.format(TEMPLATE_FILEPATH)
+        assert (
+            self.att_resource is not None
+        ), "failed to import attribute template from {}".format(TEMPLATE_FILEPATH)
 
         # Associate the model resource
         if self.model_resource is not None:
@@ -54,7 +67,9 @@ class BaseTestCase(unittest.TestCase):
 
         # Initialize builder and populate the attributes
         self.builder = AttributeBuilder()
-        self.builder.build_attributes(self.att_resource, spec, model_resource=self.model_resource)
+        self.builder.build_attributes(
+            self.att_resource, spec, model_resource=self.model_resource
+        )
         return
 
     def setUp(self):
@@ -70,9 +85,9 @@ class BaseTestCase(unittest.TestCase):
     def tearDown(self):
         self.att_resource = None
         self.model_resource = None
-        if hasattr(self, 'res_io'):
+        if hasattr(self, "res_io"):
             del self.res_io
-        if hasattr(self, 'builder'):
+        if hasattr(self, "builder"):
             del self.builder
 
     def _read_baseline(self, baseline_path):

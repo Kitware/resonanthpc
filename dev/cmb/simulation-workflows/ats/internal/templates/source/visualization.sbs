@@ -21,16 +21,10 @@
 
         <!-- NOTE: not used??? why here if also in IOEvent spec? -->
         <!-- NOTE: the year definition here is differnet than coordinator -->
-        <!-- <String Name="time units">
-          <DiscreteInfo DefaultIndex="0">
-            <Value Enum="second">s</Value>
-            <Value Enum="day">d</Value>
-            <Value Enum="year">yr 365</Value>
-          </DiscreteInfo>
-        </String> -->
+        <!-- <String Name="time units"> <DiscreteInfo DefaultIndex="0"> <Value Enum="second">s</Value> <Value Enum="day">d</Value> <Value Enum="year">yr 365</Value> </DiscreteInfo> </String> -->
 
         <Group Name="visualization times">
-          <xi:include href="templates/source/io-event.xml" />
+          <xi:include href="templates/source/io-event.xml"/>
         </Group>
 
       </ItemDefinitions>

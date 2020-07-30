@@ -60,7 +60,7 @@
         </Double>
 
         <Group Name="required times" Optional="true" IsEnabledByDefault="false">
-          <xi:include href="templates/source/io-event.xml" />
+          <xi:include href="templates/source/io-event.xml"/>
         </Group>
 
         <!-- PK tree (list of length one??) -->

@@ -8,9 +8,9 @@ from tests.base import BaseTestCase
 
 class CoordinatorTest(BaseTestCase):
 
-    BASELINE_XML_FILENAME = 'baseline_coordinator.xml'
+    BASELINE_XML_FILENAME = "baseline_coordinator.xml"
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
-    YAML_RESOURCE = 'coordinator.yml'
+    YAML_RESOURCE = "coordinator.yml"
 
     def test_coordinator(self):
         coordinator_writer.CoordinatorWriter().write(self.writer.xml_root)
@@ -18,5 +18,5 @@ class CoordinatorTest(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

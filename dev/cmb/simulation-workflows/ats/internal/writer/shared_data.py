@@ -1,7 +1,9 @@
 """Data shared among all writers"""
 
+
 class SharedData:
     """Singleton class"""
+
     _instance = None
 
     def __init__(self):
@@ -11,7 +13,7 @@ class SharedData:
         from .shared_data import instance as shared
         """
         if self.__class__._instance is not None:
-            raise RuntimeError('Invalid to instantiate SharedData more than once')
+            raise RuntimeError("Invalid to instantiate SharedData more than once")
             self.__class__._instance = self
 
         self._checked_attributes = set()
@@ -41,5 +43,6 @@ class SharedData:
     @property
     def xml_doc(self):
         return self._xml_doc
+
 
 instance = SharedData()

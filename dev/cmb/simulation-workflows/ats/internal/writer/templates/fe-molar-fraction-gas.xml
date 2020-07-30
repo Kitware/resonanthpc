@@ -1,7 +1,0 @@
-<ParameterList name="${NAME}" type="ParameterList">
-  <Parameter name="field evaluator type" type="string" value="molar fraction gas" />
-  <Parameter name="molar fraction key" type="string" value="mol_frac_gas" />
-  <ParameterList name="vapor pressure model parameters" type="ParameterList">
-    <Parameter name="vapor pressure model type" type="string" value="water vapor over water/ice" />
-  </ParameterList>
-</ParameterList>

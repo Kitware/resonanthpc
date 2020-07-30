@@ -162,9 +162,6 @@
     <ParameterList name="field evaluators" type="ParameterList">
       <ParameterList name="surface-effective_pressure" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="effective_pressure"/>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
       <ParameterList name="surface-molar_density_liquid" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="eos"/>
@@ -174,9 +171,6 @@
         <ParameterList name="EOS parameters" type="ParameterList">
           <Parameter name="EOS type" type="string" value="constant"/>
           <Parameter name="density [kg/m^3]" type="double" value="1.000000e+03"/>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="surface-source_molar_density" type="ParameterList">
@@ -188,9 +182,6 @@
           <Parameter name="EOS type" type="string" value="constant"/>
           <Parameter name="density [kg/m^3]" type="double" value="1.000000e+03"/>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
       </ParameterList>
       <ParameterList name="surface-manning_coefficient" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable"/>
@@ -198,42 +189,20 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <!-- can be component or components (string or array(string)) -->
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="3.600000e-03"/>
+                <Parameter name="value" type="double" value="0.0036"/>
               </ParameterList>
             </ParameterList>
           </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
-      </ParameterList>
-      <ParameterList name="surface-temperature" type="ParameterList">
-        <Parameter name="field evaluator type" type="string" value="independent variable"/>
-        <Parameter name="constant in time" type="bool" value="true"/>
-        <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <!-- can be component or components (string or array(string)) -->
-            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}"/>
-            <ParameterList name="function" type="ParameterList">
-              <ParameterList name="function-constant" type="ParameterList">
-                <Parameter name="value" type="double" value="2.746500e+02"/>
-              </ParameterList>
-            </ParameterList>
-          </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="low"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="surface-mass_source" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="independent variable"/>
+        <Parameter name="constant in time" type="bool" value="true"/>
         <ParameterList name="function" type="ParameterList">
-          <ParameterList name="domain rain" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
@@ -246,11 +215,27 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+      <ParameterList name="surface-temperature" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable"/>
+        <Parameter name="constant in time" type="bool" value="true"/>
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain"/>
+            <Parameter name="components" type="Array(string)" value="{cell,boundary_face}"/>
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-constant" type="ParameterList">
+                <Parameter name="value" type="double" value="274.65"/>
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
       <ParameterList name="surface-water_content" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="overland pressure water content"/>
       </ParameterList>
       <ParameterList name="surface-ponded_depth" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>
+        <Parameter name="ponded depth bar" type="bool" value="false"/>
       </ParameterList>
       <ParameterList name="surface-ponded_depth_bar" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="ponded depth"/>
