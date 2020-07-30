@@ -7,7 +7,7 @@ which doesn't support the "-m unittest" argument.
 import os
 import unittest
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     loader = unittest.TestLoader()
 
     # Next 3 lines dont work and I wish I knew why...
@@ -17,8 +17,8 @@ if __name__ == '__main__':
 
     # So instead, use discover
     source_path = os.path.abspath(os.path.dirname(__file__))
-    test_path = os.path.join(source_path, 'tests')
-    suite = loader.discover(start_dir=test_path, pattern='test*.py')
+    test_path = os.path.join(source_path, "tests")
+    suite = loader.discover(start_dir=test_path, pattern="test*.py")
     # print(suite)
 
     # Because pvpython hijacks command line options, we'll

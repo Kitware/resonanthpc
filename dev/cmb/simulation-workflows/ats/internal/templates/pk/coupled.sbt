@@ -19,7 +19,6 @@
       </ItemDefinitions>
     </AttDef>
 
-
     <AttDef Type="pk-coupled-water-rc-sh" Label="coupled water" BaseType="pk-base" Version="0">
       <ItemDefinitions>
         <Component Name="surface pk">
@@ -35,7 +34,6 @@
         </Component>
       </ItemDefinitions>
     </AttDef>
-
 
   </Definitions>
 </SMTK_AttributeResource>

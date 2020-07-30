@@ -48,7 +48,8 @@
                 <Value>monitor residual</Value>
               </DiscreteInfo>
             </String>
-            <Int Name="backtrack max steps"> <!-- TODO: check name -->
+            <Int Name="backtrack max steps">
+              <!-- TODO: check name -->
               <DefaultValue>10</DefaultValue>
             </Int>
             <Int Name="backtrack max total steps">
@@ -64,12 +65,11 @@
             <!-- There can also be a verbosity here?? -->
             <!-- TODO: `Anderson mixing` and `relaxation parameter`-->
 
-            <!-- max error growth factor:  1000.0-->
+            <!-- max error growth factor: 1000.0-->
             <!-- modify correction: true -->
 
           </ItemDefinitions>
         </Group>
-
 
         <!-- verbose object -->
         <String Name="verbosity level">
@@ -111,7 +111,6 @@
             </Int>
           </ItemDefinitions>
         </Group>
-
 
       </ItemDefinitions>
     </AttDef>

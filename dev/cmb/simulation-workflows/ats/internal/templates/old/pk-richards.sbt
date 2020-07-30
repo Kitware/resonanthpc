@@ -29,7 +29,6 @@
           </ItemDefinitions>
         </Group>
 
-
         <!-- operator - diffusion (pde-diffusion-spec) -->
         <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
         <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
@@ -59,9 +58,6 @@
             <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
           </ItemDefinitions>
         </Group>
-
-
-
 
         <!-- preconditioner (preconditioner-typed-spec) -->
         <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
@@ -112,8 +108,7 @@
           <DefaultValue>-1</DefaultValue>
         </Double>
 
-
-        <!--  TODO: there's a ton more but it says they aren't typically provided by user??? -->
+        <!-- TODO: there's a ton more but it says they aren't typically provided by user??? -->
         <!-- permeability rescaling is one of those... -->
         <Double Name="permeability rescaling">
           <DefaultValue>1e7</DefaultValue>

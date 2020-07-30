@@ -14,7 +14,7 @@
         <!-- NOTE: not documented, but in the example -->
         <String Name="delimiter">
           <!-- TODO: how do we make a space character the default value? -->
-          <DefaultValue> </DefaultValue>
+          <DefaultValue></DefaultValue>
         </String>
 
         <Int Name="write interval" Optional="true">
@@ -53,9 +53,8 @@
         <Double Name="direction normalized flux direction" NumberOfRequiredValues="3" Optional="true" IsEnabledByDefault="false"></Double>
 
         <Group Name="observation times">
-          <xi:include href="templates/source/io-event.xml" />
+          <xi:include href="templates/source/io-event.xml"/>
         </Group>
-
 
       </ItemDefinitions>
     </AttDef>

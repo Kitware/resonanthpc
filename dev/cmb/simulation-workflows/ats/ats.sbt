@@ -32,7 +32,7 @@
 
     <View Type="Group" Title="Mesh" Style="Tiled">
       <Views>
-        <View Title="Mesh Attributes" />
+        <View Title="Mesh Attributes"/>
       </Views>
     </View>
     <View Type="Instanced" Title="Domain">
@@ -70,19 +70,13 @@
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
-    <!-- <View Type="Attribute" Title="Preconditioners">
-      <AttributeTypes>
-        <Att Type="preconditioner-base"/>
-      </AttributeTypes>
-    </View> -->
+    <!-- <View Type="Attribute" Title="Preconditioners"> <AttributeTypes> <Att Type="preconditioner-base"/> </AttributeTypes> </View> -->
     <View Type="Instanced" Title="Time Integrator">
       <InstancedAttributes>
         <!-- TODO: eventaully there can be more than one -->
         <Att Type="time integrator" Name="time integrator"/>
       </InstancedAttributes>
     </View>
-
-
 
     <View Type="Attribute" Title="Visualization">
       <AttributeTypes>
@@ -117,9 +111,6 @@
         <Att Type="ic-base" Name="initial conditions"/>
       </AttributeTypes>
     </View>
-
-
-
 
   </Views>
 </SMTK_AttributeResource>
