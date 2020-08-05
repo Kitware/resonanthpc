@@ -13,11 +13,7 @@
       </AssociationsDef>
       <ItemDefinitions>
 
-        <Component Name="initial condition">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-          </Accepts>
-        </Component>
+        <!-- <Component Name="initial condition"> <Accepts> <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource> </Accepts> </Component> -->
 
         <Component Name="elevation evaluator">
           <Accepts>

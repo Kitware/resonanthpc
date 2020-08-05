@@ -21,13 +21,70 @@
 
 
 # Process Kernel
-- type: pk-richards
+- type: richards steady state
   name: Richards
-  associate:
-    - attribute: bottom face
   items:
-    - 'initial condition': computational domain
-    - 'water retention evaluator': computational domain
+    - verbosity level: high
+    - primary variable key: pressure
+    - name: boundary conditions
+      enabled: true
+      subgroups:
+        - - BC name: bottom
+          - regions: bottom face
+          - name: boundary type
+            value: pressure
+            children:
+              - BC value: 140000.0
+        - - BC name: other
+          - regions: bottom face
+          - name: boundary type
+            value: seepage face with infiltration
+            children:
+              - BC value: 101325
+        - - BC name: other 2
+          - regions: bottom face
+          - name: boundary type
+            value: zero gradient
+    - name: initial condition
+      enabled: true
+      items:
+        - initialize faces from cells: true
+        - region: computational domain
+        - components: cell,boundary_face
+        - name: variable type
+          value: constant
+          children:
+            - value: 101325.0
+    - name: water retention evaluator specs
+      items:
+        - region: computational domain
+        - name: WRM Type
+          value: van Genuchten
+          children:
+            - van Genuchten alpha [Pa^-1]: 0.00015
+            - van Genuchten m [-]: 0.8
+            - residual saturation [-]: 0.0
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [0, 99]
+          enabled: true
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 2
+    - smoother sweeps: 3
+    - strong threshold: 0.5
+    - tolerance: 0.0
+    - relaxation type: 6
+    - verbosity: summary of run time settings and timing information
+
 
 
 # Coordinator (notice that   ACTION = EDIT)
@@ -38,6 +95,9 @@
       children:
         - 'end time': 1.0
     - 'PK tree': Richards
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
 
 
 # Time integrator

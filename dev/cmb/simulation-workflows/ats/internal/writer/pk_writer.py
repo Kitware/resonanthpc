@@ -12,85 +12,12 @@
 
 import os
 
+import smtk
+
 print("loading", os.path.basename(__file__))
 
 from .shared_data import instance as shared
-from .base_writer import BaseWriter
-from .templates.creator import append_template
-
-
-def map_richards_steady_state_and_2(att):
-    bc_assocs = att.associations()
-    value_list = list()
-    for i in range(bc_assocs.numberOfValues()):
-        if bc_assocs.isSet(i):
-            value_att = bc_assocs.value(i)
-            value_list.append(value_att.name())
-
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${IC_REGION}": att.findComponent("initial condition").value().name(),
-        r"${WRE_REGION}": att.findComponent("water retention evaluator").value().name(),
-        r"${BC_REGIONS}": r"{" + ", ".join(value_list) + r"}",
-    }
-    return mapping
-
-
-def map_richards_flow_4(att):
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${IC_REGION}": att.findComponent("initial condition").value().name(),
-        r"${WRE_REGION}": att.findComponent("water retention evaluator").value().name(),
-    }
-    return mapping
-
-
-def map_overland_flow_pressure_basis_4(att):
-    mapping = {
-        r"${NAME}": att.name(),
-    }
-    return mapping
-
-
-def map_overland_flow_pressure_basis_3(att):
-    bc_assocs = att.associations()
-    value_list = list()
-    for i in range(bc_assocs.numberOfValues()):
-        if bc_assocs.isSet(i):
-            value_att = bc_assocs.value(i)
-            value_list.append(value_att.name())
-
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${IC_REGION}": att.findComponent("initial condition").value().name(),
-        r"${ELEV_REGION}": att.findComponent("elevation evaluator").value().name(),
-        r"${SLOPE_REGIONS}": r"{" + ", ".join(value_list) + r"}",
-    }
-    return mapping
-
-
-def map_overland_flow_pressure_basis_rc_sh(att):
-    bc_assocs = att.associations()
-    value_list = list()
-    for i in range(bc_assocs.numberOfValues()):
-        if bc_assocs.isSet(i):
-            value_att = bc_assocs.value(i)
-            value_list.append(value_att.name())
-
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${BC_REGIONS}": r"{" + ", ".join(value_list) + r"}",
-    }
-    return mapping
-
-
-def map_coupled_water(att):
-    mapping = {
-        r"${NAME}": att.name(),
-        r"${SUBSURFACE_PK}": att.find("subsurface pk").value().name(),
-        r"${SURFACE_PK}": att.find("surface pk").value().name(),
-    }
-    return mapping
+from .base_writer import BaseWriter, FLOAT_FORMAT
 
 
 class PKWriter(BaseWriter):
@@ -153,38 +80,237 @@ class PKWriter(BaseWriter):
 
         return
 
+    def _generate_preconditioner_section(self, pk_elem):
+        options = {
+            "block ilu": [
+                "fact: relax value",
+                "fact: absolute threshold",
+                "fact: relative threshold",
+                "fact: level-of-fill",
+                "overlap",
+                "schwarz: combine mode",
+            ],
+            "boomer amg": [
+                "tolerance",
+                "smoother sweeps",
+                "cycle applications",
+                "strong threshold",
+                "relaxation type",
+                "coarsen type",
+                "max multigrid levels",
+                "use block indices",
+                "number of functions",
+                "nodal strength of connection norm",
+                # TODO: verbosity
+            ],
+            "euclid": [
+                "ilu(k) fill level",
+                "ilut drop tolerance",
+                "rescale row",
+                # TODO: verbosity
+            ],
+        }
+        coord_inst = shared.sim_atts.findAttribute("cycle driver")
+        att = coord_inst.find("preconditioner").value()
+        if not att:
+            raise RuntimeError("preconditioner is not set.")
+        prec_elem = self._new_list(pk_elem, "preconditioner")
+        self._new_param(prec_elem, "preconditioner type", "string", att.type())
+        params = self._new_list(prec_elem, att.type() + " parameters")
+        self._render_items(params, att, options[att.type()])
+
+    def _render_pk_base(self, pk_elem, att):
+        """The base PK class."""
+        options = []
+        self._render_items(pk_elem, att, options)
+        verb_list = self._new_list(pk_elem, "verbose object")
+        self._render_items(verb_list, att, ["verbosity level",])
+
+    def _render_pk_base_2(self, pk_elem, att):
+        """The base, non-coupler pk class."""
+        self._render_pk_base(pk_elem, att)
+        options = []
+        self._render_items(pk_elem, att, options)
+        # render boundary conditions
+        bc_function_names = {
+            "pressure": "boundary pressure",
+            "mass flux": "outward mass flux",
+            "seepage face pressure": "boundary pressure",
+            "seepage face head": "boundary head",
+            "seepage face with infiltration": "outward mass flux",
+            "head": "boundary head",
+            "fixed level": "fixed level",
+            "zero gradient": None,
+            "critical depth": None,
+        }
+        # NOTE: dynamic BCs are not implemented.
+        bc_group = att.findGroup("boundary conditions")
+        n_bcs = bc_group.numberOfGroups()
+        bc_list = self._new_list(pk_elem, "boundary conditions")
+        if bc_group.isEnabled():
+            # Get number of types of BCs and group each by type
+            bc_type_idxs = {}
+            for i in range(n_bcs):
+                bc_type = bc_group.find(i, "boundary type").value()
+                bc_type_idxs.setdefault(bc_type, [])
+                bc_type_idxs[bc_type].append(i)
+            for bc_type, idxs in bc_type_idxs.items():
+                grouping = self._new_list(bc_list, bc_type)
+                for i in idxs:
+                    this_bc = self._new_list(
+                        grouping, bc_group.find(i, "BC name").value()
+                    )
+                    params = bc_group.find(i, "boundary type")
+                    regions_comp = bc_group.find(i, "regions")
+                    value_list = [
+                        regions_comp.value(k).name()
+                        for k in range(regions_comp.numberOfValues())
+                    ]
+                    regions = r"{" + ", ".join(value_list) + r"}"
+                    self._new_param(this_bc, "regions", "Array(string)", regions)
+                    func_name = bc_function_names[bc_type]
+                    if func_name:
+                        params_list = self._new_list(this_bc, func_name)
+                        func = self._new_list(params_list, "function-constant")
+                        self._new_param(
+                            func,
+                            "value",
+                            "double",
+                            FLOAT_FORMAT.format(params.find("BC value").value()),
+                        )
+
+        # render initial condition
+        ic_options = [
+            "initialize faces from cells",
+        ]
+        ic_group = att.findGroup("initial condition")
+        ic_elem = self._new_list(pk_elem, "initial condition")
+        self._render_items(ic_elem, ic_group, ic_options)
+        if ic_group.isEnabled():
+            sub = self._new_list(ic_elem, "function")
+            subsub = self._new_list(sub, "initial pressure cells")
+            # region
+            region = ic_group.find("region").value().name()
+            self._new_param(subsub, "region", "string", region)
+            # components
+            components = "{" + str(ic_group.find("components").value()) + "}"
+            self._new_param(subsub, "components", "Array(string)", components)
+            # The function - NOTE: this is repeated code from field evaluator
+            function_sub_elem = self._new_list(subsub, "function")
+            params = ic_group.find("variable type")
+            func_type = params.value()
+            if func_type == "constant":
+                constant_elem = self._new_list(function_sub_elem, "function-constant")
+                self._render_items(constant_elem, params, ["value",])
+            elif func_type == "function":
+                tabular_elem = self._new_list(function_sub_elem, "function-tabular")
+
+                group = ic_group.find("tabular-data")
+
+                def _fetch_subgroup_values(group, name):
+                    values = []
+                    for i in range(group.numberOfGroups()):
+                        v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
+                        values.append(v.value())
+                    return values
+
+                x_value_list = _fetch_subgroup_values(group, "X")
+                x_value_list = [str(x) for x in x_value_list]
+                x_values = r"{" + ",".join(x_value_list) + r"}"
+
+                y_value_list = _fetch_subgroup_values(group, "Y")
+                y_value_list = [str(x) for x in y_value_list]
+                y_values = r"{" + ",".join(y_value_list) + r"}"
+
+                self._new_param(tabular_elem, "x values", "Array(double)", x_values)
+                self._new_param(tabular_elem, "y values", "Array(double)", y_values)
+        return
+
+    def _render_pk_physical(self, pk_elem, att, render_base=True):
+        if render_base:
+            self._render_pk_base_2(pk_elem, att)
+        options = [
+            "primary variable key",
+        ]
+        self._render_items(pk_elem, att, options)
+        debug_group = att.findGroup("debugger")
+        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
+
+    def _render_pk_bdf(self, pk_elem, att, render_base=True):
+        if render_base:
+            self._render_pk_base_2(pk_elem, att)
+        pass
+
+    def _render_pk_physical_bdf(self, pk_elem, att):
+        self._render_pk_base_2(pk_elem, att)
+        self._render_pk_physical(pk_elem, att, render_base=False)
+        self._render_pk_bdf(pk_elem, att, render_base=False)
+        # TODO: other fields.
+
+    # The above PK renderers should be called internally by the following renderers.
+
+    def _render_pk_richards_steady_state(self, pk_elem, att):
+        self._render_pk_physical_bdf(pk_elem, att)
+        options = [
+            "permeability type",
+            "surface rel perm strategy",
+            "relative permeability method",
+            "modify predictor with consistent faces",
+            "modify predictor for flux BCs",
+            "modify predictor via water content",
+            "max valid change in saturation in a time step [-]",
+            "max valid change in ice saturation in a time step [-]",
+            "limit correction to pressure change [Pa]",
+            "limit correction to pressure change when crossing atmospheric [Pa]",
+            "permeability rescaling",
+        ]
+        self._render_items(pk_elem, att, options)
+        # water retention evaluator specs
+        wre_group = att.findGroup("water retention evaluator specs")
+        wre_elem = self._new_list(pk_elem, "water retention evaluator")
+        wre_params = self._new_list(wre_elem, "WRM parameters")
+        wrm_options = [
+            "van Genuchten alpha [Pa^-1]",
+            "residual saturation [-]",
+            "Mualem exponent l [-]",
+            "van Genuchten m [-]",
+            "smoothing interval width [saturation]",
+            "saturation smoothing interval [Pa]",
+        ]
+        wrm = wre_group.find("WRM Type")
+        region = wre_group.find("region").value().name()
+        wre_reg_params = self._new_list(wre_params, region)
+        self._new_param(wre_reg_params, "region", "string", region)
+        self._new_param(wre_reg_params, "WRM Type", "string", wrm.value())
+        self._render_items(wre_reg_params, wrm, wrm_options)
+        # diffusion
+        diff_group = att.findGroup("diffusion")
+        diff_options = [
+            "discretization primary",
+            "gravity",
+            "Newton correction",
+            "scaled constraint equation",
+            "constraint equation scaling cutoff",
+        ]
+        diff_elem = self._new_list(pk_elem, "diffusion")
+        self._render_items(diff_elem, diff_group, diff_options)
+        # TODO: source term
+        src_group = att.findGroup("source term")
+        if src_group.isEnabled():
+            src_options = [
+                "source",
+                "source term is differentiable",
+                "explicit source term",
+            ]
+            self._new_param(pk_elem, "source term", "bool", "true")
+            self._render_items(pk_elem, src_group, src_options)
+
     def write(self, xml_root):
         """Perform the XML write out."""
         pks_elem = self._new_list(xml_root, "PKs")
 
-        smart_templates = {
-            "pk-richards": (
-                "pk-richards-steady-state.xml",
-                map_richards_steady_state_and_2,
-            ),
-            "pk-richards-flow-2": (
-                "pk-richards-flow-2.xml",
-                map_richards_steady_state_and_2,
-            ),
-            "pk-richards-flow-4": ("pk-richards-flow-4.xml", map_richards_flow_4),
-            "pk-richards-flow-rc-sh": (
-                "pk-richards-flow-rc-sh.xml",
-                map_richards_flow_4,
-            ),
-            "pk-overland-flow-pressure-basis-3": (
-                "pk-overland-flow-pressure-basis-3.xml",
-                map_overland_flow_pressure_basis_3,
-            ),
-            "pk-overland-flow-pressure-basis-4": (
-                "pk-overland-flow-pressure-basis-4.xml",
-                map_overland_flow_pressure_basis_4,
-            ),
-            "pk-overland-flow-pressure-basis-rc-sh": (
-                "pk-overland-flow-pressure-basis-rc-sh.xml",
-                map_overland_flow_pressure_basis_rc_sh,
-            ),
-            "pk-coupled-water": ("pk-coupled-water.xml", map_coupled_water),
-            "pk-coupled-water-rc-sh": ("pk-coupled-water-rc-sh.xml", map_coupled_water),
+        renderers = {
+            "richards steady state": self._render_pk_richards_steady_state,
         }
 
         # Fetch the cycle driver to find out which PK is chosen
@@ -196,20 +322,20 @@ class PKWriter(BaseWriter):
 
         pk_atts = shared.sim_atts.findAttributes("pk-base")
         for att in pk_atts:
-            # name = att.name()
+            name = att.name()
             pk_type = att.type()
 
-            if pk_type not in smart_templates:
+            if pk_type not in renderers:
                 raise NotImplementedError(f"`{pk_type}` is not implemented yet.")
 
-            # We gotta be smart
-            fname, func = smart_templates[pk_type]
-            mapping = func(att)
-            # Grab the XML node to add time integrator if needed
-            pk_elem = append_template(pks_elem, fname, mapping)
+            pk_elem = self._new_list(pks_elem, name)
+            self._new_param(pk_elem, "PK type", "string", pk_type)
+            renderers[pk_type](pk_elem, att)
 
             # Add the cylce driver info
             if att == pk_tree:
+                # TODO: check that we do this correctly.
                 self._generate_time_integrator_section(pk_elem)
+                self._generate_preconditioner_section(pk_elem)
 
         return
