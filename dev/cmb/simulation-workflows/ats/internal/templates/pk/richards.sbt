@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <SMTK_AttributeResource Version="3">
   <Definitions>
-    <AttDef Type="richards steady state" Label="Richards Steady State" BaseType="pk-physical-bdf" Version="0">
+    <AttDef Type="richards flow" Label="Richards Flow" BaseType="pk-physical-bdf" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/richards_pk.cc -->
       <ItemDefinitions>
 
         <Group Name="water retention evaluator specs">
@@ -69,8 +70,10 @@
 
         <!-- operator - diffusion (pde-diffusion-spec) -->
         <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
+        <!-- I'm not implementing the preconditioner because its not used much?? and it doesn't seem to be all that different from `diffusion` -->
         <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
         <Group Name="diffusion" Optional="true">
+          <!-- https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#pde-diffusion -->
           <ItemDefinitions>
             <String Name="discretization primary">
               <DiscreteInfo DefaultIndex="0">
@@ -84,14 +87,14 @@
                 <Value>mfd: support operator</Value>
               </DiscreteInfo>
             </String>
-            <Void Name="gravity" IsEnabledByDefault="false" Optional="true"></Void>
+            <Void Name="gravity" IsEnabledByDefault="true" Optional="true"></Void>
             <String Name="Newton correction">
               <DiscreteInfo DefaultIndex="0">
                 <Value>true Jacobian</Value>
                 <Value>approximate Jacobian</Value>
               </DiscreteInfo>
             </String>
-            <Void Name="scaled constraint equation" IsEnabledByDefault="false"></Void>
+            <Void Name="scaled constraint equation" Optional="true" IsEnabledByDefault="false"></Void>
             <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
             <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
           </ItemDefinitions>
@@ -149,6 +152,13 @@
         </Double>
 
       </ItemDefinitions>
+    </AttDef>
+
+    <!-- TODO: check that this inheritence is correct. -->
+    <AttDef Type="richards steady state" Label="Richards Steady State" BaseType="richards flow" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/richards_steadystate.cc -->
+      <!-- TODO: The only difference is that `"max iterations"` is set default to `10` for ``"time integrator"` -->
+      <ItemDefinitions></ItemDefinitions>
     </AttDef>
 
   </Definitions>

@@ -70,13 +70,6 @@
           </Accepts>
         </Component>
 
-        <!-- preconditioner (preconditioner-typed-spec) -->
-        <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
-          </Accepts>
-        </Component>
-
       </ItemDefinitions>
     </AttDef>
   </Definitions>

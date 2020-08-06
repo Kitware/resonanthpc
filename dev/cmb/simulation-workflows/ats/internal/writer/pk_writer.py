@@ -26,7 +26,7 @@ class PKWriter(BaseWriter):
     def __init__(self):
         super(PKWriter, self).__init__()
 
-    def _generate_time_integrator_section(self, parent):
+    def _generate_time_integrator_section(self, parent, att):
         """Generates the XML elements for the time integrator section.
 
         This is meant to be added to the PK at the top of the tree
@@ -58,29 +58,31 @@ class PKWriter(BaseWriter):
             "count before increasing increase factor",
         ]
 
-        time_int_inst = shared.sim_atts.findAttribute("time integrator")
-        if time_int_inst is None:
-            raise RuntimeError("time integrator is not set")
-        time_int_elem = self._new_list(parent, "time integrator")
-        self._render_items(time_int_elem, time_int_inst, known_children)
-        self._new_param(time_int_elem, "solver type", "string", "nka_bt_ats")
-        self._new_param(time_int_elem, "timestep controller type", "string", "smarter")
+        time_int = att.find("time integrator")
+        if time_int.isEnabled():
+            time_int_att = time_int.value()
+            time_int_elem = self._new_list(parent, "time integrator")
+            self._render_items(time_int_elem, time_int_att, known_children)
+            self._new_param(time_int_elem, "solver type", "string", "nka_bt_ats")
+            self._new_param(
+                time_int_elem, "timestep controller type", "string", "smarter"
+            )
 
-        # Verbosity
-        verb_list = self._new_list(time_int_elem, "verbosity object")
-        self._render_items(verb_list, time_int_inst, ["verbosity level"])
+            # Verbosity
+            verb_list = self._new_list(time_int_elem, "verbosity object")
+            self._render_items(verb_list, time_int_att, ["verbosity level"])
 
-        nka_bt_ats_params = self._new_list(time_int_elem, "nka_bt_ats parameters")
-        self._render_items(nka_bt_ats_params, time_int_inst, nka_bt_ats_children)
+            nka_bt_ats_params = self._new_list(time_int_elem, "nka_bt_ats parameters")
+            self._render_items(nka_bt_ats_params, time_int_att, nka_bt_ats_children)
 
-        controller_params = self._new_list(
-            time_int_elem, "timestep controller smarter parameters"
-        )
-        self._render_items(controller_params, time_int_inst, controller_children)
+            controller_params = self._new_list(
+                time_int_elem, "timestep controller smarter parameters"
+            )
+            self._render_items(controller_params, time_int_att, controller_children)
 
         return
 
-    def _generate_preconditioner_section(self, pk_elem):
+    def _generate_preconditioner_section(self, pk_elem, att):
         options = {
             "block ilu": [
                 "fact: relax value",
@@ -110,10 +112,7 @@ class PKWriter(BaseWriter):
                 # TODO: verbosity
             ],
         }
-        coord_inst = shared.sim_atts.findAttribute("cycle driver")
-        att = coord_inst.find("preconditioner").value()
-        if not att:
-            raise RuntimeError("preconditioner is not set.")
+        att = att.find("preconditioner").value()
         prec_elem = self._new_list(pk_elem, "preconditioner")
         self._new_param(prec_elem, "preconditioner type", "string", att.type())
         params = self._new_list(prec_elem, att.type() + " parameters")
@@ -178,7 +177,17 @@ class PKWriter(BaseWriter):
                             "double",
                             FLOAT_FORMAT.format(params.find("BC value").value()),
                         )
+        return
 
+    def _render_pk_physical(self, pk_elem, att, render_base=True):
+        if render_base:
+            self._render_pk_base_2(pk_elem, att)
+        options = [
+            "primary variable key",
+        ]
+        self._render_items(pk_elem, att, options)
+        debug_group = att.findGroup("debugger")
+        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
         # render initial condition
         ic_options = [
             "initialize faces from cells",
@@ -224,21 +233,12 @@ class PKWriter(BaseWriter):
 
                 self._new_param(tabular_elem, "x values", "Array(double)", x_values)
                 self._new_param(tabular_elem, "y values", "Array(double)", y_values)
-        return
-
-    def _render_pk_physical(self, pk_elem, att, render_base=True):
-        if render_base:
-            self._render_pk_base_2(pk_elem, att)
-        options = [
-            "primary variable key",
-        ]
-        self._render_items(pk_elem, att, options)
-        debug_group = att.findGroup("debugger")
-        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
 
     def _render_pk_bdf(self, pk_elem, att, render_base=True):
         if render_base:
             self._render_pk_base_2(pk_elem, att)
+        self._generate_time_integrator_section(pk_elem, att)
+        self._generate_preconditioner_section(pk_elem, att)
         pass
 
     def _render_pk_physical_bdf(self, pk_elem, att):
@@ -249,7 +249,7 @@ class PKWriter(BaseWriter):
 
     # The above PK renderers should be called internally by the following renderers.
 
-    def _render_pk_richards_steady_state(self, pk_elem, att):
+    def _render_pk_richards_flow(self, pk_elem, att):
         self._render_pk_physical_bdf(pk_elem, att)
         options = [
             "permeability type",
@@ -305,11 +305,15 @@ class PKWriter(BaseWriter):
             self._new_param(pk_elem, "source term", "bool", "true")
             self._render_items(pk_elem, src_group, src_options)
 
+    def _render_pk_richards_steady_state(self, pk_elem, att):
+        self._render_pk_richards_flow(pk_elem, att)
+
     def write(self, xml_root):
         """Perform the XML write out."""
         pks_elem = self._new_list(xml_root, "PKs")
 
         renderers = {
+            "richards flow": self._render_pk_richards_flow,
             "richards steady state": self._render_pk_richards_steady_state,
         }
 
@@ -331,11 +335,5 @@ class PKWriter(BaseWriter):
             pk_elem = self._new_list(pks_elem, name)
             self._new_param(pk_elem, "PK type", "string", pk_type)
             renderers[pk_type](pk_elem, att)
-
-            # Add the cylce driver info
-            if att == pk_tree:
-                # TODO: check that we do this correctly.
-                self._generate_time_integrator_section(pk_elem)
-                self._generate_preconditioner_section(pk_elem)
 
         return

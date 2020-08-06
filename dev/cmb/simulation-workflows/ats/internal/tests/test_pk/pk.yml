@@ -20,12 +20,40 @@
     - 'normal': [0.0, 0.0, -1.0]
 
 
+# Time integrator
+- type: time integrator
+  name: time-integrator-0
+  items:
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'max time step'
+          value: 1000
+
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 2
+    - smoother sweeps: 3
+    - strong threshold: 0.5
+    - tolerance: 0.0
+    - relaxation type: 6
+    - verbosity: summary of run time settings and timing information
+
+
 # Process Kernel
 - type: richards steady state
   name: Richards
   items:
     - verbosity level: high
     - primary variable key: pressure
+    - name: time integrator
+      enabled: true
+      value: time-integrator-0
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
     - name: boundary conditions
       enabled: true
       subgroups:
@@ -74,17 +102,6 @@
       items:
         - discretization primary: "fv: default"
 
-# preconditioner
-- type: boomer amg
-  name: preconditioner-boomer-amg-0
-  items:
-    - cycle applications: 2
-    - smoother sweeps: 3
-    - strong threshold: 0.5
-    - tolerance: 0.0
-    - relaxation type: 6
-    - verbosity: summary of run time settings and timing information
-
 
 
 # Coordinator (notice that   ACTION = EDIT)
@@ -95,16 +112,3 @@
       children:
         - 'end time': 1.0
     - 'PK tree': Richards
-    - name: preconditioner
-      enabled: true
-      value: 'preconditioner-boomer-amg-0'
-
-
-# Time integrator
-- action: edit
-  type: time integrator
-  items:
-    - name: 'timestep controller smarter parameters'
-      items:
-        - name: 'max time step'
-          value: 1000

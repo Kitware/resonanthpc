@@ -89,6 +89,25 @@
             </String>
           </ItemDefinitions>
         </Group>
+      </ItemDefinitions>
+    </AttDef>
+
+    <!-- Base class for physical PKs -->
+    <AttDef Type="pk-physical" BaseType="pk-base-2" Abstract="true" Version="0">
+      <ItemDefinitions>
+        <!-- TODO: domain (name): this comes from the Mesh spec -->
+        <String Name="primary variable key">
+          <BriefDescription>Can we get a list from each PK?</BriefDescription>
+        </String>
+        <!-- TODO: initial condition: this is different than the ICs for state... at least I am pretty sure... -->
+        <!-- TODO: max valid change-->
+        <!-- TODO: includes pk-spec -->
+        <Group Name="debugger">
+          <ItemDefinitions>
+            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+          </ItemDefinitions>
+        </Group>
 
         <!-- only a single initial condition per PK -->
         <Group Name="initial condition" Optional="true">
@@ -133,25 +152,7 @@
             </String>
           </ItemDefinitions>
         </Group>
-      </ItemDefinitions>
-    </AttDef>
 
-    <!-- Base class for physical PKs -->
-    <AttDef Type="pk-physical" BaseType="pk-base-2" Abstract="true" Version="0">
-      <ItemDefinitions>
-        <!-- TODO: domain (name): this comes from the Mesh spec -->
-        <String Name="primary variable key">
-          <BriefDescription>Can we get a list from each PK?</BriefDescription>
-        </String>
-        <!-- TODO: initial condition: this is different than the ICs for state... at least I am pretty sure... -->
-        <!-- TODO: max valid change-->
-        <!-- TODO: includes pk-spec -->
-        <Group Name="debugger">
-          <ItemDefinitions>
-            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
-            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
-          </ItemDefinitions>
-        </Group>
       </ItemDefinitions>
     </AttDef>
 
@@ -160,21 +161,38 @@
       <ItemDefinitions>
         <!-- TODO: initial time step-->
         <!-- TODO: assemble preconditioner-->
-
-        <!-- <Component Name="time integrator" Optional="true" IsEnabledByDefault="false"> <Accepts> <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time-integrator-base']"></Resource> </Accepts> </Component> -->
-
         <!-- TODO: preconditioner-->
         <!-- TODO: includes pk-spec -->
+        <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time integrator']"></Resource>
+          </Accepts>
+        </Component>
+        <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
+          </Accepts>
+        </Component>
       </ItemDefinitions>
     </AttDef>
 
     <!-- Inherit from pk-physical and copy bdf items-->
     <AttDef Type="pk-physical-bdf" BaseType="pk-physical" Abstract="true" Version="0">
       <ItemDefinitions>
-        <!-- TODO: initial time step-->
-        <!-- TODO: assemble preconditioner-->
-        <!-- TODO: time integrator-->
-        <!-- TODO: preconditioner-->
+        <!-- !!!!!!!!!! -->
+        <!-- Copied from `pk-bdf` because SMTK does not support dual inheritence -->
+        <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time integrator']"></Resource>
+          </Accepts>
+        </Component>
+        <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
+          </Accepts>
+        </Component>
+        <!-- !!!!!!!!!! -->
+
         <!-- TODO: conserved quantity key -->
         <!-- TODO: absolute error tolerance -->
         <!-- TODO: relative error tolerance -->
