@@ -5,12 +5,13 @@ import xml.etree.ElementInclude as EI
 import xml.etree.ElementTree as ET
 
 
-def resolve_xinclude(source_folder, source_ext, output_folder):
+def resolve_xinclude(source_folder, source_ext):
     """"""
     # Process all files in the source folder with the give extension
-    pattern = "{}/*{}".format(source_folder, source_ext)
-    matches = glob.glob(pattern)
+    pattern = "{}/**/*{}".format(source_folder, source_ext)
+    matches = glob.glob(pattern, recursive=True)
     for filepath in matches:
+        # print("Parsing", filepath)
         tree = ET.parse(filepath)
         root = tree.getroot()
         EI.include(root)  # resolves xi:include elements
@@ -19,6 +20,7 @@ def resolve_xinclude(source_folder, source_ext, output_folder):
         filename = os.path.basename(filepath)
         basename, ext = os.path.splitext(filename)
         out_filename = "{}.sbt".format(basename)
+        output_folder = os.path.dirname(filepath)
         out_filepath = os.path.join(output_folder, out_filename)
         with open(out_filepath, "wb") as f:
             s = ET.tostring(root)
@@ -26,7 +28,7 @@ def resolve_xinclude(source_folder, source_ext, output_folder):
             #       however, we'd have to do some str-bytes conversion
             # s = "\n".join([ln.strip() for ln in s.splitlines()])
             f.write(s)
-            print("Wrote", out_filepath)
+        print("Wrote", out_filepath)
     return
 
 
@@ -42,7 +44,7 @@ if __name__ == "__main__":
     # Used hard-coded paths
     main_folder = os.path.abspath(os.path.dirname(__file__))
     start_folder = os.path.join(main_folder, "templates")
-    source_folder = os.path.join(start_folder, "source")
+    source_folder = start_folder #os.path.join(start_folder, "source")
     # build_folder = os.path.join(start_folder, "build")
     # if os.path.exists(build_folder):
     #     shutil.rmtree(build_folder)
@@ -50,7 +52,7 @@ if __name__ == "__main__":
 
     # Resolve the xincludes and create `sbt` files
     source_ext = ".sbs"
-    resolve_xinclude(source_folder, source_ext, start_folder)
+    resolve_xinclude(source_folder, source_ext)
     # Copy over all remaining `sbt` files
     # source_ext = '.sbt'
     # copy_files_with_extension(source_folder, source_ext, build_folder)

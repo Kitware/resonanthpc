@@ -126,36 +126,7 @@ class StateWriter(BaseWriter):
         components = "{" + str(att.find("components").value()) + "}"
         self._new_param(domain_elem, "components", "Array(string)", components)
         # Function list
-        function_sub_elem = self._new_list(domain_elem, "function")
-        params = att.find("variable type")
-        func_type = params.value()
-        if func_type == "constant":
-            constant_elem = self._new_list(function_sub_elem, "function-constant")
-            self._render_items(constant_elem, params, ["value",])
-        elif func_type == "function":
-            tabular_elem = self._new_list(function_sub_elem, "function-tabular")
-
-            group = att.find("tabular-data")
-
-            def _fetch_subgroup_values(group, name):
-                values = []
-                for i in range(group.numberOfGroups()):
-                    v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
-                    values.append(v.value())
-                return values
-
-            x_value_list = _fetch_subgroup_values(group, "X")
-            x_value_list = [str(x) for x in x_value_list]
-            x_values = r"{" + ",".join(x_value_list) + r"}"
-
-            y_value_list = _fetch_subgroup_values(group, "Y")
-            y_value_list = [str(x) for x in y_value_list]
-            y_values = r"{" + ",".join(y_value_list) + r"}"
-
-            self._new_param(tabular_elem, "x values", "Array(double)", x_values)
-            self._new_param(tabular_elem, "y values", "Array(double)", y_values)
-
-            self._new_param(tabular_elem, "forms", "Array(string)", r"{constant}")
+        self._render_function(domain_elem, att)
 
     def render_multiplicative_evaluator(self, fe_elem, att):
         options = ["coefficient", "enforce positivity"]

@@ -3,6 +3,5 @@
   <Includes>
     <File>internal/templates/state/fe.sbt</File>
     <File>internal/templates/state/ic.sbt</File>
-    <File>internal/templates/ic.sbt</File>
   </Includes>
 </SMTK_AttributeResource>

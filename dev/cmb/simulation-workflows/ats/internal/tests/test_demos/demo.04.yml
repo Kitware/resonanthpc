@@ -340,7 +340,7 @@
       enabled: true
       value: true
     - name: variable type
-      value: function
+      value: function-tabular
       children:
         - name: tabular-data
           subgroups:

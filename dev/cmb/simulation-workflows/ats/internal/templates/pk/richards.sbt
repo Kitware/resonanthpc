@@ -5,6 +5,12 @@
       <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/richards_pk.cc -->
       <ItemDefinitions>
 
+        <Component Name="linear solver" Optional="true">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']"></Resource>
+          </Accepts>
+        </Component>
+
         <Group Name="water retention evaluator specs">
           <!-- TODO: should this be extensible (one for N regions?) -->
           <ItemDefinitions>

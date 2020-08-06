@@ -141,6 +141,10 @@ class BaseTestCase(unittest.TestCase):
                     if k == "@value" and a["@type"] == "double":
                         va = float(va)
                         vb = float(vb)
+                    elif k == "@value" and a["@type"] == "Array(double)":
+                        va = [float(s) for s in va[1:-1].split(',')]
+                        vb = [float(s) for s in vb[1:-1].split(',')]
+                    ##
                     if va != vb:
                         raise ValueError(
                             "Data mismatch for: {}: ({} != {})".format(parent, va, vb)

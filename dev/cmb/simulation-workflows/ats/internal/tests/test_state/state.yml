@@ -183,8 +183,14 @@
   name: surface-mass_source
   items:
     - name: variable type
-      value: function
+      value: function-tabular
       children:
+        - name: forms
+          items:
+            - name: linear
+              enabled: false
+            - name: constant
+              enabled: true
         - name: tabular-data
           subgroups:
             - - X: 0.0

@@ -118,6 +118,30 @@ class PKWriter(BaseWriter):
         params = self._new_list(prec_elem, att.type() + " parameters")
         self._render_items(params, att, options[att.type()])
 
+    def _generate_linear_solver(self, pk_elem, att):
+        options = {
+            'gmres': [
+                'error tolerance',
+                'maximum number of iterations',
+                'overflow tolerance',
+                'size of Krylov space',
+                'controller training start',
+                'controller training end',
+                'maximum size of deflation space',
+                'convergence criterial',
+                'preconditioning strategy',
+            ],
+        }
+        field = att.find("linear solver")
+        if field.isEnabled():
+            solver = field.value()
+            stype = solver.type()
+            solver_elem = self._new_list(pk_elem, "linear solver")
+            self._new_param(solver_elem, 'iterative method', 'string', stype)
+            params_elem = self._new_list(solver_elem, stype + ' parameters')
+            self._render_items(params_elem, solver, options[stype])
+        return
+
     def _render_pk_base(self, pk_elem, att):
         """The base PK class."""
         options = []
@@ -204,35 +228,7 @@ class PKWriter(BaseWriter):
             # components
             components = "{" + str(ic_group.find("components").value()) + "}"
             self._new_param(subsub, "components", "Array(string)", components)
-            # The function - NOTE: this is repeated code from field evaluator
-            function_sub_elem = self._new_list(subsub, "function")
-            params = ic_group.find("variable type")
-            func_type = params.value()
-            if func_type == "constant":
-                constant_elem = self._new_list(function_sub_elem, "function-constant")
-                self._render_items(constant_elem, params, ["value",])
-            elif func_type == "function":
-                tabular_elem = self._new_list(function_sub_elem, "function-tabular")
-
-                group = ic_group.find("tabular-data")
-
-                def _fetch_subgroup_values(group, name):
-                    values = []
-                    for i in range(group.numberOfGroups()):
-                        v = group.find(i, name, smtk.attribute.SearchStyle.IMMEDIATE)
-                        values.append(v.value())
-                    return values
-
-                x_value_list = _fetch_subgroup_values(group, "X")
-                x_value_list = [str(x) for x in x_value_list]
-                x_values = r"{" + ",".join(x_value_list) + r"}"
-
-                y_value_list = _fetch_subgroup_values(group, "Y")
-                y_value_list = [str(x) for x in y_value_list]
-                y_values = r"{" + ",".join(y_value_list) + r"}"
-
-                self._new_param(tabular_elem, "x values", "Array(double)", x_values)
-                self._new_param(tabular_elem, "y values", "Array(double)", y_values)
+            self._render_function(subsub, ic_group)
 
     def _render_pk_bdf(self, pk_elem, att, render_base=True):
         if render_base:
@@ -251,6 +247,7 @@ class PKWriter(BaseWriter):
 
     def _render_pk_richards_flow(self, pk_elem, att):
         self._render_pk_physical_bdf(pk_elem, att)
+        self._generate_linear_solver(pk_elem, att)
         options = [
             "permeability type",
             "surface rel perm strategy",
