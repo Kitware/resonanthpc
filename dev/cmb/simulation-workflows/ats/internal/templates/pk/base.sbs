@@ -89,13 +89,25 @@
             </String>
           </ItemDefinitions>
         </Group>
+
+        <Component Name="evaluator" Extensible="true">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-evaluator-base']"></Resource>
+          </Accepts>
+        </Component>
+
+
       </ItemDefinitions>
     </AttDef>
 
     <!-- Base class for physical PKs -->
     <AttDef Type="pk-physical" BaseType="pk-base-2" Abstract="true" Version="0">
       <ItemDefinitions>
-        <!-- TODO: domain (name): this comes from the Mesh spec -->
+        <Component Name="domain name" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']"></Resource>
+          </Accepts>
+        </Component>
         <String Name="primary variable key">
           <BriefDescription>Can we get a list from each PK?</BriefDescription>
         </String>
@@ -112,6 +124,7 @@
         <!-- only a single initial condition per PK -->
         <Group Name="initial condition" Optional="true">
           <ItemDefinitions>
+            <String Name="condition name"><DefaultValue>initial pressure cells</DefaultValue></String>
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
             <Component Name="region">
               <Accepts>
@@ -137,10 +150,10 @@
     <!-- Base class for BDF PKs -->
     <AttDef Type="pk-bdf" BaseType="pk-base-2" Abstract="true" Version="0">
       <ItemDefinitions>
-        <!-- TODO: initial time step-->
-        <!-- TODO: assemble preconditioner-->
-        <!-- TODO: preconditioner-->
-        <!-- TODO: includes pk-spec -->
+        <Double Name="initial time step">
+          <DefaultValue>1</DefaultValue>
+        </Double>
+        <!-- TODO: assemble preconditioner (boolean) -->
         <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time integrator']"></Resource>
@@ -159,6 +172,9 @@
       <ItemDefinitions>
         <!-- !!!!!!!!!! -->
         <!-- Copied from `pk-bdf` because SMTK does not support dual inheritence -->
+        <Double Name="initial time step">
+          <DefaultValue>1</DefaultValue>
+        </Double>
         <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time integrator']"></Resource>
@@ -170,6 +186,54 @@
           </Accepts>
         </Component>
         <!-- !!!!!!!!!! -->
+
+        <Component Name="linear solver" Optional="true">
+          <!-- NOTE: assuming this goes here? -->
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']"></Resource>
+          </Accepts>
+        </Component>
+
+        <!-- operator - diffusion (pde-diffusion-spec) -->
+        <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
+        <!-- I'm not implementing the preconditioner because its not used much?? and it doesn't seem to be all that different from `diffusion` -->
+        <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
+        <Group Name="diffusion" Optional="true">
+          <!-- https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#pde-diffusion -->
+          <ItemDefinitions>
+            <String Name="discretization primary">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>fv: default</Value>
+                <Value>nlfv: default</Value>
+                <Value>mfd: default</Value>
+                <Value>mfd: monotone for hex</Value>
+                <Value>mfd: optimized for monotonicity</Value>
+                <Value>mfd: two-point flux approximation</Value>
+                <Value>mfd: optimized for sparsity</Value>
+                <Value>mfd: support operator</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="gravity" IsEnabledByDefault="true" Optional="true"></Void>
+            <String Name="Newton correction">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>true Jacobian</Value>
+                <Value>approximate Jacobian</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="scaled constraint equation" Optional="true" IsEnabledByDefault="false"></Void>
+            <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
+            <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
+          </ItemDefinitions>
+        </Group>
+
+        <Group Name="source term" Optional="true" IsEnabledByDefault="false">
+          <ItemDefinitions>
+            <String Name="source key" Optional="true"></String>
+            <Void Name="mass source in meters" Optional="true" IsEnabledByDefault="true"></Void>
+            <Void Name="source term is differentiable" Optional="true" IsEnabledByDefault="true"></Void>
+            <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
+          </ItemDefinitions>
+        </Group>
 
         <!-- TODO: conserved quantity key -->
         <!-- TODO: absolute error tolerance -->

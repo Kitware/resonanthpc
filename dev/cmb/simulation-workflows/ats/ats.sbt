@@ -12,6 +12,7 @@
     <File>internal/templates/pk/preconditioner.sbt</File>
     <File>internal/templates/pk/linear-solver.sbt</File>
     <File>internal/templates/pk/time-integrator.sbt</File>
+    <File>internal/templates/pk/evaluators.sbt</File>
     <!-- other -->
     <File>internal/templates/state.sbt</File>
     <File>internal/templates/checkpoint.sbt</File>
@@ -72,6 +73,7 @@
         <View Title="Preconditioners"/>
         <View Title="Linear Solvers"/>
         <View Title="Time Integrators"/>
+        <View Title="Evaluators"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Process Kernel">
@@ -92,6 +94,11 @@
     <View Type="Attribute" Title="Time Integrators">
       <AttributeTypes>
         <Att Type="time integrator" Name="time integrator"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Evaluators">
+      <AttributeTypes>
+        <Att Type="pk-evaluator-base" Name="evaluators"/>
       </AttributeTypes>
     </View>
 

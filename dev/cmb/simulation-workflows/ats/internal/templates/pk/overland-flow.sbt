@@ -2,34 +2,39 @@
 <SMTK_AttributeResource Version="3">
   <Definitions>
 
-    <!-- Inheritence might not be right but it doesn't really matter with current templating -->
-    <AttDef Type="pk-overland-flow-pressure-basis-4" Label="overland flow, pressure basis 4" BaseType="pk-physical-bdf" Version="0"></AttDef>
-
-    <AttDef Type="pk-overland-flow-pressure-basis-3" Label="overland flow, pressure basis 3" BaseType="pk-physical-bdf" Version="0">
-      <AssociationsDef NumberOfRequiredValues="1" Name="slope regions">
+    <AttDef Type="overland flow, pressure basis" Label="overland flow, pressure basis" BaseType="pk-physical-bdf" Version="0">
+      <!-- <AssociationsDef NumberOfRequiredValues="1" Name="slope regions">
         <Accepts>
           <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
         </Accepts>
-      </AssociationsDef>
+      </AssociationsDef> -->
       <ItemDefinitions>
 
-        <!-- <Component Name="initial condition"> <Accepts> <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource> </Accepts> </Component> -->
+        <!-- absolute error tolerance (550) -->
+        <Double Name="absolute error tolerance">
+          <DefaultValue>550</DefaultValue>
+        </Double>
+        <!-- limit correction to pressure change [Pa] (-1) -->
+        <Double Name="limit correction to pressure change [Pa]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+        <!-- limit correction to pressure change when crossing atmospheric [Pa] (-1) -->
+        <Double Name="limit correction to pressure change when crossing atmospheric [Pa]">
+          <DefaultValue>-1</DefaultValue>
+        </Double>
+        <!-- allow no negative ponded depths (false) -->
+        <Void Name="allow no negative ponded depths" Optional="true" IsEnabledByDefault="false"></Void>
+        <!-- min ponded depth for velocity calculation (1.0e-2) -->
+        <Double Name="min ponded depth for velocity calculation">
+          <DefaultValue>1.0e-2</DefaultValue>
+        </Double>
+        <!-- min ponded depth for tidal bc (0.02) -->
+        <Double Name="min ponded depth for tidal bc">
+          <DefaultValue>0.02</DefaultValue>
+        </Double>
 
-        <Component Name="elevation evaluator">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-          </Accepts>
-        </Component>
 
       </ItemDefinitions>
-    </AttDef>
-
-    <AttDef Type="pk-overland-flow-pressure-basis-rc-sh" Label="overland flow, pressure basis rc sh" BaseType="pk-physical-bdf" Version="0">
-      <AssociationsDef NumberOfRequiredValues="1" Name="BC regions">
-        <Accepts>
-          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-        </Accepts>
-      </AssociationsDef>
     </AttDef>
 
   </Definitions>

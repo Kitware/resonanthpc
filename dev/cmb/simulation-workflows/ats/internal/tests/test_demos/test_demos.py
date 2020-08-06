@@ -29,19 +29,19 @@ class Demo02Test(BaseTestCase):
         xml_string = self.writer.get_xml_doc(pretty=True)
         self._compare_xml_content(xml_string)
 
-#
-# class Demo03Test(BaseTestCase):
-#
-#     BASELINE_XML_FILENAME = "baseline_demo_03.xml"
-#     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
-#     YAML_RESOURCE = "demo.03.yml"
-#
-#     def test_demo(self):
-#         xml_doc = self.writer.generate_xml()
-#         xml_string = self.writer.get_xml_doc(pretty=True)
-#         self._compare_xml_content(xml_string)
-#
-#
+
+class Demo03Test(BaseTestCase):
+
+    BASELINE_XML_FILENAME = "baseline_demo_03.xml"
+    SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = "demo.03.yml"
+
+    def test_demo(self):
+        xml_doc = self.writer.generate_xml()
+        xml_string = self.writer.get_xml_doc(pretty=True)
+        self._compare_xml_content(xml_string)
+
+
 # class Demo04Test(BaseTestCase):
 #
 #     MODEL_RESOURCE_FILENAME = "att.demo.04.mesh.smtk"

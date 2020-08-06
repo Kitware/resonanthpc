@@ -88,13 +88,25 @@
             </String>
           </ItemDefinitions>
         </Group>
+
+        <Component Name="evaluator" Extensible="true">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-evaluator-base']" />
+          </Accepts>
+        </Component>
+
+
       </ItemDefinitions>
     </AttDef>
 
     
     <AttDef Type="pk-physical" BaseType="pk-base-2" Abstract="true" Version="0">
       <ItemDefinitions>
-        
+        <Component Name="domain name" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']" />
+          </Accepts>
+        </Component>
         <String Name="primary variable key">
           <BriefDescription>Can we get a list from each PK?</BriefDescription>
         </String>
@@ -111,6 +123,7 @@
         
         <Group Name="initial condition" Optional="true">
           <ItemDefinitions>
+            <String Name="condition name"><DefaultValue>initial pressure cells</DefaultValue></String>
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true" />
             <Component Name="region">
               <Accepts>
@@ -185,9 +198,9 @@
     
     <AttDef Type="pk-bdf" BaseType="pk-base-2" Abstract="true" Version="0">
       <ItemDefinitions>
-        
-        
-        
+        <Double Name="initial time step">
+          <DefaultValue>1</DefaultValue>
+        </Double>
         
         <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
           <Accepts>
@@ -207,6 +220,9 @@
       <ItemDefinitions>
         
         
+        <Double Name="initial time step">
+          <DefaultValue>1</DefaultValue>
+        </Double>
         <Component Name="time integrator" Optional="true" IsEnabledByDefault="false">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='time integrator']" />
@@ -218,6 +234,54 @@
           </Accepts>
         </Component>
         
+
+        <Component Name="linear solver" Optional="true">
+          
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']" />
+          </Accepts>
+        </Component>
+
+        
+        
+        
+        
+        <Group Name="diffusion" Optional="true">
+          
+          <ItemDefinitions>
+            <String Name="discretization primary">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>fv: default</Value>
+                <Value>nlfv: default</Value>
+                <Value>mfd: default</Value>
+                <Value>mfd: monotone for hex</Value>
+                <Value>mfd: optimized for monotonicity</Value>
+                <Value>mfd: two-point flux approximation</Value>
+                <Value>mfd: optimized for sparsity</Value>
+                <Value>mfd: support operator</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="gravity" IsEnabledByDefault="true" Optional="true" />
+            <String Name="Newton correction">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>true Jacobian</Value>
+                <Value>approximate Jacobian</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="scaled constraint equation" Optional="true" IsEnabledByDefault="false" />
+            <Double Name="constraint equation scaling cutoff" Optional="true" />
+            
+          </ItemDefinitions>
+        </Group>
+
+        <Group Name="source term" Optional="true" IsEnabledByDefault="false">
+          <ItemDefinitions>
+            <String Name="source key" Optional="true" />
+            <Void Name="mass source in meters" Optional="true" IsEnabledByDefault="true" />
+            <Void Name="source term is differentiable" Optional="true" IsEnabledByDefault="true" />
+            <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false" />
+          </ItemDefinitions>
+        </Group>
 
         
         

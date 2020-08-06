@@ -5,12 +5,6 @@
       <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/richards_pk.cc -->
       <ItemDefinitions>
 
-        <Component Name="linear solver" Optional="true">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']"></Resource>
-          </Accepts>
-        </Component>
-
         <Group Name="water retention evaluator specs">
           <!-- TODO: should this be extensible (one for N regions?) -->
           <ItemDefinitions>
@@ -64,49 +58,6 @@
           </DiscreteInfo>
         </String>
 
-        <Group Name="source term" Optional="true" IsEnabledByDefault="false">
-          <ItemDefinitions>
-            <String Name="source" Units="mol s^-1">
-              <DefaultValue>mass_source</DefaultValue>
-            </String>
-            <Void Name="source term is differentiable" Optional="true" IsEnabledByDefault="true"></Void>
-            <Void Name="explicit source term" Optional="true" IsEnabledByDefault="false"></Void>
-          </ItemDefinitions>
-        </Group>
-
-        <!-- operator - diffusion (pde-diffusion-spec) -->
-        <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
-        <!-- I'm not implementing the preconditioner because its not used much?? and it doesn't seem to be all that different from `diffusion` -->
-        <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
-        <Group Name="diffusion" Optional="true">
-          <!-- https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#pde-diffusion -->
-          <ItemDefinitions>
-            <String Name="discretization primary">
-              <DiscreteInfo DefaultIndex="0">
-                <Value>fv: default</Value>
-                <Value>nlfv: default</Value>
-                <Value>mfd: default</Value>
-                <Value>mfd: monotone for hex</Value>
-                <Value>mfd: optimized for monotonicity</Value>
-                <Value>mfd: two-point flux approximation</Value>
-                <Value>mfd: optimized for sparsity</Value>
-                <Value>mfd: support operator</Value>
-              </DiscreteInfo>
-            </String>
-            <Void Name="gravity" IsEnabledByDefault="true" Optional="true"></Void>
-            <String Name="Newton correction">
-              <DiscreteInfo DefaultIndex="0">
-                <Value>true Jacobian</Value>
-                <Value>approximate Jacobian</Value>
-              </DiscreteInfo>
-            </String>
-            <Void Name="scaled constraint equation" Optional="true" IsEnabledByDefault="false"></Void>
-            <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
-            <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
-          </ItemDefinitions>
-        </Group>
-
-        <!-- TODO: linear solver (linear-solver-typed-spec), oprional -->
         <!-- surface rel perm strategy -->
         <String Name="surface rel perm strategy">
           <DiscreteInfo DefaultIndex="0">
