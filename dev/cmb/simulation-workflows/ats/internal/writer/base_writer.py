@@ -240,7 +240,7 @@ class BaseWriter:
 
         return
 
-    def _render_function(self, parent_elem, function_att):
+    def _render_function(self, parent_elem, att):
 
         def _fetch_subgroup_values(group, name):
             values = []
@@ -250,19 +250,19 @@ class BaseWriter:
             return r"{" + ",".join([FLOAT_FORMAT.format(x) for x in values]) + r"}"
 
         function_sub_elem = self._new_list(parent_elem, "function")
-        params = function_att.find("variable type")
+        params = att.find("variable type")
         func_type = params.value()
         if func_type == "constant":
             constant_elem = self._new_list(function_sub_elem, "function-constant")
             self._render_items(constant_elem, params, ["value",])
         elif func_type == "function-tabular":
             tabular_elem = self._new_list(function_sub_elem, "function-tabular")
-            group = function_att.find("tabular-data")
+            group = att.find("tabular-data")
             x_values = _fetch_subgroup_values(group, "X")
             y_values = _fetch_subgroup_values(group, "Y")
             self._new_param(tabular_elem, "x values", "Array(double)", x_values)
             self._new_param(tabular_elem, "y values", "Array(double)", y_values)
-            forms = function_att.find("forms")
+            forms = att.find("forms")
             values = []
             if forms.find("linear").isEnabled():
                 values.append("linear")
@@ -273,10 +273,10 @@ class BaseWriter:
                 self._new_param(tabular_elem, "forms", "Array(string)", forms_values)
         elif func_type == "function-linear":
             linear_elem = self._new_list(function_sub_elem, "function-linear")
-            group = function_att.find("linear-data")
-            y = group.find('y0')
+            y = att.find('y0').value()
+            self._new_param(linear_elem, "y0", "double", y)
+            group = att.find("linear-data")
             x_values = _fetch_subgroup_values(group, "x0")
             g_values = _fetch_subgroup_values(group, "gradient")
             self._new_param(linear_elem, "x0", "Array(double)", x_values)
-            self._new_param(linear_elem, "y0", "double", y)
             self._new_param(linear_elem, "gradient", "Array(double)", g_values)
