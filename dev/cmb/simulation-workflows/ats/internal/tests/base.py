@@ -142,9 +142,10 @@ class BaseTestCase(unittest.TestCase):
                         va = float(va)
                         vb = float(vb)
                     elif k == "@value" and a["@type"] == "Array(double)":
-                        va = [float(s) for s in va[1:-1].split(',')]
-                        vb = [float(s) for s in vb[1:-1].split(',')]
-                    ##
+                        # three decimals places is good enough for me
+                        va = [round(float(s), 3) for s in va[1:-1].split(',')]
+                        vb = [round(float(s), 3) for s in vb[1:-1].split(',')]
+                    # do the comparison
                     if va != vb:
                         raise ValueError(
                             "Data mismatch for: {}: ({} != {})".format(parent, va, vb)

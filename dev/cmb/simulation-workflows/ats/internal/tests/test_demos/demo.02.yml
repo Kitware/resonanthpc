@@ -56,30 +56,9 @@
     - 'normal': [-1.0, 0.0, 0.0]
 
 
-# Process Kernel
-- type: pk-richards-flow-2
-  name: Richards
-  associate:
-    - attribute: surface
-  items:
-    - 'initial condition': computational domain
-    - 'water retention evaluator': computational domain
-
-
-# Coordinator (notice that   ACTION = EDIT)
-- action: edit
-  type: cycle driver
-  items:
-    - name: end-spec
-      children:
-        - 'end time': 1.0
-        - 'end time units': 'y'
-    - 'PK tree': Richards
-
-
 # Time integrator
-- action: edit
-  type: time integrator
+- type: time integrator
+  name: time-integrator-0
   items:
     - 'initial time step': 86400.0
     - name: 'nka_bt_ats parameters'
@@ -104,6 +83,102 @@
           value: 10000000000.0
         - name: 'time step increase factor'
           value: 1.25
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 1
+    - smoother sweeps: 3
+    - strong threshold: 0.25
+    - tolerance: 0.0
+    - relaxation type: 6
+    - verbosity: summary of run time settings and timing information
+
+# Linear solver
+- type: gmres
+  name: linear-solver-0
+  items:
+    - preconditioning strategy: left
+    - error tolerance: 1.0e-06
+    - convergence criterial: relative residual #,make one iteration
+    - maximum number of iterations: 80
+
+
+# Process Kernel
+- type: richards flow
+  name: Richards
+  items:
+    - verbosity level: high
+    - primary variable key: pressure
+    - permeability rescaling: 10000000.0
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+    - name: boundary conditions
+      enabled: true
+      subgroups:
+        - - BC name: top
+          - regions: surface
+          - name: boundary type
+            value: mass flux
+            children:
+              - BC value: -0.0005
+    - name: initial condition
+      enabled: true
+      items:
+        - initialize faces from cells: true
+        - region: computational domain
+        - components: cell
+        - name: variable type
+          value: function-linear
+          children:
+            - y0: 101325.0
+            - name: linear-data
+              subgroups:
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 7.0
+                  - gradient: -9806.2306853
+    - name: water retention evaluator specs
+      items:
+        - region: computational domain
+        - name: WRM Type
+          value: van Genuchten
+          children:
+            - van Genuchten alpha [Pa^-1]: 0.00015
+            - van Genuchten m [-]: 0.8
+            - residual saturation [-]: 0.0
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [0, 99]
+          enabled: true
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 1.0
+        - 'end time units': 'y'
+    - 'PK tree': Richards
 
 
 # Checkpoint - not doing

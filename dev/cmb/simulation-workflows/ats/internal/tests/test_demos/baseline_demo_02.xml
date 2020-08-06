@@ -70,7 +70,7 @@
     <ParameterList name="Richards" type="ParameterList">
       <Parameter name="primary variable key" type="string" value="pressure"/>
       <Parameter name="PK type" type="string" value="richards flow"/>
-      <Parameter name="initial time step" type="double" value="1.0"/>
+      <!-- <Parameter name="initial time step" type="double" value="1.0"/> -->
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
       <Parameter name="permeability rescaling" type="double" value="10000000.0"/>
       <Parameter name="debug cells" type="Array(int)" value="{0,99}"/>
@@ -80,9 +80,9 @@
       <ParameterList name="diffusion" type="ParameterList">
         <Parameter name="discretization primary" type="string" value="fv: default"/>
       </ParameterList>
-      <ParameterList name="diffusion preconditioner" type="ParameterList">
+      <!-- <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="include Newton correction" type="bool" value="true"/>
-      </ParameterList>
+      </ParameterList> -->
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="boomer amg"/>
         <ParameterList name="boomer amg parameters" type="ParameterList">
@@ -91,19 +91,17 @@
           <Parameter name="strong threshold" type="double" value="0.25"/>
           <Parameter name="tolerance" type="double" value="0.0"/>
           <Parameter name="relaxation type" type="int" value="6"/>
-          <Parameter name="verbosity" type="int" value="0"/>
+          <!-- <Parameter name="verbosity" type="int" value="0"/> -->
         </ParameterList>
       </ParameterList>
       <ParameterList name="linear solver" type="ParameterList">
         <Parameter name="iterative method" type="string" value="gmres"/>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high"/>
-        </ParameterList>
         <ParameterList name="gmres parameters" type="ParameterList">
           <Parameter name="preconditioning strategy" type="string" value="left"/>
           <Parameter name="error tolerance" type="double" value="1e-06"/>
-          <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}"/>
-          <Parameter name="maximum number of iteration" type="int" value="80"/>
+          <!-- TODO: <Parameter name="convergence criterial" type="Array(string)" value="{relative residual,make one iteration}"/> -->
+          <Parameter name="convergence criterial" type="string" value="relative residual"/>
+          <Parameter name="maximum number of iterations" type="int" value="80"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -144,9 +142,9 @@
             <Parameter name="residual saturation [-]" type="double" value="0.0"/>
           </ParameterList>
         </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
+        <!-- <ParameterList name="verbose object" type="ParameterList">
           <Parameter name="verbosity level" type="string" value="low"/>
-        </ParameterList>
+        </ParameterList> -->
       </ParameterList>
       <ParameterList name="time integrator" type="ParameterList">
         <Parameter name="extrapolate initial guess" type="bool" value="true"/>
