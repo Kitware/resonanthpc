@@ -257,12 +257,12 @@ class BaseWriter:
             self._render_items(constant_elem, params, ["value",])
         elif func_type == "function-tabular":
             tabular_elem = self._new_list(function_sub_elem, "function-tabular")
-            group = att.find("tabular-data")
+            group = params.find("tabular-data")
             x_values = _fetch_subgroup_values(group, "X")
             y_values = _fetch_subgroup_values(group, "Y")
             self._new_param(tabular_elem, "x values", "Array(double)", x_values)
             self._new_param(tabular_elem, "y values", "Array(double)", y_values)
-            forms = att.find("forms")
+            forms = params.find("forms")
             values = []
             if forms.find("linear").isEnabled():
                 values.append("linear")
@@ -273,9 +273,10 @@ class BaseWriter:
                 self._new_param(tabular_elem, "forms", "Array(string)", forms_values)
         elif func_type == "function-linear":
             linear_elem = self._new_list(function_sub_elem, "function-linear")
-            y = att.find('y0').value()
-            self._new_param(linear_elem, "y0", "double", y)
-            group = att.find("linear-data")
+            # breakpoint()
+            y = params.find('y0').value()
+            self._new_param(linear_elem, "y0", "double", FLOAT_FORMAT.format(y))
+            group = params.find("linear-data")
             x_values = _fetch_subgroup_values(group, "x0")
             g_values = _fetch_subgroup_values(group, "gradient")
             self._new_param(linear_elem, "x0", "Array(double)", x_values)
