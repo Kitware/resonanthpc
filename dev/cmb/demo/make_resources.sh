@@ -30,9 +30,9 @@ pysmtk $BUILDER \
   "${TESTS}/test_demos/demo.04.yml" \
   -m "${TESTS}/test_demos/att.demo.04.mesh.smtk" \
   -o demo-04/demo.04.smtk
-# NOTE: I put this model file here too
-# TODO: fic exporter to accept models
-# pysmtk $EXPORTER demo-04/demo.04.smtk -o demo-04/demo.04.xml
+# TODO: this isn't working - it doesn't see the model
+pysmtk $EXPORTER demo-04/demo.04.smtk \
+  -o demo-04/demo.04.xml
 
 
 # Rock Creek demo (incomplete!!!!)
