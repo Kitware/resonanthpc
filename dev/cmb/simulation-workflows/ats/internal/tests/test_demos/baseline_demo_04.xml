@@ -189,9 +189,9 @@
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="WRM Type" type="string" value="van Genuchten"/>
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.000545"/>
-            <Parameter name="van Genuchten m [-]" type="double" value="0.19"/>
-            <Parameter name="residual saturation [-]" type="double" value="0.1"/>
+            <Parameter name="van Genuchten alpha" type="double" value="0.000545"/>
+            <Parameter name="van Genuchten m" type="double" value="0.19"/>
+            <Parameter name="residual saturation" type="double" value="0.1"/>
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1"/>
           </ParameterList>
         </ParameterList>

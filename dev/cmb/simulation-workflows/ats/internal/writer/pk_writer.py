@@ -364,12 +364,12 @@ class PKWriter(BaseWriter):
         wre_elem = self._new_list(pk_elem, "water retention evaluator")
         wre_params = self._new_list(wre_elem, "WRM parameters")
         wrm_options = [
-            "van Genuchten alpha [Pa^-1]",
-            "residual saturation [-]",
-            "Mualem exponent l [-]",
-            "van Genuchten m [-]",
+            "van Genuchten alpha",
+            "residual saturation",
+            "Mualem exponent l",
+            "van Genuchten m",
             "smoothing interval width [saturation]",
-            "saturation smoothing interval [Pa]",
+            "saturation smoothing interval",
         ]
         wrm = wre_group.find("WRM Type")
         region = wre_group.find("region").value().name()
