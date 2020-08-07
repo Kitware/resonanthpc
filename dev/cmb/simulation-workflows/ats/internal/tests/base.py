@@ -114,7 +114,17 @@ class BaseTestCase(unittest.TestCase):
         def compare_dict(a, b, parent=""):
             """ensures all key/values in a are in b but not the other way around"""
             for k, va in a.items():
-                vb = b[k]
+                try:
+                    vb = b[k]
+                except KeyError as err:
+                    try:
+                        raise ValueError(
+                            "Heirarchy mismatch (key: `{}`, `{}`) under: {}".format(
+                                k, a["@name"], parent
+                            )
+                        )
+                    except KeyError:
+                        raise err
                 if isinstance(va, list) and isinstance(vb, dict):
                     vb = [
                         vb,

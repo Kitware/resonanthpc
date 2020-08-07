@@ -13,13 +13,57 @@
             <Value>extreme</Value>
           </DiscreteInfo>
         </String>
-        <!-- TODO: - priority - time integrators-->
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="pk-base-2" BaseType="pk-base" Abstract="true" Version="0">
-      <!-- The base, non-coupler pk class. -->
+    <!-- Base class for physical PKs -->
+    <AttDef Type="pk-physical" BaseType="pk-base" Abstract="true" Version="0">
       <ItemDefinitions>
+        <Component Name="domain name" Optional="true" IsEnabledByDefault="false">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']"></Resource>
+          </Accepts>
+        </Component>
+        <String Name="primary variable key">
+          <BriefDescription>Can we get a list from each PK?</BriefDescription>
+        </String>
+        <!-- TODO: initial condition: this is different than the ICs for state... at least I am pretty sure... -->
+        <!-- TODO: max valid change-->
+        <!-- TODO: includes pk-spec -->
+        <Group Name="debugger">
+          <ItemDefinitions>
+            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
+          </ItemDefinitions>
+        </Group>
+
+        <!-- only a single initial condition per PK -->
+        <Group Name="initial condition" Optional="true">
+          <ItemDefinitions>
+            <String Name="condition name">
+              <DefaultValue>initial pressure cells</DefaultValue>
+            </String>
+            <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
+            <Component Name="region">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <String Name="components">
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="cell">cell</Value>
+                <Value Enum="face">face</Value>
+                <Value Enum="boundary_face">boundary_face</Value>
+                <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+                <Value Enum="cell,face">cell,face</Value>
+              </DiscreteInfo>
+            </String>
+
+            <xi:include href="templates/source/function.xml"/>
+
+          </ItemDefinitions>
+        </Group>
+
         <Group Name="boundary conditions" Extensible="true" Optional="true">
           <ItemDefinitions>
             <!-- Name of the condisiton, e.g. `bottom` or `BC west` -->
@@ -96,59 +140,11 @@
           </Accepts>
         </Component>
 
-
-      </ItemDefinitions>
-    </AttDef>
-
-    <!-- Base class for physical PKs -->
-    <AttDef Type="pk-physical" BaseType="pk-base-2" Abstract="true" Version="0">
-      <ItemDefinitions>
-        <Component Name="domain name" Optional="true" IsEnabledByDefault="false">
-          <Accepts>
-            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='mesh.base']"></Resource>
-          </Accepts>
-        </Component>
-        <String Name="primary variable key">
-          <BriefDescription>Can we get a list from each PK?</BriefDescription>
-        </String>
-        <!-- TODO: initial condition: this is different than the ICs for state... at least I am pretty sure... -->
-        <!-- TODO: max valid change-->
-        <!-- TODO: includes pk-spec -->
-        <Group Name="debugger">
-          <ItemDefinitions>
-            <Int Name="debug cells" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
-            <Int Name="debug faces" Extensible="true" Optional="true" IsEnabledByDefault="false"></Int>
-          </ItemDefinitions>
-        </Group>
-
-        <!-- only a single initial condition per PK -->
-        <Group Name="initial condition" Optional="true">
-          <ItemDefinitions>
-            <String Name="condition name"><DefaultValue>initial pressure cells</DefaultValue></String>
-            <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
-            <Component Name="region">
-              <Accepts>
-                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-              </Accepts>
-            </Component>
-            <String Name="components">
-              <DiscreteInfo DefaultIndex="0">
-                <Value Enum="cell">cell</Value>
-                <Value Enum="boundary_face">boundary_face</Value>
-                <Value Enum="cell,boundary_face">cell,boundary_face</Value>
-              </DiscreteInfo>
-            </String>
-
-            <xi:include href="templates/source/function.xml"/>
-
-          </ItemDefinitions>
-        </Group>
-
       </ItemDefinitions>
     </AttDef>
 
     <!-- Base class for BDF PKs -->
-    <AttDef Type="pk-bdf" BaseType="pk-base-2" Abstract="true" Version="0">
+    <AttDef Type="pk-bdf" BaseType="pk-base" Abstract="true" Version="0">
       <ItemDefinitions>
         <Double Name="initial time step">
           <DefaultValue>1</DefaultValue>
@@ -162,6 +158,12 @@
         <Component Name="preconditioner" Optional="true" IsEnabledByDefault="false">
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
+          </Accepts>
+        </Component>
+        <Component Name="linear solver" Optional="true">
+          <!-- NOTE: assuming this goes here? -->
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']"></Resource>
           </Accepts>
         </Component>
       </ItemDefinitions>
@@ -185,14 +187,13 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='preconditioner-base']"></Resource>
           </Accepts>
         </Component>
-        <!-- !!!!!!!!!! -->
-
         <Component Name="linear solver" Optional="true">
           <!-- NOTE: assuming this goes here? -->
           <Accepts>
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='linear-solver-base']"></Resource>
           </Accepts>
         </Component>
+        <!-- !!!!!!!!!! -->
 
         <!-- operator - diffusion (pde-diffusion-spec) -->
         <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->

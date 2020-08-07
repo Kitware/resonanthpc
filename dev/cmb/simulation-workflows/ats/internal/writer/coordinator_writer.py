@@ -73,7 +73,8 @@ class CoordinatorWriter(BaseWriter):
         self._new_param(pk_elem, "PK type", "string", pk_type)
 
         # if the PK is a coupler, we have to included the coupled PKs in the tree
-        if pk_type == "pk-coupled-water":
+        # TODO: we need a better way of doing this when other couplers come online
+        if pk_type == "coupled water":
             subsurf_name = pk_att.find("subsurface pk").value().name()
             subsurf_type = pk_att.find("subsurface pk").value().type()
             nested_elem = self._new_list(pk_elem, subsurf_name)

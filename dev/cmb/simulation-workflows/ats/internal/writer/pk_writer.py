@@ -112,11 +112,13 @@ class PKWriter(BaseWriter):
                 # TODO: verbosity
             ],
         }
-        att = att.find("preconditioner").value()
-        prec_elem = self._new_list(pk_elem, "preconditioner")
-        self._new_param(prec_elem, "preconditioner type", "string", att.type())
-        params = self._new_list(prec_elem, att.type() + " parameters")
-        self._render_items(params, att, options[att.type()])
+        field = att.find("preconditioner")
+        if field.isEnabled():
+            prec_att = field.value()
+            prec_elem = self._new_list(pk_elem, "preconditioner")
+            self._new_param(prec_elem, "preconditioner type", "string", prec_att.type())
+            params = self._new_list(prec_elem, prec_att.type() + " parameters")
+            self._render_items(params, prec_att, options[prec_att.type()])
 
     def _generate_linear_solver(self, pk_elem, att):
         options = {
@@ -217,11 +219,39 @@ class PKWriter(BaseWriter):
         verb_list = self._new_list(pk_elem, "verbose object")
         self._render_items(verb_list, att, ["verbosity level",])
 
-    def _render_pk_base_2(self, pk_elem, att):
-        """The base, non-coupler pk class."""
-        self._render_pk_base(pk_elem, att)
-        options = []
+    def _render_pk_physical(self, pk_elem, att, render_base=True):
+        if render_base:
+            self._render_pk_base(pk_elem, att)
+        options = [
+            "primary variable key",
+        ]
         self._render_items(pk_elem, att, options)
+
+        dm_field = att.find("domain name")
+        if dm_field.isEnabled():
+            dm_nm = dm_field.value().name()
+            self._new_param(pk_elem, "domain name", "string", dm_nm)
+
+        debug_group = att.findGroup("debugger")
+        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
+        # render initial condition
+        ic_options = [
+            "initialize faces from cells",
+        ]
+        ic_group = att.findGroup("initial condition")
+        ic_elem = self._new_list(pk_elem, "initial condition")
+        self._render_items(ic_elem, ic_group, ic_options)
+        if ic_group.isEnabled():
+            sub = self._new_list(ic_elem, "function")
+            cond_name = ic_group.find("condition name").value()
+            subsub = self._new_list(sub, cond_name)
+            # region
+            region = ic_group.find("region").value().name()
+            self._new_param(subsub, "region", "string", region)
+            # components
+            components = "{" + str(ic_group.find("components").value()) + "}"
+            self._new_param(subsub, "components", "Array(string)", components)
+            self._render_function(subsub, ic_group)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",
@@ -270,57 +300,22 @@ class PKWriter(BaseWriter):
                             FLOAT_FORMAT.format(params.find("BC value").value()),
                         )
         self._generate_pk_evaluators(pk_elem, att)
-        return
-
-    def _render_pk_physical(self, pk_elem, att, render_base=True):
-        if render_base:
-            self._render_pk_base_2(pk_elem, att)
-        options = [
-            "primary variable key",
-        ]
-        self._render_items(pk_elem, att, options)
-
-        dm_field = att.find("domain name")
-        if dm_field.isEnabled():
-            dm_nm = dm_field.value().name()
-            self._new_param(pk_elem, "domain name", "string", dm_nm)
-
-        debug_group = att.findGroup("debugger")
-        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
-        # render initial condition
-        ic_options = [
-            "initialize faces from cells",
-        ]
-        ic_group = att.findGroup("initial condition")
-        ic_elem = self._new_list(pk_elem, "initial condition")
-        self._render_items(ic_elem, ic_group, ic_options)
-        if ic_group.isEnabled():
-            sub = self._new_list(ic_elem, "function")
-            cond_name = ic_group.find("condition name").value()
-            subsub = self._new_list(sub, cond_name)
-            # region
-            region = ic_group.find("region").value().name()
-            self._new_param(subsub, "region", "string", region)
-            # components
-            components = "{" + str(ic_group.find("components").value()) + "}"
-            self._new_param(subsub, "components", "Array(string)", components)
-            self._render_function(subsub, ic_group)
 
     def _render_pk_bdf(self, pk_elem, att, render_base=True):
         if render_base:
-            self._render_pk_base_2(pk_elem, att)
+            self._render_pk_base(pk_elem, att)
         self._generate_time_integrator_section(pk_elem, att)
         self._generate_preconditioner_section(pk_elem, att)
+        self._generate_linear_solver(pk_elem, att)
         options = [
             "initial time step",
         ]
         self._render_items(pk_elem, att, options)
 
     def _render_pk_physical_bdf(self, pk_elem, att):
-        self._render_pk_base_2(pk_elem, att)
+        self._render_pk_base(pk_elem, att)
         self._render_pk_physical(pk_elem, att, render_base=False)
         self._render_pk_bdf(pk_elem, att, render_base=False)
-        self._generate_linear_solver(pk_elem, att)
 
         # diffusion
         diff_group = att.findGroup("diffusion")
@@ -398,6 +393,32 @@ class PKWriter(BaseWriter):
         ]
         self._render_items(pk_elem, att, options)
 
+    def _render_pk_coupled_water(self, pk_elem, att):
+        subsurf = att.find("subsurface pk").value().name()
+        surf = att.find("surface pk").value().name()
+        # must be {subsurface_flow_pk, surface_flow_pk}
+        order = r"{" + ",".join([subsurf, surf]) + r"}"
+        self._new_param(pk_elem, "PKs order", "Array(string)", order)
+
+        options = ["subsurface domain name", "surface domain name"]
+        self._render_items(pk_elem, att, options)
+
+        wd_group = att.findGroup("water delegate")
+        wd_options = [
+            "modify predictor with heuristic",
+            "modify predictor damp and cap the water spurt",
+            "cap the water spurt",
+            "damp the water spurt",
+            "damp and cap the water spurt",
+            "cap over atmospheric",
+        ]
+        wd_elem = self._new_list(pk_elem, "water delegate")
+        self._render_items(wd_elem, wd_group, wd_options)
+
+        self._render_pk_bdf(pk_elem, att)
+
+        return
+
     def write(self, xml_root):
         """Perform the XML write out."""
         pks_elem = self._new_list(xml_root, "PKs")
@@ -406,6 +427,7 @@ class PKWriter(BaseWriter):
             "richards flow": self._render_pk_richards_flow,
             "richards steady state": self._render_pk_richards_steady_state,
             "overland flow, pressure basis": self._render_pk_overland_pressure,
+            "coupled water": self._render_pk_coupled_water,
         }
 
         # Fetch the cycle driver to find out which PK is chosen
