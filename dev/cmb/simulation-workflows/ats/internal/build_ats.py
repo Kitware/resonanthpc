@@ -44,7 +44,7 @@ if __name__ == "__main__":
     # Used hard-coded paths
     main_folder = os.path.abspath(os.path.dirname(__file__))
     start_folder = os.path.join(main_folder, "templates")
-    source_folder = start_folder #os.path.join(start_folder, "source")
+    source_folder = start_folder  # os.path.join(start_folder, "source")
     # build_folder = os.path.join(start_folder, "build")
     # if os.path.exists(build_folder):
     #     shutil.rmtree(build_folder)

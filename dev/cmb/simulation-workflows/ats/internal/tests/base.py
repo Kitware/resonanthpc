@@ -143,8 +143,8 @@ class BaseTestCase(unittest.TestCase):
                         vb = float(vb)
                     elif k == "@value" and a["@type"] == "Array(double)":
                         # three decimals places is good enough for me
-                        va = [round(float(s), 3) for s in va[1:-1].split(',')]
-                        vb = [round(float(s), 3) for s in vb[1:-1].split(',')]
+                        va = [round(float(s), 3) for s in va[1:-1].split(",")]
+                        vb = [round(float(s), 3) for s in vb[1:-1].split(",")]
                     # do the comparison
                     if va != vb:
                         raise ValueError(

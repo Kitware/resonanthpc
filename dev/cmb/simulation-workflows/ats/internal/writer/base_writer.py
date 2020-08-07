@@ -241,7 +241,6 @@ class BaseWriter:
         return
 
     def _render_function(self, parent_elem, att):
-
         def _fetch_subgroup_values(group, name):
             values = []
             for i in range(group.numberOfGroups()):
@@ -274,7 +273,7 @@ class BaseWriter:
         elif func_type == "function-linear":
             linear_elem = self._new_list(function_sub_elem, "function-linear")
             # breakpoint()
-            y = params.find('y0').value()
+            y = params.find("y0").value()
             self._new_param(linear_elem, "y0", "double", FLOAT_FORMAT.format(y))
             group = params.find("linear-data")
             x_values = _fetch_subgroup_values(group, "x0")

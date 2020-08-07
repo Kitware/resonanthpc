@@ -77,6 +77,48 @@
           value: 1.25
 
 
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning
+      children:
+        - Manning exponent: 0.666666666667
+        - slope regularization epsilon: 0.0
+
+
+- type: elevation evaluator
+  name: elevation-evaluator
+  items:
+    - name: elevation function
+      items:
+        - name: regions
+          value: surface domain
+        - components: cell,face
+        - name: variable type
+          value: function-linear
+          children:
+            - y0: 0.0
+            - name: linear-data
+              subgroups:
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: -0.05
+                - - x0: 0.0
+                  - gradient: 0.0
+    - name: slope function
+      items:
+        - name: regions
+          value: surface domain
+        - components: cell
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.05
+
+
 
 - type: overland flow, pressure basis
   name: overland flow
@@ -119,6 +161,9 @@
         - discretization primary: "fv: default"
     - name: source term
       enabled: true
+    - name: evaluators
+      enabled: true
+      value: [attribute, elevation-evaluator, overland-conductivity-evaluator]
 
 
 # Coordinator (notice that   ACTION = EDIT)

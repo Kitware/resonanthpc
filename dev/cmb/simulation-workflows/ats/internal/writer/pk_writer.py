@@ -120,16 +120,16 @@ class PKWriter(BaseWriter):
 
     def _generate_linear_solver(self, pk_elem, att):
         options = {
-            'gmres': [
-                'error tolerance',
-                'maximum number of iterations',
-                'overflow tolerance',
-                'size of Krylov space',
-                'controller training start',
-                'controller training end',
-                'maximum size of deflation space',
-                'convergence criterial',
-                'preconditioning strategy',
+            "gmres": [
+                "error tolerance",
+                "maximum number of iterations",
+                "overflow tolerance",
+                "size of Krylov space",
+                "controller training start",
+                "controller training end",
+                "maximum size of deflation space",
+                "convergence criterial",
+                "preconditioning strategy",
             ],
         }
         field = att.find("linear solver")
@@ -137,9 +137,77 @@ class PKWriter(BaseWriter):
             solver = field.value()
             stype = solver.type()
             solver_elem = self._new_list(pk_elem, "linear solver")
-            self._new_param(solver_elem, 'iterative method', 'string', stype)
-            params_elem = self._new_list(solver_elem, stype + ' parameters')
+            self._new_param(solver_elem, "iterative method", "string", stype)
+            params_elem = self._new_list(solver_elem, stype + " parameters")
             self._render_items(params_elem, solver, options[stype])
+        return
+
+    def _render_elevation_evaluator(self, pk_elem, att):
+        eval_elem = self._new_list(pk_elem, "elevation evaluator")
+        ####
+        elev_group = att.find("elevation function")
+        ef_elem = self._new_list(eval_elem, "elevation function")
+        e_elem = self._new_list(ef_elem, "Elevation")
+        # region
+        regions_comp = elev_group.find("regions")
+        value_list = [
+            regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
+        ]
+        regions = r"{" + ", ".join(value_list) + r"}"
+        self._new_param(e_elem, "regions", "Array(string)", regions)
+        # components
+        components = "{" + str(elev_group.find("components").value()) + "}"
+        self._new_param(e_elem, "components", "Array(string)", components)
+        # function
+        self._render_function(e_elem, elev_group)
+        ####
+        slope_group = att.find("slope function")
+        sf_elem = self._new_list(eval_elem, "slope function")
+        s_elem = self._new_list(sf_elem, "Slope magnitude Left/Right page")
+        # region
+        regions_comp = slope_group.find("regions")
+        value_list = [
+            regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
+        ]
+        regions = r"{" + ", ".join(value_list) + r"}"
+        self._new_param(s_elem, "regions", "Array(string)", regions)
+        # components
+        components = "{" + str(slope_group.find("components").value()) + "}"
+        self._new_param(s_elem, "components", "Array(string)", components)
+        # function
+        self._render_function(s_elem, slope_group)
+        return
+
+    def _render_overland_conductivity_evaluator(self, pk_elem, att):
+        options = ["height key", "slope key", "coefficient key"]
+        children = {
+            "manning": ["Manning exponent", "slope regularization epsilon"],
+        }
+        eval_elem = self._new_list(pk_elem, "overland conductivity evaluator")
+        self._render_items(eval_elem, att, options)
+        model_elem = self._new_list(eval_elem, "overland conductivity model")
+        ctype = att.find("overland conductivity type").value()
+        self._new_param(model_elem, "overland conductivity type", "string", ctype)
+        self._render_items(model_elem, att, children[ctype])
+        return
+
+    def _generate_pk_evaluators(self, pk_elem, att):
+        field = att.find("evaluators")
+        if not field.isEnabled():
+            return
+        evaluator_renderers = {
+            "overland conductivity evaluator": self._render_overland_conductivity_evaluator,
+            "elevation evaluator": self._render_elevation_evaluator,
+        }
+        n = field.numberOfValues()
+        # TODO: only one of each type can be used?
+        for i in range(n):
+            # render each evaluator
+            eval = field.value(i)
+            etype = eval.type()
+            if etype not in evaluator_renderers:
+                raise KeyError("Evaluator `{}` not yet implemented.".format(etype))
+            evaluator_renderers[etype](pk_elem, eval)
         return
 
     def _render_pk_base(self, pk_elem, att):
@@ -201,6 +269,7 @@ class PKWriter(BaseWriter):
                             "double",
                             FLOAT_FORMAT.format(params.find("BC value").value()),
                         )
+        self._generate_pk_evaluators(pk_elem, att)
         return
 
     def _render_pk_physical(self, pk_elem, att, render_base=True):
@@ -242,7 +311,9 @@ class PKWriter(BaseWriter):
             self._render_pk_base_2(pk_elem, att)
         self._generate_time_integrator_section(pk_elem, att)
         self._generate_preconditioner_section(pk_elem, att)
-        options = ['initial time step',]
+        options = [
+            "initial time step",
+        ]
         self._render_items(pk_elem, att, options)
 
     def _render_pk_physical_bdf(self, pk_elem, att):

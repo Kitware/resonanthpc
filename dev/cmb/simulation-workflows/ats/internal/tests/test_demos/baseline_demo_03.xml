@@ -85,8 +85,8 @@
       <ParameterList name="elevation evaluator" type="ParameterList">
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
-            <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell, face}"/>
+            <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
+            <Parameter name="components" type="Array(string)" value="{cell,face}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
                 <Parameter name="y0" type="double" value="0.0"/>
@@ -99,7 +99,7 @@
         <ParameterList name="slope function" type="ParameterList">
           <ParameterList name="Slope magnitude Left/Right page" type="ParameterList">
             <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
-            <Parameter name="component" type="string" value="cell"/>
+            <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.05"/>
@@ -110,6 +110,7 @@
       </ParameterList>
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
+          <Parameter name="overland conductivity type" type="string" value="manning"/>
           <Parameter name="Manning exponent" type="double" value="0.666666666667"/>
           <Parameter name="slope regularization epsilon" type="double" value="0."/>
         </ParameterList>

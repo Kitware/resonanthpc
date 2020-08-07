@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <Definitions>
+
+    <AttDef Type="pk-evaluator-base" Abstract="true" BaseType="" Version="0"></AttDef>
+
+    <AttDef Type="overland conductivity evaluator" BaseType="pk-evaluator-base" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/overland_conductivity/overland_conductivity_evaluator.cc -->
+      <ItemDefinitions>
+        <String Name="height key" Optional="true"></String>
+        <String Name="slope key" Optional="true"></String>
+        <String Name="coefficient key" Optional="true"></String>
+
+        <!-- <Void Name="include dt factor" Optional="true", IsEnabledByDefault="false"> </Void> <Double Name="dt factor"> </Double> <Void Name="include density factor" Optional="true", IsEnabledByDefault="true"> </Void> <String Name="density key"> </String>
+        -->
+
+        <String Name="overland conductivity type">
+          <ChildrenDefinitions>
+            <Double Name="Manning exponent"></Double>
+            <Double Name="slope regularization epsilon">
+              <DefaultValue>1.0e-8</DefaultValue>
+            </Double>
+          </ChildrenDefinitions>
+          <DiscreteInfo DefaultIndex="0">
+            <Structure>
+              <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/overland_conductivity/manning_conductivity_model.cc -->
+              <Value>manning</Value>
+              <Items>
+                <Item>Manning exponent</Item>
+                <Item>slope regularization epsilon</Item>
+              </Items>
+            </Structure>
+          </DiscreteInfo>
+        </String>
+
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="elevation evaluator" BaseType="pk-evaluator-base" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/elevation/standalone_elevation_evaluator.cc -->
+      <ItemDefinitions>
+        <Group Name="elevation function">
+          <ItemDefinitions>
+            <Component Name="regions" Extensible="true">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <String Name="components">
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="cell">cell</Value>
+                <Value Enum="face">face</Value>
+                <Value Enum="boundary_face">boundary_face</Value>
+                <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+                <Value Enum="cell,face">cell,face</Value>
+              </DiscreteInfo>
+            </String>
+            <xi:include href="templates/source/function.xml"/>
+          </ItemDefinitions>
+        </Group>
+
+        <Group Name="slope function">
+          <ItemDefinitions>
+            <Component Name="regions" Extensible="true">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <String Name="components">
+              <DiscreteInfo DefaultIndex="0">
+                <Value Enum="cell">cell</Value>
+                <Value Enum="face">face</Value>
+                <Value Enum="boundary_face">boundary_face</Value>
+                <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+                <Value Enum="cell,face">cell,face</Value>
+              </DiscreteInfo>
+            </String>
+            <xi:include href="templates/source/function.xml"/>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+
+  </Definitions>
+</SMTK_AttributeResource>
