@@ -233,7 +233,15 @@ class PKWriter(BaseWriter):
             self._new_param(pk_elem, "domain name", "string", dm_nm)
 
         debug_group = att.findGroup("debugger")
-        self._render_items(pk_elem, debug_group, ["debug cells", "debug faces"])
+        for fe in ["debug cells", "debug faces"]:
+            item = debug_group.find(fe)
+            if item.isEnabled():
+                value_list = []
+                for i in range(item.numberOfValues()):
+                    value_list.append(item.value(i))
+                string_list = [str(x) for x in value_list]
+                value = r"{" + ",".join(string_list) + r"}"
+                self._new_param(pk_elem, fe, "Array(int)", value)
         # render initial condition
         ic_options = [
             "initialize faces from cells",

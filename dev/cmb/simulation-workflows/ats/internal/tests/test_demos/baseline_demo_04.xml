@@ -157,7 +157,7 @@
       <Parameter name="permeability rescaling" type="double" value="10000000.0"/>
       <!-- <Parameter name="clobber surface rel perm" type="bool" value="false"/> -->
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
-      <Parameter name="debug cells" type="int" value="55"/>
+      <Parameter name="debug cells" type="Array(int)" value="{55}"/>
       <ParameterList name="verbose object" type="ParameterList">
         <Parameter name="verbosity level" type="string" value="high"/>
       </ParameterList>
