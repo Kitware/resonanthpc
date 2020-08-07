@@ -30,6 +30,7 @@ import smtk.attribute
 import smtk.io
 import smtk.operation
 import smtk.resource
+import smtk.session.vtk
 
 OPERATION_SUCCEEDED = int(smtk.operation.Operation.SUCCEEDED)  # 3
 
@@ -87,13 +88,7 @@ if __name__ == '__main__':
     if args.model_filepath:
         mfile = os.path.abspath(args.model_filepath)
         assert os.path.exists(mfile)
-        print('Loading model resource file:', mfile)
-        read_op = op_manager.createOperation('smtk::operation::ReadResource')
-        read_op.parameters().find('filename').setValue(mfile)
-        result = read_op.operate()
-        outcome = result.findInt('outcome').value()
-        assert outcome == OPERATION_SUCCEEDED, 'read operation failed for path {}'.format(mfile)
-        model_resource = result.find('resource').value()
+        model_resource = read_resource(op_manager, mfile)
         assert model_resource is not None, 'failed to load model resource from file {}'.format(mfile)
 
     # Load the export operator
