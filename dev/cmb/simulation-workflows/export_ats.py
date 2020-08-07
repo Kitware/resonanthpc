@@ -17,6 +17,14 @@ import argparse
 import os
 import sys
 
+top_dir = os.path.join(
+    os.path.dirname(__file__), os.pardir, os.pardir, os.pardir,
+)
+path = os.path.join(top_dir, "smtk-tools",)
+utilities_module_path = os.path.normpath(path)
+sys.path.insert(0, utilities_module_path)
+from smtk_tools.resource_io import ResourceIO
+
 import smtk
 import smtk.attribute
 import smtk.io
@@ -57,6 +65,7 @@ def import_python_op(op_manager, path):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate ATS input file from attribute resource')
     parser.add_argument('attribute_filepath', help='Input attribute filename/path (.smtk)')
+    parser.add_argument('--model_filepath', '-m', help='path to SMTK model resource (.smtk)')
     parser.add_argument('--output_filepath', '-o', default='ats_input.xml', help='output filename/path (ats_input.xml)')
     parser.add_argument('--export_operation', '-e', default='ats/ats.py', help='export operation path (./ats/ats.py)')
 
@@ -73,6 +82,20 @@ if __name__ == '__main__':
 
     my_dir = os.path.abspath(os.path.dirname(__file__))
 
+    # Initialize ResourceIO and load resources
+    model_resource = None
+    if args.model_filepath:
+        mfile = os.path.abspath(args.model_filepath)
+        assert os.path.exists(mfile)
+        print('Loading model resource file:', mfile)
+        read_op = op_manager.createOperation('smtk::operation::ReadResource')
+        read_op.parameters().find('filename').setValue(mfile)
+        result = read_op.operate()
+        outcome = result.findInt('outcome').value()
+        assert outcome == OPERATION_SUCCEEDED, 'read operation failed for path {}'.format(mfile)
+        model_resource = result.find('resource').value()
+        assert model_resource is not None, 'failed to load model resource from file {}'.format(mfile)
+
     # Load the export operator
     path_list = args.export_operation.split(os.sep)
     op_path = os.path.join(my_dir, *path_list)
@@ -81,6 +104,8 @@ if __name__ == '__main__':
 
     # Load the attribute resource
     att_resource = read_resource(op_manager, args.attribute_filepath)
+    if model_resource:
+        att_resource.associate(model_resource)
 
     # Configure the export operator
     params = export_op.parameters()
