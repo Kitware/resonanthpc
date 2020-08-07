@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<SMTK_AttributeResource Version="3">
+<SMTK_AttributeResource Version="3" xmlns:xi="http://www.w3.org/2001/XInclude">
   <Definitions>
     <AttDef Type="field-evaluator" BaseType="" Abstract="true" Version="0"></AttDef>
 
@@ -95,31 +95,9 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
           </Accepts>
         </Component>
-        <String Name="variable type">
-          <ChildrenDefinitions>
-            <Double Name="value"></Double>
-            <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
-              <ItemDefinitions>
-                <Double Name="X" NumberOfRequiredValues="1"></Double>
-                <Double Name="Y" NumberOfRequiredValues="1"></Double>
-              </ItemDefinitions>
-            </Group>
-          </ChildrenDefinitions>
-          <DiscreteInfo DefaultIndex="0">
-            <Structure>
-              <Value>constant</Value>
-              <Items>
-                <Item>value</Item>
-              </Items>
-            </Structure>
-            <Structure>
-              <Value>function</Value>
-              <Items>
-                <Item>tabular-data</Item>
-              </Items>
-            </Structure>
-          </DiscreteInfo>
-        </String>
+
+        <xi:include href="templates/source/function.xml"/>
+
       </ItemDefinitions>
     </AttDef>
 

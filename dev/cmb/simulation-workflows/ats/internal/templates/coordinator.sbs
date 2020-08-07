@@ -69,6 +69,7 @@
             <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base']"></Resource>
           </Accepts>
         </Component>
+
       </ItemDefinitions>
     </AttDef>
   </Definitions>

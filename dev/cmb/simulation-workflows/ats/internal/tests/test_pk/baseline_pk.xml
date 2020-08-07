@@ -21,7 +21,6 @@
           <Parameter name="strong threshold" type="double" value="0.5"/>
           <Parameter name="tolerance" type="double" value="0.0"/>
           <Parameter name="relaxation type" type="int" value="6"/>
-          <Parameter name="verbosity" type="int" value="0"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -57,11 +56,8 @@
             <Parameter name="WRM Type" type="string" value="van Genuchten"/>
             <Parameter name="van Genuchten alpha" type="double" value="0.00015"/>
             <Parameter name="van Genuchten m" type="double" value="0.8"/>
-            <Parameter name="van Genuchten residual saturation" type="double" value="0.0"/>
+            <Parameter name="residual saturation" type="double" value="0.0"/>
           </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="time integrator" type="ParameterList">

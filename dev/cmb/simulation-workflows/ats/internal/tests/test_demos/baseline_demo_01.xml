@@ -61,13 +61,13 @@
     <Parameter name="end time" type="double" value="1.0"/>
     <Parameter name="end time units" type="string" value="s"/>
     <ParameterList name="PK tree" type="ParameterList">
-      <ParameterList name="pk-richards-0" type="ParameterList">
+      <ParameterList name="Richards" type="ParameterList">
         <Parameter name="PK type" type="string" value="richards steady state"/>
       </ParameterList>
     </ParameterList>
   </ParameterList>
   <ParameterList name="PKs" type="ParameterList">
-    <ParameterList name="pk-richards-0" type="ParameterList">
+    <ParameterList name="Richards" type="ParameterList">
       <Parameter name="PK type" type="string" value="richards steady state"/>
       <Parameter name="primary variable key" type="string" value="pressure"/>
       <Parameter name="relative permeability method" type="string" value="upwind with Darcy flux"/>
@@ -87,7 +87,6 @@
           <Parameter name="strong threshold" type="double" value="0.5"/>
           <Parameter name="tolerance" type="double" value="0.0"/>
           <Parameter name="relaxation type" type="int" value="6"/>
-          <Parameter name="verbosity" type="int" value="0"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="boundary conditions" type="ParameterList">
@@ -123,11 +122,8 @@
             <Parameter name="WRM Type" type="string" value="van Genuchten"/>
             <Parameter name="van Genuchten alpha" type="double" value="0.00015"/>
             <Parameter name="van Genuchten m" type="double" value="0.8"/>
-            <Parameter name="van Genuchten residual saturation" type="double" value="0.0"/>
+            <Parameter name="residual saturation" type="double" value="0.0"/>
           </ParameterList>
-        </ParameterList>
-        <ParameterList name="verbose object" type="ParameterList">
-          <Parameter name="verbosity level" type="string" value="high"/>
         </ParameterList>
       </ParameterList>
       <ParameterList name="time integrator" type="ParameterList">

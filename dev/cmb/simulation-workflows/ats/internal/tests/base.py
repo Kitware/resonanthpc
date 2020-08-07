@@ -16,19 +16,17 @@ source_path = os.path.abspath(os.path.dirname(__file__))
 TEMPLATE_FILEPATH = os.path.join(source_path, os.pardir, os.pardir, "ats.sbt")
 
 
-path = os.path.join(
-    source_path,
-    os.pardir,
-    os.pardir,
-    os.pardir,
-    os.pardir,
-    os.pardir,
-    os.pardir,
-    "smtk-tools",
+top_dir = os.path.join(
+    source_path, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir, os.pardir,
 )
+path = os.path.join(top_dir, "smtk-tools",)
+utilities_module_path = os.path.normpath(path)
+sys.path.insert(0, utilities_module_path)
+path = os.path.join(top_dir, "xmltodict",)
 utilities_module_path = os.path.normpath(path)
 sys.path.insert(0, utilities_module_path)
 import yaml
+import xmltodict
 from smtk_tools.attribute_builder import AttributeBuilder
 from smtk_tools.resource_io import ResourceIO
 
@@ -103,5 +101,66 @@ class BaseTestCase(unittest.TestCase):
         if dump:
             with open(os.path.join(self.SOURCE_DIR, "foo.xml"), "w") as f:
                 f.write(xml_string)
-        self.assertEqual(xml_string, baseline_string)
+
+        baseline = xmltodict.parse(baseline_string)
+        testing = xmltodict.parse(xml_string)
+
+        def find_index_with_pair(lst, k, v):
+            for i, e in enumerate(lst):
+                if k in e and e[k] == v:
+                    return i
+            raise ValueError("Key/Value pair ({}: {}) not found".format(k, v))
+
+        def compare_dict(a, b, parent=""):
+            """ensures all key/values in a are in b but not the other way around"""
+            for k, va in a.items():
+                try:
+                    vb = b[k]
+                except KeyError as err:
+                    try:
+                        raise ValueError(
+                            "Heirarchy mismatch (key: `{}`, `{}`) under: {}".format(
+                                k, a["@name"], parent
+                            )
+                        )
+                    except KeyError:
+                        raise err
+                if isinstance(va, list) and isinstance(vb, dict):
+                    vb = [
+                        vb,
+                    ]
+                if isinstance(va, dict) and isinstance(vb, list):
+                    va = [
+                        va,
+                    ]
+                # Do the comparsion recursively
+                if isinstance(va, dict):
+                    compare_dict(va, vb, parent="->".join([parent, va["@name"]]))
+                elif isinstance(va, list):
+                    for e in va:
+                        try:
+                            idx = find_index_with_pair(vb, "@name", e["@name"])
+                        except ValueError:
+                            raise ValueError(
+                                "Parameter ({}) not found".format(e["@name"])
+                                + " for "
+                                + parent
+                            )
+                        compare_dict(e, vb[idx], parent="->".join([parent, e["@name"]]))
+                else:
+                    if k == "@value" and a["@type"] == "double":
+                        va = float(va)
+                        vb = float(vb)
+                    elif k == "@value" and a["@type"] == "Array(double)":
+                        # three decimals places is good enough for me
+                        va = [round(float(s), 3) for s in va[1:-1].split(",")]
+                        vb = [round(float(s), 3) for s in vb[1:-1].split(",")]
+                    # do the comparison
+                    if va != vb:
+                        raise ValueError(
+                            "Data mismatch for: {}: ({} != {})".format(parent, va, vb)
+                        )
+            return True
+
+        self.assertTrue(compare_dict(baseline, testing))
         return

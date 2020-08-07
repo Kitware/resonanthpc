@@ -32,29 +32,25 @@
     - 'normal': [1.0, 0.0]
 
 
-- type: pk-overland-flow-pressure-basis-3
-  name: overland flow
-  items:
-    - 'initial condition': surface domain
-    - 'elevation evaluator': surface domain
-  associate:
-    - attribute: surface domain
+
+# preconditioner
+- type: block ilu
+  name: block-ilu-0
 
 
-# Coordinator (notice that   ACTION = EDIT)
-- action: edit
-  type: cycle driver
+# Linear solver
+- type: gmres
+  name: linear-solver-0
   items:
-    - name: end-spec
-      children:
-        - 'end time': 10800.0
-        - 'end time units': 's'
-    - 'PK tree': overland flow
+    - preconditioning strategy: left
+    - error tolerance: 1.0e-06
+    - convergence criterial: relative residual #,make one iteration
+    - maximum number of iterations: 80
 
 
 # Time integrator
-- action: edit
-  type: time integrator
+- type: time integrator
+  name: time-integrator-0
   items:
     - 'initial time step': 86400.0
     - name: 'nka_bt_ats parameters'
@@ -79,6 +75,106 @@
           value: 10000000000.0
         - name: 'time step increase factor'
           value: 1.25
+
+
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning
+      children:
+        - Manning exponent: 0.666666666667
+        - slope regularization epsilon: 0.0
+
+
+- type: elevation evaluator
+  name: elevation-evaluator
+  items:
+    - name: elevation function
+      items:
+        - name: regions
+          value: surface domain
+        - components: cell,face
+        - name: variable type
+          value: function-linear
+          children:
+            - y0: 0.0
+            - name: linear-data
+              subgroups:
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: -0.05
+                - - x0: 0.0
+                  - gradient: 0.0
+    - name: slope function
+      items:
+        - name: regions
+          value: surface domain
+        - components: cell
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.05
+
+
+
+- type: overland flow, pressure basis
+  name: overland flow
+  items:
+    - name: domain name
+      enabled: true
+      value: surface
+    - verbosity level: high
+    - primary variable key: surface-pressure
+    - initial time step: 60.0
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'block-ilu-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+    - name: boundary conditions
+      enabled: false
+    - name: initial condition
+      enabled: true
+      items:
+        - condition name: initial pressure
+        - region: surface domain
+        - components: cell,boundary_face
+        - name: variable type
+          value: function-consant
+          children:
+            - value: 101325.0
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [0, 9]
+          enabled: true
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+    - name: source term
+      enabled: true
+    - name: evaluators
+      enabled: true
+      value: [attribute, elevation-evaluator, overland-conductivity-evaluator]
+
+
+# Coordinator (notice that   ACTION = EDIT)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+        - 'end time': 10800.0
+        - 'end time units': 's'
+    - 'PK tree': overland flow
 
 
 - type: visualization driver
@@ -154,7 +250,7 @@
       enabled: true
       value: true
     - name: variable type
-      value: function
+      value: function-tabular
       children:
         - name: tabular-data
           subgroups:
@@ -162,6 +258,12 @@
               - Y: 3.0e-6
             - - X: 3600.0
               - Y: 0.0
+        - name: forms
+          items:
+            - name: linear
+              enabled: false
+            - name: constant
+              enabled: true
 
 - type: eos
   name: surface-source_molar_density

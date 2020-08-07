@@ -20,13 +20,12 @@
     - 'normal': [0.0, 0.0, -1.0]
 
 # Process Kernel
-- type: pk-richards
+# Process Kernel
+- type: richards steady state
   name: Richards
-  associate:
-    - attribute: bottom face
   items:
-    - 'initial condition': computational domain
-    - 'water retention evaluator': computational domain
+    - primary variable key: pressure
+
 
 # Coordinator (notice that   ACTION = EDIT)
 - action: edit

@@ -91,35 +91,108 @@
     - attribute: surface_east
     - attribute: surface_west
 
-# Process Kernel
-- type: pk-richards-flow-4
+
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning
+      children:
+        - Manning exponent: 0.666666666667
+        - slope regularization epsilon: 0.01
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 3
+    - smoother sweeps: 2
+    - strong threshold: 0.5
+    - tolerance: 0.0
+
+# Linear solver
+- type: gmres
+  name: linear-solver-0
+  items:
+    - preconditioning strategy: left
+    - error tolerance: 1.0e-06
+    - convergence criterial: relative residual #,make one iteration
+    - maximum number of iterations: 80
+
+# Process Kernels
+- type: richards flow
   name: flow
   items:
-    - 'initial condition': computational domain
-    - 'water retention evaluator': computational domain
+    - verbosity level: high
+    - primary variable key: pressure
+    - permeability rescaling: 10000000.0
+    - initial time step: 10.0
+    - name: initial condition
+      enabled: true
+      items:
+        - condition name: initial pressure cells
+        - region: computational domain
+        - components: cell,face
+        - name: variable type
+          value: function-linear
+          children:
+            - y0: 101325.0
+            - name: linear-data
+              subgroups:
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 0.0
+                  - gradient: 0.0
+                - - x0: 4.0
+                  - gradient: -9806.23
+    - name: water retention evaluator specs
+      items:
+        - region: computational domain
+        - name: WRM Type
+          value: van Genuchten
+          children:
+            - van Genuchten alpha: 0.000545
+            - van Genuchten m: 0.19
+            - residual saturation: 0.1
+            - smoothing interval width [saturation]: 0.1
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [55]
+          enabled: true
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "mfd: optimized for sparsity"
 
-- type: pk-overland-flow-pressure-basis-4
+- type: overland flow, pressure basis
   name: overland flow
-
-- type: pk-coupled-water
-  name: surface-subsurface coupler
   items:
-    - 'surface pk': overland flow
-    - 'subsurface pk': flow
+    - name: domain name
+      enabled: true
+      value: surface
+    - verbosity level: high
+    - primary variable key: surface-pressure
+    - initial time step: 10.0
+    - name: initial condition
+      enabled: false
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+    - name: source term
+      enabled: true
+    - name: evaluators
+      enabled: true
+      value: overland-conductivity-evaluator
 
-# Coordinator (action = edit)
-- action: edit
-  type: cycle driver
-  items:
-    - name: end-spec
-      children:
-      - 'end time': 10.0
-      - 'end time units': d
-    - 'PK tree': surface-subsurface coupler
 
 # Time integrator
-- action: edit
-  type: time integrator
+- type: time integrator
+  name: time-integrator-0
   items:
     - 'initial time step': 86400.0
     - name: 'nka_bt_ats parameters'
@@ -145,6 +218,40 @@
         - name: 'time step increase factor'
           value: 2.0
 
+
+- type: coupled water
+  name: surface-subsurface coupler
+  items:
+    - 'subsurface pk': flow
+    - 'surface pk': overland flow
+    - verbosity level: medium
+    - initial time step: 10.0
+    - name: water delegate
+      items:
+        - name: modify predictor damp and cap the water spurt
+          enabled: true
+        - name: damp and cap the water spurt
+          enabled: true
+        - cap over atmospheric: 0.1
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+
+# Coordinator (action = edit)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+      - 'end time': 10.0
+      - 'end time units': d
+    - 'PK tree': surface-subsurface coupler
 
 # Visualization
 - type: visualization driver
@@ -340,8 +447,14 @@
       enabled: true
       value: true
     - name: variable type
-      value: function
+      value: function-tabular
       children:
+        - name: forms
+          items:
+            - name: constant
+              enabled: true
+            - name: linear
+              enabled: false
         - name: tabular-data
           subgroups:
             - - X: 0.0

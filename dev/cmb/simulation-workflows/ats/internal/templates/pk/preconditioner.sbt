@@ -8,15 +8,15 @@
       <!-- _preconditioner_type_ parameters -->
     </AttDef>
 
-    <AttDef Type="preconditioner-identity" Label="Identity" BaseType="preconditioner-base" Version="0">
+    <AttDef Type="identity" Label="Identity" BaseType="preconditioner-base" Version="0">
       <!-- no parameters -->
     </AttDef>
 
-    <AttDef Type="preconditioner-diagonal" Label="Diagonal" BaseType="preconditioner-base" Version="0">
+    <AttDef Type="diagonal" Label="Diagonal" BaseType="preconditioner-base" Version="0">
       <!-- no parameters -->
     </AttDef>
 
-    <AttDef Type="preconditioner-block-ilu" Label="Block ILU" BaseType="preconditioner-base" Version="0">
+    <AttDef Type="block ilu" Label="Block ILU" BaseType="preconditioner-base" Version="0">
       <ItemDefinitions>
         <Double Name="fact: relax value">
           <DefaultValue>1.0</DefaultValue>
@@ -39,7 +39,8 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="preconditioner-boomer-amg" Label="Boomer AMG" BaseType="preconditioner-base" Version="0">
+    <AttDef Type="boomer amg" Label="Boomer AMG" BaseType="preconditioner-base" Version="0">
+      <!-- See https://github.com/amanzi/amanzi/blob/master/src/solvers/PreconditionerBoomerAMG.hh -->
       <ItemDefinitions>
         <Double Name="tolerance">
           <DefaultValue>0.0</DefaultValue>
@@ -78,7 +79,7 @@
       </ItemDefinitions>
     </AttDef>
 
-    <AttDef Type="preconditioner-euclid" Label="Euclid" BaseType="preconditioner-base" Version="0">
+    <AttDef Type="euclid" Label="Euclid" BaseType="preconditioner-base" Version="0">
       <ItemDefinitions>
         <Int Name="ilu(k) fill level">
           <DefaultValue>1</DefaultValue>
@@ -98,7 +99,7 @@
     </AttDef>
 
     <!-- TODO: ml preconditioner parameters are not listed... skipping -->
-    <AttDef Type="preconditioner-ml" Label="TODO: ML (Trilinos AMG)" BaseType="preconditioner-base" Version="0"></AttDef>
+    <!-- <AttDef Type="preconditioner-ml" Label="TODO: ML (Trilinos AMG)" BaseType="preconditioner-base" Version="0"></AttDef> -->
 
   </Definitions>
 </SMTK_AttributeResource>

@@ -1,3 +1,6 @@
 [submodule "smtk-tools"]
 	path = smtk-tools
 	url = https://gitlab.kitware.com/john.tourtellott/smtk-tools.git
+[submodule "xmltodict"]
+	path = xmltodict
+	url = git@github.com:martinblech/xmltodict.git

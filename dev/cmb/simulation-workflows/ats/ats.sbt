@@ -9,20 +9,23 @@
     <File>internal/templates/coordinator.sbt</File>
     <!-- PKs -->
     <File>internal/templates/process-kernel.sbt</File>
+    <File>internal/templates/pk/preconditioner.sbt</File>
+    <File>internal/templates/pk/linear-solver.sbt</File>
+    <File>internal/templates/pk/time-integrator.sbt</File>
+    <File>internal/templates/pk/evaluators.sbt</File>
+    <!-- other -->
     <File>internal/templates/state.sbt</File>
     <File>internal/templates/checkpoint.sbt</File>
     <File>internal/templates/observation.sbt</File>
     <File>internal/templates/visualization.sbt</File>
-    <!-- <File>internal/templates/preconditioner.sbt</File> -->
-    <File>internal/templates/time-integrator.sbt</File>
   </Includes>
   <Views>
     <View Type="Group" Title="ATS" TopLevel="true" TabPosition="North" FilterByAdvanceLevel="true" FilterByCategory="false">
       <Views>
         <View Title="Mesh"/>
         <View Title="Region"/>
-        <View Title="Coordinator"/>
-        <View Title="Process Kernel Info"/>
+        <View Title="Coordinator / Time"/>
+        <View Title="Process Kernels"/>
         <View Title="Visualization"/>
         <View Title="Checkpoint"/>
         <View Title="Observation"/>
@@ -51,6 +54,12 @@
         <Att Type="region"/>
       </AttributeTypes>
     </View>
+
+    <View Type="Group" Title="Coordinator / Time" Style="Tabbed" TabPosition="North">
+      <Views>
+        <View Title="Coordinator"/>
+      </Views>
+    </View>
     <View Type="Instanced" Title="Coordinator">
       <InstancedAttributes>
         <Att Type="cycle driver" Name="cycle driver"/>
@@ -58,11 +67,13 @@
     </View>
 
     <!-- Process Kernel stuff -->
-    <View Type="Group" Title="Process Kernel Info" Style="Tabbed" TabPosition="North">
+    <View Type="Group" Title="Process Kernels" Style="Tabbed" TabPosition="North">
       <Views>
         <View Title="Process Kernel"/>
-        <!-- <View Title="Preconditioners"/> -->
-        <View Title="Time Integrator"/>
+        <View Title="Preconditioners"/>
+        <View Title="Linear Solvers"/>
+        <View Title="Time Integrators"/>
+        <View Title="Evaluators"/>
       </Views>
     </View>
     <View Type="Attribute" Title="Process Kernel">
@@ -70,12 +81,25 @@
         <Att Type="pk-base"/>
       </AttributeTypes>
     </View>
-    <!-- <View Type="Attribute" Title="Preconditioners"> <AttributeTypes> <Att Type="preconditioner-base"/> </AttributeTypes> </View> -->
-    <View Type="Instanced" Title="Time Integrator">
-      <InstancedAttributes>
-        <!-- TODO: eventaully there can be more than one -->
+    <View Type="Attribute" Title="Preconditioners">
+      <AttributeTypes>
+        <Att Type="preconditioner-base"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Linear Solvers">
+      <AttributeTypes>
+        <Att Type="linear-solver-base"/>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Time Integrators">
+      <AttributeTypes>
         <Att Type="time integrator" Name="time integrator"/>
-      </InstancedAttributes>
+      </AttributeTypes>
+    </View>
+    <View Type="Attribute" Title="Evaluators">
+      <AttributeTypes>
+        <Att Type="pk-evaluator-base" Name="evaluators"/>
+      </AttributeTypes>
     </View>
 
     <View Type="Attribute" Title="Visualization">

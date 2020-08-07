@@ -20,7 +20,6 @@ import smtk.attribute
 
 from .shared_data import instance as shared
 from .base_writer import BaseWriter
-from .extra import PK_MAPPING
 
 
 class CoordinatorWriter(BaseWriter):
@@ -71,17 +70,18 @@ class CoordinatorWriter(BaseWriter):
         pk_type = pk_att.type()
         pk_tree_elem = self._new_list(coord_elem, "PK tree")
         pk_elem = self._new_list(pk_tree_elem, pk_name)
-        self._new_param(pk_elem, "PK type", "string", PK_MAPPING[pk_type])
+        self._new_param(pk_elem, "PK type", "string", pk_type)
 
         # if the PK is a coupler, we have to included the coupled PKs in the tree
-        if pk_type == "pk-coupled-water":
+        # TODO: we need a better way of doing this when other couplers come online
+        if pk_type == "coupled water":
             subsurf_name = pk_att.find("subsurface pk").value().name()
             subsurf_type = pk_att.find("subsurface pk").value().type()
             nested_elem = self._new_list(pk_elem, subsurf_name)
-            self._new_param(nested_elem, "PK type", "string", PK_MAPPING[subsurf_type])
+            self._new_param(nested_elem, "PK type", "string", subsurf_type)
             surf_name = pk_att.find("surface pk").value().name()
             surf_type = pk_att.find("surface pk").value().type()
             nested_elem = self._new_list(pk_elem, surf_name)
-            self._new_param(nested_elem, "PK type", "string", PK_MAPPING[surf_type])
+            self._new_param(nested_elem, "PK type", "string", surf_type)
 
         return
