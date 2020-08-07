@@ -151,6 +151,8 @@
     - name: water retention evaluator specs
       items:
         - region: computational domain
+        - name: use surface rel perm
+          enabled: true
         - name: WRM Type
           value: van Genuchten
           children:

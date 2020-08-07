@@ -370,6 +370,8 @@ class PKWriter(BaseWriter):
         # water retention evaluator specs
         wre_group = att.findGroup("water retention evaluator specs")
         wre_elem = self._new_list(pk_elem, "water retention evaluator")
+        wre_options = ["use surface rel perm", "minimum rel perm cutoff"]
+        self._render_items(wre_elem, wre_group, wre_options)
         wre_params = self._new_list(wre_elem, "WRM parameters")
         wrm_options = [
             "van Genuchten alpha",

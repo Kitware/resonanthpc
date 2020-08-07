@@ -14,6 +14,11 @@
               </Accepts>
             </Component>
 
+            <Void Name="use surface rel perm" Optional="true" IsEnabledByDefault="false"/>
+            <Double Name="minimum rel perm cutoff">
+              <DefaultValue>0.0</DefaultValue>
+            </Double>
+
             <String Name="WRM Type">
               <ChildrenDefinitions>
                 <Double Name="van Genuchten alpha"></Double>
