@@ -17,13 +17,13 @@ import argparse
 import os
 import sys
 
-top_dir = os.path.join(
-    os.path.dirname(__file__), os.pardir, os.pardir, os.pardir,
-)
-path = os.path.join(top_dir, "smtk-tools",)
-utilities_module_path = os.path.normpath(path)
-sys.path.insert(0, utilities_module_path)
-from smtk_tools.resource_io import ResourceIO
+# top_dir = os.path.join(
+#     os.path.dirname(__file__), os.pardir, os.pardir, os.pardir,
+# )
+# path = os.path.join(top_dir, "smtk-tools",)
+# utilities_module_path = os.path.normpath(path)
+# sys.path.insert(0, utilities_module_path)
+# from smtk_tools.resource_io import ResourceIO
 
 import smtk
 import smtk.attribute
@@ -80,6 +80,8 @@ if __name__ == '__main__':
     smtk.attribute.Registrar.registerTo(op_manager)
     smtk.operation.Registrar.registerTo(op_manager)
     op_manager.registerResourceManager(res_manager)
+    smtk.session.vtk.Registrar.registerTo(res_manager)
+    smtk.session.vtk.Registrar.registerTo(op_manager)
 
     my_dir = os.path.abspath(os.path.dirname(__file__))
 

@@ -30,7 +30,6 @@ pysmtk $BUILDER \
   "${TESTS}/test_demos/demo.04.yml" \
   -m "${TESTS}/test_demos/att.demo.04.mesh.smtk" \
   -o demo-04/demo.04.smtk
-# TODO: this isn't working - it doesn't see the model
 pysmtk $EXPORTER demo-04/demo.04.smtk \
   -o demo-04/demo.04.xml
 
