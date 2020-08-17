@@ -21,6 +21,12 @@ ResonantHPC will:
   scripting access to its functionality.
 
 
+## Getting started with CMB modelbuilder
+
+To begin using CMB modelbuilder to produce ATS input files, see the
+markdown files (*.md) in directory `dev/cmb/`.
+
+
 ## Acknowledgment
 
 This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of Acquisition and Assistance, under Award Number DE-SC0020504
