@@ -5,7 +5,7 @@ layout: home
 # include located in /_includes/hero.html
 title: Welcome
 subtitle: Increase scientific productivity by providing HPC capable pre-and-post processing for easier and faster turnaround and integration with modern and next-generation simulation systems.
-hero_image: /assets/img/hero_placeholder.png
+hero_image: /assets/img/cmb_interface.png
 
 hero_links:
   - text: View on GitHub
