@@ -43,7 +43,7 @@ effort.
 
 - [ParaView](https://www.paraview.org)
 - [Amanzi and ATS](https://amanzi.github.io)
-- [Computational Model Builder](https://www.computationalmodelbuilder.org) and
+- [Computational Model Builder](https://www.computationalmodelbuilder.org)
 - [SMTK](https://smtk.readthedocs.io/en/latest/)
 - [LaGriT](https://lanl.github.io/LaGriT/)
 - [Project Jupyter](https://jupyter.org)
