@@ -149,35 +149,13 @@ class PKWriter(BaseWriter):
         ####
         elev_group = att.find("elevation function")
         ef_elem = self._new_list(eval_elem, "elevation function")
-        e_elem = self._new_list(ef_elem, "Elevation")
-        # region
-        regions_comp = elev_group.find("regions")
-        value_list = [
-            regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
-        ]
-        regions = r"{" + ", ".join(value_list) + r"}"
-        self._new_param(e_elem, "regions", "Array(string)", regions)
-        # components
-        components = "{" + str(elev_group.find("components").value()) + "}"
-        self._new_param(e_elem, "components", "Array(string)", components)
         # function
-        self._render_function(e_elem, elev_group)
+        self._render_function(ef_elem, elev_group, "Elevation")
         ####
         slope_group = att.find("slope function")
         sf_elem = self._new_list(eval_elem, "slope function")
-        s_elem = self._new_list(sf_elem, "Slope magnitude Left/Right page")
-        # region
-        regions_comp = slope_group.find("regions")
-        value_list = [
-            regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
-        ]
-        regions = r"{" + ", ".join(value_list) + r"}"
-        self._new_param(s_elem, "regions", "Array(string)", regions)
-        # components
-        components = "{" + str(slope_group.find("components").value()) + "}"
-        self._new_param(s_elem, "components", "Array(string)", components)
         # function
-        self._render_function(s_elem, slope_group)
+        self._render_function(sf_elem, slope_group, "Slope magnitude Left/Right page")
         return
 
     def _render_overland_conductivity_evaluator(self, pk_elem, att):
@@ -252,14 +230,8 @@ class PKWriter(BaseWriter):
         if ic_group.isEnabled():
             sub = self._new_list(ic_elem, "function")
             cond_name = ic_group.find("condition name").value()
-            subsub = self._new_list(sub, cond_name)
-            # region
-            region = ic_group.find("region").value().name()
-            self._new_param(subsub, "region", "string", region)
-            # components
-            components = "{" + str(ic_group.find("components").value()) + "}"
-            self._new_param(subsub, "components", "Array(string)", components)
-            self._render_function(subsub, ic_group)
+            func_group = ic_group.find("function")
+            self._render_function(sub, func_group, cond_name)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",

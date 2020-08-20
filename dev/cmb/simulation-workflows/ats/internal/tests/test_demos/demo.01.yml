@@ -124,12 +124,14 @@
       enabled: true
       items:
         - initialize faces from cells: true
-        - region: computational domain
-        - components: cell,boundary_face
-        - name: variable type
-          value: constant
-          children:
-            - value: 101325.0
+        - name: function
+          items:
+            - regions: computational domain
+            - components: cell,boundary_face
+            - name: variable type
+              value: constant
+              children:
+                - value: 101325.0
     - name: water retention evaluator specs
       items:
         - region: computational domain
@@ -194,41 +196,47 @@
 - type: independent variable
   name: permeability
   items:
-    - components: cell
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 2.5e-12
+    - name: function
+      items:
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 2.5e-12
 
 - type: independent variable
   name: porosity
   items:
-    - components: cell
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 0.25
+    - name: function
+      items:
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.25
 
 - type: independent variable
   name: temperature
   items:
-    - components: cell,boundary_face
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 273.65
+    - name: function
+      items:
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 273.65
 
 - type: richards water content
   name: water_content

@@ -104,104 +104,118 @@
 - type: independent variable
   name: base_porosity
   items:
-    - components: cell
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 0.25
+    - name: function
+      items:
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.25
 
 - type: independent variable
   name: permeability
   items:
-    - components: cell
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 2.5e-12
+    - name: function
+      items:
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 2.5e-12
 
 - type: independent variable
   name: surface-manning_coefficient
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 0.15
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.15
 
 - type: independent variable
   name: surface-relative_permeability
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 1.0
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.0
 
 - type: independent variable
   name: surface-temperature
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 274.65
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 274.65
 
 - type: independent variable
   name: temperature
   items:
-    - components: cell,boundary_face
-    - region: computational domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 274.65
+    - name: function
+      items:
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 274.65
 
 - type: independent variable
   name: surface-mass_source
   items:
-    - name: variable type
-      value: function-tabular
-      children:
-        - name: forms
-          items:
-            - name: linear
-              enabled: false
-            - name: constant
-              enabled: true
-        - name: tabular-data
-          subgroups:
-            - - X: 0.0
-              - Y: 3.0e-6
-            - - X: 4.32e+7
-              - Y: 0.0
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
+    - name: function
+      items:
+        - name: variable type
+          value: function-tabular
+          children:
+            - name: forms
+              items:
+                - name: linear
+                  enabled: false
+                - name: constant
+                  enabled: true
+            - name: tabular-data
+              subgroups:
+                - - X: 0.0
+                  - Y: 3.0e-6
+                - - X: 4.32e+7
+                  - Y: 0.0
+        - components: cell
+        - regions: surface domain
 
 - type: molar fraction gas
   name: mol_frac_gas
@@ -231,15 +245,17 @@
 - type: independent variable
   name: surface-precipitation
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 1.292956e-08
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.292956e-08
 
 - type: multiplicative evaluator
   name: surface-mass_source_2

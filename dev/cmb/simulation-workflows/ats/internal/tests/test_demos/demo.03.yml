@@ -93,8 +93,7 @@
   items:
     - name: elevation function
       items:
-        - name: regions
-          value: surface domain
+        - regions: surface domain
         - components: cell,face
         - name: variable type
           value: function-linear
@@ -110,8 +109,7 @@
                   - gradient: 0.0
     - name: slope function
       items:
-        - name: regions
-          value: surface domain
+        - regions: surface domain
         - components: cell
         - name: variable type
           value: constant
@@ -144,12 +142,14 @@
       enabled: true
       items:
         - condition name: initial pressure
-        - region: surface domain
-        - components: cell,boundary_face
-        - name: variable type
-          value: function-consant
-          children:
-            - value: 101325.0
+        - name: function
+          items:
+            - regions: surface domain
+            - components: cell,boundary_face
+            - name: variable type
+              value: function-consant
+              children:
+                - value: 101325.0
     - name: debugger
       items:
         - name: debug cells
@@ -244,26 +244,28 @@
 - type: independent variable
   name: surface-mass_source
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: function-tabular
-      children:
-        - name: tabular-data
-          subgroups:
-            - - X: 0.0
-              - Y: 3.0e-6
-            - - X: 3600.0
-              - Y: 0.0
-        - name: forms
-          items:
-            - name: linear
-              enabled: false
-            - name: constant
-              enabled: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: function-tabular
+          children:
+            - name: tabular-data
+              subgroups:
+                - - X: 0.0
+                  - Y: 3.0e-6
+                - - X: 3600.0
+                  - Y: 0.0
+            - name: forms
+              items:
+                - name: linear
+                  enabled: false
+                - name: constant
+                  enabled: true
 
 - type: eos
   name: surface-source_molar_density
@@ -292,15 +294,17 @@
 - type: independent variable
   name: surface-manning_coefficient
   items:
-    - components: cell
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 3.6e-3
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 3.6e-3
 
 - type: effective_pressure
   name: surface-effective_pressure
@@ -308,12 +312,14 @@
 - type: independent variable
   name: surface-temperature
   items:
-    - components: cell,boundary_face
-    - region: surface domain
     - name: 'constant in time'
       enabled: true
       value: true
-    - name: variable type
-      value: constant
-      children:
-        - value: 274.65
+    - name: function
+      items:
+        - components: cell,boundary_face
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 274.65

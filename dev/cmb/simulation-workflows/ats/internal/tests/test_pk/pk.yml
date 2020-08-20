@@ -77,12 +77,14 @@
       enabled: true
       items:
         - initialize faces from cells: true
-        - region: computational domain
-        - components: cell,boundary_face
-        - name: variable type
-          value: constant
-          children:
-            - value: 101325.0
+        - name: function
+          items:
+            - regions: computational domain
+            - components: cell,boundary_face
+            - name: variable type
+              value: constant
+              children:
+                - value: 101325.0
     - name: water retention evaluator specs
       items:
         - region: computational domain

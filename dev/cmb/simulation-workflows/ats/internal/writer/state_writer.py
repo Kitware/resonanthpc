@@ -118,15 +118,8 @@ class StateWriter(BaseWriter):
         ]
         self._render_items(fe_elem, att, options)
         function_elem = self._new_list(fe_elem, "function")
-        domain_elem = self._new_list(function_elem, "domain")
-        # add region
-        region = att.findComponent("region").value().name()
-        self._new_param(domain_elem, "region", "string", region)
-        # add components
-        components = "{" + str(att.find("components").value()) + "}"
-        self._new_param(domain_elem, "components", "Array(string)", components)
         # Function list
-        self._render_function(domain_elem, att)
+        self._render_function(function_elem, att.findGroup("function"), "domain")
 
     def render_multiplicative_evaluator(self, fe_elem, att):
         options = ["coefficient", "enforce positivity"]

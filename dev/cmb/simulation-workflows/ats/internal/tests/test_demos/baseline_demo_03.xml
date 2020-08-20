@@ -85,7 +85,7 @@
       <ParameterList name="elevation evaluator" type="ParameterList">
         <ParameterList name="elevation function" type="ParameterList">
           <ParameterList name="Elevation" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
+            <Parameter name="region" type="string" value="surface domain"/>
             <Parameter name="components" type="Array(string)" value="{cell,face}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-linear" type="ParameterList">
@@ -98,7 +98,7 @@
         </ParameterList>
         <ParameterList name="slope function" type="ParameterList">
           <ParameterList name="Slope magnitude Left/Right page" type="ParameterList">
-            <Parameter name="regions" type="Array(string)" value="{surface domain}"/>
+            <Parameter name="region" type="string" value="surface domain"/>
             <Parameter name="components" type="Array(string)" value="{cell}"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">

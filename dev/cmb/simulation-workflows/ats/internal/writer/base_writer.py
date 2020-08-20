@@ -240,7 +240,7 @@ class BaseWriter:
 
         return
 
-    def _render_function(self, parent_elem, att):
+    def _render_function(self, parent_elem, att, name):
         def _fetch_subgroup_values(group, name):
             values = []
             for i in range(group.numberOfGroups()):
@@ -248,7 +248,23 @@ class BaseWriter:
                 values.append(v.value())
             return r"{" + ",".join([FLOAT_FORMAT.format(x) for x in values]) + r"}"
 
-        function_sub_elem = self._new_list(parent_elem, "function")
+        the_group = self._new_list(parent_elem, name)
+
+        # add region
+        regions_comp = att.find("regions")
+        value_list = [
+            regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
+        ]
+        if len(value_list) == 1:
+            self._new_param(the_group, "region", "string", value_list[0])
+        else:
+            regions = r"{" + ", ".join(value_list) + r"}"
+            self._new_param(the_group, "regions", "Array(string)", regions)
+        # add components
+        components = "{" + str(att.find("components").value()) + "}"
+        self._new_param(the_group, "components", "Array(string)", components)
+
+        function_sub_elem = self._new_list(the_group, "function")
         params = att.find("variable type")
         func_type = params.value()
         if func_type == "constant":
