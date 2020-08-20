@@ -18,6 +18,24 @@ import os
 import sys
 import traceback
 
+# Workaround for missing site-packages path in release packages
+site_path = None
+if sys.platform == 'win32':
+  site_path = os.path.join(sys.prefix, 'bin', 'Lib', 'site-packages')
+elif sys.platform == 'darwin':
+  site_path = os.path.join(sys.prefix, os.pardir, os.pardir, os.pardir, os.pardir, 'Python')
+elif sys.platform == 'linux':
+  site_path = os.path.join(sys.prefix, 'lib', 'python3.7', 'site-packages')
+else:
+  print(f'Unrecognized platform {sys.platform}')
+if site_path is not None:
+  abs_path = os.path.abspath(site_path)
+  # Check for smtk lib
+  smtk_path = os.path.join(abs_path, 'smtk')
+  if os.path.exists(smtk_path) and not abs_path in sys.path:
+    print(f'Adding to sys.path: {abs_path}')
+    sys.path.append(abs_path)
+
 import smtk
 import smtk.attribute
 import smtk.io
