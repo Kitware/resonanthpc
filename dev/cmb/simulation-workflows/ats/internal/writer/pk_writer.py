@@ -12,8 +12,6 @@
 
 import os
 
-import smtk
-
 print("loading", os.path.basename(__file__))
 
 from .shared_data import instance as shared
@@ -417,7 +415,7 @@ class PKWriter(BaseWriter):
         pk_tree_item = coord_inst.findComponent("PK tree")
         if pk_tree_item is None:
             raise RuntimeError("PK must be selected in the coordinator section.")
-        pk_tree = pk_tree_item.value()
+        # pk_tree = pk_tree_item.value()
 
         pk_atts = shared.sim_atts.findAttributes("pk-base")
         for att in pk_atts:

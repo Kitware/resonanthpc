@@ -1,70 +1,70 @@
 <!-- Use inside of a Group! -->
-  <ItemDefinitions>
+<ItemDefinitions>
 
-    <Component Name="regions" Extensible="true">
-      <Accepts>
-        <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-      </Accepts>
-    </Component>
+  <Component Name="regions" Extensible="true">
+    <Accepts>
+      <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+    </Accepts>
+  </Component>
 
-    <String Name="components">
-      <DiscreteInfo DefaultIndex="0">
-        <Value Enum="cell">cell</Value>
-        <Value Enum="face">face</Value>
-        <Value Enum="boundary_face">boundary_face</Value>
-        <Value Enum="cell,boundary_face">cell,boundary_face</Value>
-        <Value Enum="cell,face">cell,face</Value>
-      </DiscreteInfo>
-    </String>
+  <String Name="components">
+    <DiscreteInfo DefaultIndex="0">
+      <Value Enum="cell">cell</Value>
+      <Value Enum="face">face</Value>
+      <Value Enum="boundary_face">boundary_face</Value>
+      <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+      <Value Enum="cell,face">cell,face</Value>
+    </DiscreteInfo>
+  </String>
 
-    <String Name="variable type">
-      <ChildrenDefinitions>
-        <!-- constant -->
-        <Double Name="value"></Double>
-        <!-- tabular -->
-        <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
-          <ItemDefinitions>
-            <Double Name="X" NumberOfRequiredValues="1"></Double>
-            <Double Name="Y" NumberOfRequiredValues="1"></Double>
-          </ItemDefinitions>
-        </Group>
-        <Group Name="forms">
-          <ItemDefinitions>
-            <Void Name="linear" Optional="true" IsEnabledByDefault="true"></Void>
-            <Void Name="constant" Optional="true" IsEnabledByDefault="true"></Void>
-          </ItemDefinitions>
-        </Group>
-        <!-- linear -->
-        <Group Name="linear-data" Label="Linear Data" Extensible="true">
-          <ItemDefinitions>
-            <Double Name="x0" NumberOfRequiredValues="1"></Double>
-            <Double Name="gradient" NumberOfRequiredValues="1"></Double>
-          </ItemDefinitions>
-        </Group>
-        <Double Name="y0"></Double>
-        <!--  -->
-      </ChildrenDefinitions>
-      <DiscreteInfo DefaultIndex="0">
-        <Structure>
-          <Value>constant</Value>
-          <Items>
-            <Item>value</Item>
-          </Items>
-        </Structure>
-        <Structure>
-          <Value>function-tabular</Value>
-          <Items>
-            <Item>tabular-data</Item>
-            <Item>forms</Item>
-          </Items>
-        </Structure>
-        <Structure>
-          <Value>function-linear</Value>
-          <Items>
-            <Item>linear-data</Item>
-            <Item>y0</Item>
-          </Items>
-        </Structure>
-      </DiscreteInfo>
-    </String>
-  </ItemDefinitions>
+  <String Name="variable type">
+    <ChildrenDefinitions>
+      <!-- constant -->
+      <Double Name="value"></Double>
+      <!-- tabular -->
+      <Group Name="tabular-data" Label="Tabular Data" Extensible="true">
+        <ItemDefinitions>
+          <Double Name="X" NumberOfRequiredValues="1"></Double>
+          <Double Name="Y" NumberOfRequiredValues="1"></Double>
+        </ItemDefinitions>
+      </Group>
+      <Group Name="forms">
+        <ItemDefinitions>
+          <Void Name="linear" Optional="true" IsEnabledByDefault="true"></Void>
+          <Void Name="constant" Optional="true" IsEnabledByDefault="true"></Void>
+        </ItemDefinitions>
+      </Group>
+      <!-- linear -->
+      <Group Name="linear-data" Label="Linear Data" Extensible="true">
+        <ItemDefinitions>
+          <Double Name="x0" NumberOfRequiredValues="1"></Double>
+          <Double Name="gradient" NumberOfRequiredValues="1"></Double>
+        </ItemDefinitions>
+      </Group>
+      <Double Name="y0"></Double>
+      <!-- -->
+    </ChildrenDefinitions>
+    <DiscreteInfo DefaultIndex="0">
+      <Structure>
+        <Value>constant</Value>
+        <Items>
+          <Item>value</Item>
+        </Items>
+      </Structure>
+      <Structure>
+        <Value>function-tabular</Value>
+        <Items>
+          <Item>tabular-data</Item>
+          <Item>forms</Item>
+        </Items>
+      </Structure>
+      <Structure>
+        <Value>function-linear</Value>
+        <Items>
+          <Item>linear-data</Item>
+          <Item>y0</Item>
+        </Items>
+      </Structure>
+    </DiscreteInfo>
+  </String>
+</ItemDefinitions>

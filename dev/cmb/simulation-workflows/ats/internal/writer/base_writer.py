@@ -15,7 +15,6 @@
 import os
 
 print("loading", os.path.basename(__file__))
-from xml.dom import minidom
 
 import smtk
 import smtk.attribute

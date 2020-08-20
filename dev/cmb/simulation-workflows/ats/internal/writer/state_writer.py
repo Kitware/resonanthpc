@@ -14,9 +14,6 @@ import os
 
 print("loading", os.path.basename(__file__))
 
-import smtk
-import smtk.attribute
-
 from .shared_data import instance as shared
 from .base_writer import BaseWriter, FLOAT_FORMAT
 
