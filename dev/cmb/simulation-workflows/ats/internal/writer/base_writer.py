@@ -295,3 +295,7 @@ class BaseWriter:
             g_values = _fetch_subgroup_values(group, "gradient")
             self._new_param(linear_elem, "x0", "Array(double)", x_values)
             self._new_param(linear_elem, "gradient", "Array(double)", g_values)
+        elif func_type == "function-file":
+            tabular_elem = self._new_list(function_sub_elem, "function-tabular")
+            options = ["file", "x header", "y header"]
+            self._render_items(tabular_elem, params, options)

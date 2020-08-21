@@ -42,7 +42,10 @@
         </ItemDefinitions>
       </Group>
       <Double Name="y0"></Double>
-      <!-- -->
+      <!-- file -->
+      <String Name="file"></String>
+      <String Name="x header"></String>
+      <String Name="y header"></String>
     </ChildrenDefinitions>
     <DiscreteInfo DefaultIndex="0">
       <Structure>
@@ -63,6 +66,14 @@
         <Items>
           <Item>linear-data</Item>
           <Item>y0</Item>
+        </Items>
+      </Structure>
+      <Structure>
+        <Value>function-file</Value>
+        <Items>
+          <Item>file</Item>
+          <Item>x header</Item>
+          <Item>y header</Item>
         </Items>
       </Structure>
     </DiscreteInfo>

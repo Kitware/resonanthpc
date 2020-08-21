@@ -194,6 +194,22 @@
           </ParameterList>
         </ParameterList>
       </ParameterList>
+      <ParameterList name="surface-precipitation_rain" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="independent variable" />
+        <ParameterList name="function" type="ParameterList">
+          <ParameterList name="domain" type="ParameterList">
+            <Parameter name="region" type="string" value="surface domain" />
+            <Parameter name="components" type="Array(string)" value="{cell}" />
+            <ParameterList name="function" type="ParameterList">
+              <ParameterList name="function-tabular" type="ParameterList">
+                <Parameter name="file" type="string" value="../met/daymet_raw_38p9600_-106p9900.h5" />
+                <Parameter name="x header" type="string" value="time [s]" />
+                <Parameter name="y header" type="string" value="precipitation rain [m s^-1]" />
+              </ParameterList>
+            </ParameterList>
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
       <ParameterList name="mol_frac_gas" type="ParameterList">
         <Parameter name="field evaluator type" type="string" value="molar fraction gas"/>
         <Parameter name="molar fraction key" type="string" value="mol_frac_gas"/>
