@@ -55,12 +55,12 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: ats-cmb
-          path: artifacts
+          path: artifacts/ats-cmb
       - uses: actions/download-artifact@v2
         with:
           name: demos
-          path: artifacts
-      - name: Display structure of downloaded files
+          path: artifacts/demos
+      - name: Display structure of artifacts
         run: ls -R
         working-directory: artifacts
       # - name: Create Release
