@@ -26,14 +26,16 @@ import smtk.operation
 # Add the directory containing this file to the python module search list
 import inspect
 source_file = os.path.abspath(inspect.getfile(inspect.currentframe()))
-sys.path.insert(0, os.path.dirname(source_file))
+source_dir = os.path.dirname(source_file)
+sys.path.insert(0, source_dir)
 # Make sure __file__ is set when using modelbuilder
 __file__ = source_file
 print('loading', os.path.basename(__file__))
 
-import internal
-import internal.writer
-imp.reload(internal.writer)  # for development
+sys.path.insert(0, os.path.join(source_dir, "internal"))
+
+import writer
+imp.reload(writer)  # for development
 
 
 class Export(smtk.operation.Operation):
@@ -103,7 +105,7 @@ def ExportCMB(export_op):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    from internal.writer import ats_writer
+    from writer import ats_writer
     imp.reload(ats_writer)
 
     writer = ats_writer.ATSWriter(sim_atts)

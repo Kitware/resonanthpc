@@ -18,7 +18,7 @@ import os
 import sys
 
 # top_dir = os.path.join(
-#     os.path.dirname(__file__), os.pardir, os.pardir, os.pardir,
+#     os.path.dirname(__file__), os.pardir,
 # )
 # path = os.path.join(top_dir, "smtk-tools",)
 # utilities_module_path = os.path.normpath(path)

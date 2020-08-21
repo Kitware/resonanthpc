@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from writer import ats_writer, coordinator_writer
+from writer import coordinator_writer
 
 from tests.base import BaseTestCase
 
