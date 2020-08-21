@@ -17,9 +17,8 @@ jobs:
       - uses: actions/checkout@v2
         with:
          submodules: 'true'
-      - name: Initialize Environment
-        run: |
-          alias pvpython='/root/misc/root/smtk-deps/bin/pvpython'
+      - name: Set pvpython
+        run: echo '::set-env name=pvpython::/root/misc/root/smtk-deps/bin/pvpython'
       # - name: Lint with flake8
       #   run: |
       #     # stop the build if there are Python syntax errors or undefined names
