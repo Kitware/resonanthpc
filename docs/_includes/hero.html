@@ -9,7 +9,7 @@
               <div class="hero-links columns is-centered">
                 {% for link in page.hero_links %}
                   <div class="column is-3-desktop is-half-tablet">
-                    <a href="{{ link.url | prepend: site.baseurl }}" class="button is-medium {{ link.class }}">
+                    <a href="{{ link.url }}" class="button is-medium {{ link.class }}">
                       {% if link.icon %}
                         <span class="mdi mdi-{{ link.icon }}"></span>
                       {% endif %}
