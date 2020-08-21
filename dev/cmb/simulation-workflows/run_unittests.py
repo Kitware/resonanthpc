@@ -5,7 +5,12 @@ which doesn't support the "-m unittest" argument.
 
 
 import os
+import sys
 import unittest
+
+source_path = os.path.abspath(os.path.dirname(__file__))
+writer_path = os.path.join(source_path, "ats", "internal")
+sys.path.insert(0, writer_path)
 
 if __name__ == "__main__":
     loader = unittest.TestLoader()

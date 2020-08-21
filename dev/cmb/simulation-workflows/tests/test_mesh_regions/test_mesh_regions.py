@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from writer import ats_writer, domain_writer, region_writer
+from writer import domain_writer, region_writer
 
 from tests.base import BaseTestCase
 

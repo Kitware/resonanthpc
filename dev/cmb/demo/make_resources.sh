@@ -2,7 +2,7 @@
 set -e
 TEMPLATE="../simulation-workflows/ats/ats.sbt"
 BUILDER="../../../smtk-tools/build_attributes.py"
-TESTS="../simulation-workflows/ats/internal/tests/"
+TESTS="../simulation-workflows/tests/"
 EXPORTER="../simulation-workflows/export_ats.py"
 
 # Demos 01-04

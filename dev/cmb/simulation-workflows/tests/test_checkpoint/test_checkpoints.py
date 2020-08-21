@@ -1,8 +1,7 @@
 import os
-import sys
 import unittest
 
-from writer import ats_writer, checkpoint_writer
+from writer import checkpoint_writer
 
 from tests.base import BaseTestCase
 

@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from writer import ats_writer, pk_writer
+from writer import pk_writer
 
 from tests.base import BaseTestCase
 
