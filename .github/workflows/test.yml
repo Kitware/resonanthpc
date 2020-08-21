@@ -46,7 +46,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: test
-    # if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v2
       - name: Get the version
@@ -63,17 +63,6 @@ jobs:
       - name: Display structure of artifacts
         run: ls -R
         working-directory: artifacts
-      # - name: Create Release
-      #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
-      #   id: create_release
-      #   uses: actions/create-release@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     tag_name: ${{ github.ref }}
-      #     release_name: Release ${{ github.ref }}
-      #     draft: false
-      #     prerelease: false
       - name: Bundle Templates for Release
         run: |
           cd artifacts
@@ -84,23 +73,34 @@ jobs:
           cd artifacts
           mv demos demos-${{ steps.get_version.outputs.version }}
           zip -r demos-${{ steps.get_version.outputs.version }}.zip demos-${{ steps.get_version.outputs.version }}
-      # - name: Upload Templates
-      #   id: upload-templates
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dev/cmb/simulation-workflows/ats-cmb-${{ steps.get_version.outputs.version }}.zip
-      #     asset_name: ats-cmb-${{ steps.get_version.outputs.version }}.zip
-      #     asset_content_type: application/zip
-      # - name: Upload Demos
-      #   id: upload-demos
-      #   uses: actions/upload-release-asset@v1
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dev/cmb/demo/demos-${{ steps.get_version.outputs.version }}.zip
-      #     asset_name: demos-${{ steps.get_version.outputs.version }}.zip
-      #     asset_content_type: application/zip
+      - name: Create Release
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Templates to Release
+        id: upload-templates
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/ats-cmb-${{ steps.get_version.outputs.version }}.zip
+          asset_name: ats-cmb-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+      - name: Upload Demos to Release
+        id: upload-demos
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/demos-${{ steps.get_version.outputs.version }}.zip
+          asset_name: demos-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
