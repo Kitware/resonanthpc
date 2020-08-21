@@ -6,11 +6,13 @@ name: CI Testing
 on:
   push:
     branches: [ master ]
+    tags:
+      - v*
   pull_request:
     branches: [ master ]
 
 jobs:
-  container:
+  test:
     runs-on: ubuntu-latest
     container: kitware/cmb:ci-cmb-fedora31-latest
     steps:
@@ -31,7 +33,76 @@ jobs:
         run: |
           cd dev/cmb/demo
           ./make_resources.sh
+          mkdir demos
+          mv demo-* demos/
+          mv run-ats.sh demos/
       - uses: actions/upload-artifact@v2
         with:
           name: ats-cmb
           path: dev/cmb/simulation-workflows/ats
+      - uses: actions/upload-artifact@v2
+        with:
+          name: demos
+          path: dev/cmb/demo/demos
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+    steps:
+      - uses: actions/checkout@v2
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+      - uses: actions/download-artifact@v2
+        with:
+          name: ats-cmb
+          path: artifacts/ats-cmb
+      - uses: actions/download-artifact@v2
+        with:
+          name: demos
+          path: artifacts/demos
+      - name: Display structure of artifacts
+        run: ls -R
+        working-directory: artifacts
+      - name: Bundle Templates for Release
+        run: |
+          cd artifacts
+          mv ats-cmb ats-cmb-${{ steps.get_version.outputs.version }}
+          zip -r ats-cmb-${{ steps.get_version.outputs.version }}.zip ats-cmb-${{ steps.get_version.outputs.version }}
+      - name: Bundle Demos for Release
+        run: |
+          cd artifacts
+          mv demos demos-${{ steps.get_version.outputs.version }}
+          zip -r demos-${{ steps.get_version.outputs.version }}.zip demos-${{ steps.get_version.outputs.version }}
+      - name: Create Release
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Templates to Release
+        id: upload-templates
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/ats-cmb-${{ steps.get_version.outputs.version }}.zip
+          asset_name: ats-cmb-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+      - name: Upload Demos to Release
+        id: upload-demos
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: artifacts/demos-${{ steps.get_version.outputs.version }}.zip
+          asset_name: demos-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip

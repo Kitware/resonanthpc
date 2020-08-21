@@ -28,10 +28,12 @@ pvpython $BUILDER \
 pvpython $EXPORTER demo-03/demo.03.smtk -o demo-03/demo.03.xml
 
 mkdir -p demo-04
+cp ${TESTS}/test_demos/att.demo.04.mesh.smtk demo-04/
+cp ${TESTS}/test_demos/open-book-2D.exo demo-04/
 pvpython $BUILDER \
   $TEMPLATE \
   "${TESTS}/test_demos/demo.04.yml" \
-  -m "${TESTS}/test_demos/att.demo.04.mesh.smtk" \
+  -m "demo-04/att.demo.04.mesh.smtk" \
   -o demo-04/demo.04.smtk
 pvpython $EXPORTER demo-04/demo.04.smtk \
   -o demo-04/demo.04.xml
