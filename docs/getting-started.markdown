@@ -28,11 +28,7 @@ Note that one or more packages might be missing for a given date; in that case l
 
 To install, simply download and unzip the file. (There is no `setup.exe` or other installer for windows, for example.) The macOS dmg file contains two folders; you only need to copy the `modelbuilder 6.3.0` folder onto your file system.
 
-#### 2. Download ATS workflow files
-
-To use CMB modelbuilder for ATS preprocessing, download and unzip the latest ResonantHPC release package from https://github.com/Kitware/resonanthpc/releases. This package includes a set of "template" files, which specify the various properties used by the simulation code, plus a set of python scripts that are used to generate ATS input files.
-
-#### 3. Setup Modelbuilder Views
+#### 2. Setup Modelbuilder Views
 
 When starting modelbuilder for the first time, a number of view panels appear on the left-hand side of the application, as shown in this screenshot.
 
@@ -52,6 +48,12 @@ The end result should look something like this screenshot.
 ![this screenshot](/assets/img/getting-started/modelbuilder-after-setup.png).
 
 
+
+#### 3. Download ATS workflow files
+
+To use CMB modelbuilder for ATS preprocessing, download and unzip the latest release from the [ResonantHPC package](https://github.com/Kitware/resonanthpc/releases). The `ats-cmb-v*` directory includes a set of "template" files, which specify the various properties used by the simulation code, plus a set of python scripts that are used to generate ATS input files.
+
+
 #### 4. Create modelbuilder project
 
 Following are the intial steps for creating an ATS input file, using the [ats-demos](https://github.com/amanzi/ats-demos) for reference. Specifically this covers the beginning steps to implement the `01_richards_steadystate` example.
@@ -60,7 +62,7 @@ Following are the intial steps for creating an ATS input file, using the [ats-de
 
 The first step for producing any simlation is to load the modelbuilder user interface "template", which specifies the various properties used by the simulation code. These files use XML format, but typically have the extension `.sbt`.
 
-Use the "File" => "Open" menu item and select `ats.sbt` file in the ResonantHPC package. Because this example does not use any geometric model input, you can expand the left hand panel to expose more of the
+Use the "File" => "Open" menu item and select `ats.sbt` file in the `ats-cmb-v*` directory previously downloaded. Because this example does not use any geometric model input, you can expand the left hand panel to expose more of the
 Attirbute Editor tab. The Attribute Editor should now display these horizontal tabs, corresponding to the top-level sections of the ATS input specification.
 
 * Mesh
