@@ -1,6 +1,5 @@
 #! /bin/sh
 set -e
-alias pysmtk="/Applications/modelbuilder.app/Contents/bin/pvpython"
 TEMPLATE="../simulation-workflows/ats/ats.sbt"
 BUILDER="../../../smtk-tools/build_attributes.py"
 TESTS="../simulation-workflows/ats/internal/tests/"
