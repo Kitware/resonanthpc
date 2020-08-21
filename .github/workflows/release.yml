@@ -19,6 +19,8 @@ jobs:
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
       - name: Add pvpython to path
         run: echo '::add-path::/root/misc/root/smtk-deps/bin/'
+      - name: Install Zip
+        run: yum install zip unzip
       - name: Build and Zip Templates
         run: |
           cd dev/cmb/simulation-workflows/ats/internal

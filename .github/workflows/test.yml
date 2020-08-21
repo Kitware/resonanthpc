@@ -35,3 +35,6 @@ jobs:
         with:
           name: ats-cmb
           path: dev/cmb/simulation-workflows/ats
+      - name: test on tags
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        run: echo "this was run"
