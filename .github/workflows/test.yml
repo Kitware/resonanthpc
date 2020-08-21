@@ -30,9 +30,7 @@ jobs:
           cd dev/cmb/simulation-workflows/ats/internal
           python3 build_ats.py
           pvpython run_unittests.py
-          popd
       - name: Demos
         run: |
           cd dev/cmb/demo
           ./make_resources.sh
-          popd
