@@ -6,10 +6,10 @@ name: CI Testing
 on:
   push:
     branches: [ master ]
+    tags:
+      - v*
   pull_request:
     branches: [ master ]
-  tags:
-    - v*
 
 jobs:
   test:
