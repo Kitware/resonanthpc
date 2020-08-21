@@ -60,6 +60,9 @@ jobs:
         with:
           name: demos
           path: artifacts
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: artifacts
       # - name: Create Release
       #   if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
       #   id: create_release
