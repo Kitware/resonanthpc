@@ -13,12 +13,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF#refs/tags/}
       - name: Build and Zip Templates
         run: |
           cd dev/cmb/simulation-workflows/ats/internal
           python3 build_ats.py
           cd ../../
-          zip -r ats-cmb-${{ github.ref }}.zip ats/
+          zip -r ats-cmb-$VERSION.zip ats/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -36,6 +39,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: dev/cmb/simulation-workflows/ats-cmb-${{ github.ref }}.zip
-          asset_name: ats-cmb-${{ github.ref }}.zip
+          asset_path: dev/cmb/simulation-workflows/ats-cmb-$VERSION.zip
+          asset_name: ats-cmb-$VERSION.zip
           asset_content_type: application/zip
