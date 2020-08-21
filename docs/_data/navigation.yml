@@ -2,5 +2,7 @@
 #   link: /demos
 - name: Team
   link: /team
+- name: Getting Started
+  link: /getting-started
 - name: Contact Us
   link: mailto:kitware@kitware.com
