@@ -21,7 +21,8 @@ jobs:
           cd dev/cmb/simulation-workflows/ats/internal
           python3 build_ats.py
           cd ../../
-          zip -r ats-cmb-${{ steps.get_version.outputs.version }}.zip ats/
+          mv ats ats-cmb-${{ steps.get_version.outputs.version }}
+          zip -r ats-cmb-${{ steps.get_version.outputs.version }}.zip ats-cmb-${{ steps.get_version.outputs.version }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
