@@ -7,15 +7,18 @@ on:
 name: Upload Release Asset
 
 jobs:
-  build:
-    name: Upload Release Asset
+  container:
+    name: Upload Release Assets
     runs-on: ubuntu-latest
+    container: kitware/cmb:ci-cmb-fedora31-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Get the version
         id: get_version
         run: echo ::set-output name=version::${GITHUB_REF#refs/tags/}
+      - name: Add pvpython to path
+        run: echo '::add-path::/root/misc/root/smtk-deps/bin/'
       - name: Build and Zip Templates
         run: |
           cd dev/cmb/simulation-workflows/ats/internal
@@ -23,6 +26,14 @@ jobs:
           cd ../../
           mv ats ats-cmb-${{ steps.get_version.outputs.version }}
           zip -r ats-cmb-${{ steps.get_version.outputs.version }}.zip ats-cmb-${{ steps.get_version.outputs.version }}
+      - name: Build and Zip Demos
+        run: |
+          cd dev/cmb/demo
+          ./make_resources.sh
+          mkdir demos-${{ steps.get_version.outputs.version }}
+          mv demo-* demos-${{ steps.get_version.outputs.version }}/
+          mv run-ats.sh demos-${{ steps.get_version.outputs.version }}/
+          zip -r demos-${{ steps.get_version.outputs.version }}.zip demos-${{ steps.get_version.outputs.version }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -33,8 +44,8 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset
+      - name: Upload Templates
+        id: upload-templates
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,4 +53,14 @@ jobs:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: dev/cmb/simulation-workflows/ats-cmb-${{ steps.get_version.outputs.version }}.zip
           asset_name: ats-cmb-${{ steps.get_version.outputs.version }}.zip
+          asset_content_type: application/zip
+      - name: Upload Demos
+        id: upload-demos
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: dev/cmb/demo/demos-${{ steps.get_version.outputs.version }}.zip
+          asset_name: demos-${{ steps.get_version.outputs.version }}.zip
           asset_content_type: application/zip
