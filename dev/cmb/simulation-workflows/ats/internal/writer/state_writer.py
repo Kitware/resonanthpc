@@ -116,7 +116,8 @@ class StateWriter(BaseWriter):
         self._render_items(fe_elem, att, options)
         function_elem = self._new_list(fe_elem, "function")
         # Function list
-        self._render_function(function_elem, att.findGroup("function"), "domain")
+        func_name = att.find("function name").value()
+        self._render_function(function_elem, att.findGroup("function"), func_name)
 
     def render_multiplicative_evaluator(self, fe_elem, att):
         options = ["coefficient", "enforce positivity"]

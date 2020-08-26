@@ -158,6 +158,10 @@ class BaseTestCase(unittest.TestCase):
                         # three decimals places is good enough for me
                         va = [round(float(s), 3) for s in va[1:-1].split(",")]
                         vb = [round(float(s), 3) for s in vb[1:-1].split(",")]
+                    elif k == "@value" and "Array(" in a["@type"]:
+                        # split the array of strings
+                        va = set([s.strip() for s in va[1:-1].split(",")])
+                        vb = set([s.strip() for s in vb[1:-1].split(",")])
                     # do the comparison
                     if va != vb:
                         raise ValueError(

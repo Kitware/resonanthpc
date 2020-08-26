@@ -53,7 +53,7 @@
         - name: absolute residual
           enabled: false
         - name: make one iteration
-          enabled: false
+          enabled: true
     - maximum number of iterations: 80
 
 
@@ -256,6 +256,7 @@
     - name: 'constant in time'
       enabled: true
       value: true
+    - function name: domain rain
     - name: function
       items:
         - components: cell
@@ -308,7 +309,7 @@
       value: true
     - name: function
       items:
-        - components: cell
+        - components: cell,boundary_face
         - regions: surface domain
         - name: variable type
           value: constant
@@ -332,3 +333,58 @@
           value: constant
           children:
             - value: 274.65
+
+
+
+
+# Observations
+- type: observation
+  name: surface outlet flux
+  items:
+    - 'variable': surface-mass_flux
+    - 'observation output filename': surface_outlet_flux.dat
+    - 'delimiter': ' '
+    - region: right side
+    - functional: "observation data: extensive integral"
+    - location name: face
+    - name: 'direction normalized flux'
+      enable: true
+    - name: write interval
+      enabled: true
+      value: 1
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 300.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+
+- type: observation
+  name: surface water
+  items:
+    - 'variable': surface-water_content
+    - 'observation output filename': surface_water_content.dat
+    - 'delimiter': ' '
+    - region: surface domain
+    - functional: "observation data: extensive integral"
+    - location name: cell
+    - name: 'direction normalized flux'
+      enable: true
+    - name: write interval
+      enabled: true
+      value: 1
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 300.0
+            - name: Stop Time
+              enable: true
+              value: -1.0

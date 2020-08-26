@@ -127,4 +127,9 @@ class ATSWriter(BaseWriter):
         imp.reload(vis_writer)
         vis_writer.VisualizationWriter().write(self.xml_root)
 
+        from . import observation_writer
+
+        imp.reload(observation_writer)
+        observation_writer.ObservationWriter().write(self.xml_root)
+
         return shared.xml_doc
