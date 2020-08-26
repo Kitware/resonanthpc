@@ -36,9 +36,9 @@ class PKWriter(BaseWriter):
         ]
         nka_bt_ats_children = [
             "nka lag iterations",
-            "backtrack max steps",
+            "max backtrack steps",
             "backtrack max total steps",
-            "backtrack lag iterations",
+            "backtrack lag",
             "backtrack factor",
             "backtrack last iterations",
             "backtrack tolerance",
@@ -143,7 +143,6 @@ class PKWriter(BaseWriter):
                 "controller training start",
                 "controller training end",
                 "maximum size of deflation space",
-                "convergence criterial",
                 "preconditioning strategy",
             ],
         }
@@ -155,6 +154,26 @@ class PKWriter(BaseWriter):
             self._new_param(solver_elem, "iterative method", "string", stype)
             params_elem = self._new_list(solver_elem, stype + " parameters")
             self._render_items(params_elem, solver, options[stype])
+            criteria = [
+                "relative rhs",
+                "relative residual",
+                "absolute residual",
+                "make one iteration",
+            ]
+            crit_grp = solver.findGroup("convergence criteria")
+            criteria_to_add = []
+            for crit in criteria:
+                if crit_grp.find(crit).isEnabled():
+                    criteria_to_add.append(crit)
+            if len(criteria_to_add) > 1:
+                value = r"{" + ",".join(criteria_to_add) + r"}"
+                self._new_param(
+                    params_elem, "convergence criteria", "Array(string)", value
+                )
+            else:
+                value = criteria_to_add[0]
+                self._new_param(params_elem, "convergence criterial", "string", value)
+
         return
 
     def _render_elevation_evaluator(self, pk_elem, att):

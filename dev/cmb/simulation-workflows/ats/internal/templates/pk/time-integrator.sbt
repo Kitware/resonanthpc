@@ -48,14 +48,14 @@
                 <Value>monitor residual</Value>
               </DiscreteInfo>
             </String>
-            <Int Name="backtrack max steps">
-              <!-- TODO: check name -->
+            <Int Name="max backtrack steps">
+              <!-- TODO: check name this is inconsistent all over the place -->
               <DefaultValue>10</DefaultValue>
             </Int>
             <Int Name="backtrack max total steps">
               <DefaultValue>1e6</DefaultValue>
             </Int>
-            <Int Name="backtrack lag iterations">
+            <Int Name="backtrack lag">
               <DefaultValue>0</DefaultValue>
             </Int>
             <Int Name="backtrack last iterations">

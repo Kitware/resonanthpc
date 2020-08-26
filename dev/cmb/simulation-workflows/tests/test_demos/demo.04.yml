@@ -117,7 +117,16 @@
   items:
     - preconditioning strategy: left
     - error tolerance: 1.0e-06
-    - convergence criterial: relative residual #,make one iteration
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: false
     - maximum number of iterations: 80
 
 # Process Kernels
@@ -213,7 +222,7 @@
           value: 'monitor residual'
         - name: 'nka lag iterations'
           value: 2
-        - name: 'backtrack max steps'
+        - name: 'max backtrack steps'
           value: 5
     - name: 'timestep controller smarter parameters'
       items:
