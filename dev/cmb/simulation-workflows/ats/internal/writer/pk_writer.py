@@ -37,12 +37,20 @@ class PKWriter(BaseWriter):
         nka_bt_ats_children = [
             "nka lag iterations",
             "max backtrack steps",
+            "backtrack max total steps",
             "backtrack lag",
             "backtrack factor",
+            "backtrack last iterations",
             "backtrack tolerance",
+            "backtrack fail on bad search direction",
             "nonlinear tolerance",
             "diverged tolerance",
             "limit iterations",
+            "max nka vectors",
+            "nka vector tolerance",
+            "monitor",
+            "max error growth factor",
+            "modify correction",
         ]
 
         controller_children = [
@@ -72,6 +80,13 @@ class PKWriter(BaseWriter):
 
             nka_bt_ats_params = self._new_list(time_int_elem, "nka_bt_ats parameters")
             self._render_items(nka_bt_ats_params, time_int_att, nka_bt_ats_children)
+
+            residual_debug = time_int_att.findGroup("ResidualDebugger")
+            if residual_debug.isEnabled():
+                residual_debug_list = self._new_list(time_int_elem, "ResidualDebugger")
+                self._render_items(
+                    residual_debug_list, residual_debug, ["cycles"], force_array=True
+                )
 
             controller_params = self._new_list(
                 time_int_elem, "timestep controller smarter parameters"
@@ -128,7 +143,6 @@ class PKWriter(BaseWriter):
                 "controller training start",
                 "controller training end",
                 "maximum size of deflation space",
-                "convergence criterial",
                 "preconditioning strategy",
             ],
         }
@@ -140,6 +154,26 @@ class PKWriter(BaseWriter):
             self._new_param(solver_elem, "iterative method", "string", stype)
             params_elem = self._new_list(solver_elem, stype + " parameters")
             self._render_items(params_elem, solver, options[stype])
+            criteria = [
+                "relative rhs",
+                "relative residual",
+                "absolute residual",
+                "make one iteration",
+            ]
+            crit_grp = solver.findGroup("convergence criteria")
+            criteria_to_add = []
+            for crit in criteria:
+                if crit_grp.find(crit).isEnabled():
+                    criteria_to_add.append(crit)
+            if len(criteria_to_add) > 1:
+                value = r"{" + ",".join(criteria_to_add) + r"}"
+                self._new_param(
+                    params_elem, "convergence criteria", "Array(string)", value
+                )
+            else:
+                value = criteria_to_add[0]
+                self._new_param(params_elem, "convergence criterial", "string", value)
+
         return
 
     def _render_elevation_evaluator(self, pk_elem, att):
@@ -221,6 +255,7 @@ class PKWriter(BaseWriter):
         # render initial condition
         ic_options = [
             "initialize faces from cells",
+            "initialize surface head from subsurface",
         ]
         ic_group = att.findGroup("initial condition")
         ic_elem = self._new_list(pk_elem, "initial condition")
@@ -229,7 +264,8 @@ class PKWriter(BaseWriter):
             sub = self._new_list(ic_elem, "function")
             cond_name = ic_group.find("condition name").value()
             func_group = ic_group.find("function")
-            self._render_function(sub, func_group, cond_name)
+            if func_group.isEnabled():
+                self._render_function(sub, func_group, cond_name)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",
@@ -344,12 +380,12 @@ class PKWriter(BaseWriter):
         self._render_items(wre_elem, wre_group, wre_options)
         wre_params = self._new_list(wre_elem, "WRM parameters")
         wrm_options = [
-            "van Genuchten alpha",
-            "residual saturation",
-            "Mualem exponent l",
-            "van Genuchten m",
+            "van Genuchten alpha [Pa^-1]",
+            "residual saturation [-]",
+            "Mualem exponent l [-]",
+            "van Genuchten m [-]",
             "smoothing interval width [saturation]",
-            "saturation smoothing interval",
+            "saturation smoothing interval [Pa]",
         ]
         wrm = wre_group.find("WRM Type")
         region = wre_group.find("region").value().name()

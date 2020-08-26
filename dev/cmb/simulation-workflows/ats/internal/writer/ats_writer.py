@@ -107,9 +107,10 @@ class ATSWriter(BaseWriter):
         imp.reload(coordinator_writer)
         coordinator_writer.CoordinatorWriter().write(self.xml_root)
 
-        # from . import checkpoint_writer
-        # imp.reload(checkpoint_writer)
-        # checkpoint_writer.CheckpointWriter().write(self.xml_root)
+        from . import checkpoint_writer
+
+        imp.reload(checkpoint_writer)
+        checkpoint_writer.CheckpointWriter().write(self.xml_root)
 
         from . import pk_writer
 
@@ -125,5 +126,10 @@ class ATSWriter(BaseWriter):
 
         imp.reload(vis_writer)
         vis_writer.VisualizationWriter().write(self.xml_root)
+
+        from . import observation_writer
+
+        imp.reload(observation_writer)
+        observation_writer.ObservationWriter().write(self.xml_root)
 
         return shared.xml_doc

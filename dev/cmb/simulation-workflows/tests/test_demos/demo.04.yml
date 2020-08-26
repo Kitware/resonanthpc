@@ -117,7 +117,16 @@
   items:
     - preconditioning strategy: left
     - error tolerance: 1.0e-06
-    - convergence criterial: relative residual #,make one iteration
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: true
     - maximum number of iterations: 80
 
 # Process Kernels
@@ -158,9 +167,9 @@
         - name: WRM Type
           value: van Genuchten
           children:
-            - van Genuchten alpha: 0.000545
-            - van Genuchten m: 0.19
-            - residual saturation: 0.1
+            - van Genuchten alpha [Pa^-1]: 0.000545
+            - van Genuchten m [-]: 0.19
+            - residual saturation [-]: 0.1
             - smoothing interval width [saturation]: 0.1
     - name: debugger
       items:
@@ -182,7 +191,12 @@
     - primary variable key: surface-pressure
     - initial time step: 10.0
     - name: initial condition
-      enabled: false
+      enabled: true
+      items:
+        - name: initialize surface head from subsurface
+          enabled: true
+        - name: function
+          enabled: false
     - name: diffusion
       enabled: true
       items:
@@ -192,6 +206,7 @@
     - name: evaluators
       enabled: true
       value: overland-conductivity-evaluator
+
 
 
 # Time integrator
@@ -209,11 +224,11 @@
           value: 1.0e-06
         - name: 'backtrack tolerance'
           value: 0.0001
-        - name: 'backtrack monitor'
+        - name: 'monitor'
           value: 'monitor residual'
         - name: 'nka lag iterations'
           value: 2
-        - name: 'backtrack max steps'
+        - name: 'max backtrack steps'
           value: 5
     - name: 'timestep controller smarter parameters'
       items:
@@ -358,7 +373,7 @@
 - type: eos
   name: molar_density_gas
   items:
-    - 'EOS basis': both
+    - 'EOS basis': molar
     - 'molar density key': molar_density_gas
     - 'mass density key': mass_density_gas
     - name: EOS type
@@ -370,6 +385,7 @@
     - name: 'constant in time'
       enabled: true
       value: true
+    - function name: rest domain
     - name: function
       items:
         - components: cell
@@ -402,7 +418,7 @@
       value: true
     - name: function
       items:
-        - components: cell
+        - components: cell,boundary_face
         - regions: surface domain
         - name: variable type
           value: constant
@@ -460,6 +476,7 @@
     - name: 'constant in time'
       enabled: true
       value: true
+    - function name: domain rain
     - name: function
       items:
         - components: cell

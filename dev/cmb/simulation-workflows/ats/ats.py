@@ -20,21 +20,23 @@ import traceback
 
 # Workaround for missing site-packages path in release packages
 site_path = None
-if sys.platform == 'win32':
-  site_path = os.path.join(sys.prefix, 'bin', 'Lib', 'site-packages')
-elif sys.platform == 'darwin':
-  site_path = os.path.join(sys.prefix, os.pardir, os.pardir, os.pardir, os.pardir, 'Python')
-elif sys.platform == 'linux':
-  site_path = os.path.join(sys.prefix, 'lib', 'python3.7', 'site-packages')
+if sys.platform == "win32":
+    site_path = os.path.join(sys.prefix, "bin", "Lib", "site-packages")
+elif sys.platform == "darwin":
+    site_path = os.path.join(
+        sys.prefix, os.pardir, os.pardir, os.pardir, os.pardir, "Python"
+    )
+elif sys.platform == "linux":
+    site_path = os.path.join(sys.prefix, "lib", "python3.7", "site-packages")
 else:
-  print(f'Unrecognized platform {sys.platform}')
+    print(f"Unrecognized platform {sys.platform}")
 if site_path is not None:
-  abs_path = os.path.abspath(site_path)
-  # Check for smtk lib
-  smtk_path = os.path.join(abs_path, 'smtk')
-  if os.path.exists(smtk_path) and not abs_path in sys.path:
-    print(f'Adding to sys.path: {abs_path}')
-    sys.path.append(abs_path)
+    abs_path = os.path.abspath(site_path)
+    # Check for smtk lib
+    smtk_path = os.path.join(abs_path, "smtk")
+    if os.path.exists(smtk_path) and not abs_path in sys.path:
+        print(f"Adding to sys.path: {abs_path}")
+        sys.path.append(abs_path)
 
 import smtk
 import smtk.attribute
@@ -43,21 +45,24 @@ import smtk.operation
 
 # Add the directory containing this file to the python module search list
 import inspect
+
 source_file = os.path.abspath(inspect.getfile(inspect.currentframe()))
 source_dir = os.path.dirname(source_file)
 sys.path.insert(0, source_dir)
 # Make sure __file__ is set when using modelbuilder
 __file__ = source_file
-print('loading', os.path.basename(__file__))
+print("loading", os.path.basename(__file__))
 
 sys.path.insert(0, os.path.join(source_dir, "internal"))
 
 import writer
+
 imp.reload(writer)  # for development
 
 
 class Export(smtk.operation.Operation):
     """"""
+
     def __init__(self):
         smtk.operation.Operation.__init__(self)
 
@@ -72,13 +77,13 @@ class Export(smtk.operation.Operation):
             track = traceback.format_exc()
             print(track)
             print("\n\n")
-            #smtk.ErrorMessage(self.log(), sys.exc_info()[0])
+            # smtk.ErrorMessage(self.log(), sys.exc_info()[0])
             raise
             return self.createResult(smtk.operation.Operation.Outcome.FAILED)
 
         # Return with success
         result = self.createResult(smtk.operation.Operation.Outcome.SUCCEEDED)
-        result.find('success').setValue(int(success))
+        result.find("success").setValue(int(success))
         return result
 
     def createSpecification(self):
@@ -88,15 +93,15 @@ class Export(smtk.operation.Operation):
         # Load export atts
         source_dir = os.path.abspath(os.path.dirname(__file__))
         # print('source_dir:', source_dir)
-        sbt_path = os.path.join(source_dir, 'internal', 'ats-export.sbt')
-        print('sbt_path:', sbt_path)
+        sbt_path = os.path.join(source_dir, "internal", "ats-export.sbt")
+        print("sbt_path:", sbt_path)
         reader = smtk.io.AttributeReader()
         result = reader.read(spec, sbt_path, self.log())
         # print('reader result:', result)
 
         # Setup result definition
-        resultDef = spec.createDefinition('test result', 'result')
-        successDef = smtk.attribute.IntItemDefinition.New('success')
+        resultDef = spec.createDefinition("test result", "result")
+        successDef = smtk.attribute.IntItemDefinition.New("success")
         resultDef.addItemDefinition(successDef)
 
         return spec
@@ -108,14 +113,14 @@ def ExportCMB(export_op):
     logger = export_op.log()
 
     # Get the simulation attribute resource
-    sim_atts = smtk.attribute.Resource.CastTo(params.find('attributes').value())
+    sim_atts = smtk.attribute.Resource.CastTo(params.find("attributes").value())
     if sim_atts is None:
-        msg = 'ERROR - No simulation attributes'
+        msg = "ERROR - No simulation attributes"
         print(msg)
         raise RuntimeError(msg)
 
     # Get output filepath
-    output_file_item = params.findFile('output-file')
+    output_file_item = params.findFile("output-file")
     output_file = output_file_item.value(0)
 
     # Create output folder if needed
@@ -124,11 +129,12 @@ def ExportCMB(export_op):
         os.makedirs(output_dir)
 
     from writer import ats_writer
+
     imp.reload(ats_writer)
 
     writer = ats_writer.ATSWriter(sim_atts)
     completed = writer.write(output_file)
-    print('Writer completion status: %s' % completed)
+    print("Writer completion status: %s" % completed)
 
     # In some runtime environments, stdout is null
     if sys.stdout is not None:

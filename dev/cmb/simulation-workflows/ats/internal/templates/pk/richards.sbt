@@ -21,18 +21,18 @@
 
             <String Name="WRM Type">
               <ChildrenDefinitions>
-                <Double Name="van Genuchten alpha"></Double>
-                <Double Name="residual saturation"></Double>
-                <Double Name="Mualem exponent l">
+                <Double Name="van Genuchten alpha [Pa^-1]"></Double>
+                <Double Name="residual saturation [-]"></Double>
+                <Double Name="Mualem exponent l [-]">
                   <DefaultValue>0.5</DefaultValue>
                 </Double>
-                <Double Name="van Genuchten m"></Double>
+                <Double Name="van Genuchten m [-]"></Double>
                 <!-- n is not used if m is given -->
-                <!-- <Double Name="van Genuchten n"></Double> -->
+                <!-- <Double Name="van Genuchten n [-]"></Double> -->
                 <Double Name="smoothing interval width [saturation]">
                   <DefaultValue>0.0</DefaultValue>
                 </Double>
-                <Double Name="saturation smoothing interval">
+                <Double Name="saturation smoothing interval [Pa]">
                   <DefaultValue>0.0</DefaultValue>
                 </Double>
               </ChildrenDefinitions>
@@ -40,12 +40,12 @@
                 <Structure>
                   <Value>van Genuchten</Value>
                   <Items>
-                    <Item>van Genuchten alpha</Item>
-                    <Item>van Genuchten m</Item>
-                    <Item>residual saturation</Item>
-                    <Item>Mualem exponent l</Item>
+                    <Item>van Genuchten alpha [Pa^-1]</Item>
+                    <Item>van Genuchten m [-]</Item>
+                    <Item>residual saturation [-]</Item>
+                    <Item>Mualem exponent l [-]</Item>
                     <Item>smoothing interval width [saturation]</Item>
-                    <Item>saturation smoothing interval</Item>
+                    <Item>saturation smoothing interval [Pa]</Item>
                   </Items>
                 </Structure>
               </DiscreteInfo>

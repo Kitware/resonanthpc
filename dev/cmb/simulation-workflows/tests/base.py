@@ -17,9 +17,7 @@ ats_path = os.path.join(source_path, os.pardir, "ats")
 
 TEMPLATE_FILEPATH = os.path.join(ats_path, "ats.sbt")
 
-top_dir = os.path.join(
-    source_path, os.pardir, os.pardir, os.pardir, os.pardir,
-)
+top_dir = os.path.join(source_path, os.pardir, os.pardir, os.pardir, os.pardir,)
 path = os.path.join(top_dir, "smtk-tools",)
 utilities_module_path = os.path.normpath(path)
 sys.path.insert(0, utilities_module_path)
@@ -119,9 +117,13 @@ class BaseTestCase(unittest.TestCase):
                     vb = b[k]
                 except KeyError as err:
                     try:
+                        if isinstance(va, dict):
+                            name = va["@name"]
+                        else:
+                            name = a["@name"]
                         raise ValueError(
                             "Heirarchy mismatch (key: `{}`, `{}`) under: {}".format(
-                                k, a["@name"], parent
+                                k, name, parent
                             )
                         )
                     except KeyError:
@@ -156,6 +158,10 @@ class BaseTestCase(unittest.TestCase):
                         # three decimals places is good enough for me
                         va = [round(float(s), 3) for s in va[1:-1].split(",")]
                         vb = [round(float(s), 3) for s in vb[1:-1].split(",")]
+                    elif k == "@value" and "Array(" in a["@type"]:
+                        # split the array of strings
+                        va = set([s.strip() for s in va[1:-1].split(",")])
+                        vb = set([s.strip() for s in vb[1:-1].split(",")])
                     # do the comparison
                     if va != vb:
                         raise ValueError(

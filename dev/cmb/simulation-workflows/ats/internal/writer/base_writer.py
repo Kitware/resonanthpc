@@ -140,7 +140,7 @@ class BaseWriter:
         array_string = "{{{}}}".format(value_string)
         self._new_param(parent_elem, array_name, "Array(string)", array_string)
 
-    def _render_items(self, parent_elem, att, param_names):
+    def _render_items(self, parent_elem, att, param_names, force_array=False):
         """Generates Parameter elements for items specified by param_names"""
         assert isinstance(param_names, list)
         for param_name in param_names:
@@ -158,7 +158,9 @@ class BaseWriter:
             value = None
             if item.type() == smtk.attribute.Item.VoidType:
                 value = "true" if item.isEnabled() else "false"
-            elif hasattr(item, "numberOfValues") and item.numberOfValues() > 1:
+            elif hasattr(item, "numberOfValues") and (
+                force_array or item.numberOfValues() > 1
+            ):
                 type_string = "Array({})".format(type_string)
                 value_list = list()
                 for i in range(item.numberOfValues()):
@@ -260,8 +262,12 @@ class BaseWriter:
             regions = r"{" + ", ".join(value_list) + r"}"
             self._new_param(the_group, "regions", "Array(string)", regions)
         # add components
-        components = "{" + str(att.find("components").value()) + "}"
-        self._new_param(the_group, "components", "Array(string)", components)
+        component = str(att.find("components").value())
+        if component in ("cell", "face", "boundary_face"):
+            self._new_param(the_group, "component", "string", component)
+        else:
+            components = "{" + component + "}"
+            self._new_param(the_group, "components", "Array(string)", components)
 
         function_sub_elem = self._new_list(the_group, "function")
         params = att.find("variable type")

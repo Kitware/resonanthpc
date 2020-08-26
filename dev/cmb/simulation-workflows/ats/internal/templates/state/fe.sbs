@@ -84,6 +84,10 @@
       <ItemDefinitions>
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="false"></Void>
 
+        <String Name="function name">
+          <DefaultValue>domain</DefaultValue>
+        </String>
+
         <Group Name="function">
           <xi:include href="templates/source/function.xml"/>
         </Group>

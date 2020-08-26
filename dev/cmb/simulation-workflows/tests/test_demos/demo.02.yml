@@ -71,11 +71,11 @@
           value: 1.0e-06
         - name: 'backtrack tolerance'
           value: 0.0001
-        - name: 'backtrack monitor'
+        - name: 'monitor'
           value: 'monitor residual'
         - name: 'nka lag iterations'
           value: 2
-        - name: 'backtrack max steps'
+        - name: 'max backtrack steps'
           value: 5
     - name: 'timestep controller smarter parameters'
       items:
@@ -101,7 +101,16 @@
   items:
     - preconditioning strategy: left
     - error tolerance: 1.0e-06
-    - convergence criterial: relative residual #,make one iteration
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: true
     - maximum number of iterations: 80
 
 
@@ -158,9 +167,9 @@
         - name: WRM Type
           value: van Genuchten
           children:
-            - van Genuchten alpha: 0.00015
-            - van Genuchten m: 0.8
-            - residual saturation: 0.0
+            - van Genuchten alpha [Pa^-1]: 0.00015
+            - van Genuchten m [-]: 0.8
+            - residual saturation [-]: 0.0
     - name: debugger
       items:
         - name: debug cells
@@ -291,3 +300,20 @@
 
 - type: effective_pressure
   name: effective_pressure
+
+
+# checkpoint
+- type: checkpoint driver
+  action: edit
+  items:
+    - 'file name base': checkpoint
+    - 'file name digits': 5
+    - name: 'checkpoint times'
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 31557600.0
+            - name: Stop Time
+              enable: true
+              value: -1.0

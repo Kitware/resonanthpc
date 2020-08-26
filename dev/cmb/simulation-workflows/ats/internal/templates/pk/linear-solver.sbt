@@ -30,14 +30,14 @@
         <Int Name="maximum size of deflation space">
           <DefaultValue>0</DefaultValue>
         </Int>
-        <String Name="convergence criterial">
-          <DiscreteInfo DefaultIndex="0">
-            <Value>relative rhs</Value>
-            <Value>relative residual</Value>
-            <Value>absolute residual</Value>
-            <Value>make one iteration</Value>
-          </DiscreteInfo>
-        </String>
+        <Group Name="convergence criteria">
+          <ItemDefinitions>
+            <Void Name="relative rhs" Optional="true" IsEnabledByDefault="true"/>
+            <Void Name="relative residual" Optional="true" IsEnabledByDefault="false"/>
+            <Void Name="absolute residual" Optional="true" IsEnabledByDefault="false"/>
+            <Void Name="make one iteration" Optional="true" IsEnabledByDefault="false"/>
+          </ItemDefinitions>
+        </Group>
         <String Name="preconditioning strategy">
           <DiscreteInfo DefaultIndex="0">
             <Value>left</Value>
