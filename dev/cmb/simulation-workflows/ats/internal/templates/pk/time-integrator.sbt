@@ -39,7 +39,7 @@
             <Double Name="backtrack factor">
               <DefaultValue>0.5</DefaultValue>
             </Double>
-            <String Name="backtrack monitor">
+            <String Name="monitor">
               <DiscreteInfo DefaultIndex="0">
                 <Value>monitor either</Value>
                 <Value>monitor enorm</Value>
@@ -65,8 +65,10 @@
             <!-- There can also be a verbosity here?? -->
             <!-- TODO: `Anderson mixing` and `relaxation parameter`-->
 
-            <!-- max error growth factor: 1000.0-->
-            <!-- modify correction: true -->
+            <Double Name="max error growth factor">
+              <DefaultValue>1000.0</DefaultValue>
+            </Double>
+            <Void Name="modify correction" Optional="true" IsEnabledByDefault="true"/>
 
           </ItemDefinitions>
         </Group>
@@ -80,6 +82,13 @@
             <Value>extreme</Value>
           </DiscreteInfo>
         </String>
+
+        <!-- ResidualDebugger -->
+        <Group Name="ResidualDebugger" Optional="true" IsEnabledByDefault="false">
+          <ItemDefinitions>
+            <Int Name="cycles" Extensible="true"></Int>
+          </ItemDefinitions>
+        </Group>
 
         <!-- timestep controller list section -->
         <!-- timestep controller type: smarter -->

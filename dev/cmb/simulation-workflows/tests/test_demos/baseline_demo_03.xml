@@ -99,7 +99,7 @@
         <ParameterList name="slope function" type="ParameterList">
           <ParameterList name="Slope magnitude Left/Right page" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.05"/>
@@ -190,7 +190,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.0036"/>
@@ -205,7 +205,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="x values" type="Array(double)" value="{0.0,3600.0}"/>

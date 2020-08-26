@@ -80,11 +80,14 @@
           value: 1000.0
         - name: 'nonlinear tolerance'
           value: 1.0e-13
-        - name: 'backtrack monitor'
+        - name: 'monitor'
           value: 'monitor residual'
           # <Parameter name="max error growth factor" type="double" value="1000.0" />
           # <Parameter name="modify correction" type="bool" value="true" />
-
+    - name: ResidualDebugger
+      enabled: true
+      items:
+        - cycles: [0]
     - name: 'timestep controller smarter parameters'
       items:
         - name: 'min time step'
@@ -138,9 +141,9 @@
         - name: WRM Type
           value: van Genuchten
           children:
-            - van Genuchten alpha: 0.00015
-            - van Genuchten m: 0.8
-            - residual saturation: 0.0
+            - van Genuchten alpha [Pa^-1]: 0.00015
+            - van Genuchten m [-]: 0.8
+            - residual saturation [-]: 0.0
     - name: debugger
       items:
         - name: debug cells

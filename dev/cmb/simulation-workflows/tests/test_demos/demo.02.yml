@@ -71,7 +71,7 @@
           value: 1.0e-06
         - name: 'backtrack tolerance'
           value: 0.0001
-        - name: 'backtrack monitor'
+        - name: 'monitor'
           value: 'monitor residual'
         - name: 'nka lag iterations'
           value: 2
@@ -158,9 +158,9 @@
         - name: WRM Type
           value: van Genuchten
           children:
-            - van Genuchten alpha: 0.00015
-            - van Genuchten m: 0.8
-            - residual saturation: 0.0
+            - van Genuchten alpha [Pa^-1]: 0.00015
+            - van Genuchten m [-]: 0.8
+            - residual saturation [-]: 0.0
     - name: debugger
       items:
         - name: debug cells

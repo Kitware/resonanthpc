@@ -36,13 +36,21 @@ class PKWriter(BaseWriter):
         ]
         nka_bt_ats_children = [
             "nka lag iterations",
-            "max backtrack steps",
-            "backtrack lag",
+            "backtrack max steps",
+            "backtrack max total steps",
+            "backtrack lag iterations",
             "backtrack factor",
+            "backtrack last iterations",
             "backtrack tolerance",
+            "backtrack fail on bad search direction",
             "nonlinear tolerance",
             "diverged tolerance",
             "limit iterations",
+            "max nka vectors",
+            "nka vector tolerance",
+            "monitor",
+            "max error growth factor",
+            "modify correction",
         ]
 
         controller_children = [
@@ -72,6 +80,13 @@ class PKWriter(BaseWriter):
 
             nka_bt_ats_params = self._new_list(time_int_elem, "nka_bt_ats parameters")
             self._render_items(nka_bt_ats_params, time_int_att, nka_bt_ats_children)
+
+            residual_debug = time_int_att.findGroup("ResidualDebugger")
+            if residual_debug.isEnabled():
+                residual_debug_list = self._new_list(time_int_elem, "ResidualDebugger")
+                self._render_items(
+                    residual_debug_list, residual_debug, ["cycles"], force_array=True
+                )
 
             controller_params = self._new_list(
                 time_int_elem, "timestep controller smarter parameters"
@@ -344,12 +359,12 @@ class PKWriter(BaseWriter):
         self._render_items(wre_elem, wre_group, wre_options)
         wre_params = self._new_list(wre_elem, "WRM parameters")
         wrm_options = [
-            "van Genuchten alpha",
-            "residual saturation",
-            "Mualem exponent l",
-            "van Genuchten m",
+            "van Genuchten alpha [Pa^-1]",
+            "residual saturation [-]",
+            "Mualem exponent l [-]",
+            "van Genuchten m [-]",
             "smoothing interval width [saturation]",
-            "saturation smoothing interval",
+            "saturation smoothing interval [Pa]",
         ]
         wrm = wre_group.find("WRM Type")
         region = wre_group.find("region").value().name()

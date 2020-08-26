@@ -189,9 +189,9 @@
           <ParameterList name="computational domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
             <Parameter name="WRM Type" type="string" value="van Genuchten"/>
-            <Parameter name="van Genuchten alpha" type="double" value="0.000545"/>
-            <Parameter name="van Genuchten m" type="double" value="0.19"/>
-            <Parameter name="residual saturation" type="double" value="0.1"/>
+            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.000545"/>
+            <Parameter name="van Genuchten m [-]" type="double" value="0.19"/>
+            <Parameter name="residual saturation [-]" type="double" value="0.1"/>
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1"/>
           </ParameterList>
         </ParameterList>
@@ -343,7 +343,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.25"/>
@@ -358,7 +358,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="2.5e-12"/>
@@ -373,7 +373,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="0.15"/>
@@ -388,7 +388,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-tabular" type="ParameterList">
                 <Parameter name="x values" type="Array(double)" value="{0.0,43200000.0}"/>
@@ -405,7 +405,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="1.0"/>
@@ -420,7 +420,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain"/>
-            <Parameter name="components" type="Array(string)" value="{cell}"/>
+            <Parameter name="component" type="string" value="cell"/>
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="274.65"/>

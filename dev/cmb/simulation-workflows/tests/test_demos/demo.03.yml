@@ -63,7 +63,7 @@
           value: 1.0e-06
         - name: 'backtrack tolerance'
           value: 1
-        - name: 'backtrack monitor'
+        - name: 'monitor'
           value: 'monitor residual'
         - name: 'nka lag iterations'
           value: 2
