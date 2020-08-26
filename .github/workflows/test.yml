@@ -45,6 +45,28 @@ jobs:
           name: demos
           path: dev/cmb/demo/demos
 
+  execute:
+    runs-on: ubuntu-latest
+    needs: test
+    container: metsi/ats:latest
+    - uses: actions/download-artifact@v2
+      with:
+        name: demos
+        path: artifacts/demos
+    - name: Display structure of artifacts
+      run: ls -R
+      working-directory: artifacts
+    - name: Run Demo 01 with ATS
+      run: ./run-ats.sh demo-01
+      working-directory: artifacts/demos
+    - name: Run Demo 02 with ATS
+      run: ./run-ats.sh demo-02
+      working-directory: artifacts/demos
+    - name: Run Demo 03 with ATS
+      run: ./run-ats.sh demo-03
+      working-directory: artifacts/demos
+
+
   deploy:
     runs-on: ubuntu-latest
     needs: test
