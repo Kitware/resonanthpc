@@ -255,6 +255,7 @@ class PKWriter(BaseWriter):
         # render initial condition
         ic_options = [
             "initialize faces from cells",
+            "initialize surface head from subsurface",
         ]
         ic_group = att.findGroup("initial condition")
         ic_elem = self._new_list(pk_elem, "initial condition")
@@ -263,7 +264,8 @@ class PKWriter(BaseWriter):
             sub = self._new_list(ic_elem, "function")
             cond_name = ic_group.find("condition name").value()
             func_group = ic_group.find("function")
-            self._render_function(sub, func_group, cond_name)
+            if func_group.isEnabled():
+                self._render_function(sub, func_group, cond_name)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",

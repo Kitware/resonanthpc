@@ -44,7 +44,8 @@
               <DefaultValue>initial pressure cells</DefaultValue>
             </String>
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
-            <Group Name="function">
+            <Void Name="initialize surface head from subsurface" Optional="true" IsEnabledByDefault="false"></Void>
+            <Group Name="function" Optional="true" IsEnabledByDefault="true">
               <xi:include href="templates/source/function.xml"/>
             </Group>
           </ItemDefinitions>

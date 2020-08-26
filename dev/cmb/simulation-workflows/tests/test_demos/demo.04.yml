@@ -126,7 +126,7 @@
         - name: absolute residual
           enabled: false
         - name: make one iteration
-          enabled: false
+          enabled: true
     - maximum number of iterations: 80
 
 # Process Kernels
@@ -191,7 +191,12 @@
     - primary variable key: surface-pressure
     - initial time step: 10.0
     - name: initial condition
-      enabled: false
+      enabled: true
+      items:
+        - name: initialize surface head from subsurface
+          enabled: true
+        - name: function
+          enabled: false
     - name: diffusion
       enabled: true
       items:
@@ -201,6 +206,7 @@
     - name: evaluators
       enabled: true
       value: overland-conductivity-evaluator
+
 
 
 # Time integrator
@@ -367,7 +373,7 @@
 - type: eos
   name: molar_density_gas
   items:
-    - 'EOS basis': both
+    - 'EOS basis': molar
     - 'molar density key': molar_density_gas
     - 'mass density key': mass_density_gas
     - name: EOS type
@@ -379,6 +385,7 @@
     - name: 'constant in time'
       enabled: true
       value: true
+    - function name: rest domain
     - name: function
       items:
         - components: cell
@@ -411,7 +418,7 @@
       value: true
     - name: function
       items:
-        - components: cell
+        - components: cell,boundary_face
         - regions: surface domain
         - name: variable type
           value: constant
@@ -469,6 +476,7 @@
     - name: 'constant in time'
       enabled: true
       value: true
+    - function name: domain rain
     - name: function
       items:
         - components: cell
