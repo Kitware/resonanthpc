@@ -1,4 +1,4 @@
-#! bin/sh
+#! /bin/sh
 # Accepts name of directory with simulation input deck
 set -e
 # Outputs will be saved there as well in `sim_dump`
