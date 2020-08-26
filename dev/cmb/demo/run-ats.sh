@@ -2,7 +2,7 @@
 # Accepts name of directory with simulation input deck
 set -e
 # Outputs will be saved there as well in `sim_dump`
-pushd $1
+cd $1
 rm -rf sim_dump
 original_files=$(ls | grep -Ev '\.(smtk|ipynb)$')
 mkdir sim_dump
@@ -22,4 +22,4 @@ input_file=($(find . -type f -name "*.xml"))
 docker run --rm -v $HOST_MNT:$CONT_MNT:delegated -w $CONT_PWD metsi/ats mpirun -n 4 ats --xml_file=$input_file
 
 # Return
-popd
+cd ../../
