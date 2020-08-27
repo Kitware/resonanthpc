@@ -53,5 +53,18 @@ class Demo04VTest(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
+class Demo04SuperSlabTest(BaseTestCase):
+
+    MODEL_RESOURCE_FILENAME = "att.demo.04-v.mesh.smtk"
+    BASELINE_XML_FILENAME = "baseline_demo_04-superslab.xml"
+    SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = "demo.04-superslab.yml"
+
+    def test_demo(self):
+        self.writer.generate_xml()
+        xml_string = self.writer.get_xml_doc(pretty=True)
+        self._compare_xml_content(xml_string)
+
+
 if __name__ == "__main__":
     unittest.main()

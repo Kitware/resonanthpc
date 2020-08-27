@@ -6,50 +6,56 @@
       <ItemDefinitions>
 
         <Group Name="water retention evaluator specs">
-          <!-- TODO: should this be extensible (one for N regions?) -->
           <ItemDefinitions>
-            <Component Name="region">
-              <Accepts>
-                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-              </Accepts>
-            </Component>
-
             <Void Name="use surface rel perm" Optional="true" IsEnabledByDefault="false"/>
             <Double Name="minimum rel perm cutoff">
               <DefaultValue>0.0</DefaultValue>
             </Double>
 
-            <String Name="WRM Type">
-              <ChildrenDefinitions>
-                <Double Name="van Genuchten alpha [Pa^-1]"></Double>
-                <Double Name="residual saturation [-]"></Double>
-                <Double Name="Mualem exponent l [-]">
-                  <DefaultValue>0.5</DefaultValue>
-                </Double>
-                <Double Name="van Genuchten m [-]"></Double>
-                <!-- n is not used if m is given -->
-                <!-- <Double Name="van Genuchten n [-]"></Double> -->
-                <Double Name="smoothing interval width [saturation]">
-                  <DefaultValue>0.0</DefaultValue>
-                </Double>
-                <Double Name="saturation smoothing interval [Pa]">
-                  <DefaultValue>0.0</DefaultValue>
-                </Double>
-              </ChildrenDefinitions>
-              <DiscreteInfo DefaultIndex="0">
-                <Structure>
-                  <Value>van Genuchten</Value>
-                  <Items>
-                    <Item>van Genuchten alpha [Pa^-1]</Item>
-                    <Item>van Genuchten m [-]</Item>
-                    <Item>residual saturation [-]</Item>
-                    <Item>Mualem exponent l [-]</Item>
-                    <Item>smoothing interval width [saturation]</Item>
-                    <Item>saturation smoothing interval [Pa]</Item>
-                  </Items>
-                </Structure>
-              </DiscreteInfo>
-            </String>
+            <Group Name="WRM evaluators" Extensible="true">
+              <ItemDefinitions>
+                <String Name="evaluator name" Optional="true" IsEnabledByDefault="false"></String>
+
+                <Component Name="region">
+                  <Accepts>
+                    <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+                  </Accepts>
+                </Component>
+
+                <String Name="WRM Type">
+                  <ChildrenDefinitions>
+                    <Double Name="van Genuchten alpha [Pa^-1]"></Double>
+                    <Double Name="residual saturation [-]"></Double>
+                    <Double Name="Mualem exponent l [-]">
+                      <DefaultValue>0.5</DefaultValue>
+                    </Double>
+                    <Double Name="van Genuchten m [-]"></Double>
+                    <!-- n is not used if m is given -->
+                    <!-- <Double Name="van Genuchten n [-]"></Double> -->
+                    <Double Name="smoothing interval width [saturation]">
+                      <DefaultValue>0.0</DefaultValue>
+                    </Double>
+                    <Double Name="saturation smoothing interval [Pa]">
+                      <DefaultValue>0.0</DefaultValue>
+                    </Double>
+                  </ChildrenDefinitions>
+                  <DiscreteInfo DefaultIndex="0">
+                    <Structure>
+                      <Value>van Genuchten</Value>
+                      <Items>
+                        <Item>van Genuchten alpha [Pa^-1]</Item>
+                        <Item>van Genuchten m [-]</Item>
+                        <Item>residual saturation [-]</Item>
+                        <Item>Mualem exponent l [-]</Item>
+                        <Item>smoothing interval width [saturation]</Item>
+                        <Item>saturation smoothing interval [Pa]</Item>
+                      </Items>
+                    </Structure>
+                  </DiscreteInfo>
+                </String>
+
+              </ItemDefinitions>
+            </Group>
           </ItemDefinitions>
         </Group>
 

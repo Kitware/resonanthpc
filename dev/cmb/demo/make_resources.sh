@@ -39,6 +39,17 @@ pvpython $BUILDER \
 pvpython $EXPORTER demo-04-v/demo.04-v.smtk \
   -o demo-04-v/demo.04-v.xml
 
+mkdir -p demo-04-superslab
+cp ${TESTS}/test_demos/att.demo.04-superslab.mesh.smtk demo-04-superslab/
+cp ${TESTS}/test_demos/super_slab.exo demo-04-superslab/
+pvpython $BUILDER \
+  $TEMPLATE \
+  "${TESTS}/test_demos/demo.04-superslab.yml" \
+  -m "demo-04-superslab/att.demo.04-superslab.mesh.smtk" \
+  -o demo-04-superslab/demo.04-superslab.smtk
+pvpython $EXPORTER demo-04-superslab/demo.04-superslab.smtk \
+  -o demo-04-superslab/demo.04-superslab.xml
+
 
 # Rock Creek demo (incomplete!!!!)
 # pvpython $BUILDER \

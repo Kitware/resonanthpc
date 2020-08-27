@@ -379,20 +379,30 @@ class PKWriter(BaseWriter):
         wre_options = ["use surface rel perm", "minimum rel perm cutoff"]
         self._render_items(wre_elem, wre_group, wre_options)
         wre_params = self._new_list(wre_elem, "WRM parameters")
-        wrm_options = [
-            "van Genuchten alpha [Pa^-1]",
-            "residual saturation [-]",
-            "Mualem exponent l [-]",
-            "van Genuchten m [-]",
-            "smoothing interval width [saturation]",
-            "saturation smoothing interval [Pa]",
-        ]
-        wrm = wre_group.find("WRM Type")
-        region = wre_group.find("region").value().name()
-        wre_reg_params = self._new_list(wre_params, region)
-        self._new_param(wre_reg_params, "region", "string", region)
-        self._new_param(wre_reg_params, "WRM Type", "string", wrm.value())
-        self._render_items(wre_reg_params, wrm, wrm_options)
+        wrm_options = {
+            "van Genuchten": [
+                "van Genuchten alpha [Pa^-1]",
+                "residual saturation [-]",
+                "Mualem exponent l [-]",
+                "van Genuchten m [-]",
+                "smoothing interval width [saturation]",
+                "saturation smoothing interval [Pa]",
+            ],
+        }
+        evaluator = att.findGroup("WRM evaluators")
+        for i in range(evaluator.numberOfGroups()):
+            region = evaluator.find(i, "region").value().name()
+            name_a = evaluator.find(i, "evaluator name")
+            if name_a.isEnabled():
+                name = name_a.value()
+            else:
+                name = region
+            wrm = evaluator.find(i, "WRM Type")
+            wrm_type = wrm.value()
+            wre_reg_params = self._new_list(wre_params, name)
+            self._new_param(wre_reg_params, "region", "string", region)
+            self._new_param(wre_reg_params, "WRM Type", "string", wrm_type)
+            self._render_items(wre_reg_params, wrm, wrm_options[wrm_type])
 
     def _render_pk_richards_steady_state(self, pk_elem, att):
         self._render_pk_richards_flow(pk_elem, att)
