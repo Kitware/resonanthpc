@@ -28,4 +28,5 @@ if __name__ == "__main__":
 
     # Because pvpython hijacks command line options, we'll
     # hard-code verbosity to level 2 for now
-    unittest.TextTestRunner(verbosity=2).run(suite)
+    run = unittest.TextTestRunner(verbosity=2).run(suite)
+    exit(len(run.failures) > 0 or len(run.errors) > 0)
