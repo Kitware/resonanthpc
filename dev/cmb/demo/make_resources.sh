@@ -4,6 +4,7 @@ TEMPLATE="../simulation-workflows/ats/ats.sbt"
 BUILDER="../../../smtk-tools/build_attributes.py"
 TESTS="../simulation-workflows/tests/"
 EXPORTER="../simulation-workflows/export_ats.py"
+alias pvpython="/Applications/modelbuilder.app/Contents/bin/pvpython"
 
 # Demos 01-04
 mkdir -p demo-01
@@ -27,16 +28,16 @@ pvpython $BUILDER \
   -o demo-03/demo.03.smtk
 pvpython $EXPORTER demo-03/demo.03.smtk -o demo-03/demo.03.xml
 
-mkdir -p demo-04
-cp ${TESTS}/test_demos/att.demo.04.mesh.smtk demo-04/
-cp ${TESTS}/test_demos/open-book-2D.exo demo-04/
+mkdir -p demo-04-v
+cp ${TESTS}/test_demos/att.demo.04-v.mesh.smtk demo-04-v/
+cp ${TESTS}/test_demos/open-book-2D.exo demo-04-v/
 pvpython $BUILDER \
   $TEMPLATE \
-  "${TESTS}/test_demos/demo.04.yml" \
-  -m "demo-04/att.demo.04.mesh.smtk" \
-  -o demo-04/demo.04.smtk
-pvpython $EXPORTER demo-04/demo.04.smtk \
-  -o demo-04/demo.04.xml
+  "${TESTS}/test_demos/demo.04-v.yml" \
+  -m "demo-04-v/att.demo.04-v.mesh.smtk" \
+  -o demo-04-v/demo.04-v.smtk
+pvpython $EXPORTER demo-04-v/demo.04-v.smtk \
+  -o demo-04-v/demo.04-v.xml
 
 
 # Rock Creek demo (incomplete!!!!)

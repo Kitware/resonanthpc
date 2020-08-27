@@ -40,12 +40,12 @@ class Demo03Test(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
-class Demo04Test(BaseTestCase):
+class Demo04VTest(BaseTestCase):
 
-    MODEL_RESOURCE_FILENAME = "att.demo.04.mesh.smtk"
-    BASELINE_XML_FILENAME = "baseline_demo_04.xml"
+    MODEL_RESOURCE_FILENAME = "att.demo.04-v.mesh.smtk"
+    BASELINE_XML_FILENAME = "baseline_demo_04-v.xml"
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
-    YAML_RESOURCE = "demo.04.yml"
+    YAML_RESOURCE = "demo.04-v.yml"
 
     def test_demo(self):
         self.writer.generate_xml()
