@@ -4,7 +4,6 @@ TEMPLATE="../simulation-workflows/ats/ats.sbt"
 BUILDER="../../../smtk-tools/build_attributes.py"
 TESTS="../simulation-workflows/tests/"
 EXPORTER="../simulation-workflows/export_ats.py"
-alias pvpython="/Applications/modelbuilder.app/Contents/bin/pvpython"
 
 # Demos 01-04
 mkdir -p demo-01
