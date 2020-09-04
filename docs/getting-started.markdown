@@ -16,15 +16,10 @@ You can use Kitware's [Computational ModelBuilder](https://www.computationalmode
 
 #### 1. Download and install CMB modelbuilder
 
-CMB modelbuilder release packages are generated nightly as part of Kitware's software development process and uploaded to a public collection named ComputationalModelBuilder on https://data.kitware.com. The are a number of different directories underneath that collection. Users should navigate to the [CMB-public/Nightly/MasterBranch](https://data.kitware.com/#collection/58fa68228d777f16d01e03e5/folder/5980ed698d777f16d01ea0e8) folder, where packages are uploaded to subdirectories listed by date code (YYYY-MM-DD). Select the most recent directory and look for the download matching your system type, for example
+CMB modelbuilder release packages are generated nightly as part of Kitware's software development process and uploaded to a public collection named ComputationalModelBuilder on https://data.kitware.com. The are a number of different directories underneath that collection. Users should navigate to the [CMB-public/Nightly/MasterBranch](https://data.kitware.com/#collection/58fa68228d777f16d01e03e5/folder/5980ed698d777f16d01ea0e8) folder, where packages are uploaded to subdirectories listed by date code (YYYY-MM-DD).
 
-```
-modelbuilder-6.3.0-rc1-20200810-Linux-64bit.tar.gz
-modelbuilder-6.3.0-rc1-20200810-OSX-64bit.dmg
-modelbuilder-6.3.0-rc1-20200810-Windows-64bit.zip
-```
-
-Note that one or more packages might be missing for a given date; in that case look in the previous date(s).
+**We have extracted three known working versions from those nightlies and we host
+them [here](https://data.kitware.com/#user/5edea5859014a6d84eabf0f0/folder/5f52604e50a41e3d19675995). Select the download matching your system type.**
 
 To install, simply download and unzip the file. (There is no `setup.exe` or other installer for windows, for example.) The macOS dmg file contains two folders; you only need to copy the `modelbuilder 6.3.0` folder onto your file system.
 
