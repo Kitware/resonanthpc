@@ -11,6 +11,7 @@
 # =============================================================================
 
 import os
+import re
 
 print("loading", os.path.basename(__file__))
 
@@ -29,6 +30,7 @@ class RegionWriter(BaseWriter):
         # Define names that are not directly function of attribute type
         region_type_params = {
             "region.labeled.surface": "region: labeled set",
+            "region.labeled.volume": "region: labeled set"
         }
 
         # Association parameters
@@ -121,7 +123,7 @@ class RegionWriter(BaseWriter):
                     type_list_elem,
                     "label",
                     "string",
-                    model_entity.name().replace("Unnamed set ID: ", ""),
+                    re.sub("Unnamed (\w+) ID: ", "", model_entity.name())
                 )
                 continue
 

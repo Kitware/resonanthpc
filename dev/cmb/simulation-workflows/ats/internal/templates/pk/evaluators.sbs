@@ -30,6 +30,13 @@
                 <Item>slope regularization epsilon</Item>
               </Items>
             </Structure>
+            <Structure>
+              <Value>manning harmonic mean</Value>
+              <Items>
+                <Item>Manning exponent</Item>
+                <Item>slope regularization epsilon</Item>
+              </Items>
+            </Structure>
           </DiscreteInfo>
         </String>
 

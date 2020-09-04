@@ -27,7 +27,7 @@
     - 'high coordinate': [ 0.0, 1.0]
 
 - type: region.labeled.surface
-  name: surface
+  name: surface face
   associate:
     - face: 2
 
@@ -51,7 +51,7 @@
 - type: mesh.surface
   name: surface
   associate:
-    - attribute: surface
+    - attribute: surface face
 
 
 # PK evaluators
@@ -59,7 +59,7 @@
   name: overland-conductivity-evaluator
   items:
     - name: overland conductivity type
-      value: manning
+      value: manning harmonic mean
       children:
         - Manning exponent: 0.666666666667
         - slope regularization epsilon: 0.0
@@ -94,7 +94,7 @@
 
 # Process Kernels
 - type: richards flow
-  name: flow
+  name: subsurface flow
   items:
     - verbosity level: high
     - primary variable key: pressure
@@ -107,7 +107,7 @@
         - name: function
           items:
             - regions: computational domain
-            - components: cell,face
+            - components: cell
             - name: variable type
               value: function-linear
               children:
@@ -120,7 +120,7 @@
                       - gradient: 977.723005
                     - - x0: 0.0
                       - gradient: 0.0
-                    - - x0: 4.0
+                    - - x0: 0.0
                       - gradient: -9777.23005
     - name: water retention evaluator specs
       items:
@@ -128,8 +128,10 @@
           enabled: true
         - name: WRM evaluators
           subgroups:
-            - - region: computational domain
-              - evaluator name: rest domain
+            - - region: computational domain rest
+              - name: evaluator name
+                value: rest domain
+                enabled: true
               - name: WRM Type
                 value: van Genuchten
                 children:
@@ -138,7 +140,9 @@
                   - residual saturation [-]: 0.2
                   - smoothing interval width [saturation]: 0.1
             - - region: computational domain first slab
-              - evaluator name: first slab
+              - name: evaluator name
+                value: first slab
+                enabled: true
               - name: WRM Type
                 value: van Genuchten
                 children:
@@ -147,7 +151,9 @@
                   - residual saturation [-]: 0.3
                   - smoothing interval width [saturation]: 0.1
             - - region: computational domain second slab
-              - evaluator name: second slab
+              - name: evaluator name
+                value: second slab
+                enabled: true
               - name: WRM Type
                 value: van Genuchten
                 children:
@@ -184,10 +190,10 @@
     - name: boundary conditions
       enabled: true
       subgroups:
-        - - BC name: seepage face head
+        - - BC name: outlet
           - regions: surface outlet
-          - name: outlet
-            value: boundary head
+          - name: boundary type
+            value: seepage face head
             children:
               - BC value: 0.05
     - name: diffusion
@@ -265,7 +271,7 @@
           enabled: true
         - name: damp and cap the water spurt
           enabled: true
-        - cap over atmospheric: 001
+        - cap over atmospheric: 0.001
     - name: time integrator
       enabled: true
       value: 'time-integrator-0'
@@ -540,7 +546,7 @@
     - name: function
       items:
         - components: cell
-        - regions: computational domain
+        - regions: computational domain rest
         - name: variable type
           value: constant
           children:

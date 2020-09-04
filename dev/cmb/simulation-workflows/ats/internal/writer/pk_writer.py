@@ -194,6 +194,7 @@ class PKWriter(BaseWriter):
         options = ["height key", "slope key", "coefficient key"]
         children = {
             "manning": ["Manning exponent", "slope regularization epsilon"],
+            "manning harmonic mean": ["Manning exponent", "slope regularization epsilon"],
         }
         eval_elem = self._new_list(pk_elem, "overland conductivity evaluator")
         self._render_items(eval_elem, att, options)
