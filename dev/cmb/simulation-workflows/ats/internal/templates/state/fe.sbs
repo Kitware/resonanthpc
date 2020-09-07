@@ -84,11 +84,7 @@
       <ItemDefinitions>
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="false"></Void>
 
-        <String Name="function name">
-          <DefaultValue>domain</DefaultValue>
-        </String>
-
-        <Group Name="function">
+        <Group Name="function" Extensible="true">
           <xi:include href="templates/source/function.xml"/>
         </Group>
 
@@ -203,8 +199,9 @@
         <String Name="porosity key" Optional="true" IsEnabledByDefault="false">
           <DefaultValue>porosity</DefaultValue>
         </String>
-        <Group Name="compressible porosity model parameters">
+        <Group Name="compressible porosity model parameters" Extensible="true">
           <ItemDefinitions>
+            <String Name="function name" Optional="true" IsEnabledByDefault="false"></String>
             <Component Name="region">
               <Accepts>
                 <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
@@ -212,6 +209,9 @@
             </Component>
             <Double Name="pore compressibility [Pa^-1]">
               <DefaultValue>1.0e-9</DefaultValue>
+            </Double>
+            <Double Name="pore compressibility inflection point [Pa^-1]">
+              <DefaultValue>0.0</DefaultValue>
             </Double>
           </ItemDefinitions>
         </Group>

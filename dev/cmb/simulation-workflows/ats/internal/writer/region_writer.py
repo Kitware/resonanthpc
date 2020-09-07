@@ -30,7 +30,7 @@ class RegionWriter(BaseWriter):
         # Define names that are not directly function of attribute type
         region_type_params = {
             "region.labeled.surface": "region: labeled set",
-            "region.labeled.volume": "region: labeled set"
+            "region.labeled.volume": "region: labeled set",
         }
 
         # Association parameters
@@ -123,7 +123,7 @@ class RegionWriter(BaseWriter):
                     type_list_elem,
                     "label",
                     "string",
-                    re.sub("Unnamed (\w+) ID: ", "", model_entity.name())
+                    re.sub("Unnamed (\w+) ID: ", "", model_entity.name()),
                 )
                 continue
 

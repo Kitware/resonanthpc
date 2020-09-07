@@ -387,9 +387,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell
         - regions: computational domain
         - name: variable type
@@ -478,9 +478,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain rain
     - name: function
       items:
+        - function name: domain rain
         - components: cell
         - regions: surface domain
         - name: variable type

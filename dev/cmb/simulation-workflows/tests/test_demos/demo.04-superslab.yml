@@ -359,9 +359,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain
     - name: function
       items:
+        - function name: domain
         - components: cell
         - regions: surface domain
         - name: variable type
@@ -386,9 +386,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain
     - name: function
       items:
+        - function name: domain
         - components: cell
         - regions: surface domain
         - name: variable type
@@ -424,9 +424,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
         - name: variable type
@@ -440,9 +440,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell
         - regions: computational domain
         - name: variable type
@@ -456,9 +456,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
         - name: variable type
@@ -472,9 +472,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain
     - name: function
       items:
+        - function name: domain
         - components: cell
         - regions: surface domain
         - name: variable type
@@ -488,9 +488,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell
         - regions: surface domain
         - name: variable type
@@ -519,9 +519,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: surface
     - name: function
       items:
+        - function name: surface
         - components: cell,boundary_face
         - regions: surface domain
         - name: variable type
@@ -535,37 +535,59 @@
 - type: effective_pressure
   name: surface-effective_pressure
 
-#  TODO: fix these
 - type: independent variable
   name: base_porosity
   items:
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
-      items:
-        - components: cell
-        - regions: computational domain rest
-        - name: variable type
-          value: constant
-          children:
-            - value: 0.4
+      subgroups:
+        - - components: cell
+          - function name: rest domain
+          - regions: computational domain rest
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.4
+        - - components: cell
+          - function name: first slab
+          - regions: computational domain first slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.4
+        - - components: cell
+          - function name: second slab
+          - regions: computational domain second slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.1
 
-- type: independent variable
+- type: compressible porosity
   name: porosity
   items:
-    - name: 'constant in time'
-      enabled: true
-      value: true
-    - name: function
-      items:
-        - components: cell
-        - regions: computational domain
-        - name: variable type
-          value: constant
-          children:
-            - value: 5.113922e-08
+    - name: compressible porosity model parameters
+      subgroups:
+        - - name: function name
+            enabled: true
+            value: rest domain
+          - region: computational domain rest
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
+        - - name: function name
+            enabled: true
+            value: first slab
+          - region: computational domain first slab
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
+        - - name: function name
+            enabled: true
+            value: second slab
+          - region: computational domain second slab
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
 
 - type: independent variable
   name: permeability
@@ -574,14 +596,28 @@
       enabled: true
       value: true
     - name: function
-      items:
-        - components: cell
-        - regions: computational domain
-        - name: variable type
-          value: constant
-          children:
-            - value: 2.8468e-11
-
+      subgroups:
+        - - function name: rest domain
+          - components: cell
+          - regions: computational domain rest
+          - name: variable type
+            value: constant
+            children:
+              - value: 2.8468e-11
+        - - function name: first slab
+          - components: cell
+          - regions: computational domain first slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 7.117e-13
+        - - function name: second slab
+          - components: cell
+          - regions: computational domain second slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 2.8468e-14
 
 
 
