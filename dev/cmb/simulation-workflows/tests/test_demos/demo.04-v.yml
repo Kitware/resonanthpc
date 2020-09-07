@@ -161,16 +161,18 @@
                       - gradient: -9806.23
     - name: water retention evaluator specs
       items:
-        - region: computational domain
         - name: use surface rel perm
           enabled: true
-        - name: WRM Type
-          value: van Genuchten
-          children:
-            - van Genuchten alpha [Pa^-1]: 0.000545
-            - van Genuchten m [-]: 0.19
-            - residual saturation [-]: 0.1
-            - smoothing interval width [saturation]: 0.1
+        - name: WRM evaluators
+          subgroups:
+            - - region: computational domain
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.000545
+                  - van Genuchten m [-]: 0.19
+                  - residual saturation [-]: 0.1
+                  - smoothing interval width [saturation]: 0.1
     - name: debugger
       items:
         - name: debug cells
@@ -385,9 +387,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: rest domain
     - name: function
       items:
+        - function name: rest domain
         - components: cell
         - regions: computational domain
         - name: variable type
@@ -476,9 +478,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain rain
     - name: function
       items:
+        - function name: domain rain
         - components: cell
         - regions: surface domain
         - name: variable type

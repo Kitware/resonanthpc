@@ -70,14 +70,21 @@ class StateWriter(BaseWriter):
         # Sub group
         model_params = [
             "pore compressibility [Pa^-1]",
+            "pore compressibility inflection point [Pa^-1]",
         ]
         model_params_elem = self._new_list(
             fe_elem, "compressible porosity model parameters"
         )
-        region_name = att.findComponent("region").value().name()
-        region_elem = self._new_list(model_params_elem, region_name)
-        self._new_param(region_elem, "region", "string", region_name)
-        self._render_items(region_elem, att, model_params)
+        params_group = att.findGroup("compressible porosity model parameters")
+        for i in range(params_group.numberOfGroups()):
+            region_name = params_group.find(i, "region").value().name()
+            name_field = params_group.find(i, "function name")
+            name = region_name
+            if name_field.isEnabled():
+                name = name_field.value()
+            region_elem = self._new_list(model_params_elem, name)
+            self._new_param(region_elem, "region", "string", region_name)
+            self._render_items(region_elem, params_group, model_params, index=i)
 
     def render_overland_pressure_water_content(self, fe_elem, att):
         options = [
@@ -116,8 +123,7 @@ class StateWriter(BaseWriter):
         self._render_items(fe_elem, att, options)
         function_elem = self._new_list(fe_elem, "function")
         # Function list
-        func_name = att.find("function name").value()
-        self._render_function(function_elem, att.findGroup("function"), func_name)
+        self._render_function(function_elem, att.findGroup("function"))
 
     def render_multiplicative_evaluator(self, fe_elem, att):
         options = ["coefficient", "enforce positivity"]

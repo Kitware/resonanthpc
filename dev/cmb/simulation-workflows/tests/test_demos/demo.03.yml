@@ -256,9 +256,9 @@
     - name: 'constant in time'
       enabled: true
       value: true
-    - function name: domain rain
     - name: function
       items:
+        - function name: domain rain
         - components: cell
         - regions: surface domain
         - name: variable type

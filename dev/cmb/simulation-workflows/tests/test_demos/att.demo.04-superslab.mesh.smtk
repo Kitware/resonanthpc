@@ -1,0 +1,580 @@
+{
+  "id": "9610d02e-71b7-41b6-a15e-043b72610290",
+  "links": null,
+  "modelFiles": [
+    "super_slab.exo"
+  ],
+  "models": {
+    "a1153d5b-0089-40af-bb1f-0bdc11a788b2": {
+      "17d83a11-d994-4cc6-9d5c-9d90b4d325b7": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "63b442bc-f038-4146-9c40-82771e542c37": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "6dd56697-4b29-4388-a026-b29aec8ee035": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "929f0a1c-5950-4fd1-9534-f3017ef646cc": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "a1153d5b-0089-40af-bb1f-0bdc11a788b2": {
+        "a": {
+          "b": [
+            [
+              9
+            ]
+          ],
+          "i": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ],
+            [
+              8
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 4104,
+        "r": [
+          "63b442bc-f038-4146-9c40-82771e542c37",
+          "17d83a11-d994-4cc6-9d5c-9d90b4d325b7",
+          "6dd56697-4b29-4388-a026-b29aec8ee035",
+          "a251b519-c8ac-41a0-a8b0-8fa38cdea401",
+          "a64f65d6-a203-4f77-9ffe-6752c9f87c34",
+          "f22249b8-81f9-448b-b4f2-8095889c7b1d",
+          "df593f53-65f0-4b8f-822d-0dbac1d334c6",
+          "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5",
+          "929f0a1c-5950-4fd1-9534-f3017ef646cc",
+          "e9e8ca0a-89ab-4755-aaa9-95e9f8f09643"
+        ]
+      },
+      "a251b519-c8ac-41a0-a8b0-8fa38cdea401": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "a64f65d6-a203-4f77-9ffe-6752c9f87c34": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "df593f53-65f0-4b8f-822d-0dbac1d334c6": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      },
+      "f22249b8-81f9-448b-b4f2-8095889c7b1d": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2"
+        ]
+      }
+    }
+  },
+  "name": "super_slab",
+  "preservedUUIDs": [
+    "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+    "63b442bc-f038-4146-9c40-82771e542c37",
+    "17d83a11-d994-4cc6-9d5c-9d90b4d325b7",
+    "6dd56697-4b29-4388-a026-b29aec8ee035",
+    "a251b519-c8ac-41a0-a8b0-8fa38cdea401",
+    "a64f65d6-a203-4f77-9ffe-6752c9f87c34",
+    "f22249b8-81f9-448b-b4f2-8095889c7b1d",
+    "df593f53-65f0-4b8f-822d-0dbac1d334c6",
+    "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5",
+    "929f0a1c-5950-4fd1-9534-f3017ef646cc"
+  ],
+  "properties": {
+    "unordered_map<uuid, double>": {},
+    "unordered_map<uuid, long>": {},
+    "unordered_map<uuid, string>": {},
+    "unordered_map<uuid, uuid>": {},
+    "unordered_map<uuid, vector<double>>": {},
+    "unordered_map<uuid, vector<long>>": {
+      "_geomstyle": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0
+          ]
+        ]
+      ],
+      "cell_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "embedding dimension": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            3
+          ]
+        ]
+      ],
+      "file order": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            -1
+          ]
+        ]
+      ],
+      "group_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "instance_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0
+          ]
+        ]
+      ],
+      "invalid_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0
+          ]
+        ]
+      ],
+      "model_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0
+          ]
+        ]
+      ],
+      "pedigree id": [
+        [
+          "929f0a1c-5950-4fd1-9534-f3017ef646cc",
+          [
+            6
+          ]
+        ],
+        [
+          "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5",
+          [
+            5
+          ]
+        ],
+        [
+          "df593f53-65f0-4b8f-822d-0dbac1d334c6",
+          [
+            4
+          ]
+        ],
+        [
+          "a64f65d6-a203-4f77-9ffe-6752c9f87c34",
+          [
+            2
+          ]
+        ],
+        [
+          "f22249b8-81f9-448b-b4f2-8095889c7b1d",
+          [
+            3
+          ]
+        ],
+        [
+          "6dd56697-4b29-4388-a026-b29aec8ee035",
+          [
+            12
+          ]
+        ],
+        [
+          "17d83a11-d994-4cc6-9d5c-9d90b4d325b7",
+          [
+            11
+          ]
+        ],
+        [
+          "a251b519-c8ac-41a0-a8b0-8fa38cdea401",
+          [
+            1
+          ]
+        ],
+        [
+          "63b442bc-f038-4146-9c40-82771e542c37",
+          [
+            10
+          ]
+        ]
+      ],
+      "shell_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "use_counters": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "unordered_map<uuid, vector<string>>": {
+      "_simple type": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            "file"
+          ]
+        ],
+        [
+          "929f0a1c-5950-4fd1-9534-f3017ef646cc",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "df593f53-65f0-4b8f-822d-0dbac1d334c6",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "a64f65d6-a203-4f77-9ffe-6752c9f87c34",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "f22249b8-81f9-448b-b4f2-8095889c7b1d",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "6dd56697-4b29-4388-a026-b29aec8ee035",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "17d83a11-d994-4cc6-9d5c-9d90b4d325b7",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "a251b519-c8ac-41a0-a8b0-8fa38cdea401",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "63b442bc-f038-4146-9c40-82771e542c37",
+          [
+            "element block"
+          ]
+        ]
+      ],
+      "name": [
+        [
+          "929f0a1c-5950-4fd1-9534-f3017ef646cc",
+          [
+            "Unnamed set ID: 6"
+          ]
+        ],
+        [
+          "bf06be0e-2093-4ec8-b163-d9dc46fdd8c5",
+          [
+            "Unnamed set ID: 5"
+          ]
+        ],
+        [
+          "df593f53-65f0-4b8f-822d-0dbac1d334c6",
+          [
+            "Unnamed set ID: 4"
+          ]
+        ],
+        [
+          "a64f65d6-a203-4f77-9ffe-6752c9f87c34",
+          [
+            "Unnamed set ID: 2"
+          ]
+        ],
+        [
+          "f22249b8-81f9-448b-b4f2-8095889c7b1d",
+          [
+            "Unnamed set ID: 3"
+          ]
+        ],
+        [
+          "6dd56697-4b29-4388-a026-b29aec8ee035",
+          [
+            "Unnamed block ID: 12"
+          ]
+        ],
+        [
+          "17d83a11-d994-4cc6-9d5c-9d90b4d325b7",
+          [
+            "Unnamed block ID: 11"
+          ]
+        ],
+        [
+          "a251b519-c8ac-41a0-a8b0-8fa38cdea401",
+          [
+            "Unnamed set ID: 1"
+          ]
+        ],
+        [
+          "63b442bc-f038-4146-9c40-82771e542c37",
+          [
+            "Unnamed block ID: 10"
+          ]
+        ],
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            "super_slab"
+          ]
+        ]
+      ],
+      "type": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            "exodus"
+          ]
+        ]
+      ],
+      "url": [
+        [
+          "a1153d5b-0089-40af-bb1f-0bdc11a788b2",
+          [
+            "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/tests/test_demos/super_slab.exo"
+          ]
+        ]
+      ]
+    }
+  },
+  "type": "smtk::session::vtk::Resource",
+  "version": "3.1"
+}
