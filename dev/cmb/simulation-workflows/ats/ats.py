@@ -30,7 +30,7 @@ elif sys.platform == "darwin":
         if app_pos > 0:
             end_pos = app_pos + len(app_name)
             app_path = p[:end_pos]
-            site_path = os.path.join(app_path, '/', 'Python')
+            site_path = os.path.join(app_path, 'Contents', 'Python')
             break
 elif sys.platform == "linux":
     site_path = os.path.join(sys.prefix, "lib", "python3.7", "site-packages")
