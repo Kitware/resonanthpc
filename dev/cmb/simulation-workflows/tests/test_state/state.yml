@@ -262,6 +262,20 @@
   associate:
     - attribute: [surface-precipitation, surface-molar_density_liquid]
 
+- type: independent variable
+  name: surface-precipitation_rain
+  items:
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: function-file
+          children:
+            - file: "../met/daymet_raw_38p9600_-106p9900.h5"
+            - x header: "time [s]"
+            - y header: "precipitation rain [m s^-1]"
+
 # State initial conditions
 - type: ic-const-scalar
   name: atmospheric_pressure

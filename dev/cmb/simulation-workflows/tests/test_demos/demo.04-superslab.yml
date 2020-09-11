@@ -1,0 +1,634 @@
+---
+# build_attributes.py input for demo04
+
+# Mesh
+- type: mesh.resource
+  name: domain
+  items:
+    - resource: model
+
+# Region
+- type: region.box.3d
+  name: computational domain
+  items:
+    - 'low coordinate': [0.0, 0.0, 0.0]
+    - 'high coordinate': [100.0, 1.0, 15.0]
+
+- type: region.box.2d
+  name: surface domain
+  items:
+    - 'low coordinate':  [ 0.0, 0.0]
+    - 'high coordinate': [100.0, 1.0]
+
+- type: region.box.2d
+  name: surface outlet
+  items:
+    - 'low coordinate':  [ 0.0, 0.0]
+    - 'high coordinate': [ 0.0, 1.0]
+
+- type: region.labeled.surface
+  name: surface face
+  associate:
+    - face: 2
+
+- type: region.labeled.volume
+  name: computational domain rest
+  associate:
+    - volume: 10
+
+- type: region.labeled.volume
+  name: computational domain first slab
+  associate:
+    - volume: 12
+
+- type: region.labeled.volume
+  name: computational domain second slab
+  associate:
+    - volume: 11
+
+
+# Mesh (surface)
+- type: mesh.surface
+  name: surface
+  associate:
+    - attribute: surface face
+
+
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning harmonic mean
+      children:
+        - Manning exponent: 0.666666666667
+        - slope regularization epsilon: 0.0
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 1
+    - smoother sweeps: 2
+    - strong threshold: 0.85
+    - tolerance: 0.0
+    - number of functions: 1
+
+# Linear solver
+- type: gmres
+  name: linear-solver-0
+  items:
+    - preconditioning strategy: left
+    - error tolerance: 1.0e-06
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: true
+    - maximum number of iterations: 80
+
+# Process Kernels
+- type: richards flow
+  name: subsurface flow
+  items:
+    - verbosity level: high
+    - primary variable key: pressure
+    - permeability rescaling: 10000000.0
+    - initial time step: 60.0
+    - name: initial condition
+      enabled: true
+      items:
+        - condition name: initial pressure cells
+        - name: function
+          items:
+            - regions: computational domain
+            - components: cell
+            - name: variable type
+              value: function-linear
+              children:
+                - y0: 101325.0
+                - name: linear-data
+                  subgroups:
+                    - - x0: 0.0
+                      - gradient: 0.0
+                    - - x0: 0.0
+                      - gradient: 977.723005
+                    - - x0: 0.0
+                      - gradient: 0.0
+                    - - x0: 0.0
+                      - gradient: -9777.23005
+    - name: water retention evaluator specs
+      items:
+        - name: use surface rel perm
+          enabled: true
+        - name: WRM evaluators
+          subgroups:
+            - - region: computational domain rest
+              - name: evaluator name
+                value: rest domain
+                enabled: true
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.0006137
+                  - van Genuchten m [-]: 0.5
+                  - residual saturation [-]: 0.2
+                  - smoothing interval width [saturation]: 0.1
+            - - region: computational domain first slab
+              - name: evaluator name
+                value: first slab
+                enabled: true
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.0001023
+                  - van Genuchten m [-]: 0.666666666667
+                  - residual saturation [-]: 0.3
+                  - smoothing interval width [saturation]: 0.1
+            - - region: computational domain second slab
+              - name: evaluator name
+                value: second slab
+                enabled: true
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.0001023
+                  - van Genuchten m [-]: 0.666666666667
+                  - residual saturation [-]: 0.3
+                  - smoothing interval width [saturation]: 0.1
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [1]
+          enabled: true
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "mfd: optimized for sparsity"
+
+- type: overland flow, pressure basis
+  name: surface flow
+  items:
+    - name: domain name
+      enabled: true
+      value: surface
+    - verbosity level: high
+    - primary variable key: surface-pressure
+    - initial time step: 60.0
+    - name: initial condition
+      enabled: true
+      items:
+        - name: initialize surface head from subsurface
+          enabled: true
+        - name: function
+          enabled: false
+    - name: boundary conditions
+      enabled: true
+      subgroups:
+        - - BC name: outlet
+          - regions: surface outlet
+          - name: boundary type
+            value: seepage face head
+            children:
+              - BC value: 0.05
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+    - name: source term
+      enabled: true
+    - name: evaluators
+      enabled: true
+      value: overland-conductivity-evaluator
+    - name: debugger
+      items:
+        - name: debug cells
+          value: [0]
+          enabled: true
+
+
+
+# Time integrator
+- type: time integrator
+  name: time-integrator-0
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 100000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 1.0
+        - name: 'backtrack factor'
+          value: 0.5
+        - name: 'monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'max backtrack steps'
+          value: 5
+        - name: 'backtrack lag'
+          value: 0
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'min time step'
+          value: 1.0e-10
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'time step increase factor'
+          value: 1.25
+        - name: 'max iterations'
+          value: 18
+        - name: 'min iterations'
+          value: 10
+        - name: 'time step reduction factor'
+          value: 0.5
+        - name: 'growth wait after fail'
+          value: 2
+        - name: 'count before increasing increase factor'
+          value: 2
+
+
+- type: coupled water
+  name: Top level MPC
+  items:
+    - 'subsurface pk': subsurface flow
+    - 'surface pk': surface flow
+    - verbosity level: medium
+    - initial time step: 10.0
+    - name: water delegate
+      items:
+        - name: modify predictor damp and cap the water spurt
+          enabled: true
+        - name: damp and cap the water spurt
+          enabled: true
+        - cap over atmospheric: 0.001
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+
+# Coordinator (action = edit)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+      - 'end time': 18000.0
+      - 'end time units': s
+    - 'PK tree': Top level MPC
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 180.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+- type: visualization driver
+  items:
+    - 'domain': surface
+    - 'file name base': visdump_surface
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 180.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+# Checkpoint (not used)
+
+# Observation
+- type: observation
+  name: surface outlet flux
+  items:
+    - 'variable': surface-mass_flux
+    - 'observation output filename': surface_outlet_flux.dat
+    - 'delimiter': ' '
+    - region: surface outlet
+    - name: 'direction normalized flux'
+      enable: true
+    - functional: 'observation data: extensive integral'
+    - location name: face
+    - name: write interval
+      enabled: true
+      value: 1
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Time Period': 180.0
+            - name: Stop Time
+              enable: true
+              value: -1.0
+
+# State
+# State field evaluators
+- type: independent variable
+  name: surface-mass_source
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: domain
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: function-tabular
+          children:
+            - name: forms
+              items:
+                - name: constant
+                  enabled: true
+                - name: linear
+                  enabled: false
+            - name: tabular-data
+              subgroups:
+                - - X: 0.0
+                  - Y: 5.5e-06
+                - - X: 12000.0
+                  - Y: 0.0
+
+- type: independent variable
+  name: surface-source_molar_density
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: domain
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55389.0
+
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: ponded depth
+  name: surface-ponded_depth_bar
+  items:
+    - name: ponded depth bar
+      enabled: true
+      value: true
+    - name: height key
+      enabled: true
+      value: surface-ponded_depth_bar
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: richards water content
+  name: water_content
+
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: independent variable
+  name: molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55389.0
+
+- type: independent variable
+  name: mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: viscosity_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.001002
+
+- type: independent variable
+  name: surface-molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: domain
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55389.0
+
+- type: independent variable
+  name: surface-mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: surface-relative_permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.0
+
+- type: independent variable
+  name: surface-manning_coefficient
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: surface
+        - components: cell,boundary_face
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.01986
+
+- type: effective_pressure
+  name: effective_pressure
+
+- type: effective_pressure
+  name: surface-effective_pressure
+
+- type: independent variable
+  name: base_porosity
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      subgroups:
+        - - components: cell
+          - function name: rest domain
+          - regions: computational domain rest
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.4
+        - - components: cell
+          - function name: first slab
+          - regions: computational domain first slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.4
+        - - components: cell
+          - function name: second slab
+          - regions: computational domain second slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 0.1
+
+- type: compressible porosity
+  name: porosity
+  items:
+    - name: compressible porosity model parameters
+      subgroups:
+        - - name: function name
+            enabled: true
+            value: rest domain
+          - region: computational domain rest
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
+        - - name: function name
+            enabled: true
+            value: first slab
+          - region: computational domain first slab
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
+        - - name: function name
+            enabled: true
+            value: second slab
+          - region: computational domain second slab
+          - pore compressibility [Pa^-1]: 5.113922e-08
+          - pore compressibility inflection point [Pa^-1]: 0.0
+
+- type: independent variable
+  name: permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      subgroups:
+        - - function name: rest domain
+          - components: cell
+          - regions: computational domain rest
+          - name: variable type
+            value: constant
+            children:
+              - value: 2.8468e-11
+        - - function name: first slab
+          - components: cell
+          - regions: computational domain first slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 7.117e-13
+        - - function name: second slab
+          - components: cell
+          - regions: computational domain second slab
+          - name: variable type
+            value: constant
+            children:
+              - value: 2.8468e-14
+
+
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]

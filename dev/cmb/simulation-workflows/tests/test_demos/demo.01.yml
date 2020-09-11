@@ -137,13 +137,15 @@
                 - value: 101325.0
     - name: water retention evaluator specs
       items:
-        - region: computational domain
-        - name: WRM Type
-          value: van Genuchten
-          children:
-            - van Genuchten alpha [Pa^-1]: 0.00015
-            - van Genuchten m [-]: 0.8
-            - residual saturation [-]: 0.0
+        - name: WRM evaluators
+          subgroups:
+            - - region: computational domain
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.00015
+                  - van Genuchten m [-]: 0.8
+                  - residual saturation [-]: 0.0
     - name: debugger
       items:
         - name: debug cells

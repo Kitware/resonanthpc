@@ -140,11 +140,16 @@ class BaseWriter:
         array_string = "{{{}}}".format(value_string)
         self._new_param(parent_elem, array_name, "Array(string)", array_string)
 
-    def _render_items(self, parent_elem, att, param_names, force_array=False):
+    def _render_items(
+        self, parent_elem, att, param_names, force_array=False, index=None
+    ):
         """Generates Parameter elements for items specified by param_names"""
         assert isinstance(param_names, list)
         for param_name in param_names:
-            item = att.find(param_name)
+            if index is not None:
+                item = att.find(index, param_name)
+            else:
+                item = att.find(param_name)
             if item is None:
                 continue
 
@@ -241,7 +246,15 @@ class BaseWriter:
 
         return
 
-    def _render_function(self, parent_elem, att, name):
+    def _render_function(self, parent_elem, att, name=None, _i=0, _recursive=True):
+
+        if att.numberOfGroups() > 1 and _recursive:
+            for i in range(att.numberOfGroups()):
+                self._render_function(
+                    parent_elem, att, name=None, _i=i, _recursive=False
+                )
+            return
+
         def _fetch_subgroup_values(group, name):
             values = []
             for i in range(group.numberOfGroups()):
@@ -249,10 +262,13 @@ class BaseWriter:
                 values.append(v.value())
             return r"{" + ",".join([FLOAT_FORMAT.format(x) for x in values]) + r"}"
 
+        if name is None:
+            name = att.find(_i, "function name").value()
+
         the_group = self._new_list(parent_elem, name)
 
         # add region
-        regions_comp = att.find("regions")
+        regions_comp = att.find(_i, "regions")
         value_list = [
             regions_comp.value(k).name() for k in range(regions_comp.numberOfValues())
         ]
@@ -262,7 +278,7 @@ class BaseWriter:
             regions = r"{" + ", ".join(value_list) + r"}"
             self._new_param(the_group, "regions", "Array(string)", regions)
         # add components
-        component = str(att.find("components").value())
+        component = str(att.find(_i, "components").value())
         if component in ("cell", "face", "boundary_face"):
             self._new_param(the_group, "component", "string", component)
         else:
@@ -270,7 +286,7 @@ class BaseWriter:
             self._new_param(the_group, "components", "Array(string)", components)
 
         function_sub_elem = self._new_list(the_group, "function")
-        params = att.find("variable type")
+        params = att.find(_i, "variable type")
         func_type = params.value()
         if func_type == "constant":
             constant_elem = self._new_list(function_sub_elem, "function-constant")
@@ -301,3 +317,7 @@ class BaseWriter:
             g_values = _fetch_subgroup_values(group, "gradient")
             self._new_param(linear_elem, "x0", "Array(double)", x_values)
             self._new_param(linear_elem, "gradient", "Array(double)", g_values)
+        elif func_type == "function-file":
+            tabular_elem = self._new_list(function_sub_elem, "function-tabular")
+            options = ["file", "x header", "y header"]
+            self._render_items(tabular_elem, params, options)
