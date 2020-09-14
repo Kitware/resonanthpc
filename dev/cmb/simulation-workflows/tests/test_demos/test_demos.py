@@ -42,10 +42,10 @@ class Demo03Test(BaseTestCase):
 
 class Demo04VTest(BaseTestCase):
 
-    MODEL_RESOURCE_FILENAME = "att.demo.04-v.mesh.smtk"
-    BASELINE_XML_FILENAME = "baseline_demo_04-v.xml"
+    MODEL_RESOURCE_FILENAME = "mesh.04_v.smtk"
+    BASELINE_XML_FILENAME = "baseline_demo_04_v.xml"
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
-    YAML_RESOURCE = "demo.04-v.yml"
+    YAML_RESOURCE = "demo.04_v.yml"
 
     def test_demo(self):
         self.writer.generate_xml()
@@ -55,10 +55,10 @@ class Demo04VTest(BaseTestCase):
 
 class Demo04SuperSlabTest(BaseTestCase):
 
-    MODEL_RESOURCE_FILENAME = "att.demo.04-superslab.mesh.smtk"
-    BASELINE_XML_FILENAME = "baseline_demo_04-superslab.xml"
+    MODEL_RESOURCE_FILENAME = "mesh.04_super_slab.smtk"
+    BASELINE_XML_FILENAME = "baseline_demo_04_super_slab.xml"
     SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
-    YAML_RESOURCE = "demo.04-superslab.yml"
+    YAML_RESOURCE = "demo.04_super_slab.yml"
 
     def test_demo(self):
         self.writer.generate_xml()
