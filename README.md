@@ -2,6 +2,8 @@
 
 [![CI Testing](https://github.com/Kitware/resonanthpc/workflows/CI%20Testing/badge.svg)](https://github.com/Kitware/resonanthpc/actions?query=workflow%3A%22CI+Testing%22)
 
+Please visit our website: [kitware.github.io/resonanthpc/](https://kitware.github.io/resonanthpc/)
+
 ResonantHPC is designed to increase scientific productivity by providing HPC
 capable pre-and-post processing for easier and faster turnaround and
 integration with modern and next-generation simulation systems.
