@@ -321,3 +321,11 @@ class BaseWriter:
             tabular_elem = self._new_list(function_sub_elem, "function-tabular")
             options = ["file", "x header", "y header"]
             self._render_items(tabular_elem, params, options)
+        elif func_type == "initialize from 1D column":
+            tabular_elem = self._new_list(function_sub_elem, "initialize from 1D column")
+            options = ["file", "z header", "f header", "coordinate orientation"]
+            self._render_items(tabular_elem, params, options)
+            # surface sideset
+            sideset_comp = params.find("surface sideset")
+            if sideset_comp is not None:
+                self._new_param(tabular_elem, "surface sideset", "string", sideset_comp.value().name())
