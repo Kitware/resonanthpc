@@ -1,0 +1,310 @@
+{
+  "id": "d6406229-5403-4391-bc06-a6afe8d03f1f",
+  "links": null,
+  "modelFiles": [
+    "hillslope_noduff.exo"
+  ],
+  "models": {
+    "a3ce172c-f27a-49b1-8a7a-f826c3003a23": {
+      "25ebc609-1c86-4024-b509-59e16d55919b": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23"
+        ]
+      },
+      "612854dd-e0df-4bca-b536-0bb3dcc09c31": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23"
+        ]
+      },
+      "a3ce172c-f27a-49b1-8a7a-f826c3003a23": {
+        "a": {
+          "b": [
+            [
+              3
+            ]
+          ],
+          "i": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 4104,
+        "r": [
+          "f83d1600-be28-400f-9681-963c2aad1edf",
+          "612854dd-e0df-4bca-b536-0bb3dcc09c31",
+          "25ebc609-1c86-4024-b509-59e16d55919b",
+          "2f765177-72ca-4711-bc79-7fd2eac30fd2"
+        ]
+      },
+      "f83d1600-be28-400f-9681-963c2aad1edf": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23"
+        ]
+      }
+    }
+  },
+  "name": "hillslope_noduff",
+  "preservedUUIDs": [
+    "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+    "f83d1600-be28-400f-9681-963c2aad1edf",
+    "612854dd-e0df-4bca-b536-0bb3dcc09c31",
+    "25ebc609-1c86-4024-b509-59e16d55919b"
+  ],
+  "properties": {
+    "unordered_map<uuid, double>": {},
+    "unordered_map<uuid, long>": {},
+    "unordered_map<uuid, string>": {},
+    "unordered_map<uuid, uuid>": {},
+    "unordered_map<uuid, vector<double>>": {},
+    "unordered_map<uuid, vector<long>>": {
+      "_geomstyle": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0
+          ]
+        ]
+      ],
+      "cell_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "embedding dimension": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            3
+          ]
+        ]
+      ],
+      "file order": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            -1
+          ]
+        ]
+      ],
+      "group_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "instance_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0
+          ]
+        ]
+      ],
+      "invalid_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0
+          ]
+        ]
+      ],
+      "model_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0
+          ]
+        ]
+      ],
+      "pedigree id": [
+        [
+          "25ebc609-1c86-4024-b509-59e16d55919b",
+          [
+            2
+          ]
+        ],
+        [
+          "612854dd-e0df-4bca-b536-0bb3dcc09c31",
+          [
+            1
+          ]
+        ],
+        [
+          "f83d1600-be28-400f-9681-963c2aad1edf",
+          [
+            1001
+          ]
+        ]
+      ],
+      "shell_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "use_counters": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "unordered_map<uuid, vector<string>>": {
+      "_simple type": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            "file"
+          ]
+        ],
+        [
+          "25ebc609-1c86-4024-b509-59e16d55919b",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "612854dd-e0df-4bca-b536-0bb3dcc09c31",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "f83d1600-be28-400f-9681-963c2aad1edf",
+          [
+            "element block"
+          ]
+        ]
+      ],
+      "name": [
+        [
+          "25ebc609-1c86-4024-b509-59e16d55919b",
+          [
+            "Unnamed set ID: 2"
+          ]
+        ],
+        [
+          "612854dd-e0df-4bca-b536-0bb3dcc09c31",
+          [
+            "Unnamed set ID: 1"
+          ]
+        ],
+        [
+          "f83d1600-be28-400f-9681-963c2aad1edf",
+          [
+            "Unnamed block ID: 1001"
+          ]
+        ],
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            "hillslope_noduff"
+          ]
+        ]
+      ],
+      "type": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            "exodus"
+          ]
+        ]
+      ],
+      "url": [
+        [
+          "a3ce172c-f27a-49b1-8a7a-f826c3003a23",
+          [
+            "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/tests/test_demos/hillslope_noduff.exo"
+          ]
+        ]
+      ]
+    }
+  },
+  "type": "smtk::session::vtk::Resource",
+  "version": "3.1"
+}

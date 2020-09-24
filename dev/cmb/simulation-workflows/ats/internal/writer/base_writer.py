@@ -216,6 +216,11 @@ class BaseWriter:
             return values
 
         for group_name in extensible_groups.keys():
+            if group_name.startswith("cycle"):
+                type_string = "Array({})".format("int")
+            else:
+                type_string = "Array({})".format("double")
+
             event_group = io_event.find(group_name)
             if event_group.isEnabled():
                 meta = extensible_groups[group_name]
@@ -227,7 +232,7 @@ class BaseWriter:
                     for i in range(n):
                         name = group_name + " {}".format(i)
                         values = _get_array_values(event_group, array_names, i)
-                        self._new_param(parent_elem, name, dbl_type_string, values)
+                        self._new_param(parent_elem, name, type_string, values)
                         for item in item_names:
                             value = str(event_group.find(i, item).value())
                             self._new_param(
@@ -235,7 +240,7 @@ class BaseWriter:
                             )
                 else:
                     values = _get_array_values(event_group, array_names)
-                    self._new_param(parent_elem, group_name, dbl_type_string, values)
+                    self._new_param(parent_elem, group_name, type_string, values)
                     for item in item_names:
                         value = str(event_group.find(item).value())
                         self._new_param(

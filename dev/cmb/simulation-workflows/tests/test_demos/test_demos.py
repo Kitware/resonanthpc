@@ -66,5 +66,18 @@ class Demo04SuperSlabTest(BaseTestCase):
         self._compare_xml_content(xml_string)
 
 
+class Demo05SpinupGI(BaseTestCase):
+
+    MODEL_RESOURCE_FILENAME = "mesh.05_hillslope_noduff.smtk"
+    BASELINE_XML_FILENAME = "baseline_demo_05_spinup_gi.xml"
+    SOURCE_DIR = os.path.abspath(os.path.dirname(__file__))
+    YAML_RESOURCE = "demo.05_spinup_gi.yml"
+
+    def test_demo(self):
+        self.writer.generate_xml()
+        xml_string = self.writer.get_xml_doc(pretty=True)
+        self._compare_xml_content(xml_string, True)
+
+
 if __name__ == "__main__":
     unittest.main()

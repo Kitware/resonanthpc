@@ -1,0 +1,539 @@
+---
+# build_attributes.py input for demo04
+
+# Mesh
+- type: mesh.resource
+  name: domain
+  items:
+    - resource: model
+
+# Region
+- type: region.all
+  name: computational domain
+
+- type: region.all
+  name: surface domain
+
+- type: region.labeled.surface
+  name: surface
+  associate:
+    - face: 2
+
+- type: region.labeled.surface
+  name: bottom
+  associate:
+    - face: 1
+
+- type: region.plane.2d
+  name: outlet
+  items:
+    - 'point':  [1000.0, 0.0]
+    - 'normal': [1.0, 0.0]
+
+# Mesh (surface)
+- type: mesh.surface
+  name: surface mesh
+  associate:
+    - attribute: surface
+
+
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning
+      children:
+        - Manning exponent: 0.66666666666
+        - slope regularization epsilon: 0.01
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 1
+    - smoother sweeps: 1
+    - strong threshold: 0.85
+    - tolerance: 0.0
+
+# Linear solver
+- type: gmres
+  name: linear-solver-0
+  items:
+    - preconditioning strategy: left
+    - error tolerance: 1.04e-10
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: true
+    - maximum number of iterations: 80
+
+# Process Kernels
+- type: richards flow
+  name: subsurface flow
+  items:
+    - verbosity level: high
+    - primary variable key: pressure
+    - permeability rescaling: 10000000.0
+    - initial time step: 5.0
+    - name: initial condition
+      enabled: true
+      items:
+        - condition name: initial pressure cells
+        - name: function
+          enabled: false
+        - name: initialize from 1D column
+          enabled: true
+          items:
+            - file: 'column_data.h5'
+            - 'z header': '/z'
+            - 'f header': '/pressure'
+            - 'coordinate orientation': depth
+            - name: surface sideset
+              value: surface
+    - name: water retention evaluator specs
+      items:
+        - name: use surface rel perm
+          enabled: true
+        - name: WRM evaluators
+          subgroups:
+            - - region: computational domain
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 0.00015
+                  - van Genuchten m [-]: 0.8
+                  - residual saturation [-]: 0.0
+                  - smoothing interval width [saturation]: 0.0
+    - name: debugger
+      items:
+        - name: debug cells
+          enabled: false
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "mfd: default"
+
+- type: overland flow, pressure basis
+  name: surface flow
+  items:
+    - name: domain name
+      enabled: true
+      value: surface mesh
+    - verbosity level: high
+    - primary variable key: surface-pressure
+    - initial time step: 60.0
+    - name: initial condition
+      enabled: true
+      items:
+        - name: initialize surface head from subsurface
+          enabled: true
+        - name: function
+          enabled: false
+    - name: boundary conditions
+      enabled: true
+      subgroups:
+        - - BC name: surface
+          - regions: outlet
+          - name: boundary type
+            value: seepage face head
+            children:
+              - BC value: 0.5
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+    - name: source term
+      enabled: true
+      items:
+        - name: mass source in meters
+          enabled: false
+    - name: evaluators
+      enabled: true
+      value: overland-conductivity-evaluator
+
+
+
+# Time integrator
+- type: time integrator
+  name: time-integrator-0
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 100000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 0.0001
+        - name: 'monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'max backtrack steps'
+          value: 5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'min iterations'
+          value: 7
+        - name: 'max time step'
+          value: 10000000000.0
+        - name: 'min time step'
+          value: 1.04e-10
+        - name: 'time step increase factor'
+          value: 1.25
+        - name: 'time step reduction factor'
+          value: 0.75
+
+- type: coupled water
+  name: Top level MPC
+  items:
+    - 'subsurface pk': subsurface flow
+    - 'surface pk': surface flow
+    - verbosity level: medium
+    - initial time step: 5.0
+    - name: water delegate
+      items:
+        - name: modify predictor damp and cap the water spurt
+          enabled: true
+        - name: damp and cap the water spurt
+          enabled: true
+        - cap over atmospheric: 1.0e-06
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+
+# Coordinator (action = edit)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+      - 'end time': 20000.0
+      - 'end time units': d
+      # - 'end cycle': 800
+    - name: 'wallclock duration [hrs]'
+      enabled: true
+      value: 13.4
+    - 'PK tree': Top level MPC
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times
+          enabled: true
+          items:
+            - times: [1728000000.0, ]
+
+- type: visualization driver
+  items:
+    - 'domain': surface mesh
+    - 'file name base': visdump_surface
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: times
+          enabled: true
+          items:
+            - times: [1728000000.0, ]
+
+# Checkpoint (not used)
+
+# Observation (not used)
+
+# State
+# State field evaluators
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: compressible porosity
+  name: porosity
+  items:
+    - region: computational domain
+
+- type: effective_pressure
+  name: effective_pressure
+
+- type: effective_pressure
+  name: surface-effective_pressure
+
+- type: independent variable
+  name: molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: surface-mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: surface-molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: surface-source_molar_density
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: base_porosity
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: computational domain
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.4
+
+- type: independent variable
+  name: permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: computational domain
+        - components: cell
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.0e-12
+
+- type: independent variable
+  name: surface-manning_coefficient
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: cells
+        - components: cell,boundary_face
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.15
+
+- type: independent variable
+  name: surface-relative_permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.0
+
+- type: independent variable
+  name: surface-precipitation
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 1.576e-09
+
+- type: multiplicative evaluator
+  name: surface-mass_source
+  associate:
+    - attribute: [surface-precipitation, surface-molar_density_liquid]
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: ponded depth
+  name: surface-ponded_depth_bar
+  items:
+    - name: ponded depth bar
+      enabled: true
+      value: true
+    - name: height key
+      enabled: true
+      value: ponded_depth_bar
+
+- type: richards water content
+  name: water_content
+
+- type: independent variable
+  name: viscosity_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: variable type
+          value: constant
+          children:
+            - value: 0.00089
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]
+
+
+
+# Observations
+- type: observation
+  name: surface outlet flux
+  items:
+    - 'variable': surface-mass_flux
+    - 'observation output filename': surface_outlet_flux.dat
+    - 'delimiter': ' '
+    - region: outlet
+    - functional: "observation data: extensive integral"
+    - location name: face
+    - name: 'direction normalized flux'
+      enable: true
+    - name: write interval
+      enabled: true
+      value: 10
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Start Cycle': 0
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+- type: observation
+  name: total water content
+  items:
+    - 'variable': water_content
+    - 'observation output filename': water_content.dat
+    - 'delimiter': ' '
+    - region: computational domain
+    - functional: "observation data: extensive integral"
+    - location name: cell
+    - name: write interval
+      enabled: true
+      value: 10
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Start Cycle': 0
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
