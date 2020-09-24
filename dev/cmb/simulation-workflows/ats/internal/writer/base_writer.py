@@ -196,11 +196,11 @@ class BaseWriter:
                 "array": ["Start Time", "Time Period", "Stop Time",],
                 "items": ["units"],  # NOTE: assumes all items are string
             },
+            "times": {
+                'array': ['times'],
+                'items': ['units'],
+            }
         }
-        # 'times': {
-        #     'array': ['times'],
-        #     'items': ['units'],
-        # },
         sub_items = [
             "cycles",  # Int
         ]
