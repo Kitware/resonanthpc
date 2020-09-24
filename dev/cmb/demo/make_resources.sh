@@ -50,6 +50,18 @@ pvpython $EXPORTER demo-04-superslab/demo.04_super_slab.smtk \
   -o demo-04-superslab/demo.04_super_slab.xml
 
 
+mkdir -p demo-05-spinup-gi
+cp ${TESTS}/test_demos/mesh.05_hillslope_noduff.smtk demo-05-spinup-gi/
+cp ${TESTS}/test_demos/hillslope_noduff.exo demo-05-spinup-gi/
+pvpython $BUILDER \
+  $TEMPLATE \
+  "${TESTS}/test_demos/demo.05_spinup_gi.yml" \
+  -m "demo-05-spinup-gi/mesh.05_hillslope_noduff.smtk" \
+  -o demo-05-spinup-gi/demo.05_spinup_gi.smtk
+pvpython $EXPORTER demo-05-spinup-gi/demo.05_spinup_gi.smtk \
+  -o demo-05-spinup-gi/demo.05_spinup_gi.xml
+
+
 # Rock Creek demo (incomplete!!!!)
 # pvpython $BUILDER \
 #   $TEMPLATE \

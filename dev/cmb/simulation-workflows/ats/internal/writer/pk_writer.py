@@ -270,6 +270,15 @@ class PKWriter(BaseWriter):
             func_group = ic_group.find("function")
             if func_group.isEnabled():
                 self._render_function(sub, func_group, cond_name)
+            column_group = ic_group.find("initialize from 1D column")
+            if column_group.isEnabled():
+                column_elem = self._new_list(ic_elem, "initialize from 1D column")
+                options = ["file", "z header", "f header", "coordinate orientation"]
+                self._render_items(column_elem, column_group, options)
+                # surface sideset
+                sideset_comp = column_group.find("surface sideset")
+                if sideset_comp is not None:
+                    self._new_param(column_elem, "surface sideset", "string", sideset_comp.value().name())
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",
