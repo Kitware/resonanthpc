@@ -50,16 +50,6 @@
       <String Name="file"></String>
       <String Name="x header"></String>
       <String Name="y header"></String>
-      <!-- 1D column file -->
-      <String Name="z header"></String>
-      <String Name="f header"></String>
-      <String Name="coordinate orientation"></String>
-      <Component Name="surface sideset">
-        <Accepts>
-          <!-- TODO: check this. May need to only be labeled sidest for type -->
-          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-        </Accepts>
-      </Component>
     </ChildrenDefinitions>
     <DiscreteInfo DefaultIndex="0">
       <Structure>
@@ -88,16 +78,6 @@
           <Item>file</Item>
           <Item>x header</Item>
           <Item>y header</Item>
-        </Items>
-      </Structure>
-      <Structure>
-        <Value>initialize from 1D column</Value>
-        <Items>
-          <Item>file</Item>
-          <Item>z header</Item>
-          <Item>f header</Item>
-          <Item>coordinate orientation</Item>
-          <Item>surface sideset</Item>
         </Items>
       </Structure>
     </DiscreteInfo>
