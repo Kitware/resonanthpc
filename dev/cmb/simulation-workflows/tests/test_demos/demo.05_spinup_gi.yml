@@ -15,7 +15,7 @@
   name: surface domain
 
 - type: region.labeled.surface
-  name: surface
+  name: surface region
   associate:
     - face: 2
 
@@ -32,9 +32,9 @@
 
 # Mesh (surface)
 - type: mesh.surface
-  name: surface mesh
+  name: surface
   associate:
-    - attribute: surface
+    - attribute: surface region
 
 
 # PK evaluators
@@ -96,7 +96,7 @@
             - 'f header': '/pressure'
             - 'coordinate orientation': depth
             - name: surface sideset
-              value: surface
+              value: surface region
     - name: water retention evaluator specs
       items:
         - name: use surface rel perm
@@ -125,7 +125,7 @@
   items:
     - name: domain name
       enabled: true
-      value: surface mesh
+      value: surface
     - verbosity level: high
     - primary variable key: surface-pressure
     - initial time step: 60.0
@@ -247,7 +247,7 @@
 
 - type: visualization driver
   items:
-    - 'domain': surface mesh
+    - 'domain': surface
     - 'file name base': visdump_surface
     - name: 'visualization times'
       enable: true

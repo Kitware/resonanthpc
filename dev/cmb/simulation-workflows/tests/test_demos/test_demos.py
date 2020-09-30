@@ -76,7 +76,7 @@ class Demo05SpinupGI(BaseTestCase):
     def test_demo(self):
         self.writer.generate_xml()
         xml_string = self.writer.get_xml_doc(pretty=True)
-        self._compare_xml_content(xml_string, True)
+        self._compare_xml_content(xml_string)
 
 
 if __name__ == "__main__":

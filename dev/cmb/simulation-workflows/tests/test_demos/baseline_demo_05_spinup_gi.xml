@@ -1,9 +1,9 @@
 <ParameterList name="Main">
   <ParameterList name="mesh">
-    <ParameterList name="surface mesh">
+    <ParameterList name="surface">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="surface parameters">
-        <Parameter name="surface sideset name" type="string" value="surface" />
+        <Parameter name="surface sideset name" type="string" value="surface region" />
       </ParameterList>
     </ParameterList>
     <ParameterList name="domain">
@@ -24,7 +24,7 @@
       <ParameterList name="region: all">
       </ParameterList>
     </ParameterList>
-    <ParameterList name="surface">
+    <ParameterList name="surface region">
       <ParameterList name="region: labeled set">
         <Parameter name="label" type="string" value="2" />
         <Parameter name="file" type="string" value="hillslope_noduff.exo" />
@@ -72,7 +72,7 @@
       <Parameter name="file name base" type="string" value="visdump" />
       <Parameter name="times" type="Array(double)" value="{1728000000.0}" />
     </ParameterList>
-    <ParameterList name="surface mesh">
+    <ParameterList name="surface">
       <Parameter name="file name base" type="string" value="visdump_surface" />
       <Parameter name="times" type="Array(double)" value="{1728000000.0}" />
     </ParameterList>
@@ -184,7 +184,7 @@
           <Parameter name="z header" type="string" value="/z" />
           <Parameter name="f header" type="string" value="/pressure" />
           <Parameter name="coordinate orientation" type="string" value="depth" />
-          <Parameter name="surface sideset" type="string" value="surface" />
+          <Parameter name="surface sideset" type="string" value="surface region" />
         </ParameterList>
       </ParameterList>
 
@@ -208,7 +208,7 @@
     <ParameterList name="surface flow">
       <Parameter name="PK type" type="string" value="overland flow, pressure basis" />
       <Parameter name="primary variable key" type="string" value="surface-pressure" />
-      <Parameter name="domain name" type="string" value="surface mesh" />
+      <Parameter name="domain name" type="string" value="surface" />
       <Parameter name="source term" type="bool" value="true" />
       <Parameter name="mass source in meters" type="bool" value="false" />
       <Parameter name="initial time step" type="double" value="60.0" />
