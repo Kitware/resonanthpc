@@ -1,0 +1,936 @@
+{
+  "id": "d4175e40-0ec7-412f-a67f-e3a44452bee6",
+  "links": null,
+  "modelFiles": [
+    "rock_creek.exo"
+  ],
+  "models": {
+    "c241b93c-389b-4a66-a624-9dbde59ffdd3": {
+      "0c9ac016-9791-4cbd-b75f-74315d7383fa": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "24aeadbb-d03c-4161-8f6d-ddf44809ac57": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "28410450-b3c0-4c32-b4c2-8568fd66c09c": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "51ff1ecf-d7da-44bf-91ba-22460299f681": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "531602a5-0a41-47a6-bc78-7509335e44dd": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "7be486a7-2cf8-4fcf-9068-0472db3a8a03": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "88ab0ac2-8c6d-4796-8cae-f3755b2aee87": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "a419293f-a095-49da-a840-30c295fe426f": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "a5c8b854-ed35-4ac0-853e-47b0c3978fa0": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "c241b93c-389b-4a66-a624-9dbde59ffdd3": {
+        "a": {
+          "b": [
+            [
+              17
+            ]
+          ],
+          "i": [
+            [
+              0
+            ],
+            [
+              1
+            ],
+            [
+              2
+            ],
+            [
+              3
+            ],
+            [
+              4
+            ],
+            [
+              5
+            ],
+            [
+              6
+            ],
+            [
+              7
+            ],
+            [
+              8
+            ],
+            [
+              9
+            ],
+            [
+              10
+            ],
+            [
+              11
+            ],
+            [
+              12
+            ],
+            [
+              13
+            ],
+            [
+              14
+            ],
+            [
+              15
+            ],
+            [
+              16
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 4104,
+        "r": [
+          "c37b43ab-26a5-4b18-b59d-fe1af0290bc9",
+          "24aeadbb-d03c-4161-8f6d-ddf44809ac57",
+          "51ff1ecf-d7da-44bf-91ba-22460299f681",
+          "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112",
+          "0c9ac016-9791-4cbd-b75f-74315d7383fa",
+          "28410450-b3c0-4c32-b4c2-8568fd66c09c",
+          "a5c8b854-ed35-4ac0-853e-47b0c3978fa0",
+          "7be486a7-2cf8-4fcf-9068-0472db3a8a03",
+          "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05",
+          "ef401ad1-f844-476d-b7e2-87ba9467df4f",
+          "531602a5-0a41-47a6-bc78-7509335e44dd",
+          "d94aba91-d53d-40a4-a399-ff7119819781",
+          "a419293f-a095-49da-a840-30c295fe426f",
+          "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8",
+          "88ab0ac2-8c6d-4796-8cae-f3755b2aee87",
+          "ed11bc45-b5bc-4eab-9a76-05d00ac43063",
+          "f3747915-5484-46d2-ba75-f14357869b9e",
+          "73338a97-7a6a-49a8-bddd-efd9ec004a2a"
+        ]
+      },
+      "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "c37b43ab-26a5-4b18-b59d-fe1af0290bc9": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "d94aba91-d53d-40a4-a399-ff7119819781": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "ed11bc45-b5bc-4eab-9a76-05d00ac43063": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "ef401ad1-f844-476d-b7e2-87ba9467df4f": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "f3747915-5484-46d2-ba75-f14357869b9e": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ],
+          "u": [
+            [
+              -1,
+              0,
+              -1
+            ],
+            [
+              -1,
+              0,
+              1
+            ]
+          ]
+        },
+        "d": 2,
+        "e": 260,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      },
+      "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112": {
+        "a": {
+          "e": [
+            [
+              0
+            ]
+          ]
+        },
+        "d": 3,
+        "e": 264,
+        "r": [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3"
+        ]
+      }
+    }
+  },
+  "name": "rock_creek",
+  "preservedUUIDs": [
+    "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+    "c37b43ab-26a5-4b18-b59d-fe1af0290bc9",
+    "24aeadbb-d03c-4161-8f6d-ddf44809ac57",
+    "51ff1ecf-d7da-44bf-91ba-22460299f681",
+    "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112",
+    "0c9ac016-9791-4cbd-b75f-74315d7383fa",
+    "28410450-b3c0-4c32-b4c2-8568fd66c09c",
+    "a5c8b854-ed35-4ac0-853e-47b0c3978fa0",
+    "7be486a7-2cf8-4fcf-9068-0472db3a8a03",
+    "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05",
+    "ef401ad1-f844-476d-b7e2-87ba9467df4f",
+    "531602a5-0a41-47a6-bc78-7509335e44dd",
+    "d94aba91-d53d-40a4-a399-ff7119819781",
+    "a419293f-a095-49da-a840-30c295fe426f",
+    "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8",
+    "88ab0ac2-8c6d-4796-8cae-f3755b2aee87",
+    "ed11bc45-b5bc-4eab-9a76-05d00ac43063",
+    "f3747915-5484-46d2-ba75-f14357869b9e"
+  ],
+  "properties": {
+    "unordered_map<uuid, double>": {},
+    "unordered_map<uuid, long>": {},
+    "unordered_map<uuid, string>": {},
+    "unordered_map<uuid, uuid>": {},
+    "unordered_map<uuid, vector<double>>": {},
+    "unordered_map<uuid, vector<long>>": {
+      "_geomstyle": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0
+          ]
+        ]
+      ],
+      "cell_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "embedding dimension": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            3
+          ]
+        ]
+      ],
+      "file order": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            -1
+          ]
+        ]
+      ],
+      "group_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "instance_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0
+          ]
+        ]
+      ],
+      "invalid_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0
+          ]
+        ]
+      ],
+      "model_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0
+          ]
+        ]
+      ],
+      "pedigree id": [
+        [
+          "d94aba91-d53d-40a4-a399-ff7119819781",
+          [
+            42
+          ]
+        ],
+        [
+          "a419293f-a095-49da-a840-30c295fe426f",
+          [
+            43
+          ]
+        ],
+        [
+          "28410450-b3c0-4c32-b4c2-8568fd66c09c",
+          [
+            999
+          ]
+        ],
+        [
+          "ef401ad1-f844-476d-b7e2-87ba9467df4f",
+          [
+            31
+          ]
+        ],
+        [
+          "531602a5-0a41-47a6-bc78-7509335e44dd",
+          [
+            41
+          ]
+        ],
+        [
+          "f3747915-5484-46d2-ba75-f14357869b9e",
+          [
+            95
+          ]
+        ],
+        [
+          "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05",
+          [
+            3
+          ]
+        ],
+        [
+          "88ab0ac2-8c6d-4796-8cae-f3755b2aee87",
+          [
+            71
+          ]
+        ],
+        [
+          "a5c8b854-ed35-4ac0-853e-47b0c3978fa0",
+          [
+            1
+          ]
+        ],
+        [
+          "ed11bc45-b5bc-4eab-9a76-05d00ac43063",
+          [
+            90
+          ]
+        ],
+        [
+          "24aeadbb-d03c-4161-8f6d-ddf44809ac57",
+          [
+            106
+          ]
+        ],
+        [
+          "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112",
+          [
+            205
+          ]
+        ],
+        [
+          "51ff1ecf-d7da-44bf-91ba-22460299f681",
+          [
+            201
+          ]
+        ],
+        [
+          "0c9ac016-9791-4cbd-b75f-74315d7383fa",
+          [
+            207
+          ]
+        ],
+        [
+          "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8",
+          [
+            52
+          ]
+        ],
+        [
+          "7be486a7-2cf8-4fcf-9068-0472db3a8a03",
+          [
+            2
+          ]
+        ],
+        [
+          "c37b43ab-26a5-4b18-b59d-fe1af0290bc9",
+          [
+            103
+          ]
+        ]
+      ],
+      "shell_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ],
+      "use_counters": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      ]
+    },
+    "unordered_map<uuid, vector<string>>": {
+      "_simple type": [
+        [
+          "d94aba91-d53d-40a4-a399-ff7119819781",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "a419293f-a095-49da-a840-30c295fe426f",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "28410450-b3c0-4c32-b4c2-8568fd66c09c",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "ef401ad1-f844-476d-b7e2-87ba9467df4f",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "531602a5-0a41-47a6-bc78-7509335e44dd",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "f3747915-5484-46d2-ba75-f14357869b9e",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "88ab0ac2-8c6d-4796-8cae-f3755b2aee87",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "a5c8b854-ed35-4ac0-853e-47b0c3978fa0",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "ed11bc45-b5bc-4eab-9a76-05d00ac43063",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "24aeadbb-d03c-4161-8f6d-ddf44809ac57",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            "file"
+          ]
+        ],
+        [
+          "51ff1ecf-d7da-44bf-91ba-22460299f681",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "0c9ac016-9791-4cbd-b75f-74315d7383fa",
+          [
+            "element block"
+          ]
+        ],
+        [
+          "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "7be486a7-2cf8-4fcf-9068-0472db3a8a03",
+          [
+            "side set"
+          ]
+        ],
+        [
+          "c37b43ab-26a5-4b18-b59d-fe1af0290bc9",
+          [
+            "element block"
+          ]
+        ]
+      ],
+      "name": [
+        [
+          "d94aba91-d53d-40a4-a399-ff7119819781",
+          [
+            "Unnamed set ID: 42"
+          ]
+        ],
+        [
+          "531602a5-0a41-47a6-bc78-7509335e44dd",
+          [
+            "Unnamed set ID: 41"
+          ]
+        ],
+        [
+          "a419293f-a095-49da-a840-30c295fe426f",
+          [
+            "Unnamed set ID: 43"
+          ]
+        ],
+        [
+          "28410450-b3c0-4c32-b4c2-8568fd66c09c",
+          [
+            "Unnamed block ID: 999"
+          ]
+        ],
+        [
+          "ef401ad1-f844-476d-b7e2-87ba9467df4f",
+          [
+            "Unnamed set ID: 31"
+          ]
+        ],
+        [
+          "f3747915-5484-46d2-ba75-f14357869b9e",
+          [
+            "Unnamed set ID: 95"
+          ]
+        ],
+        [
+          "9c9dfa34-4cf9-43d2-a42a-7e9c9b32ba05",
+          [
+            "Unnamed set ID: 3"
+          ]
+        ],
+        [
+          "0c9ac016-9791-4cbd-b75f-74315d7383fa",
+          [
+            "Unnamed block ID: 207"
+          ]
+        ],
+        [
+          "c2cc33df-7f9e-4c5d-bd4f-c344c9d430d8",
+          [
+            "Unnamed set ID: 52"
+          ]
+        ],
+        [
+          "7be486a7-2cf8-4fcf-9068-0472db3a8a03",
+          [
+            "Unnamed set ID: 2"
+          ]
+        ],
+        [
+          "ed11bc45-b5bc-4eab-9a76-05d00ac43063",
+          [
+            "Unnamed set ID: 90"
+          ]
+        ],
+        [
+          "fbd6f43d-ee31-4de6-8f26-2b1cd0f7f112",
+          [
+            "Unnamed block ID: 205"
+          ]
+        ],
+        [
+          "24aeadbb-d03c-4161-8f6d-ddf44809ac57",
+          [
+            "Unnamed block ID: 106"
+          ]
+        ],
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            "rock_creek"
+          ]
+        ],
+        [
+          "51ff1ecf-d7da-44bf-91ba-22460299f681",
+          [
+            "Unnamed block ID: 201"
+          ]
+        ],
+        [
+          "c37b43ab-26a5-4b18-b59d-fe1af0290bc9",
+          [
+            "Unnamed block ID: 103"
+          ]
+        ],
+        [
+          "88ab0ac2-8c6d-4796-8cae-f3755b2aee87",
+          [
+            "Unnamed set ID: 71"
+          ]
+        ],
+        [
+          "a5c8b854-ed35-4ac0-853e-47b0c3978fa0",
+          [
+            "Unnamed set ID: 1"
+          ]
+        ]
+      ],
+      "type": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            "exodus"
+          ]
+        ]
+      ],
+      "url": [
+        [
+          "c241b93c-389b-4a66-a624-9dbde59ffdd3",
+          [
+            "/Users/bane/Software/ResonantHPC/resonanthpc/dev/cmb/simulation-workflows/tests/test_rock_creek/data/rock_creek.exo"
+          ]
+        ]
+      ]
+    }
+  },
+  "type": "smtk::session::vtk::Resource",
+  "version": "3.1"
+}
