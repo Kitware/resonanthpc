@@ -47,11 +47,11 @@
       <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/elevation/standalone_elevation_evaluator.cc -->
       <ItemDefinitions>
         <Group Name="elevation function">
-          <xi:include href="templates/source/function.xml"/>
+          <xi:include href="templates/source/region-function.xml"/>
         </Group>
 
         <Group Name="slope function">
-          <xi:include href="templates/source/function.xml"/>
+          <xi:include href="templates/source/region-function.xml"/>
         </Group>
       </ItemDefinitions>
     </AttDef>

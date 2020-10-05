@@ -85,7 +85,7 @@
         <Void Name="constant in time" Optional="true" IsEnabledByDefault="false"></Void>
 
         <Group Name="function" Extensible="true">
-          <xi:include href="templates/source/function.xml"/>
+          <xi:include href="templates/source/region-function.xml"/>
         </Group>
 
       </ItemDefinitions>
