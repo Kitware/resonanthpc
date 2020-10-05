@@ -108,7 +108,7 @@
           items:
             - regions: computational domain
             - components: cell
-            - name: variable type
+            - name: function
               value: function-linear
               children:
                 - y0: 101325.0
@@ -364,7 +364,7 @@
         - function name: domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: function-tabular
           children:
             - name: forms
@@ -391,7 +391,7 @@
         - function name: domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55389.0
@@ -429,7 +429,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55389.0
@@ -445,7 +445,7 @@
         - function name: rest domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -461,7 +461,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.001002
@@ -477,7 +477,7 @@
         - function name: domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55389.0
@@ -493,7 +493,7 @@
         - function name: rest domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -508,7 +508,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.0
@@ -524,7 +524,7 @@
         - function name: surface
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.01986
@@ -546,21 +546,21 @@
         - - components: cell
           - function name: rest domain
           - regions: computational domain rest
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 0.4
         - - components: cell
           - function name: first slab
           - regions: computational domain first slab
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 0.4
         - - components: cell
           - function name: second slab
           - regions: computational domain second slab
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 0.1
@@ -600,21 +600,21 @@
         - - function name: rest domain
           - components: cell
           - regions: computational domain rest
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 2.8468e-11
         - - function name: first slab
           - components: cell
           - regions: computational domain first slab
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 7.117e-13
         - - function name: second slab
           - components: cell
           - regions: computational domain second slab
-          - name: variable type
+          - name: function
             value: constant
             children:
               - value: 2.8468e-14

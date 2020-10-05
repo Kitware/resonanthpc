@@ -288,7 +288,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -304,7 +304,7 @@
         - function name: rest domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -320,7 +320,7 @@
         - function name: rest domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -335,7 +335,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -350,7 +350,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -366,7 +366,7 @@
         - function name: computational domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.4
@@ -382,7 +382,7 @@
         - function name: computational domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.0e-12
@@ -398,7 +398,7 @@
         - function name: cells
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.15
@@ -413,7 +413,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.0
@@ -428,7 +428,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.576e-09
@@ -468,7 +468,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.00089

@@ -104,7 +104,7 @@
       items:
         - regions: surface domain
         - components: cell,face
-        - name: variable type
+        - name: function
           value: function-linear
           children:
             - y0: 0.0
@@ -120,7 +120,7 @@
       items:
         - regions: surface domain
         - components: cell
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.05
@@ -155,7 +155,7 @@
           items:
             - regions: surface domain
             - components: cell,boundary_face
-            - name: variable type
+            - name: function
               value: function-consant
               children:
                 - value: 101325.0
@@ -261,7 +261,7 @@
         - function name: domain rain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: function-tabular
           children:
             - name: tabular-data
@@ -311,7 +311,7 @@
       items:
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 3.6e-3
@@ -329,7 +329,7 @@
       items:
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 274.65

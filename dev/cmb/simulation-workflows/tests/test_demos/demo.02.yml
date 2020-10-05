@@ -147,7 +147,7 @@
           items:
             - regions: computational domain
             - components: cell
-            - name: variable type
+            - name: function
               value: function-linear
               children:
                 - y0: 101325.0
@@ -265,7 +265,7 @@
       items:
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.25
@@ -280,7 +280,7 @@
       items:
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 2.5e-12
@@ -295,7 +295,7 @@
       items:
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 273.65

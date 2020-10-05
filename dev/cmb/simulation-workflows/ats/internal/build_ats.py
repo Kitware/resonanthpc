@@ -5,6 +5,19 @@ import xml.etree.ElementInclude as EI
 import xml.etree.ElementTree as ET
 
 
+def loader(href, parse, encoding=None):
+    if parse == "xml":
+        with open(href, 'rb') as file:
+            data = ET.parse(file).getroot()
+            EI.include(data, loader=loader)
+    else:
+        if not encoding:
+            encoding = 'UTF-8'
+        with open(href, 'r', encoding=encoding) as file:
+            data = file.read()
+    return data
+
+
 def resolve_xinclude(source_folder, source_ext):
     """"""
     # Process all files in the source folder with the give extension
@@ -14,7 +27,7 @@ def resolve_xinclude(source_folder, source_ext):
         # print("Parsing", filepath)
         tree = ET.parse(filepath)
         root = tree.getroot()
-        EI.include(root)  # resolves xi:include elements
+        EI.include(root, loader=loader)  # resolves xi:include elements
 
         # Write output file
         filename = os.path.basename(filepath)
