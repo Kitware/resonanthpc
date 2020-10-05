@@ -286,3 +286,23 @@
   name: gravity
   items:
     - value: [0.0, 0.0, -9.80665]
+
+- type: transpiration distribution via rooting depth
+  name: transpiration
+
+- type: column sum evaluator
+  name: surface-total_transpiration
+  items:
+    - name: evaluator dependency
+      items:
+        - evaluator: transpiration
+
+- type: secondary variable from function
+  name: surface-manning_coefficient_2
+  associate:
+    - attribute: [surface-total_transpiration]
+  items:
+    - name: function
+      value: constant
+      children:
+        - value: 1.5

@@ -11,18 +11,51 @@
 
     <!-- ////////////////////////////////////////////////////////////////// -->
 
-    <AttDef Type="multiplicative evaluator" BaseType="field-evaluator-linker-base" Version="0">
+    <AttDef Type="dependent-evaluator-base" BaseType="field-evaluator-linker-base" Version="0" Abstract="true">
       <AssociationsDef Name="evaluator dependencies" Extensible="true" NumberOfRequiredValues="1">
         <Accepts>
           <Resource Name="smtk::attribute::Resource" Filter="attribute[type='field-evaluator-base']"></Resource>
         </Accepts>
       </AssociationsDef>
+    </AttDef>
+
+    <AttDef Type="multiplicative evaluator" BaseType="dependent-evaluator-base" Version="0">
       <ItemDefinitions>
         <!-- NOTE: all options here are set as optional because none are set in demos -->
         <Double Name="coefficient" Optional="true" IsEnabledByDefault="false">
           <DefaultValue>1.0</DefaultValue>
         </Double>
         <Void Name="enforce positivity" Optional="true" IsEnabledByDefault="false"></Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="column sum evaluator" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Group Name="evaluator dependency">
+          <ItemDefinitions>
+            <Component Name="evaluator">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='field-evaluator-base']"></Resource>
+              </Accepts>
+            </Component>
+            <Double Name="coefficient" Optional="true" IsEnabledByDefault="false"></Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="additive evaluator" BaseType="field-evaluator-linker-base" Version="0">
+      <ItemDefinitions>
+        <Group Name="evaluator dependencies" Extensible="true">
+          <ItemDefinitions>
+            <Component Name="evaluator">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='field-evaluator-base']"></Resource>
+              </Accepts>
+            </Component>
+            <Double Name="coefficient" Optional="true" IsEnabledByDefault="false"></Double>
+          </ItemDefinitions>
+        </Group>
       </ItemDefinitions>
     </AttDef>
 
@@ -213,6 +246,84 @@
             <Double Name="pore compressibility inflection point [Pa^-1]">
               <DefaultValue>0.0</DefaultValue>
             </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="depth" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Void Name="constant in time" Optional="true" IsEnabledByDefault="false"></Void>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="secondary variable from function" BaseType="dependent-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <xi:include href="templates/source/function.xml"/>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="snow melt rate" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions>
+        <Double Name="snow melt rate [mm day^-1 C^-1]">
+          <DefaultValue>2.74</DefaultValue>
+        </Double>
+        <Double Name="snow-ground transition depth [m]">
+          <DefaultValue>0.02</DefaultValue>
+        </Double>
+        <Double Name="air-snow temperature difference [C]">
+          <DefaultValue>2.0</DefaultValue>
+        </Double>
+        <!-- TODO: there are more: https://github.com/amanzi/ats/tree/master/src/pks/flow/constitutive_relations/sources/snow_meltrate_evaluator.cc -->
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="transpiration distribution via rooting depth" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions></ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="potential evapotranspiration" BaseType="field-evaluator-base" Version="0">
+      <ItemDefinitions></ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="rooting depth fraction, one PFT per cell" BaseType="field-evaluator-base" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/fe24b4aa1c73e9c60bdf9402c8b7514da67f6deb/src/pks/flow/constitutive_relations/sources/onepft_rooting_depth_fraction_evaluator.cc -->
+      <ItemDefinitions>
+        <Group Name="rooting_depth_fraction parameters">
+          <!-- https://github.com/amanzi/ats/blob/fe24b4aa1c73e9c60bdf9402c8b7514da67f6deb/src/pks/flow/constitutive_relations/sources/rooting_depth_fraction_model.cc -->
+          <ItemDefinitions>
+            <Component Name="region">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <Double Name="alpha">
+              <DefaultValue>7</DefaultValue>
+            </Double>
+            <Double Name="beta">
+              <DefaultValue>1.75</DefaultValue>
+            </Double>
+            <Double Name="max rooting depth [m]">
+              <DefaultValue>2.0</DefaultValue>
+            </Double>
+          </ItemDefinitions>
+        </Group>
+      </ItemDefinitions>
+    </AttDef>
+
+    <AttDef Type="plant wilting factor" BaseType="field-evaluator-base" Version="0">
+      <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/sources/plant_wilting_factor_evaluator.cc -->
+      <ItemDefinitions>
+        <Group Name="plant_wilting_factor parameters">
+          <!-- https://github.com/amanzi/ats/blob/master/src/pks/flow/constitutive_relations/sources/plant_wilting_factor_model.cc -->
+          <ItemDefinitions>
+            <Component Name="region">
+              <Accepts>
+                <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+              </Accepts>
+            </Component>
+            <Double Name="capillary pressure at fully open stomates [Pa]"></Double>
+            <Double Name="capillary pressure at wilting point [Pa]"></Double>
           </ItemDefinitions>
         </Group>
       </ItemDefinitions>

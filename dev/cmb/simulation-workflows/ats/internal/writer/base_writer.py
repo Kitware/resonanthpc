@@ -259,7 +259,7 @@ class BaseWriter:
 
         return
 
-    def _render_the_function(self, parent_elem, params):
+    def _render_function(self, parent_elem, params):
         """`params` is the `function` string item: att.find(_i, "function")"""
         func_type = params.value()
         if func_type == "constant":
@@ -296,11 +296,11 @@ class BaseWriter:
             options = ["file", "x header", "y header"]
             self._render_items(tabular_elem, params, options)
 
-    def _render_function(self, parent_elem, att, name=None, _i=0, _recursive=True):
+    def _render_region_function(self, parent_elem, att, name=None, _i=0, _recursive=True):
 
         if att.numberOfGroups() > 1 and _recursive:
             for i in range(att.numberOfGroups()):
-                self._render_function(
+                self._render_region_function(
                     parent_elem, att, name=None, _i=i, _recursive=False
                 )
             return
@@ -330,4 +330,4 @@ class BaseWriter:
 
         function_sub_elem = self._new_list(the_group, "function")
         params = att.find(_i, "function")
-        self._render_the_function(function_sub_elem, params)
+        self._render_function(function_sub_elem, params)

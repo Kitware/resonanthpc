@@ -182,12 +182,12 @@ class PKWriter(BaseWriter):
         elev_group = att.find("elevation function")
         ef_elem = self._new_list(eval_elem, "elevation function")
         # function
-        self._render_function(ef_elem, elev_group, "Elevation")
+        self._render_region_function(ef_elem, elev_group, "Elevation")
         ####
         slope_group = att.find("slope function")
         sf_elem = self._new_list(eval_elem, "slope function")
         # function
-        self._render_function(sf_elem, slope_group, "Slope magnitude Left/Right page")
+        self._render_region_function(sf_elem, slope_group, "Slope magnitude Left/Right page")
         return
 
     def _render_overland_conductivity_evaluator(self, pk_elem, att):
@@ -269,7 +269,7 @@ class PKWriter(BaseWriter):
             cond_name = ic_group.find("condition name").value()
             func_group = ic_group.find("function")
             if func_group.isEnabled():
-                self._render_function(sub, func_group, cond_name)
+                self._render_region_function(sub, func_group, cond_name)
             column_group = ic_group.find("initialize from 1D column")
             if column_group.isEnabled():
                 column_elem = self._new_list(ic_elem, "initialize from 1D column")

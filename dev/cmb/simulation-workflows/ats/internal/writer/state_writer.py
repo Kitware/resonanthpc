@@ -123,11 +123,9 @@ class StateWriter(BaseWriter):
         self._render_items(fe_elem, att, options)
         function_elem = self._new_list(fe_elem, "function")
         # Function list
-        self._render_function(function_elem, att.findGroup("function"))
+        self._render_region_function(function_elem, att.findGroup("function"))
 
-    def render_multiplicative_evaluator(self, fe_elem, att):
-        options = ["coefficient", "enforce positivity"]
-        self._render_items(fe_elem, att, options)
+    def _render_dependent_evaluator_base(self, fe_elem, att):
         assocs = att.associations()
         value_list = list()
         for i in range(assocs.numberOfValues()):
@@ -136,6 +134,88 @@ class StateWriter(BaseWriter):
                 value_list.append(value_att.name())
         linked_fes = r"{" + ", ".join(value_list) + r"}"
         self._new_param(fe_elem, "evaluator dependencies", "Array(string)", linked_fes)
+
+    def render_multiplicative_evaluator(self, fe_elem, att):
+        self._render_dependent_evaluator_base(fe_elem, att)
+        options = ["coefficient", "enforce positivity"]
+        self._render_items(fe_elem, att, options)
+
+    def render_secondary_variable_from_function(self, fe_elem, att):
+        self._render_dependent_evaluator_base(fe_elem, att)
+        function_elem = self._new_list(fe_elem, "function")
+        # Function list
+        self._render_function(function_elem, att.find("function"))
+
+    def render_column_sum_evaluator(self, fe_elem, att):
+        depends = att.findGroup("evaluator dependency")
+        name = depends.find("evaluator").value().name()
+        coef_a = depends.find("coefficient")
+        self._new_param(fe_elem, "evaluator dependency", "string", name)
+        if coef_a.isEnabled():
+            self._new_param(fe_elem, name + " coefficient", "double", FLOAT_FORMAT.format(coef_a.value()))
+
+    def render_additive_evaluator(self, fe_elem, att):
+        depends = att.findGroup("evaluator dependencies")
+        evals = {}
+        for i in range(depends.numberOfGroups()):
+            name = depends.find(i, "evaluator").value().name()
+            coef_a = depends.find(i, "coefficient")
+            if coef_a.isEnabled():
+                evals[name] = coef_a.value()
+            else:
+                evals[name] = None
+        linked_fes = r"{" + ", ".join(evals.keys()) + r"}"
+        self._new_param(fe_elem, "evaluator dependencies", "Array(string)", linked_fes)
+        for name, coef in evals.items():
+            if coef is not None:
+                self._new_param(fe_elem, name + " coefficient", "double", FLOAT_FORMAT.format(coef))
+
+    def render_depth(self, fe_elem, att):
+        options = [
+            "constant in time",
+        ]
+        self._render_items(fe_elem, att, options)
+
+    def render_snow_melt_rate(self, fe_elem, att):
+        options = [
+            "snow melt rate [mm day^-1 C^-1]",
+            "snow-ground transition depth [m]",
+            "air-snow temperature difference [C]",
+        ]
+        self._render_items(fe_elem, att, options)
+
+    def render_transpiration_distribution_via_rooting_depth(self, fe_elem, att):
+        pass
+
+    def render_potential_evapotranspiration(self, fe_elem, att):
+        pass
+
+    def render_rooting_depth_fraction(self, fe_elem, att):
+        params_group = att.findGroup("rooting_depth_fraction parameters")
+        options = [
+            "alpha",
+            "beta",
+            "max rooting depth [m]",
+        ]
+        params_elem = self._new_list(fe_elem, "rooting_depth_fraction parameters")
+        # TODO: should `broadleaf_deciduous` be able to be changed?
+        leaf_elem = self._new_list(params_elem, "broadleaf_deciduous")
+        self._render_items(leaf_elem, params_group, options)
+        region_name = params_group.find("region").value().name()
+        self._new_param(leaf_elem, "region", "string", region_name)
+
+    def render_plant_wilting_factor(self, fe_elem, att):
+        params_group = att.findGroup("plant_wilting_factor parameters")
+        options = [
+            "capillary pressure at fully open stomates [Pa]",
+            "capillary pressure at wilting point [Pa]",
+        ]
+        params_elem = self._new_list(fe_elem, "plant_wilting_factor parameters")
+        # TODO: should `broadleaf_deciduous` be able to be changed?
+        leaf_elem = self._new_list(params_elem, "broadleaf_deciduous")
+        self._render_items(leaf_elem, params_group, options)
+        region_name = params_group.find("region").value().name()
+        self._new_param(leaf_elem, "region", "string", region_name)
 
     def write(self, xml_root):
         """Perform the XML write out."""
@@ -154,6 +234,15 @@ class StateWriter(BaseWriter):
             "eos": self.render_eos,
             "independent variable": self.render_independent_variable,
             "multiplicative evaluator": self.render_multiplicative_evaluator,
+            "depth": self.render_depth,
+            "secondary variable from function": self.render_secondary_variable_from_function,
+            "additive evaluator": self.render_additive_evaluator,
+            "column sum evaluator": self.render_column_sum_evaluator,
+            "snow melt rate": self.render_snow_melt_rate,
+            "transpiration distribution via rooting depth": self.render_transpiration_distribution_via_rooting_depth,
+            "potential evapotranspiration": self.render_potential_evapotranspiration,
+            "rooting depth fraction, one PFT per cell": self.render_rooting_depth_fraction,
+            "plant wilting factor": self.render_plant_wilting_factor,
         }
 
         fe_list_elem = self._new_list(state_elem, "field evaluators")
