@@ -1,6 +1,5 @@
 import glob
 import os
-import shutil
 import xml.etree.ElementInclude as EI
 import xml.etree.ElementTree as ET
 
@@ -11,10 +10,7 @@ def loader(href, parse, encoding=None):
             data = ET.parse(file).getroot()
             EI.include(data, loader=loader)
     else:
-        if not encoding:
-            encoding = 'UTF-8'
-        with open(href, 'r', encoding=encoding) as file:
-            data = file.read()
+        raise RuntimeError("Unable to handle recursive include.")
     return data
 
 
