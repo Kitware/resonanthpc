@@ -37,5 +37,15 @@
       </ItemDefinitions>
     </AttDef>
 
+    <AttDef Type="weak MPC" Label="weak MPC" BaseType="pk-bdf" Version="0">
+      <ItemDefinitions>
+        <Component Name="PKs" Extensible="true">
+          <Accepts>
+            <Resource Name="smtk::attribute::Resource" Filter="attribute[type='pk-base']"></Resource>
+          </Accepts>
+        </Component>
+      </ItemDefinitions>
+    </AttDef>
+
   </Definitions>
 </SMTK_AttributeResource>

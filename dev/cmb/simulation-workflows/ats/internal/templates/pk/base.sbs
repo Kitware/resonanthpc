@@ -232,8 +232,11 @@
           </ItemDefinitions>
         </Group>
 
+        <Double Name="absolute error tolerance" Optional="true">
+          <DefaultValue>550.0</DefaultValue>
+        </Double>
+
         <!-- TODO: conserved quantity key -->
-        <!-- TODO: absolute error tolerance -->
         <!-- TODO: relative error tolerance -->
         <!-- TODO: flux error tolerance -->
 

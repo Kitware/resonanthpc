@@ -458,6 +458,12 @@ class PKWriter(BaseWriter):
 
         return
 
+    def _render_pk_weak(self, pk_elem, att):
+        raise NotImplementedError()
+
+    def _render_pk_surface_balance(self, pk_elem, att):
+        raise NotImplementedError()
+
     def write(self, xml_root):
         """Perform the XML write out."""
         pks_elem = self._new_list(xml_root, "PKs")
@@ -467,6 +473,8 @@ class PKWriter(BaseWriter):
             "richards steady state": self._render_pk_richards_steady_state,
             "overland flow, pressure basis": self._render_pk_overland_pressure,
             "coupled water": self._render_pk_coupled_water,
+            "weak MPC": self._render_pk_weak,
+            "general surface balance": self._render_pk_surface_balance,
         }
 
         # Fetch the cycle driver to find out which PK is chosen

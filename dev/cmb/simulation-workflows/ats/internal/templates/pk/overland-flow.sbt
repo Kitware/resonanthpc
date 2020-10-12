@@ -10,10 +10,6 @@
       </AssociationsDef> -->
       <ItemDefinitions>
 
-        <!-- absolute error tolerance (550) -->
-        <Double Name="absolute error tolerance">
-          <DefaultValue>550</DefaultValue>
-        </Double>
         <!-- limit correction to pressure change [Pa] (-1) -->
         <Double Name="limit correction to pressure change [Pa]">
           <DefaultValue>-1</DefaultValue>
