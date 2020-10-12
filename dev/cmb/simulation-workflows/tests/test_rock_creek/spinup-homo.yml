@@ -271,7 +271,7 @@
       enabled: true
       items:
         - condition name: initial pressure cells
-        - name: function
+        - name: condition type
           enabled: false
         - name: initialize from 1D column
           enabled: true
@@ -320,7 +320,7 @@
       items:
         - name: initialize surface head from subsurface
           enabled: true
-        - name: function
+        - name: condition type
           enabled: false
     - name: boundary conditions
       enabled: true

@@ -5,5 +5,6 @@
     <File>internal/templates/pk/richards.sbt</File>
     <File>internal/templates/pk/overland-flow.sbt</File>
     <File>internal/templates/pk/coupled.sbt</File>
+    <File>internal/templates/pk/surface-balance.sbt</File>
   </Includes>
 </SMTK_AttributeResource>

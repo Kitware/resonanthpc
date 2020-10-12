@@ -143,24 +143,27 @@
       enabled: true
       items:
         - initialize faces from cells: true
-        - name: function
-          items:
-            - regions: computational domain
-            - components: cell
+        - name: condition type
+          value: function
+          children:
             - name: function
-              value: function-linear
-              children:
-                - y0: 101325.0
-                - name: linear-data
-                  subgroups:
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 7.0
-                      - gradient: -9806.2306853
+              items:
+                - regions: computational domain
+                - components: cell
+                - name: function
+                  value: function-linear
+                  children:
+                    - y0: 101325.0
+                    - name: linear-data
+                      subgroups:
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 7.0
+                          - gradient: -9806.2306853
     - name: water retention evaluator specs
       items:
         - name: WRM evaluators

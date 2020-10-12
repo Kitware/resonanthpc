@@ -265,11 +265,25 @@ class PKWriter(BaseWriter):
         ic_elem = self._new_list(pk_elem, "initial condition")
         self._render_items(ic_elem, ic_group, ic_options)
         if ic_group.isEnabled():
-            sub = self._new_list(ic_elem, "function")
             cond_name = ic_group.find("condition name").value()
-            func_group = ic_group.find("function")
-            if func_group.isEnabled():
-                self._render_region_function(sub, func_group, cond_name)
+            cond_type = ic_group.find("condition type")
+            if cond_type.value() == "scalar field":
+                # Handle function
+                func_group = cond_type.find("function")
+                sub = self._new_list(ic_elem, "function")
+                if func_group.isEnabled():
+                    self._render_region_function(sub, func_group, cond_name)
+            elif cond_type.value() == "constant scalar":
+                # handle scalar value
+                sub = self._new_list(ic_elem, cond_name)
+                value = FLOAT_FORMAT.format(cond_type.find("scalar value").value())
+                self._new_param(sub, "value", "double", value)
+            elif cond_type.value() == "constant vector 2d":
+                raise NotImplementedError()
+                # handle vector values
+            elif cond_type.value() == "constant vector 3d":
+                raise NotImplementedError()
+            # Column
             column_group = ic_group.find("initialize from 1D column")
             if column_group.isEnabled():
                 column_elem = self._new_list(ic_elem, "initialize from 1D column")

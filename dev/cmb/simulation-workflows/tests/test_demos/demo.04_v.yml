@@ -141,24 +141,27 @@
       enabled: true
       items:
         - condition name: initial pressure cells
-        - name: function
-          items:
-            - regions: computational domain
-            - components: cell,face
+        - name: condition type
+          value: function
+          children:
             - name: function
-              value: function-linear
-              children:
-                - y0: 101325.0
-                - name: linear-data
-                  subgroups:
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 4.0
-                      - gradient: -9806.23
+              items:
+                - regions: computational domain
+                - components: cell,face
+                - name: function
+                  value: function-linear
+                  children:
+                    - y0: 101325.0
+                    - name: linear-data
+                      subgroups:
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 4.0
+                          - gradient: -9806.23
     - name: water retention evaluator specs
       items:
         - name: use surface rel perm
@@ -197,7 +200,7 @@
       items:
         - name: initialize surface head from subsurface
           enabled: true
-        - name: function
+        - name: condition type
           enabled: false
     - name: diffusion
       enabled: true

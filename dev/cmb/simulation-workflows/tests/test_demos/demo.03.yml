@@ -151,14 +151,17 @@
       enabled: true
       items:
         - condition name: initial pressure
-        - name: function
-          items:
-            - regions: surface domain
-            - components: cell,boundary_face
+        - name: condition type
+          value: function
+          children:
             - name: function
-              value: function-consant
-              children:
-                - value: 101325.0
+              items:
+                - regions: surface domain
+                - components: cell,boundary_face
+                - name: function
+                  value: function-consant
+                  children:
+                    - value: 101325.0
     - name: debugger
       items:
         - name: debug cells
