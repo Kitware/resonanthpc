@@ -479,10 +479,16 @@ class PKWriter(BaseWriter):
         return
 
     def _render_pk_weak(self, pk_elem, att):
-        raise NotImplementedError()
+        pks_comp = att.find("PKs")
+        value_list = [pks_comp.value(k).name() for k in range(pks_comp.numberOfValues())]
+        order = r"{" + ",".join(value_list) + r"}"
+        self._new_param(pk_elem, "PKs order", "Array(string)", order)
+        self._render_pk_bdf(pk_elem, att)
 
     def _render_pk_surface_balance(self, pk_elem, att):
-        raise NotImplementedError()
+        self._render_pk_physical_bdf(pk_elem, att)
+        options = ["modify predictor positivity preserving"]
+        self._render_items(pk_elem, att, options)
 
     def write(self, xml_root):
         """Perform the XML write out."""
