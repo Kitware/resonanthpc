@@ -99,6 +99,12 @@
                 </Component>
               </ItemDefinitions>
             </Group>
+
+            <Group Name="restart from file" Optional="true" IsEnabledByDefault="false">
+              <ItemDefinitions>
+                <String Name="restart file"></String>
+              </ItemDefinitions>
+            </Group>
           </ItemDefinitions>
         </Group>
 
@@ -273,7 +279,8 @@
           <DefaultValue>550.0</DefaultValue>
         </Double>
 
-        <!-- TODO: conserved quantity key -->
+        <String Name="conserved quantity key" Optional="true" IsEnabledByDefault="false"></String>
+
         <!-- TODO: relative error tolerance -->
         <!-- TODO: flux error tolerance -->
 

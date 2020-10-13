@@ -293,6 +293,11 @@ class PKWriter(BaseWriter):
                 sideset_comp = column_group.find("surface sideset")
                 if sideset_comp is not None:
                     self._new_param(column_elem, "surface sideset", "string", sideset_comp.value().name())
+            # restart from file
+            restart = ic_group.find("restart from file")
+            if restart.isEnabled():
+                path = restart.find("restart file").value()
+                self._new_param(ic_elem, "restart file", "string", path)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",
@@ -366,6 +371,8 @@ class PKWriter(BaseWriter):
             "Newton correction",
             "scaled constraint equation",
             "constraint equation scaling cutoff",
+            "conserved quantity key",
+            "absolute error tolerance",
         ]
         diff_elem = self._new_list(pk_elem, "diffusion")
         self._render_items(diff_elem, diff_group, diff_options)
@@ -437,7 +444,6 @@ class PKWriter(BaseWriter):
     def _render_pk_overland_pressure(self, pk_elem, att):
         self._render_pk_physical_bdf(pk_elem, att)
         options = [
-            "absolute error tolerance",
             "imit correction to pressure change [Pa]",
             "limit correction to pressure change when crossing atmospheric [Pa]",
             "allow no negative ponded depths",
