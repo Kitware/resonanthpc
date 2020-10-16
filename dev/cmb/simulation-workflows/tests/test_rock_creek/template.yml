@@ -1,0 +1,818 @@
+---
+# build_attributes.py input for demo04
+
+# Mesh
+- type: mesh.resource
+  name: domain
+  items:
+    - resource: model
+
+# Region
+- type: region.all
+  name: computational domain
+
+- type: region.all
+  name: surface domain
+
+- type: region.labeled.surface
+  name: surface region
+  associate:
+    - face: 2
+
+- type: region.labeled.surface
+  name: bottom face
+  associate:
+    - face: 1
+
+# Mesh (surface)
+- type: mesh.surface
+  name: surface
+  associate:
+    - attribute: surface region
+
+- type: mesh.aliased
+  name: snow
+  items:
+    - alias: surface
+
+
+######################################################################
+
+# Visualization
+- type: visualization driver
+  items:
+    - 'domain': domain
+    - 'file name base': visdump
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+- type: visualization driver
+  items:
+    - 'domain': surface
+    - 'file name base': visdump_surface
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+- type: visualization driver
+  items:
+    - 'domain': snow
+    - 'file name base': visdump_snow
+    - name: 'visualization times'
+      enable: true
+      items:
+        - name: cycles start period stop
+          enable: true
+          items:
+            - 'Cycle Period': 1
+            - name: Stop Cycle
+              enable: true
+              value: -1
+
+# Checkpoint (not used)
+
+
+# Observations
+- type: observation
+  name: surface outlet flux
+  items:
+    - 'variable': surface-mass_flux
+    - 'observation output filename': surface_outlet_flux.dat
+    - 'delimiter': ' '
+    - region: bottom face
+    - functional: "observation data: extensive integral"
+    - location name: face
+    - name: 'direction normalized flux'
+      enable: true
+    - name: write interval
+      enabled: true
+      value: 30
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Start Time': 0
+            - 'Time Period': 86400.0
+            - name: Stop Time
+              enable: true
+              value: -1
+
+- type: observation
+  name: surface-transpiration_mps
+  items:
+    - 'variable': surface-potential_transpiration_mps
+    - 'observation output filename': surface-potential_transpiration_mps.dat
+    - 'delimiter': ' '
+    - region: surface domain
+    - functional: "observation data: extensive integral"
+    - location name: cell
+    - name: write interval
+      enabled: true
+      value: 30
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Start Time': 0
+            - 'Time Period': 86400.0
+            - name: Stop Time
+              enable: true
+              value: -1
+
+- type: observation
+  name: total_transpiration
+  items:
+    - 'variable': surface-total_transpiration
+    - 'observation output filename': surface-total_transpiration.dat
+    - 'delimiter': ' '
+    - region: surface domain
+    - functional: "observation data: extensive integral"
+    - location name: cell
+    - name: write interval
+      enabled: true
+      value: 30
+    - name: 'observation times'
+      enable: true
+      items:
+        - name: times start period stop
+          enable: true
+          items:
+            - 'Start Time': 0
+            - 'Time Period': 86400.0
+            - name: Stop Time
+              enable: true
+              value: -1
+
+
+# State initial conditions
+- type: ic-const-scalar
+  name: atmospheric_pressure
+  items:
+    - value: 101325.0
+
+- type: ic-const-vector
+  name: gravity
+  items:
+    - value: [0.0, 0.0, -9.80665]
+
+
+######################################################################
+
+# PK evaluators
+- type: overland conductivity evaluator
+  name: overland-conductivity-evaluator
+  items:
+    - name: overland conductivity type
+      value: manning
+      children:
+        - Manning exponent: 0.666666666667
+        - slope regularization epsilon: 0.01
+
+# preconditioner
+- type: boomer amg
+  name: preconditioner-boomer-amg-0
+  items:
+    - cycle applications: 1 #iterations?
+    - smoother sweeps: 1
+    - strong threshold: 0.85
+    - tolerance: 0.0
+
+- type: block ilu
+  name: block-ilu-snow-storage
+
+# Linear solver
+- type: gmres
+  name: linear-solver-0
+  items:
+    - preconditioning strategy: left
+    - error tolerance: 1.0e-6
+    - name: convergence criteria
+      items:
+        - name: relative rhs
+          enabled: false
+        - name: relative residual
+          enabled: true
+        - name: absolute residual
+          enabled: false
+        - name: make one iteration
+          enabled: true
+    - maximum number of iterations: 80
+
+
+# Time integrator
+- type: time integrator
+  name: time-integrator-0
+  items:
+    - 'initial time step': 86400.0
+    - name: 'nka_bt_ats parameters'
+      items:
+        - name: 'limit iterations'
+          value: 21
+        - name: 'diverged tolerance'
+          value: 1000000.0
+        - name: 'nonlinear tolerance'
+          value: 1.0e-06
+        - name: 'backtrack tolerance'
+          value: 0.0001
+        - name: 'monitor'
+          value: 'monitor residual'
+        - name: 'nka lag iterations'
+          value: 2
+        - name: 'max backtrack steps'
+          value: 5
+        - name: 'backtrack lag'
+          value: 0
+        - name: 'backtrack factor'
+          value: 0.5
+    - name: 'timestep controller smarter parameters'
+      items:
+        - name: 'min iterations'
+          value: 10
+        - name: 'max iterations'
+          value: 18
+        - name: 'max time step'
+          value: 10000000.0
+        - name: 'min time step'
+          value: 1.0e-10
+        - name: 'time step increase factor'
+          value: 2.0
+        - name: 'time step reduction factor'
+          value: 0.5
+        - name: 'growth wait after fail'
+          value: 2
+        - name: 'count before increasing increase factor'
+          value: 2
+
+
+# Process Kernels
+- type: richards flow
+  name: flow
+  items:
+    - verbosity level: medium
+    - primary variable key: pressure
+    - permeability rescaling: 10000000.0
+    - initial time step: 10.0
+    - name: initial condition
+      enabled: true
+      items:
+        - name: condition type
+          enabled: true
+          value: restart from file
+          children:
+            - restart file: '../spinup/spinup-homo/checkpoint_final.h5'
+    - name: water retention evaluator specs
+      items:
+        - name: use surface rel perm
+          enabled: true
+        - name: WRM evaluators
+          subgroups:
+            - - region: computational domain
+              - name: WRM Type
+                value: van Genuchten
+                children:
+                  - van Genuchten alpha [Pa^-1]: 5.0e-4
+                  - van Genuchten m [-]: 1.39
+                  - residual saturation [-]: 0.18
+                  - smoothing interval width [saturation]: 0.1
+    - name: debugger
+      items:
+        - name: debug cells
+          enabled: false
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "mfd: two-point flux approximation"
+    - name: source term
+      enabled: true
+      items:
+        - name: mass source in meters
+          enabled: false
+        - name: source key
+          enabled: true
+          value: mass_source
+    # - clobber surface rel perm: false
+
+
+- type: overland flow, pressure basis
+  name: overland flow
+  items:
+    - name: domain name
+      enabled: true
+      value: surface
+    - verbosity level: high
+    - primary variable key: surface-pressure
+    - initial time step: 10.0
+    - name: initial condition
+      enabled: true
+      items:
+        - name: initialize surface head from subsurface
+          enabled: true
+        - name: condition type
+          enabled: false
+    - name: boundary conditions
+      enabled: true
+      subgroups:
+        - - BC name: surface
+          - regions: bottom face
+          - name: boundary type
+            value: seepage face head
+            children:
+              - BC value: 5.00e-01
+    - name: diffusion
+      enabled: true
+      items:
+        - discretization primary: "fv: default"
+    - name: source term
+      enabled: true
+      items:
+        - name: mass source in meters
+          enabled: true
+        - name: source key
+          enabled: true
+          value: surface-source_sink
+    - name: evaluators
+      enabled: true
+      value: overland-conductivity-evaluator
+
+- type: coupled water
+  name: surface-subsurface coupler
+  items:
+    - 'subsurface pk': flow
+    - 'surface pk': overland flow
+    - verbosity level: medium
+    - initial time step: 5.0
+    - name: water delegate
+      items:
+        - name: modify predictor damp and cap the water spurt
+          enabled: true
+        - name: damp and cap the water spurt
+          enabled: true
+        - cap over atmospheric: 0.001
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'preconditioner-boomer-amg-0'
+    - name: linear solver
+      enabled: true
+      value: 'linear-solver-0'
+
+
+- type: general surface balance
+  name: snow storage
+  items:
+    - primary variable key: snow-water_equivalent
+    - name: conserved quantity key
+      enabled: true
+      value: snow-water_content
+    - name: domain name
+      enabled: true
+      value: snow
+    - name: source term
+      enabled: true
+      items:
+        - name: mass source in meters
+          enabled: false
+        - name: source term is differentiable
+          enabled: false
+        - name: source key
+          enabled: true
+          value: snow-source_sink
+    - name: modify predictor positivity preserving
+      enabled: true
+    - initial time step: 10.0
+    - name: time integrator
+      enabled: true
+      value: 'time-integrator-0'
+    - name: preconditioner
+      enabled: true
+      value: 'block-ilu-snow-storage'
+    - name: initial condition
+      enabled: true
+      items:
+        - name: condition type
+          value: constant scalar
+          children:
+            - name: scalar value
+              value: 0.0
+
+
+- type: weak MPC
+  name: water balance
+  items:
+    - 'PKs': [attribute, snow storage, surface-subsurface coupler]
+
+
+
+
+# Coordinator (action = edit)
+- action: edit
+  type: cycle driver
+  items:
+    - name: end-spec
+      children:
+      - 'end time': 365.0
+      - 'end time units': d
+    - name: 'wallclock duration [hrs]'
+      enabled: true
+      value: 23.0
+    - 'PK tree': water balance
+
+
+
+
+######################################################################
+
+# State
+# State field evaluators
+- type: capillary pressure, atmospheric gas over liquid
+  name: capillary_pressure_gas_liq
+
+- type: compressible porosity
+  name: porosity
+  items:
+    - region: computational domain
+
+- type: independent variable
+  name: molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: function
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: computational domain
+        - name: function
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: surface-mass_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: constant
+          children:
+            - value: 997.0
+
+- type: independent variable
+  name: surface-molar_density_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: surface-source_molar_density
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: constant
+          children:
+            - value: 55000.0
+
+- type: independent variable
+  name: base_porosity
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell
+        - regions: computational domain
+        - name: function
+          value: constant
+          children:
+            - value: 0.25
+
+- type: independent variable
+  name: permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: domain
+        - components: cell
+        - regions: computational domain
+        - name: function
+          value: constant
+          children:
+            - value: 2.5e-12
+
+- type: independent variable
+  name: surface-relative_permeability
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: constant
+          children:
+            - value: 1.0
+
+- type: independent variable
+  name: surface-precipitation
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: precipitation rain [m s^-1]
+
+- type: overland pressure water content
+  name: surface-water_content
+
+- type: ponded depth
+  name: surface-ponded_depth
+
+- type: richards water content
+  name: water_content
+
+- type: independent variable
+  name: viscosity_liquid
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - function name: rest domain
+        - components: cell,boundary_face
+        - regions: computational domain
+        - name: function
+          value: constant
+          children:
+            - value: 0.00089
+
+
+- type: independent variable
+  name: surface-shortwave_radiation
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: incoming shortwave radiation [W m^-2]
+
+- type: independent variable
+  name: surface-relative_humidity
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: relative humidity [-]
+
+- type: independent variable
+  name: surface-air_temperature_inter
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: previous time [s]
+            - y header: air temperature [K]
+
+- type: independent variable
+  name: surface-air_temperature
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: air temperature [K]
+
+
+- type: independent variable
+  name: snow-precipitation
+  items:
+    - name: 'constant in time'
+      enabled: true
+      value: true
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: precipitation snow [m SWE s^-1]
+
+
+
+# - type: multiplicative evaluator
+#   name: snow-water_content
+#   associate:
+#     - attribute: [snow-cell_volume, snow-water_equivalent]
+
+
+- type: depth
+  name: depth
+  items:
+    - name: constant in time
+      enabled: true
+
+- type: transpiration distribution via rooting depth
+  name: transpiration
+
+- type: potential evapotranspiration
+  name: surface-potential_transpiration_mps
+
+
+- type: rooting depth fraction, one PFT per cell
+  name: rooting_depth_fraction
+  items:
+    - name: rooting_depth_fraction parameters
+      items:
+        - region: surface domain
+        - alpha: 7
+        - beta: 1.75
+        - max rooting depth [m]: 1.5
+
+- type: plant wilting factor
+  name: plant_wilting_factor
+  items:
+    - name: plant_wilting_factor parameters
+      items:
+        - region: surface domain
+        - capillary pressure at fully open stomates [Pa]: 0.35e+6
+        - capillary pressure at wilting point [Pa]: 2.24e+6
+
+- type: snow melt rate
+  name: snow-melt
+
+- type: additive evaluator
+  name: snow-source_sink
+  items:
+    - name: evaluator dependencies
+      subgroups:
+        - - evaluator: snow-precipitation
+        - - evaluator: snow-melt
+          - name: coefficient
+            enabled: true
+            value: -1
+
+
+- type: independent variable
+  name: surface-precipitation_rain
+  items:
+    - name: function
+      items:
+        - components: cell
+        - regions: surface domain
+        - name: function
+          value: function-file
+          children:
+            - file: daymet_raw_38p9600_-106p9900.h5
+            - x header: time [s]
+            - y header: precipitation rain [m s^-1]
+
+- type: additive evaluator
+  name: surface-source_sink
+  items:
+    - name: evaluator dependencies
+      subgroups:
+        - - evaluator: snow-melt
+        - - evaluator: surface-precipitation_rain
+
+- type: additive evaluator
+  name: mass_source
+  items:
+    - name: evaluator dependencies
+      subgroups:
+        - - evaluator: transpiration
+          - name: coefficient
+            enabled: true
+            value: -1
+
+- type: column sum evaluator
+  name: surface-total_transpiration
+  items:
+    - name: evaluator dependency
+      items:
+        - evaluator: transpiration
+
+- type: secondary variable from function
+  name: surface-manning_coefficient
+  associate:
+    - attribute: [surface-total_transpiration]
+  items:
+    - name: function
+      value: constant
+      children:
+        - value: 1.5
+
+
+- type: multiplicative evaluator
+  name: surface-potential_transpiration
+  associate:
+    - attribute: [surface-potential_transpiration_mps,surface-molar_density_liquid]
