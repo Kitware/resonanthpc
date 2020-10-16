@@ -43,17 +43,34 @@
             <String Name="condition name">
               <DefaultValue>initial pressure cells</DefaultValue>
             </String>
+
+            <!-- TODO: these two bools are not always relevant. -->
+            <!-- From Ethan: `initialize faces from cells is only relevant for PKs whose primary variables include face unknowns. Those are effectively only those where a gradient is applied, so Richards, overland flow, energy equations, but not surface balance general` -->
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
             <Void Name="initialize surface head from subsurface" Optional="true" IsEnabledByDefault="false"></Void>
 
             <String Name="condition type" Optional="true" IsEnabledByDefault="true">
               <ChildrenDefinitions>
-                <Group Name="function" Optional="true" IsEnabledByDefault="true">
+                <Group Name="function">
                   <xi:include href="templates/source/region-function.xml"/>
                 </Group>
+                <!-- Constant value -->
                 <Double Name="scalar value"></Double>
                 <Double Name="2d vector value" NumberOfRequiredValues="2"></Double>
                 <Double Name="3d vector value" NumberOfRequiredValues="3"></Double>
+                <!-- initialize from 1D column -->
+                <String Name="file"></String>
+                <String Name="z header"></String>
+                <String Name="f header"></String>
+                <String Name="coordinate orientation"></String>
+                <Component Name="surface sideset">
+                  <Accepts>
+                    <!-- TODO: check this. May need to only be labeled sidest for type -->
+                    <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+                  </Accepts>
+                </Component>
+                <!-- restart from file -->
+                <String Name="restart file"></String>
               </ChildrenDefinitions>
               <DiscreteInfo DefaultIndex="0">
                 <Structure>
@@ -69,6 +86,22 @@
                   </Items>
                 </Structure>
                 <Structure>
+                  <Value>restart from file</Value>
+                  <Items>
+                    <Item>restart file</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>1D column</Value>
+                  <Items>
+                    <Item>file</Item>
+                    <Item>z header</Item>
+                    <Item>f header</Item>
+                    <Item>coordinate orientation</Item>
+                    <Item>surface sideset</Item>
+                  </Items>
+                </Structure>
+                <Structure>
                   <Value>constant vector 2d</Value>
                   <Items>
                     <Item>2d vector value</Item>
@@ -80,31 +113,8 @@
                     <Item>3d vector value</Item>
                   </Items>
                 </Structure>
-                <!-- TODO: tensors and file: https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#initialization-of-tensor-fields -->
               </DiscreteInfo>
             </String>
-
-
-            <Group Name="initialize from 1D column" Optional="true" IsEnabledByDefault="false">
-              <ItemDefinitions>
-                <String Name="file"></String>
-                <String Name="z header"></String>
-                <String Name="f header"></String>
-                <String Name="coordinate orientation"></String>
-                <Component Name="surface sideset">
-                  <Accepts>
-                    <!-- TODO: check this. May need to only be labeled sidest for type -->
-                    <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-                  </Accepts>
-                </Component>
-              </ItemDefinitions>
-            </Group>
-
-            <Group Name="restart from file" Optional="true" IsEnabledByDefault="false">
-              <ItemDefinitions>
-                <String Name="restart file"></String>
-              </ItemDefinitions>
-            </Group>
           </ItemDefinitions>
         </Group>
 

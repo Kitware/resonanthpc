@@ -272,10 +272,9 @@
       items:
         - condition name: initial pressure cells
         - name: condition type
-          enabled: false
-        - name: initialize from 1D column
           enabled: true
-          items:
+          value: 1D column
+          children:
             - file: 'column_data.h5'
             - 'z header': '/z'
             - 'f header': '/pressure'

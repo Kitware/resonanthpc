@@ -263,16 +263,15 @@ class PKWriter(BaseWriter):
         ]
         ic_group = att.findGroup("initial condition")
         ic_elem = self._new_list(pk_elem, "initial condition")
+        cond_name = ic_group.find("condition name").value()
+        cond_type = ic_group.find("condition type")
         self._render_items(ic_elem, ic_group, ic_options)
-        if ic_group.isEnabled():
-            cond_name = ic_group.find("condition name").value()
-            cond_type = ic_group.find("condition type")
+        if ic_group.isEnabled() and cond_type.isEnabled():
             if cond_type.value() == "scalar field":
                 # Handle function
                 func_group = cond_type.find("function")
                 sub = self._new_list(ic_elem, "function")
-                if func_group.isEnabled():
-                    self._render_region_function(sub, func_group, cond_name)
+                self._render_region_function(sub, func_group, cond_name)
             elif cond_type.value() == "constant scalar":
                 # handle scalar value
                 sub = self._new_list(ic_elem, cond_name)
@@ -283,20 +282,17 @@ class PKWriter(BaseWriter):
                 # handle vector values
             elif cond_type.value() == "constant vector 3d":
                 raise NotImplementedError()
-            # Column
-            column_group = ic_group.find("initialize from 1D column")
-            if column_group.isEnabled():
+            elif cond_type.value() == "1D column":
                 column_elem = self._new_list(ic_elem, "initialize from 1D column")
                 options = ["file", "z header", "f header", "coordinate orientation"]
-                self._render_items(column_elem, column_group, options)
+                self._render_items(column_elem, cond_type, options)
                 # surface sideset
-                sideset_comp = column_group.find("surface sideset")
+                sideset_comp = cond_type.find("surface sideset")
                 if sideset_comp is not None:
                     self._new_param(column_elem, "surface sideset", "string", sideset_comp.value().name())
-            # restart from file
-            restart = ic_group.find("restart from file")
-            if restart.isEnabled():
-                path = restart.find("restart file").value()
+            elif cond_type.value() == "restart from file":
+                # restart from file
+                path = cond_type.find("restart file").value()
                 self._new_param(ic_elem, "restart file", "string", path)
         # render boundary conditions
         bc_function_names = {

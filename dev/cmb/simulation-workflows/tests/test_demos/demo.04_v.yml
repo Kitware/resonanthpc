@@ -142,7 +142,7 @@
       items:
         - condition name: initial pressure cells
         - name: condition type
-          value: function
+          value: scalar field
           children:
             - name: function
               items:
