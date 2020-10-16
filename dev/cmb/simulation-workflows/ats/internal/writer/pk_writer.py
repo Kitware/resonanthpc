@@ -263,20 +263,19 @@ class PKWriter(BaseWriter):
         ]
         ic_group = att.findGroup("initial condition")
         ic_elem = self._new_list(pk_elem, "initial condition")
-        cond_name = ic_group.find("condition name").value()
         cond_type = ic_group.find("condition type")
         self._render_items(ic_elem, ic_group, ic_options)
         if ic_group.isEnabled() and cond_type.isEnabled():
             if cond_type.value() == "scalar field":
                 # Handle function
                 func_group = cond_type.find("function")
+                cond_name = cond_type.find("condition name").value()
                 sub = self._new_list(ic_elem, "function")
                 self._render_region_function(sub, func_group, cond_name)
             elif cond_type.value() == "constant scalar":
                 # handle scalar value
-                sub = self._new_list(ic_elem, cond_name)
                 value = FLOAT_FORMAT.format(cond_type.find("scalar value").value())
-                self._new_param(sub, "value", "double", value)
+                self._new_param(ic_elem, "value", "double", value)
             elif cond_type.value() == "constant vector 2d":
                 raise NotImplementedError()
                 # handle vector values
@@ -359,6 +358,11 @@ class PKWriter(BaseWriter):
         self._render_pk_physical(pk_elem, att, render_base=False)
         self._render_pk_bdf(pk_elem, att, render_base=False)
 
+        options = [
+            "conserved quantity key",
+        ]
+        self._render_items(pk_elem, att, options)
+
         # diffusion
         diff_group = att.findGroup("diffusion")
         diff_options = [
@@ -367,7 +371,6 @@ class PKWriter(BaseWriter):
             "Newton correction",
             "scaled constraint equation",
             "constraint equation scaling cutoff",
-            "conserved quantity key",
             "absolute error tolerance",
         ]
         diff_elem = self._new_list(pk_elem, "diffusion")

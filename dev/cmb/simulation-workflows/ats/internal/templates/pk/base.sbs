@@ -40,10 +40,6 @@
         <!-- only a single initial condition per PK -->
         <Group Name="initial condition" Optional="true">
           <ItemDefinitions>
-            <String Name="condition name">
-              <DefaultValue>initial pressure cells</DefaultValue>
-            </String>
-
             <!-- TODO: these two bools are not always relevant. -->
             <!-- From Ethan: `initialize faces from cells is only relevant for PKs whose primary variables include face unknowns. Those are effectively only those where a gradient is applied, so Richards, overland flow, energy equations, but not surface balance general` -->
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
@@ -54,6 +50,9 @@
                 <Group Name="function">
                   <xi:include href="templates/source/region-function.xml"/>
                 </Group>
+                <String Name="condition name">
+                  <DefaultValue>initial pressure cells</DefaultValue>
+                </String>
                 <!-- Constant value -->
                 <Double Name="scalar value"></Double>
                 <Double Name="2d vector value" NumberOfRequiredValues="2"></Double>
@@ -77,6 +76,7 @@
                   <Value>scalar field</Value>
                   <Items>
                     <Item>function</Item>
+                    <Item>condition name</Item>
                   </Items>
                 </Structure>
                 <Structure>

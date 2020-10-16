@@ -150,10 +150,10 @@
     - name: initial condition
       enabled: true
       items:
-        - condition name: initial pressure
         - name: condition type
           value: function
           children:
+            - condition name: initial pressure
             - name: function
               items:
                 - regions: surface domain

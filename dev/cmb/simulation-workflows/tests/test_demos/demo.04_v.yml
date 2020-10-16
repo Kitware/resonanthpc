@@ -140,7 +140,6 @@
     - name: initial condition
       enabled: true
       items:
-        - condition name: initial pressure cells
         - name: condition type
           value: scalar field
           children:

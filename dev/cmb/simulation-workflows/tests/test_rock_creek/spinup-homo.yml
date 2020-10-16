@@ -270,7 +270,6 @@
     - name: initial condition
       enabled: true
       items:
-        - condition name: initial pressure cells
         - name: condition type
           enabled: true
           value: 1D column
