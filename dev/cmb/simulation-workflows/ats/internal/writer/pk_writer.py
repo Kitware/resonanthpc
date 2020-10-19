@@ -182,12 +182,14 @@ class PKWriter(BaseWriter):
         elev_group = att.find("elevation function")
         ef_elem = self._new_list(eval_elem, "elevation function")
         # function
-        self._render_function(ef_elem, elev_group, "Elevation")
+        self._render_region_function(ef_elem, elev_group, "Elevation")
         ####
         slope_group = att.find("slope function")
         sf_elem = self._new_list(eval_elem, "slope function")
         # function
-        self._render_function(sf_elem, slope_group, "Slope magnitude Left/Right page")
+        self._render_region_function(
+            sf_elem, slope_group, "Slope magnitude Left/Right page"
+        )
         return
 
     def _render_overland_conductivity_evaluator(self, pk_elem, att):
@@ -263,22 +265,41 @@ class PKWriter(BaseWriter):
         ]
         ic_group = att.findGroup("initial condition")
         ic_elem = self._new_list(pk_elem, "initial condition")
+        cond_type = ic_group.find("condition type")
         self._render_items(ic_elem, ic_group, ic_options)
-        if ic_group.isEnabled():
-            sub = self._new_list(ic_elem, "function")
-            cond_name = ic_group.find("condition name").value()
-            func_group = ic_group.find("function")
-            if func_group.isEnabled():
-                self._render_function(sub, func_group, cond_name)
-            column_group = ic_group.find("initialize from 1D column")
-            if column_group.isEnabled():
+        if ic_group.isEnabled() and cond_type.isEnabled():
+            if cond_type.value() == "scalar field":
+                # Handle function
+                func_group = cond_type.find("function")
+                cond_name = cond_type.find("condition name").value()
+                sub = self._new_list(ic_elem, "function")
+                self._render_region_function(sub, func_group, cond_name)
+            elif cond_type.value() == "constant scalar":
+                # handle scalar value
+                value = FLOAT_FORMAT.format(cond_type.find("scalar value").value())
+                self._new_param(ic_elem, "value", "double", value)
+            elif cond_type.value() == "constant vector 2d":
+                raise NotImplementedError()
+                # handle vector values
+            elif cond_type.value() == "constant vector 3d":
+                raise NotImplementedError()
+            elif cond_type.value() == "1D column":
                 column_elem = self._new_list(ic_elem, "initialize from 1D column")
                 options = ["file", "z header", "f header", "coordinate orientation"]
-                self._render_items(column_elem, column_group, options)
+                self._render_items(column_elem, cond_type, options)
                 # surface sideset
-                sideset_comp = column_group.find("surface sideset")
+                sideset_comp = cond_type.find("surface sideset")
                 if sideset_comp is not None:
-                    self._new_param(column_elem, "surface sideset", "string", sideset_comp.value().name())
+                    self._new_param(
+                        column_elem,
+                        "surface sideset",
+                        "string",
+                        sideset_comp.value().name(),
+                    )
+            elif cond_type.value() == "restart from file":
+                # restart from file
+                path = cond_type.find("restart file").value()
+                self._new_param(ic_elem, "restart file", "string", path)
         # render boundary conditions
         bc_function_names = {
             "pressure": "boundary pressure",
@@ -344,17 +365,34 @@ class PKWriter(BaseWriter):
         self._render_pk_physical(pk_elem, att, render_base=False)
         self._render_pk_bdf(pk_elem, att, render_base=False)
 
+        options = [
+            "conserved quantity key",
+        ]
+        self._render_items(pk_elem, att, options)
+
         # diffusion
         diff_group = att.findGroup("diffusion")
-        diff_options = [
-            "discretization primary",
-            "gravity",
-            "Newton correction",
-            "scaled constraint equation",
-            "constraint equation scaling cutoff",
-        ]
-        diff_elem = self._new_list(pk_elem, "diffusion")
-        self._render_items(diff_elem, diff_group, diff_options)
+        if diff_group.isEnabled():
+            diff_options = [
+                "discretization primary",
+                "gravity",
+                "Newton correction",
+                "scaled constraint equation",
+                "constraint equation scaling cutoff",
+                "absolute error tolerance",
+            ]
+            diff_elem = self._new_list(pk_elem, "diffusion")
+            self._render_items(diff_elem, diff_group, diff_options)
+
+        # diffusion preconditioner
+        diff_pre_group = att.findGroup("diffusion preconditioner")
+        if diff_pre_group.isEnabled():
+            diff_pre_options = [
+                "Newton correction",
+                "include Newton correction",
+            ]
+            diff_pre_elem = self._new_list(pk_elem, "diffusion preconditioner")
+            self._render_items(diff_pre_elem, diff_pre_group, diff_pre_options)
 
         # source term
         src_group = att.findGroup("source term")
@@ -423,7 +461,6 @@ class PKWriter(BaseWriter):
     def _render_pk_overland_pressure(self, pk_elem, att):
         self._render_pk_physical_bdf(pk_elem, att)
         options = [
-            "absolute error tolerance",
             "imit correction to pressure change [Pa]",
             "limit correction to pressure change when crossing atmospheric [Pa]",
             "allow no negative ponded depths",
@@ -458,6 +495,20 @@ class PKWriter(BaseWriter):
 
         return
 
+    def _render_pk_weak(self, pk_elem, att):
+        pks_comp = att.find("PKs")
+        value_list = [
+            pks_comp.value(k).name() for k in range(pks_comp.numberOfValues())
+        ]
+        order = r"{" + ",".join(value_list) + r"}"
+        self._new_param(pk_elem, "PKs order", "Array(string)", order)
+        self._render_pk_bdf(pk_elem, att)
+
+    def _render_pk_surface_balance(self, pk_elem, att):
+        self._render_pk_physical_bdf(pk_elem, att)
+        options = ["modify predictor positivity preserving"]
+        self._render_items(pk_elem, att, options)
+
     def write(self, xml_root):
         """Perform the XML write out."""
         pks_elem = self._new_list(xml_root, "PKs")
@@ -467,6 +518,8 @@ class PKWriter(BaseWriter):
             "richards steady state": self._render_pk_richards_steady_state,
             "overland flow, pressure basis": self._render_pk_overland_pressure,
             "coupled water": self._render_pk_coupled_water,
+            "weak MPC": self._render_pk_weak,
+            "general surface balance": self._render_pk_surface_balance,
         }
 
         # Fetch the cycle driver to find out which PK is chosen

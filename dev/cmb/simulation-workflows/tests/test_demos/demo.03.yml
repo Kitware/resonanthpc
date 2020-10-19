@@ -104,7 +104,7 @@
       items:
         - regions: surface domain
         - components: cell,face
-        - name: variable type
+        - name: function
           value: function-linear
           children:
             - y0: 0.0
@@ -120,7 +120,7 @@
       items:
         - regions: surface domain
         - components: cell
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.05
@@ -150,15 +150,18 @@
     - name: initial condition
       enabled: true
       items:
-        - condition name: initial pressure
-        - name: function
-          items:
-            - regions: surface domain
-            - components: cell,boundary_face
-            - name: variable type
-              value: function-consant
-              children:
-                - value: 101325.0
+        - name: condition type
+          value: function
+          children:
+            - condition name: initial pressure
+            - name: function
+              items:
+                - regions: surface domain
+                - components: cell,boundary_face
+                - name: function
+                  value: function-consant
+                  children:
+                    - value: 101325.0
     - name: debugger
       items:
         - name: debug cells
@@ -168,6 +171,10 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: true Jacobian
     - name: source term
       enabled: true
     - name: evaluators
@@ -261,7 +268,7 @@
         - function name: domain rain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: function-tabular
           children:
             - name: tabular-data
@@ -311,7 +318,7 @@
       items:
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 3.6e-3
@@ -329,7 +336,7 @@
       items:
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 274.65

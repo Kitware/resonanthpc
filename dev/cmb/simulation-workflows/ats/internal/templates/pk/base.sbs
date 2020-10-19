@@ -40,16 +40,25 @@
         <!-- only a single initial condition per PK -->
         <Group Name="initial condition" Optional="true">
           <ItemDefinitions>
-            <String Name="condition name">
-              <DefaultValue>initial pressure cells</DefaultValue>
-            </String>
+            <!-- TODO: these two bools are not always relevant. -->
+            <!-- From Ethan: `initialize faces from cells is only relevant for PKs whose primary variables include face unknowns. Those are effectively only those where a gradient is applied, so Richards, overland flow, energy equations, but not surface balance
+            general` -->
             <Void Name="initialize faces from cells" Optional="true" IsEnabledByDefault="true"></Void>
             <Void Name="initialize surface head from subsurface" Optional="true" IsEnabledByDefault="false"></Void>
-            <Group Name="function" Optional="true" IsEnabledByDefault="true">
-              <xi:include href="templates/source/function.xml"/>
-            </Group>
-            <Group Name="initialize from 1D column" Optional="true" IsEnabledByDefault="false">
-              <ItemDefinitions>
+
+            <String Name="condition type" Optional="true" IsEnabledByDefault="true">
+              <ChildrenDefinitions>
+                <Group Name="function">
+                  <xi:include href="templates/source/region-function.xml"/>
+                </Group>
+                <String Name="condition name">
+                  <DefaultValue>initial pressure cells</DefaultValue>
+                </String>
+                <!-- Constant value -->
+                <Double Name="scalar value"></Double>
+                <Double Name="2d vector value" NumberOfRequiredValues="2"></Double>
+                <Double Name="3d vector value" NumberOfRequiredValues="3"></Double>
+                <!-- initialize from 1D column -->
                 <String Name="file"></String>
                 <String Name="z header"></String>
                 <String Name="f header"></String>
@@ -60,8 +69,53 @@
                     <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
                   </Accepts>
                 </Component>
-              </ItemDefinitions>
-            </Group>
+                <!-- restart from file -->
+                <String Name="restart file"></String>
+              </ChildrenDefinitions>
+              <DiscreteInfo DefaultIndex="0">
+                <Structure>
+                  <Value>scalar field</Value>
+                  <Items>
+                    <Item>function</Item>
+                    <Item>condition name</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>constant scalar</Value>
+                  <Items>
+                    <Item>scalar value</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>restart from file</Value>
+                  <Items>
+                    <Item>restart file</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>1D column</Value>
+                  <Items>
+                    <Item>file</Item>
+                    <Item>z header</Item>
+                    <Item>f header</Item>
+                    <Item>coordinate orientation</Item>
+                    <Item>surface sideset</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>constant vector 2d</Value>
+                  <Items>
+                    <Item>2d vector value</Item>
+                  </Items>
+                </Structure>
+                <Structure>
+                  <Value>constant vector 3d</Value>
+                  <Items>
+                    <Item>3d vector value</Item>
+                  </Items>
+                </Structure>
+              </DiscreteInfo>
+            </String>
           </ItemDefinitions>
         </Group>
 
@@ -197,8 +251,6 @@
         <!-- !!!!!!!!!! -->
 
         <!-- operator - diffusion (pde-diffusion-spec) -->
-        <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
-        <!-- I'm not implementing the preconditioner because its not used much?? and it doesn't seem to be all that different from `diffusion` -->
         <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
         <Group Name="diffusion" Optional="true">
           <!-- https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#pde-diffusion -->
@@ -223,6 +275,19 @@
           </ItemDefinitions>
         </Group>
 
+        <Group Name="diffusion preconditioner" Optional="true">
+          <!-- https://github.com/amanzi/ats/blob/4087243353695f5d3e0e468531253104697468d0/src/pks/flow/richards_pk.cc#L237 -->
+          <ItemDefinitions>
+            <String Name="Newton correction" Optional="true" IsEnabledByDefault="true">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>approximate Jacobian</Value>
+                <Value>true Jacobian</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="include Newton correction" Optional="true" IsEnabledByDefault="false"/>
+          </ItemDefinitions>
+        </Group>
+
         <Group Name="source term" Optional="true" IsEnabledByDefault="false">
           <ItemDefinitions>
             <String Name="source key" Optional="true"></String>
@@ -232,8 +297,12 @@
           </ItemDefinitions>
         </Group>
 
-        <!-- TODO: conserved quantity key -->
-        <!-- TODO: absolute error tolerance -->
+        <Double Name="absolute error tolerance" Optional="true">
+          <DefaultValue>550.0</DefaultValue>
+        </Double>
+
+        <String Name="conserved quantity key" Optional="true" IsEnabledByDefault="false"></String>
+
         <!-- TODO: relative error tolerance -->
         <!-- TODO: flux error tolerance -->
 

@@ -1,8 +1,17 @@
 import glob
 import os
-import shutil
 import xml.etree.ElementInclude as EI
 import xml.etree.ElementTree as ET
+
+
+def loader(href, parse, encoding=None):
+    if parse == "xml":
+        with open(href, "rb") as file:
+            data = ET.parse(file).getroot()
+            EI.include(data, loader=loader)
+    else:
+        raise RuntimeError("Unable to handle recursive include.")
+    return data
 
 
 def resolve_xinclude(source_folder, source_ext):
@@ -14,7 +23,7 @@ def resolve_xinclude(source_folder, source_ext):
         # print("Parsing", filepath)
         tree = ET.parse(filepath)
         root = tree.getroot()
-        EI.include(root)  # resolves xi:include elements
+        EI.include(root, loader=loader)  # resolves xi:include elements
 
         # Write output file
         filename = os.path.basename(filepath)

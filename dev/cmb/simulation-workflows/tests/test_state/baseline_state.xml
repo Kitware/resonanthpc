@@ -244,6 +244,22 @@
         <Parameter name="enforce positivity" type="bool" value="false"/>
         <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-precipitation, surface-molar_density_liquid}"/>
       </ParameterList>
+      <ParameterList name="transpiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="transpiration distribution via rooting depth" />
+      </ParameterList>
+      <ParameterList name="surface-total_transpiration" type="ParameterList">
+        <Parameter name="field evaluator type" type="string" value="column sum evaluator" />
+        <Parameter name="evaluator dependency" type="string" value="transpiration" />
+      </ParameterList>
+      <ParameterList name="surface-manning_coefficient_2">
+        <Parameter name="field evaluator type" type="string" value="secondary variable from function"/>
+        <Parameter name="evaluator dependencies" type="Array(string)" value="{surface-total_transpiration}"/>
+        <ParameterList name="function">
+          <ParameterList name="function-constant">
+            <Parameter name="value" type="double" value="1.5" />
+          </ParameterList>
+        </ParameterList>
+      </ParameterList>
     </ParameterList>
     <ParameterList name="initial conditions" type="ParameterList">
       <ParameterList name="atmospheric_pressure" type="ParameterList">

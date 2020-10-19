@@ -62,9 +62,27 @@ pvpython $EXPORTER demo-05-spinup-gi/demo.05_spinup_gi.smtk \
   -o demo-05-spinup-gi/demo.05_spinup_gi.xml
 
 
-# Rock Creek demo (incomplete!!!!)
-# pvpython $BUILDER \
-#   $TEMPLATE \
-#   "${TESTS}/test_rock_creek/rock_creek.spinup.homo.yml" \
-#   -m "${TESTS}/test_rock_creek/att.rock_creek.mesh.smtk" \
-#   -o rock_creek.smtk
+name="rock_creek-spinup-homo"
+wkdir="demo-rock_creek-spinup-homo"
+mkdir -p $wkdir
+cp ${TESTS}/test_rock_creek/data/* $wkdir/
+pvpython $BUILDER \
+  $TEMPLATE \
+  "${TESTS}/test_rock_creek/spinup-homo.yml" \
+  -m $wkdir/mesh.rock_creek.smtk \
+  -o $wkdir/demo.${name}.smtk
+pvpython $EXPORTER $wkdir/demo.${name}.smtk \
+  -o $wkdir/demo.${name}.xml
+
+
+name="rock_creek-template"
+wkdir="demo-rock_template"
+mkdir -p $wkdir
+cp ${TESTS}/test_rock_creek/data/* $wkdir/
+pvpython $BUILDER \
+  $TEMPLATE \
+  "${TESTS}/test_rock_creek/template.yml" \
+  -m $wkdir/mesh.rock_creek.smtk \
+  -o $wkdir/demo.${name}.smtk
+pvpython $EXPORTER $wkdir/demo.${name}.smtk \
+  -o $wkdir/demo.${name}.xml

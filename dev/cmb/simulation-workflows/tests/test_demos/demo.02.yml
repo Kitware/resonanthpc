@@ -143,24 +143,27 @@
       enabled: true
       items:
         - initialize faces from cells: true
-        - name: function
-          items:
-            - regions: computational domain
-            - components: cell
-            - name: variable type
-              value: function-linear
-              children:
-                - y0: 101325.0
-                - name: linear-data
-                  subgroups:
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 0.0
-                      - gradient: 0.0
-                    - - x0: 7.0
-                      - gradient: -9806.2306853
+        - name: condition type
+          value: function
+          children:
+            - name: function
+              items:
+                - regions: computational domain
+                - components: cell
+                - name: function
+                  value: function-linear
+                  children:
+                    - y0: 101325.0
+                    - name: linear-data
+                      subgroups:
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 0.0
+                          - gradient: 0.0
+                        - - x0: 7.0
+                          - gradient: -9806.2306853
     - name: water retention evaluator specs
       items:
         - name: WRM evaluators
@@ -181,6 +184,13 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - name: include Newton correction
+          enabled: true
+        - name: Newton correction
+          enabled: false
 
 
 # Coordinator (notice that   ACTION = EDIT)
@@ -265,7 +275,7 @@
       items:
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.25
@@ -280,7 +290,7 @@
       items:
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 2.5e-12
@@ -295,7 +305,7 @@
       items:
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 273.65

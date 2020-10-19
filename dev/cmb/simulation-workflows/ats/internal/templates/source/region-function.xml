@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Use inside of a Group! -->
+<ItemDefinitions xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <String Name="function name">
+    <DefaultValue>domain</DefaultValue>
+  </String>
+
+  <Component Name="regions" Extensible="true">
+    <Accepts>
+      <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
+    </Accepts>
+  </Component>
+
+  <String Name="components">
+    <DiscreteInfo DefaultIndex="0">
+      <Value Enum="cell">cell</Value>
+      <Value Enum="face">face</Value>
+      <Value Enum="boundary_face">boundary_face</Value>
+      <Value Enum="cell,boundary_face">cell,boundary_face</Value>
+      <Value Enum="cell,face">cell,face</Value>
+    </DiscreteInfo>
+  </String>
+
+  <xi:include href="templates/source/function.xml"/>
+
+</ItemDefinitions>

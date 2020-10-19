@@ -85,12 +85,10 @@
     - name: initial condition
       enabled: true
       items:
-        - condition name: initial pressure cells
-        - name: function
-          enabled: false
-        - name: initialize from 1D column
+        - name: condition type
           enabled: true
-          items:
+          value: 1D column
+          children:
             - file: 'column_data.h5'
             - 'z header': '/z'
             - 'f header': '/pressure'
@@ -119,6 +117,10 @@
       enabled: true
       items:
         - discretization primary: "mfd: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: approximate Jacobian
 
 - type: overland flow, pressure basis
   name: surface flow
@@ -134,7 +136,7 @@
       items:
         - name: initialize surface head from subsurface
           enabled: true
-        - name: function
+        - name: condition type
           enabled: false
     - name: boundary conditions
       enabled: true
@@ -149,6 +151,10 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: true Jacobian
     - name: source term
       enabled: true
       items:
@@ -288,7 +294,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -304,7 +310,7 @@
         - function name: rest domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -320,7 +326,7 @@
         - function name: rest domain
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 997.0
@@ -335,7 +341,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -350,7 +356,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 55000.0
@@ -366,7 +372,7 @@
         - function name: computational domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.4
@@ -382,7 +388,7 @@
         - function name: computational domain
         - components: cell
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.0e-12
@@ -398,7 +404,7 @@
         - function name: cells
         - components: cell,boundary_face
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.15
@@ -413,7 +419,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.0
@@ -428,7 +434,7 @@
       items:
         - components: cell
         - regions: surface domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 1.576e-09
@@ -468,7 +474,7 @@
         - function name: rest domain
         - components: cell,boundary_face
         - regions: computational domain
-        - name: variable type
+        - name: function
           value: constant
           children:
             - value: 0.00089
