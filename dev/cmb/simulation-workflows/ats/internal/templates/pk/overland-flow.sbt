@@ -3,11 +3,7 @@
   <Definitions>
 
     <AttDef Type="overland flow, pressure basis" Label="overland flow, pressure basis" BaseType="pk-physical-bdf" Version="0">
-      <!-- <AssociationsDef NumberOfRequiredValues="1" Name="slope regions">
-        <Accepts>
-          <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource>
-        </Accepts>
-      </AssociationsDef> -->
+      <!-- <AssociationsDef NumberOfRequiredValues="1" Name="slope regions"> <Accepts> <Resource Name="smtk::attribute::Resource" Filter="attribute[type='region']"></Resource> </Accepts> </AssociationsDef> -->
       <ItemDefinitions>
 
         <!-- limit correction to pressure change [Pa] (-1) -->
@@ -28,7 +24,6 @@
         <Double Name="min ponded depth for tidal bc">
           <DefaultValue>0.02</DefaultValue>
         </Double>
-
 
       </ItemDefinitions>
     </AttDef>
