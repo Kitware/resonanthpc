@@ -188,9 +188,9 @@
          <Parameter name="discretization primary" type="string" value="mfd: two-point flux approximation" />
        </ParameterList>
 
-       <!-- <ParameterList name="diffusion preconditioner">
+       <ParameterList name="diffusion preconditioner">
          <Parameter name="Newton correction" type="string" value="approximate Jacobian" />
-       </ParameterList> -->
+       </ParameterList>
 
        <ParameterList name="boundary conditions" />
 
@@ -237,9 +237,9 @@
          <Parameter name="discretization primary" type="string" value="fv: default" />
        </ParameterList>
 
-       <!-- <ParameterList name="diffusion preconditioner">
+       <ParameterList name="diffusion preconditioner">
          <Parameter name="Newton correction" type="string" value="true Jacobian" />
-       </ParameterList> -->
+       </ParameterList>
 
        <ParameterList name="boundary conditions">
          <ParameterList name="seepage face head">

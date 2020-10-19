@@ -124,9 +124,9 @@
         <Parameter name="discretization primary" type="string" value="fv: default" />
       </ParameterList>
 
-      <!-- <ParameterList name="diffusion preconditioner" type="ParameterList">
+      <ParameterList name="diffusion preconditioner" type="ParameterList">
         <Parameter name="include Newton correction" type="bool" value="true" />
-      </ParameterList> -->
+      </ParameterList>
 
       <ParameterList name="preconditioner" type="ParameterList">
         <Parameter name="preconditioner type" type="string" value="boomer amg" />

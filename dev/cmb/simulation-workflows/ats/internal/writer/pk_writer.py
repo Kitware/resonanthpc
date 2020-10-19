@@ -365,16 +365,27 @@ class PKWriter(BaseWriter):
 
         # diffusion
         diff_group = att.findGroup("diffusion")
-        diff_options = [
-            "discretization primary",
-            "gravity",
-            "Newton correction",
-            "scaled constraint equation",
-            "constraint equation scaling cutoff",
-            "absolute error tolerance",
-        ]
-        diff_elem = self._new_list(pk_elem, "diffusion")
-        self._render_items(diff_elem, diff_group, diff_options)
+        if diff_group.isEnabled():
+            diff_options = [
+                "discretization primary",
+                "gravity",
+                "Newton correction",
+                "scaled constraint equation",
+                "constraint equation scaling cutoff",
+                "absolute error tolerance",
+            ]
+            diff_elem = self._new_list(pk_elem, "diffusion")
+            self._render_items(diff_elem, diff_group, diff_options)
+
+        # diffusion preconditioner
+        diff_pre_group = att.findGroup("diffusion preconditioner")
+        if diff_pre_group.isEnabled():
+            diff_pre_options = [
+                "Newton correction",
+                "include Newton correction",
+            ]
+            diff_pre_elem = self._new_list(pk_elem, "diffusion preconditioner")
+            self._render_items(diff_pre_elem, diff_pre_group, diff_pre_options)
 
         # source term
         src_group = att.findGroup("source term")

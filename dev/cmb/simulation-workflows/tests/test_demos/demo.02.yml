@@ -184,6 +184,13 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - name: include Newton correction
+          enabled: true
+        - name: Newton correction
+          enabled: false
 
 
 # Coordinator (notice that   ACTION = EDIT)

@@ -117,6 +117,10 @@
       enabled: true
       items:
         - discretization primary: "mfd: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: approximate Jacobian
 
 - type: overland flow, pressure basis
   name: surface flow
@@ -147,6 +151,10 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: true Jacobian
     - name: source term
       enabled: true
       items:

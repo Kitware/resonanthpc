@@ -171,6 +171,10 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: true Jacobian
     - name: source term
       enabled: true
     - name: evaluators

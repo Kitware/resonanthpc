@@ -301,6 +301,10 @@
       enabled: true
       items:
         - discretization primary: "mfd: two-point flux approximation"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: approximate Jacobian
     - name: source term
       enabled: true
       items:
@@ -341,6 +345,10 @@
       enabled: true
       items:
         - discretization primary: "fv: default"
+    - name: diffusion preconditioner
+      enabled: true
+      items:
+        - Newton correction: true Jacobian
     - name: source term
       enabled: true
       items:

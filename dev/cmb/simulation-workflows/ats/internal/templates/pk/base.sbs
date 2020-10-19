@@ -250,8 +250,6 @@
         <!-- !!!!!!!!!! -->
 
         <!-- operator - diffusion (pde-diffusion-spec) -->
-        <!-- TODO: diffusion preconditioner (pde-diffusion-spec), optional-->
-        <!-- I'm not implementing the preconditioner because its not used much?? and it doesn't seem to be all that different from `diffusion` -->
         <!-- NOTE: implementing only the diffusion operator as the others aren't well documented and not used in the demos. A full implementation will look different than this -->
         <Group Name="diffusion" Optional="true">
           <!-- https://amanzi.github.io/ats/input_spec/ATSNativeSpec_dev.html#pde-diffusion -->
@@ -273,6 +271,19 @@
             <Void Name="scaled constraint equation" Optional="true" IsEnabledByDefault="false"></Void>
             <Double Name="constraint equation scaling cutoff" Optional="true"></Double>
             <!-- NOTE: there are many other additional options in the docs for the MFD family... skipping as MFD isn't used in the *basic* demos -->
+          </ItemDefinitions>
+        </Group>
+
+        <Group Name="diffusion preconditioner" Optional="true">
+          <!-- https://github.com/amanzi/ats/blob/4087243353695f5d3e0e468531253104697468d0/src/pks/flow/richards_pk.cc#L237 -->
+          <ItemDefinitions>
+            <String Name="Newton correction" Optional="true" IsEnabledByDefault="true">
+              <DiscreteInfo DefaultIndex="0">
+                <Value>approximate Jacobian</Value>
+                <Value>true Jacobian</Value>
+              </DiscreteInfo>
+            </String>
+            <Void Name="include Newton correction" Optional="true" IsEnabledByDefault="false"/>
           </ItemDefinitions>
         </Group>
 
