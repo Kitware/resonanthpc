@@ -24,13 +24,13 @@ if sys.platform == "win32":
     site_path = os.path.join(sys.prefix, "bin", "Lib", "site-packages")
 elif sys.platform == "darwin":
     # Look for modelbuilder.app in sys.path
-    app_name = 'modelbuilder.app'
+    app_name = "modelbuilder.app"
     for p in sys.path:
         app_pos = p.rfind(app_name)
         if app_pos > 0:
             end_pos = app_pos + len(app_name)
             app_path = p[:end_pos]
-            site_path = os.path.join(app_path, 'Contents', 'Python')
+            site_path = os.path.join(app_path, "Contents", "Python")
             break
 elif sys.platform == "linux":
     site_path = os.path.join(sys.prefix, "lib", "python3.7", "site-packages")

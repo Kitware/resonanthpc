@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 
 def loader(href, parse, encoding=None):
     if parse == "xml":
-        with open(href, 'rb') as file:
+        with open(href, "rb") as file:
             data = ET.parse(file).getroot()
             EI.include(data, loader=loader)
     else:

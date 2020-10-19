@@ -204,10 +204,7 @@ class BaseWriter:
                 "array": ["Start Time", "Time Period", "Stop Time",],
                 "items": ["units"],  # NOTE: assumes all items are string
             },
-            "times": {
-                'array': ['times'],
-                'items': ['units'],
-            }
+            "times": {"array": ["times"], "items": ["units"],},
         }
         sub_items = [
             "cycles",  # Int
@@ -296,7 +293,9 @@ class BaseWriter:
             options = ["file", "x header", "y header"]
             self._render_items(tabular_elem, params, options)
 
-    def _render_region_function(self, parent_elem, att, name=None, _i=0, _recursive=True):
+    def _render_region_function(
+        self, parent_elem, att, name=None, _i=0, _recursive=True
+    ):
 
         if att.numberOfGroups() > 1 and _recursive:
             for i in range(att.numberOfGroups()):

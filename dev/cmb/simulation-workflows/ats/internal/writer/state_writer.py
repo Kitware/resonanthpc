@@ -152,7 +152,12 @@ class StateWriter(BaseWriter):
         coef_a = depends.find("coefficient")
         self._new_param(fe_elem, "evaluator dependency", "string", name)
         if coef_a.isEnabled():
-            self._new_param(fe_elem, name + " coefficient", "double", FLOAT_FORMAT.format(coef_a.value()))
+            self._new_param(
+                fe_elem,
+                name + " coefficient",
+                "double",
+                FLOAT_FORMAT.format(coef_a.value()),
+            )
 
     def render_additive_evaluator(self, fe_elem, att):
         depends = att.findGroup("evaluator dependencies")
@@ -168,7 +173,9 @@ class StateWriter(BaseWriter):
         self._new_param(fe_elem, "evaluator dependencies", "Array(string)", linked_fes)
         for name, coef in evals.items():
             if coef is not None:
-                self._new_param(fe_elem, name + " coefficient", "double", FLOAT_FORMAT.format(coef))
+                self._new_param(
+                    fe_elem, name + " coefficient", "double", FLOAT_FORMAT.format(coef)
+                )
 
     def render_depth(self, fe_elem, att):
         options = [

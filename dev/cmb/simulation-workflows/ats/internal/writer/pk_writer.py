@@ -187,7 +187,9 @@ class PKWriter(BaseWriter):
         slope_group = att.find("slope function")
         sf_elem = self._new_list(eval_elem, "slope function")
         # function
-        self._render_region_function(sf_elem, slope_group, "Slope magnitude Left/Right page")
+        self._render_region_function(
+            sf_elem, slope_group, "Slope magnitude Left/Right page"
+        )
         return
 
     def _render_overland_conductivity_evaluator(self, pk_elem, att):
@@ -288,7 +290,12 @@ class PKWriter(BaseWriter):
                 # surface sideset
                 sideset_comp = cond_type.find("surface sideset")
                 if sideset_comp is not None:
-                    self._new_param(column_elem, "surface sideset", "string", sideset_comp.value().name())
+                    self._new_param(
+                        column_elem,
+                        "surface sideset",
+                        "string",
+                        sideset_comp.value().name(),
+                    )
             elif cond_type.value() == "restart from file":
                 # restart from file
                 path = cond_type.find("restart file").value()
@@ -490,7 +497,9 @@ class PKWriter(BaseWriter):
 
     def _render_pk_weak(self, pk_elem, att):
         pks_comp = att.find("PKs")
-        value_list = [pks_comp.value(k).name() for k in range(pks_comp.numberOfValues())]
+        value_list = [
+            pks_comp.value(k).name() for k in range(pks_comp.numberOfValues())
+        ]
         order = r"{" + ",".join(value_list) + r"}"
         self._new_param(pk_elem, "PKs order", "Array(string)", order)
         self._render_pk_bdf(pk_elem, att)
