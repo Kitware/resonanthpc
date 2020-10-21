@@ -73,14 +73,14 @@ using world-class ParaView and Jupyter. Our current efforts are focused on
 providing this workflow for the [Amanz/ATS](https://amanzi.github.io)
 hydrological simulation software.
 
-![workflow](assets/workflow.png)
+![workflow](docs/assets/img/workflow.png)
 
 The left side of this workflow entails defining the input parameters to set up
 the simulation in Computational Model Builder.
 
-![cmb](assets/cmb.png)
+![cmb](docs/assets/img/cmb.png)
 
 We then run the simulation with the defined problem, yield results and provide
 an end-to-end platform for running simulations and visualizing their results.
 
-![ipyparaview](assets/ipyparaview.png)
+![ipyparaview](docs/assets/img/ipyparaview.png)
