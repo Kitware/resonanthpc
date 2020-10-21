@@ -127,7 +127,6 @@ class NerscInterface:
         return js
 
 
-
     def upload_file(self, local_path, nersc_folder, machine=MACHINE):
         """"""
         assert self._newt_sessionid is not None
