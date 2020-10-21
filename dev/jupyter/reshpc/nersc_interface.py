@@ -14,6 +14,21 @@ class NerscInterface:
         self._newt_sessionid = None
 
 
+    def get_job_info(self, job_id, machine=MACHINE, verbose=False):
+        assert self._newt_sessionid is not None
+
+        if verbose:
+            print('sending command...')
+
+        cookies = dict(newt_sessionid=self._newt_sessionid)
+        url = '{}/queue/{}/{}/sacct'.format(NEWT_BASE_URL, machine, job_id)
+        r = requests.get(url, cookies=cookies)
+        r.raise_for_status()
+
+        js = r.json()
+        return js
+
+
     def get_scratch_folder(self, machine=MACHINE):
         """Requests path to the user'S $SCRATCH directory on the NERSC machine
 
@@ -85,9 +100,32 @@ class NerscInterface:
         return 'OK'
 
 
-    def submit_ats(self, nersc_folder, xml_filename, machine=MACHINE):
-        raise NotImplementedError
-        ()
+    def submit_job(self, slurm_script, nersc_folder, job_filename='job.sbatch', machine=MACHINE):
+        """Submits job to queue.
+
+
+        Uploads slurm_script as file to nersc_folder.
+        Returns dict with ['status', 'error', 'jobid'] keys or raises exception.
+        """
+        assert self._newt_sessionid is not None
+
+        print('uploading slurm script...')
+        url = '{}/file/{}{}'.format(NEWT_BASE_URL, machine, nersc_folder)
+        cookies = dict(newt_sessionid=self._newt_sessionid)
+        r = requests.post(url, cookies=cookies, files={'file': (job_filename, slurm_script)})
+        r.raise_for_status()
+
+        print('submitting job...')
+        url = '{}/queue/{}'.format(NEWT_BASE_URL, machine)
+        data = {
+            'jobfile': '{}/{}'.format(nersc_folder, job_filename)
+        }
+        r = requests.post(url, cookies=cookies, data=data)
+        r.raise_for_status()
+
+        js = r.json()
+        return js
+
 
 
     def upload_file(self, local_path, nersc_folder, machine=MACHINE):
