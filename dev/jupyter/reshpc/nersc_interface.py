@@ -73,6 +73,24 @@ class NerscInterface:
         return scratch_folder
 
 
+    def job_state_label(self, state):
+        """Returns the text associated with the most common job state codes.
+
+        Copied from https://slurm.schedmd.com/squeue.html#lbAG
+        """
+        lookup = dict(
+            CD='Completed',
+            CG='Completing',
+            F='Failed',
+            NF='Node Fail',
+            OOM='Out Of Memory',
+            PD='Pending',
+            R='Running',
+            TO='Time Out'
+            )
+        return lookup.get(state, 'Unrecognized')
+
+
     def list_folder(self, nersc_folder, glob_pattern=None, machine=MACHINE):
         """Returns a GENERATOR with contents of a folder.
 
