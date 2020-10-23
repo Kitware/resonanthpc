@@ -16,6 +16,27 @@ class NerscInterface:
         self._requests_session = requests.Session()
 
 
+    def download_file(self, nersc_file, local_folder, machine=MACHINE):
+        assert self._newt_sessionid is not None
+        print('sending command...')
+
+        url = '%s/file/%s/%s' % (NEWT_BASE_URL, machine, nersc_file)
+        params = {
+            'view': 'read'
+        }
+
+        filename = os.path.basename(nersc_file)
+        local_file = os.path.join(local_folder, filename)
+
+        # Per https://stackoverflow.com/a/16696317
+        with self._requests_session.get(url, params=params, stream=True) as r:
+            r.raise_for_status()
+            with open(local_file, 'wb') as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    f.write(chunk)
+        return 'OK'
+
+
     def get_job_info(self, job_id, machine=MACHINE, verbose=False):
         assert self._newt_sessionid is not None
 
@@ -58,6 +79,9 @@ class NerscInterface:
         Args:
             pattern: string for matching filename, e.g., '*.xml'
         """
+        assert self._newt_sessionid is not None
+        print('sending command...')
+
         url = '%s/file/%s/%s' % (NEWT_BASE_URL, machine, nersc_folder)
         r = self._requests_session.get(url)
         r.raise_for_status()
@@ -126,6 +150,24 @@ class NerscInterface:
         return 'OK'
 
 
+    def make_tgzfile(self, nersc_folder, tarfile, glob_pattern='*.*', machine=MACHINE):
+        """"""
+        assert self._newt_sessionid is not None
+        print('sending command...')
+
+        cmd = 'rm -f {tarfile} && cd {nersc_folder} && tar -czf {tarfile} {files}'.format(
+            tarfile=tarfile, nersc_folder=nersc_folder, files=glob_pattern)
+        # print('cmb:', cmd)
+        data = {
+          'executable': cmd,
+          'loginenv': 'true'
+        }
+        url = '%s/command/%s' % (NEWT_BASE_URL, machine)
+        r = self._requests_session.post(url, data=data)
+        r.raise_for_status()
+        return 'OK'
+
+
     def submit_job(self, slurm_script, nersc_folder, job_filename='job.sbatch', machine=MACHINE):
         """Submits job to queue.
 
@@ -134,8 +176,8 @@ class NerscInterface:
         Returns dict with ['status', 'error', 'jobid'] keys or raises exception.
         """
         assert self._newt_sessionid is not None
-
         print('uploading slurm script...')
+
         url = '{}/file/{}{}'.format(NEWT_BASE_URL, machine, nersc_folder)
         r = self._requests_session.post(url, files={'file': (job_filename, slurm_script)})
         r.raise_for_status()
