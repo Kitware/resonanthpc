@@ -36,6 +36,14 @@ class NerscInterface:
                     f.write(chunk)
         return 'OK'
 
+    def file_exists(self, nersc_file, machine=MACHINE):
+        """Returns boolean indicating whether or not file exists at the path"""
+        print('sending command...')
+
+        url = '%s/file/%s/%s' % (NEWT_BASE_URL, machine, nersc_file)
+        r = self._requests_session.get(url)
+        return r.status_code == requests.codes.ok
+
 
     def get_job_info(self, job_id, machine=MACHINE, verbose=False):
         assert self._newt_sessionid is not None
