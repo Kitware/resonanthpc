@@ -18,10 +18,10 @@
         <Parameter name="high coordinate" type="Array(double)" value="{0.0,1.0}" />
       </ParameterList>
     </ParameterList>
-    <ParameterList name="surface face" type="ParameterList">
+    <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="super_slab.exo" />
+        <Parameter name="file" type="string" value="../super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="face" />
       </ParameterList>
@@ -29,7 +29,7 @@
     <ParameterList name="computational domain rest" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="10" />
-        <Parameter name="file" type="string" value="super_slab.exo" />
+        <Parameter name="file" type="string" value="../super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -37,7 +37,7 @@
     <ParameterList name="computational domain first slab" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="12" />
-        <Parameter name="file" type="string" value="super_slab.exo" />
+        <Parameter name="file" type="string" value="../super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -45,7 +45,7 @@
     <ParameterList name="computational domain second slab" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="11" />
-        <Parameter name="file" type="string" value="super_slab.exo" />
+        <Parameter name="file" type="string" value="../super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -56,7 +56,7 @@
     <ParameterList name="surface" type="ParameterList">
       <Parameter name="mesh type" type="string" value="surface" />
       <ParameterList name="surface parameters" type="ParameterList">
-        <Parameter name="surface sideset name" type="string" value="surface face" />
+        <Parameter name="surface sideset name" type="string" value="surface" />
       </ParameterList>
       <!-- <ParameterList name="surface">
       </ParameterList> -->
@@ -64,7 +64,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="super_slab.exo" />
+        <Parameter name="file" type="string" value="../super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
@@ -126,7 +126,7 @@
           <Parameter name="preconditioning strategy" type="string" value="left" />
           <Parameter name="error tolerance" type="double" value="1e-06" />
           <Parameter name="convergence criteria" type="Array(string)" value="{relative residual,make one iteration}" />
-          <Parameter name="maximum number of iterations" type="int" value="80" />
+          <Parameter name="maximum number of iteration" type="int" value="80" />
         </ParameterList>
       </ParameterList>
 
@@ -207,25 +207,25 @@
           <ParameterList name="rest domain" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain rest" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0006137" />
-            <Parameter name="van Genuchten m [-]" type="double" value="0.5" />
-            <Parameter name="residual saturation [-]" type="double" value="0.2" />
+            <Parameter name="van Genuchten alpha" type="double" value="0.0006137" />
+            <Parameter name="van Genuchten m" type="double" value="0.5" />
+            <Parameter name="residual saturation" type="double" value="0.2" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="first slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain first slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001023" />
-            <Parameter name="van Genuchten m [-]" type="double" value="0.666666666667" />
-            <Parameter name="residual saturation [-]" type="double" value="0.3" />
+            <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
+            <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
+            <Parameter name="residual saturation" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
           <ParameterList name="second slab" type="ParameterList">
             <Parameter name="region" type="string" value="computational domain second slab" />
             <Parameter name="WRM Type" type="string" value="van Genuchten" />
-            <Parameter name="van Genuchten alpha [Pa^-1]" type="double" value="0.0001023" />
-            <Parameter name="van Genuchten m [-]" type="double" value="0.666666666667" />
-            <Parameter name="residual saturation [-]" type="double" value="0.3" />
+            <Parameter name="van Genuchten alpha" type="double" value="0.0001023" />
+            <Parameter name="van Genuchten m" type="double" value="0.666666666667" />
+            <Parameter name="residual saturation" type="double" value="0.3" />
             <Parameter name="smoothing interval width [saturation]" type="double" value="0.1" />
           </ParameterList>
         </ParameterList>
@@ -272,7 +272,6 @@
 
       <ParameterList name="overland conductivity evaluator" type="ParameterList">
         <ParameterList name="overland conductivity model" type="ParameterList">
-          <Parameter name="overland conductivity type" type="string" value="manning harmonic mean" />
           <Parameter name="Manning exponent" type="double" value="0.666666666667" />
           <Parameter name="slope regularization epsilon" type="double" value="0.0" />
         </ParameterList>
@@ -395,7 +394,7 @@
         <ParameterList name="function" type="ParameterList">
           <ParameterList name="domain" type="ParameterList">
             <Parameter name="region" type="string" value="surface domain" />
-            <Parameter name="component" type="string" value="cell" />
+            <Parameter name="components" type="Array(string)" value="{cell}" />
             <ParameterList name="function" type="ParameterList">
               <ParameterList name="function-constant" type="ParameterList">
                 <Parameter name="value" type="double" value="55389.0" />
@@ -449,6 +448,7 @@
               </ParameterList>
             </ParameterList>
             <Parameter name="components" type="Array(string)" value="{cell,boundary_face}" />
+
           </ParameterList>
         </ParameterList>
       </ParameterList>
