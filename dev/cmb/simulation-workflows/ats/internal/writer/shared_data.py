@@ -44,5 +44,10 @@ class SharedData:
     def xml_doc(self):
         return self._xml_doc
 
+    @property
+    def ats_version(self):
+        ats_info = self.sim_atts.findAttribute("ATS Information")
+        return ats_info.find("ATS Version").value()
+
 
 instance = SharedData()
