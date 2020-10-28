@@ -23,6 +23,10 @@ class PKWriter(BaseWriter):
 
     def __init__(self):
         super(PKWriter, self).__init__()
+        # TODO: this is such a hack of a solution.
+        self.use_units = True
+        if shared.ats_version != 'master-branch':
+            self.use_units = False
 
     def _generate_time_integrator_section(self, parent, att):
         """Generates the XML elements for the time integrator section.
@@ -417,10 +421,10 @@ class PKWriter(BaseWriter):
             "modify predictor with consistent faces",
             "modify predictor for flux BCs",
             "modify predictor via water content",
-            "max valid change in saturation in a time step [-]",
-            "max valid change in ice saturation in a time step [-]",
-            "limit correction to pressure change [Pa]",
-            "limit correction to pressure change when crossing atmospheric [Pa]",
+            "max valid change in saturation in a time step" + " [-]" if self.use_units else "",
+            "max valid change in ice saturation in a time step" + " [-]" if self.use_units else "",
+            "limit correction to pressure change" + " [Pa]" if self.use_units else "",
+            "limit correction to pressure change when crossing atmospheric" + " [Pa]" if self.use_units else "",
             "permeability rescaling",
         ]
         self._render_items(pk_elem, att, options)
@@ -432,12 +436,12 @@ class PKWriter(BaseWriter):
         wre_params = self._new_list(wre_elem, "WRM parameters")
         wrm_options = {
             "van Genuchten": [
-                "van Genuchten alpha [Pa^-1]",
-                "residual saturation [-]",
-                "Mualem exponent l [-]",
-                "van Genuchten m [-]",
-                "smoothing interval width [saturation]",
-                "saturation smoothing interval [Pa]",
+                "van Genuchten alpha" + " [Pa^-1]" if self.use_units else "",
+                "residual saturation" + " [-]" if self.use_units else "",
+                "Mualem exponent l" + " [-]" if self.use_units else "",
+                "van Genuchten m" + " [-]" if self.use_units else "",
+                "smoothing interval width" + " [saturation]" if self.use_units else "",
+                "saturation smoothing interval" + " [Pa]" if self.use_units else "",
             ],
         }
         evaluator = att.findGroup("WRM evaluators")
@@ -461,8 +465,8 @@ class PKWriter(BaseWriter):
     def _render_pk_overland_pressure(self, pk_elem, att):
         self._render_pk_physical_bdf(pk_elem, att)
         options = [
-            "imit correction to pressure change [Pa]",
-            "limit correction to pressure change when crossing atmospheric [Pa]",
+            "imit correction to pressure change" + " [Pa]" if self.use_units else "",
+            "limit correction to pressure change when crossing atmospheric" + " [Pa]" if self.use_units else "",
             "allow no negative ponded depths",
             "min ponded depth for velocity calculation",
             "min ponded depth for tidal bc",

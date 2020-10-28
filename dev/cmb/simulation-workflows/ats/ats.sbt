@@ -2,6 +2,7 @@
 <SMTK_AttributeResource Version="3">
   <!-- ATS's top level -->
   <Includes>
+    <File>internal/templates/ats-info.sbt</File>
     <!-- Mesh and Regions -->
     <File>internal/templates/domain.sbt</File>
     <File>internal/templates/region.sbt</File>
@@ -35,8 +36,14 @@
 
     <View Type="Group" Title="Mesh" Style="Tiled">
       <Views>
+        <View Title="ATS Information"/>
         <View Title="Mesh Attributes"/>
       </Views>
+    </View>
+    <View Type="Instanced" Title="ATS Information">
+      <InstancedAttributes>
+        <Att Type="ATS Information" Name="ATS Information"/>
+      </InstancedAttributes>
     </View>
     <View Type="Instanced" Title="Domain">
       <InstancedAttributes>
