@@ -4,16 +4,15 @@ import os
 
 import requests
 
-NEWT_BASE_URL = "https://newt.nersc.gov/newt"
-MACHINE = "cori"
+from .assets import NEWT_BASE_URL, MACHINE, REQUESTS_SESSION
 
 
 class NerscInterface:
     def __init__(self, login_notebook="nersc_login.ipynb"):
         """"""
         self._login_notebook = login_notebook  # for error messages (only)
-        self._newt_sessionid = None
-        self._requests_session = requests.Session()
+        self._requests_session = REQUESTS_SESSION
+        self._newt_sessionid = REQUESTS_SESSION.cookies.get("newt_sessionid")
 
     def download_file(self, nersc_file, local_folder, machine=MACHINE):
         assert self._newt_sessionid is not None
@@ -115,43 +114,6 @@ class NerscInterface:
 
             path["size"] = int(path["size"])
             yield path
-
-    def login(self, file="~/.newt_sessionid", newt_sessionid=None):
-        """"""
-        if newt_sessionid is None:
-            path = os.path.expanduser(file)
-            if not os.path.exists(path):
-                template = "File {} missing => use {}"
-                raise RuntimeError(template.format(file, self._login_notebook))
-
-            with open(path) as f:
-                newt_sessionid = f.read().strip()
-        assert newt_sessionid is not None
-        print("sending command...")
-
-        url = "{}/login/".format(NEWT_BASE_URL)
-        cookies = dict(newt_sessionid=newt_sessionid)
-        r = requests.get(url, cookies=cookies)
-        r.raise_for_status()
-
-        js = r.json()
-        # print('login reply', js)
-        # Example reply:
-        # {'username': 'johnt', 'session_lifetime': 976394, 'auth': True, 'newt_sessionid': '0fc3f5310b54310f08bdcbf690d5c255'}
-        if "auth" not in js or not js["auth"]:
-            print("Reply:", js)
-            raise Exception("User not logged in => use {}".format(self._login_notebook))
-
-        if hasattr(js, "session_lifetime") and js["session_lifetime"] < 300:
-            print("Reply:", js)
-            template = "Session lifetime about to expire ({} sec) => use {}"
-            raise Exception(
-                template.format(js["session_lifetime"], self._login_notebook)
-            )
-
-        self._newt_sessionid = newt_sessionid
-        self._requests_session.cookies.set("newt_sessionid", self._newt_sessionid)
-        return "OK"
 
     def make_folder(self, nersc_folder, machine=MACHINE):
         assert self._newt_sessionid is not None
