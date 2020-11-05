@@ -5,7 +5,6 @@ import os
 
 import requests
 
-
 from .assets import NEWT_BASE_URL, REQUESTS_SESSION
 
 
@@ -60,7 +59,7 @@ def login(file="~/.newt_sessionid", newt_sessionid=None):
         with open(path) as f:
             newt_sessionid = f.read().strip()
     assert newt_sessionid is not None
-    print("sending command...")
+    print("sending test command...")
 
     url = "{}/login/".format(NEWT_BASE_URL)
     cookies = dict(newt_sessionid=newt_sessionid)
@@ -81,5 +80,5 @@ def login(file="~/.newt_sessionid", newt_sessionid=None):
         raise Exception(template.format(js["session_lifetime"]))
 
     REQUESTS_SESSION.cookies.set("newt_sessionid", newt_sessionid)
-    print("OK")
+    print("Login OK")
     return True
