@@ -83,7 +83,11 @@ class ATSWidget(object):
 
         self.progress_widget = widgets.FloatProgress(value=0.0, min=0.0, max=5.0)
 
-        self.output = widgets.Output(layout={'border': '5px solid black', 'width': '100%', 'height': '95%'})
+        self.output = widgets.Output(layout={'border': '5px solid black',
+                                             'width': '100%',
+                                             'height': '250px',
+                                             'overflow_y':'auto',
+                                             })
 
         self.download_button = widgets.Button(
             description='Download',
@@ -98,7 +102,12 @@ class ATSWidget(object):
 
         self.download_button.on_click(_download_callback)
 
-        self.layout = widgets.HBox([
+        layout = widgets.Layout(display='align-self',
+                                border='solid 1px',
+                                width='100%',
+                                max_height='750px',)
+
+        self.ui = widgets.HBox([
             widgets.VBox([
                 self.scratch_folder,
                 self.nodes_slider,
@@ -108,8 +117,9 @@ class ATSWidget(object):
                 self.data_selector,
                 widgets.HBox([self.submit_button, self.download_button,]),
             ]),
-            widgets.VBox([self.output, self.progress_widget])
-        ])
+            widgets.VBox([self.output, self.progress_widget], layout=layout)
+        ], layout=layout)
+
 
     def _log(self, msg):
         return self.output.append_stdout(msg + '\n')

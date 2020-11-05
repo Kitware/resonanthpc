@@ -21,7 +21,7 @@
     <ParameterList name="surface" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="2" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="./data/super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="face" />
       </ParameterList>
@@ -29,7 +29,7 @@
     <ParameterList name="computational domain rest" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="10" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="./data/super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -37,7 +37,7 @@
     <ParameterList name="computational domain first slab" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="12" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="./data/super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -45,7 +45,7 @@
     <ParameterList name="computational domain second slab" type="ParameterList">
       <ParameterList name="region: labeled set" type="ParameterList">
         <Parameter name="label" type="string" value="11" />
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="./data/super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
         <Parameter name="entity" type="string" value="cell" />
       </ParameterList>
@@ -64,7 +64,7 @@
     <ParameterList name="domain" type="ParameterList">
       <Parameter name="mesh type" type="string" value="read mesh file" />
       <ParameterList name="read mesh file parameters" type="ParameterList">
-        <Parameter name="file" type="string" value="../data/super_slab.exo" />
+        <Parameter name="file" type="string" value="./data/super_slab.exo" />
         <Parameter name="format" type="string" value="Exodus II" />
       </ParameterList>
     </ParameterList>
