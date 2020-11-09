@@ -8,6 +8,10 @@ import requests
 from .assets import NEWT_BASE_URL, REQUESTS_SESSION
 
 
+class NotLoggedInError(Exception):
+    pass
+
+
 class _LoginUtility(object):
     def __init__(self):
         user = input("Username: ")
@@ -72,12 +76,12 @@ def login(file="~/.newt_sessionid", newt_sessionid=None):
     # {'username': 'johnt', 'session_lifetime': 976394, 'auth': True, 'newt_sessionid': '0fc3f5310b54310f08bdcbf690d5c255'}
     if "auth" not in js or not js["auth"]:
         print("Reply:", js)
-        raise Exception("User not logged in. Try agin.")
+        raise NotLoggedInError("User not logged in. Try agin.")
 
     if hasattr(js, "session_lifetime") and js["session_lifetime"] < 300:
         print("Reply:", js)
         template = "Session lifetime about to expire ({} sec)"
-        raise Exception(template.format(js["session_lifetime"]))
+        raise NotLoggedInError(template.format(js["session_lifetime"]))
 
     REQUESTS_SESSION.cookies.set("newt_sessionid", newt_sessionid)
     print("Login OK")
