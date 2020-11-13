@@ -61,7 +61,7 @@ class ATSRunner(object):
 
         slurm_commands = [
             '#!/bin/bash',
-            '#SBATCH --account=m2398',
+            '#SBATCH --account=m3421',
             '#SBATCH --chdir={}'.format(self.nersc_folder),
             '#SBATCH --partition=debug',
             '#SBATCH --time=0:{}:0'.format(self.timeout_min),
