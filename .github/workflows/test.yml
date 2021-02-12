@@ -45,6 +45,23 @@ jobs:
           name: demos
           path: dev/cmb/demo/demos
 
+  execute:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: demos
+      - name: Download ATS Docker Image
+        run: docker pull metsi/ats:latest
+      - name: Run Demo 01 with ATS
+        run: sh ./run-ats.sh demo-01
+      - name: Run Demo 02 with ATS
+        run: sh ./run-ats.sh demo-02
+      - name: Run Demo 03 with ATS
+        run: sh ./run-ats.sh demo-03
+
+
   deploy:
     runs-on: ubuntu-latest
     needs: test
