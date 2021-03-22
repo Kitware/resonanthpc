@@ -20,7 +20,7 @@ jobs:
         with:
          submodules: 'true'
       - name: Add pvpython to path
-        run: echo '::add-path::/root/misc/root/smtk-deps/bin/'
+        run: echo "/root/misc/root/smtk-deps/bin/" >> $GITHUB_PATH
       - name: Build Templates
         run: |
           cd dev/cmb/simulation-workflows/ats/internal
